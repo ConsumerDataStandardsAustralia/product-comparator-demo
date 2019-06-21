@@ -1,2 +1,2 @@
-# cds-prd-comparator
-A PoC of comparison web app utilising the open banking product API
+# cds-prd-viewer
+A PoC of banking products view/comparison web app utilising the open banking product API
