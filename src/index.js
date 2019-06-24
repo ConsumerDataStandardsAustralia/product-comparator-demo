@@ -5,7 +5,7 @@ import Page from './components/Page';
 import * as serviceWorker from './serviceWorker';
 import { Provider as StoreProvider } from 'react-redux'
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
-import store from './redux/store'
+import store from './store'
 
 const theme = createMuiTheme({
   palette: {
