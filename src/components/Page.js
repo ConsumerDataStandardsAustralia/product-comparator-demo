@@ -1,6 +1,6 @@
 import React from 'react';
 
-function App() {
+function Page() {
   return (
     <div>
       CDS Banking Products View/Comparison App
@@ -8,4 +8,4 @@ function App() {
   );
 }
 
-export default App;
+export default Page;
