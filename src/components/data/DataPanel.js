@@ -61,7 +61,7 @@ const DataPanel = (props) => {
         <Grid container alignItems='center' spacing={2} className={classes.container}>
           {savedDataSources.map((dataSource, index) => (
             <Grid item xs={12} key={index}>
-              <ProductList dataSource={dataSource} dataSouceIndex={index}/>
+              <ProductList dataSource={dataSource} dataSourceIndex={index}/>
             </Grid>
           ))}
         </Grid>

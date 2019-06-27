@@ -1,4 +1,5 @@
 import React from 'react'
+import {connect} from 'react-redux'
 import ExpansionPanel from '@material-ui/core/ExpansionPanel'
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary'
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails'
@@ -12,6 +13,8 @@ import LendingRate from './LendingRate'
 import Eligibility from './Eligibility'
 import Feature from './Feature'
 import Fee from './Fee'
+import Checkbox from '@material-ui/core/Checkbox'
+import {selectProduct, deselectProduct} from "../../store/data"
 
 const useStyles = makeStyles(theme => ({
   panel: {
@@ -28,8 +31,20 @@ const useStyles = makeStyles(theme => ({
 
 const Product = (props) => {
   const classes = useStyles()
-  const {product, dataSouceIndex} = props
+  const {product, dataSourceIndex, selectedProducts} = props
+  console.log('selectedProducts', selectedProducts)
+  const selected = selectedProducts.filter(
+    prd=>(prd.dataSourceIdx === dataSourceIndex && prd.productId === product.productId)).length > 0
+  const handleChange = event => {
+    event.target.checked ? props.selectProduct(dataSourceIndex, product.productId) : props.deselectProduct(dataSourceIndex, product.productId)
+  }
   return (
+    <div>
+    <Checkbox
+      checked={selected}
+      onChange={handleChange}
+      color="primary"
+    />
     <ExpansionPanel defaultExpanded className={classes.panel}>
       <ExpansionPanelSummary
         expandIcon={<ExpandMoreIcon/>}
@@ -104,7 +119,14 @@ const Product = (props) => {
         </div>
       </ExpansionPanelDetails>
     </ExpansionPanel>
+    </div>
   )
 }
 
-export default Product
+const mapStateToProps = state => ({
+  selectedProducts: state.data.selectedProducts
+})
+
+const mapDispatchToProps = { selectProduct, deselectProduct }
+
+export default connect(mapStateToProps, mapDispatchToProps)(Product)

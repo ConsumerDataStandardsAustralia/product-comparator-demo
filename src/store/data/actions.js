@@ -6,7 +6,7 @@ export const RETRIEVE_ALL_PRODUCT_DETAILS = 'RETRIEVE_ALL_PRODUCT_DETAILS'
 export const SELECT_PRODUCT = 'SELECT_PRODUCT'
 export const DESELECT_PRODUCT = 'DESELECT_PRODUCT'
 
-export const retrieveProductList = (name, url) => {
+export const retrieveProductList = (dataSourceIdx, url) => {
   const normalisedUrl = normalise(url)
   return (dispatch) => {
     const response = dispatch({
@@ -16,7 +16,7 @@ export const retrieveProductList = (name, url) => {
     response.then(({value})=> {
       const {products} = value.data
       const actions = products.map(product => retrieveProductDetail(normalisedUrl, product.productId))
-      dispatch(retrieveAllProductDetails(name, actions))
+      dispatch(retrieveAllProductDetails(dataSourceIdx, actions))
     })
   }
 }
@@ -29,4 +29,14 @@ export const retrieveProductDetail = (url, productId) => ({
 export const retrieveAllProductDetails = (name, actions) => dispatch => dispatch({
   type: RETRIEVE_ALL_PRODUCT_DETAILS,
   payload: Promise.all(actions.map((action) => dispatch(action)))
+})
+
+export const selectProduct = (dataSourceIdx, productId) => ({
+  type: SELECT_PRODUCT,
+  payload: { dataSourceIdx, productId }
+})
+
+export const deselectProduct = (dataSourceIdx, productId) => ({
+  type: DESELECT_PRODUCT,
+  payload: { dataSourceIdx, productId }
 })

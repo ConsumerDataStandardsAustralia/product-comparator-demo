@@ -36,7 +36,7 @@ class ProductList extends React.Component {
         {
           progress === fulfilled(RETRIEVE_ALL_PRODUCT_DETAILS) && !!products &&
           Object.keys(productsByCategory).map((category, index) => (
-            <ProductCategory key={index} category={category} products={productsByCategory[category]} dataSouceIndex={dataSourceIndex}/>
+            <ProductCategory key={index} category={category} products={productsByCategory[category]} dataSourceIndex={dataSourceIndex}/>
           ))
         }
       </div>
