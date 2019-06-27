@@ -11,3 +11,8 @@ export default function isUrl(s) {
   return localhostDomainRE.test(lowerCase) ||
     nonLocalhostDomainRE.test(lowerCase);
 }
+
+export function normalise(url) {
+  if (url.endsWith('/')) return url.substr(0, url.length - 1)
+  return url
+}

@@ -19,7 +19,6 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: fade('#fff', 0.9)
   },
   heading: {
-    width: theme.typography.pxToRem(75),
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
@@ -40,17 +39,15 @@ const useStyles = makeStyles(theme => ({
 }))
 
 const DataSourcePanel = (props) => {
-  console.log(props.dataSources)
   const classes = useStyles()
   return (
     <ExpansionPanel defaultExpanded className={classes.panel}>
       <ExpansionPanelSummary
         expandIcon={<ExpandMoreIcon/>}
         aria-controls='panel1c-content'
-        id='panel1c-header'
       >
         <div className={classes.heading}>
-          <AccountBalanceIcon/><Typography>Banks</Typography>
+          <AccountBalanceIcon/><Typography  style={{paddingLeft: 8}}>Banks</Typography>
         </div>
       </ExpansionPanelSummary>
       { props.dataSources.length > 0 &&
@@ -69,7 +66,7 @@ const DataSourcePanel = (props) => {
   )
 }
 
-const mapStateToProps = state=>({
+const mapStateToProps = state => ({
   dataSources: state.dataSources
 })
 

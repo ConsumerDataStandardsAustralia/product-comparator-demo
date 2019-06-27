@@ -6,7 +6,7 @@ import {
   MODIFY_DATA_SOURCE
 } from './actions'
 
-export default function(state, action) {
+export default function(state=[], action) {
   switch (action.type) {
     case LOAD_DATA_SOURCE:
       // TODO load data source from local storage
@@ -24,6 +24,6 @@ export default function(state, action) {
     case MODIFY_DATA_SOURCE:
       return state.map((dataSource, index) => (index === action.index ? {...action.payload, saved: false} : dataSource))
     default:
-      return []
+      return [...state]
   }
 }

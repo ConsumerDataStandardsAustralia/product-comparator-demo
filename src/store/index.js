@@ -4,9 +4,11 @@ import promise from 'redux-promise-middleware'
 import { createLogger } from 'redux-logger'
 import { combineReducers } from 'redux'
 import dataSources from './data-source/reducer'
+import data from './data/reducer'
 
 const rootReducer = combineReducers({
-  dataSources
+  dataSources,
+  data
 })
 
 const logger = createLogger({ collapsed: true })
