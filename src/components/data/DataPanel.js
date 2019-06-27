@@ -45,7 +45,6 @@ const useStyles = makeStyles(theme => ({
 
 const DataPanel = (props) => {
   const {savedDataSources} = props
-  console.log('savedDataSources', savedDataSources)
   const classes = useStyles()
   return (
     <ExpansionPanel defaultExpanded className={classes.panel}>
