@@ -1,4 +1,5 @@
 import React from 'react'
+import RateTier from './RateTier'
 
 const DepositRate = (props) => {
   const {depositRate} = props
