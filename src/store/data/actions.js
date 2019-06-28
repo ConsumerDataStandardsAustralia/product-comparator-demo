@@ -11,22 +11,24 @@ export const retrieveProductList = (dataSourceIdx, url) => {
   return (dispatch) => {
     const response = dispatch({
       type: RETRIEVE_PRODUCT_LIST,
-      payload: fetch(normalisedUrl + '/banking/products').then(response => response.json())
+      payload: fetch(normalisedUrl + '/banking/products').then(
+          response => response.json()).then(json=>({idx: dataSourceIdx, response: json}))
     })
     response.then(({value})=> {
-      const {products} = value.data
-      const actions = products.map(product => retrieveProductDetail(normalisedUrl, product.productId))
-      dispatch(retrieveAllProductDetails(dataSourceIdx, actions))
+      const {products} = value.response.data
+      const actions = products.map(product => retrieveProductDetail(dataSourceIdx, normalisedUrl, product.productId))
+      dispatch(retrieveAllProductDetails(actions))
     })
   }
 }
 
-export const retrieveProductDetail = (url, productId) => ({
+export const retrieveProductDetail = (dataSourceIdx, url, productId) => ({
   type: RETRIEVE_PRODUCT_DETAIL,
-  payload: fetch(url + '/banking/products/' + productId).then(response => response.json())
+  payload: fetch(url + '/banking/products/' + productId).then(
+      response => response.json()).then(json => ({idx: dataSourceIdx, response: json}))
 })
 
-export const retrieveAllProductDetails = (name, actions) => dispatch => dispatch({
+export const retrieveAllProductDetails = (actions) => dispatch => dispatch({
   type: RETRIEVE_ALL_PRODUCT_DETAILS,
   payload: Promise.all(actions.map((action) => dispatch(action)))
 })

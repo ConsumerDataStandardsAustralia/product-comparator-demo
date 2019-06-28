@@ -9,14 +9,16 @@ import ProductCategory from './ProductCategory'
 class ProductList extends React.Component {
 
   componentDidMount() {
-    const { dataSource } = this.props
-    const { name, url } = dataSource
-    this.props.retrieveProductList(name, url)
+    const { dataSourceIndex, dataSource } = this.props
+    const { url } = dataSource
+    this.props.retrieveProductList(dataSourceIndex, url)
   }
 
   render() {
     const { dataSource, dataSourceIndex } = this.props
-    const { progress, totalRecords, records, products } = this.props.data
+    let productList = this.props.data.productList[dataSourceIndex];
+    productList = !!productList ? productList : {}
+    const { progress, totalRecords, records, products } = productList
     const productsByCategory = {}
     !!products && products.forEach(product => {
       let productCategory = product.productCategory;

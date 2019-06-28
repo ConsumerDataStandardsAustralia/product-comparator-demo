@@ -5,61 +5,43 @@ import {
   SELECT_PRODUCT,
   DESELECT_PRODUCT
 } from './actions'
-import {
-  pending,
-  fulfilled,
-  rejected
-} from '../../utils/async-actions'
+import {fulfilled, pending} from '../../utils/async-actions'
 
-export default function(state = {selectedProducts: []}, action) {
+export default function(state = {selectedProducts:[], productList:[]}, action) {
   switch (action.type) {
     case pending(RETRIEVE_PRODUCT_LIST):
-      return {...state, progress: action.type }
-    case rejected(RETRIEVE_PRODUCT_LIST):
-      return {...state, progress: action.type }
+      return {...state}
     case fulfilled(RETRIEVE_PRODUCT_LIST):
-      return {
-        ...state,
-        progress: action.type,
-        totalRecords: action.payload.meta.totalRecords,
-        records: 0
-      }
+      const a = {selectedProducts: [...state.selectedProducts], productList: [...state.productList]}
+      const {idx, response} = action.payload
+      a.productList[idx] = {...a.productList[idx], progress: action.type, totalRecords: response.meta.totalRecords, records: 0, products:[]}
+      return a
+    case pending(RETRIEVE_PRODUCT_DETAIL):
+      return {...state}
     case fulfilled(RETRIEVE_PRODUCT_DETAIL):
-      return {
-        ...state,
-        progress: action.type,
-        totalRecords: state.totalRecords,
-        records: state.records + 1
-      }
+      const b = {selectedProducts: [...state.selectedProducts], productList: [...state.productList]}
+      const index = action.payload.idx
+      const products = [...b.productList[index].products]
+      products.push(action.payload.response.data)
+      b.productList[index] = {...b.productList[index], progress: action.type, records: b.productList[index].records + 1, products:products}
+      return b
+    case pending(RETRIEVE_ALL_PRODUCT_DETAILS):
+      return {...state}
     case fulfilled(RETRIEVE_ALL_PRODUCT_DETAILS):
-      return {
-        ...state,
-        progress: action.type,
-        totalRecords: state.totalRecords,
-        records: state.records,
-        products: action.payload.map(({value}) => value.data)
-      }
-    case rejected(RETRIEVE_ALL_PRODUCT_DETAILS):
-      return {
-        ...state,
-        progress: action.type,
-        totalRecords: state.totalRecords,
-        records: state.records
-      }
+      const c = {selectedProducts: [...state.selectedProducts], productList: [...state.productList]}
+      const dsIdx = action.payload[0].value.idx
+      c.productList[dsIdx] = {...c.productList[dsIdx], progress: action.type}
+      return c
     case SELECT_PRODUCT:
       const {dataSourceIdx, productId} = action.payload
-      const selectedProducts = [...state.selectedProducts]
-      selectedProducts.push({dataSourceIdx: dataSourceIdx, productId: productId})
-      return {
-        ...state,
-        selectedProducts: selectedProducts
-      }
+      const d = {selectedProducts: [...state.selectedProducts], productList: [...state.productList]}
+      d.selectedProducts.push({dataSourceIdx, productId})
+      return d
     case DESELECT_PRODUCT:
       const { payload } = action
       return {
-        ...state,
-        selectedProducts: state.selectedProducts.filter(
-          prd => (prd.dataSourceIdx !== payload.dataSourceIdx || prd.productId !== payload.productId))
+        selectedProducts: state.selectedProducts.filter(prd => (prd.dataSourceIdx !== payload.dataSourceIdx || prd.productId !== payload.productId)),
+        productList: [...state.productList]
       }
     default:
       return {...state}
