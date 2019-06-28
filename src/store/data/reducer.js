@@ -33,14 +33,15 @@ export default function(state = {selectedProducts:[], productList:[]}, action) {
       c.productList[dsIdx] = {...c.productList[dsIdx], progress: action.type}
       return c
     case SELECT_PRODUCT:
-      const {dataSourceIdx, productId} = action.payload
+      const {dataSourceIdx, product} = action.payload
       const d = {selectedProducts: [...state.selectedProducts], productList: [...state.productList]}
-      d.selectedProducts.push({dataSourceIdx, productId})
+      d.selectedProducts.push({dataSourceIdx, product})
       return d
     case DESELECT_PRODUCT:
       const { payload } = action
       return {
-        selectedProducts: state.selectedProducts.filter(prd => (prd.dataSourceIdx !== payload.dataSourceIdx || prd.productId !== payload.productId)),
+        selectedProducts: state.selectedProducts.filter(
+            prd => (prd.dataSourceIdx !== payload.dataSourceIdx || prd.product.productId !== payload.product.productId)),
         productList: [...state.productList]
       }
     default:

@@ -36,9 +36,9 @@ const Product = (props) => {
   const classes = useStyles()
   const {product, dataSourceIndex, selectedProducts} = props
   const selected = selectedProducts.filter(
-    prd=>(prd.dataSourceIdx === dataSourceIndex && prd.productId === product.productId)).length > 0
+    prd=>(prd.dataSourceIdx === dataSourceIndex && prd.product.productId === product.productId)).length > 0
   const handleChange = event => {
-    event.target.checked ? props.selectProduct(dataSourceIndex, product.productId) : props.deselectProduct(dataSourceIndex, product.productId)
+    event.target.checked ? props.selectProduct(dataSourceIndex, product) : props.deselectProduct(dataSourceIndex, product)
   }
   return (
     <div className={classes.root}>

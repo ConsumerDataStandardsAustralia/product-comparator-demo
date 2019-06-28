@@ -33,12 +33,12 @@ export const retrieveAllProductDetails = (actions) => dispatch => dispatch({
   payload: Promise.all(actions.map((action) => dispatch(action)))
 })
 
-export const selectProduct = (dataSourceIdx, productId) => ({
+export const selectProduct = (dataSourceIdx, product) => ({
   type: SELECT_PRODUCT,
-  payload: { dataSourceIdx, productId }
+  payload: { dataSourceIdx, product }
 })
 
-export const deselectProduct = (dataSourceIdx, productId) => ({
+export const deselectProduct = (dataSourceIdx, product) => ({
   type: DESELECT_PRODUCT,
-  payload: { dataSourceIdx, productId }
+  payload: { dataSourceIdx, product }
 })
