@@ -16,7 +16,7 @@ const FeeDiscount = (props) => {
       <div>{discount.additionalInfo}</div>
       <div>For more info, click <a href={discount.additionalInfoUri} target='_blank'>{discount.additionalInfoUri}</a></div>
       {
-        discount.eligibility.map((discountEligibility, index) =>(
+        !!discount.eligibility && discount.eligibility.map((discountEligibility, index) =>(
           <DiscountEligibility key={index} eligibility={discountEligibility}/>
         ))
       }

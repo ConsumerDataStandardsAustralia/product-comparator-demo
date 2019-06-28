@@ -17,7 +17,7 @@ const Fee = (props) => {
       <div>{fee.additionalInfo}</div>
       <div>For more info, click <a href={fee.additionalInfoUri} target='_blank'>{fee.additionalInfoUri}</a></div>
       {
-        fee.discounts.map((discount, index) =>(
+        !!fee.discounts && fee.discounts.map((discount, index) =>(
           <FeeDiscount key={index} discount={discount}/>
         ))
       }

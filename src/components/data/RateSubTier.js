@@ -4,6 +4,7 @@ import RateCondition from "./RateCondition";
 const RateSubTier = (props) => {
   const {subTier} = props
   return (
+      !!subTier &&
     <div>
       <div>{subTier.name}</div>
       <div>{subTier.unitOfMeasure}</div>
