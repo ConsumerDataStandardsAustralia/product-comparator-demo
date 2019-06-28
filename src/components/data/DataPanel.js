@@ -68,7 +68,8 @@ const DataPanel = (props) => {
       }
       <Divider/>
       <ExpansionPanelActions>
-        <Fab variant='extended' size='medium' color='primary' className={classes.button} onClick={props.addDataSource}>
+        <Fab variant='extended' size='medium' color='primary' disabled={props.selectedProducts.length < 2}
+             className={classes.button} onClick={props.addDataSource}>
           <CompareIcon className={classes.leftIcon}/>
           Compare
         </Fab>
@@ -78,7 +79,8 @@ const DataPanel = (props) => {
 }
 
 const mapStateToProps = state=>({
-  savedDataSources: state.dataSources.filter(dataSource => dataSource.saved)
+  savedDataSources: state.dataSources.filter(dataSource => dataSource.saved),
+  selectedProducts: state.data.selectedProducts
 })
 
 export default connect(mapStateToProps)(DataPanel)

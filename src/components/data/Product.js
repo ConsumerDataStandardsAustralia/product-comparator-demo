@@ -35,7 +35,6 @@ const useStyles = makeStyles(theme => ({
 const Product = (props) => {
   const classes = useStyles()
   const {product, dataSourceIndex, selectedProducts} = props
-  console.log('selectedProducts', selectedProducts)
   const selected = selectedProducts.filter(
     prd=>(prd.dataSourceIdx === dataSourceIndex && prd.productId === product.productId)).length > 0
   const handleChange = event => {
