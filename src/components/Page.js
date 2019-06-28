@@ -3,6 +3,7 @@ import DataSourcePanel from './data-source/DataSourcePanel'
 import DataPanel from './data/DataPanel'
 import Header from './header'
 import { Container } from '@material-ui/core'
+import ComparisonPanel from "./comparison/ComparisonPanel";
 
 function Page() {
   return (
@@ -10,6 +11,7 @@ function Page() {
       <Header title='Banking Products Viewer'/>
       <DataSourcePanel/>
       <DataPanel/>
+      <ComparisonPanel/>
     </Container>
   );
 }
