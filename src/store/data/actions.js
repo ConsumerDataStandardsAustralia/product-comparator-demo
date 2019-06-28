@@ -1,8 +1,16 @@
+import {rejected} from "../../utils/async-actions";
+
+export const START_RETRIEVE_PRODUCT_LIST = 'START_RETRIEVE_PRODUCT_LIST'
 export const RETRIEVE_PRODUCT_LIST = 'RETRIEVE_PRODUCT_LIST'
 export const RETRIEVE_PRODUCT_DETAIL = 'RETRIEVE_PRODUCT_DETAIL'
 export const RETRIEVE_ALL_PRODUCT_DETAILS = 'RETRIEVE_ALL_PRODUCT_DETAILS'
 export const SELECT_PRODUCT = 'SELECT_PRODUCT'
 export const DESELECT_PRODUCT = 'DESELECT_PRODUCT'
+
+export const startRetrieveProductList = (dataSourceIdx, productListUrl) => ({
+  type: START_RETRIEVE_PRODUCT_LIST,
+  payload: { dataSourceIdx, productListUrl }
+})
 
 export const retrieveProductList = (dataSourceIdx, baseUrl, productListUrl) => {
   return (dispatch) => {
@@ -31,7 +39,7 @@ export const retrieveProductDetail = (dataSourceIdx, url, productId) => ({
 
 export const retrieveAllProductDetails = (actions) => dispatch => dispatch({
   type: RETRIEVE_ALL_PRODUCT_DETAILS,
-  payload: Promise.all(actions.map((action) => dispatch(action)))
+  payload: Promise.all(actions.map(action => dispatch(action)))
 })
 
 export const selectProduct = (dataSourceIdx, product) => ({
