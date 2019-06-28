@@ -17,10 +17,13 @@ import Checkbox from '@material-ui/core/Checkbox'
 import {selectProduct, deselectProduct} from "../../store/data"
 
 const useStyles = makeStyles(theme => ({
+  root: {
+    display: 'flex',
+    alignItems: 'flex-start'
+  },
   panel: {
     boxShadow: 'none',
-    width: 'fit-content',
-    maxWidth: '95%',
+    width: '90%',
     backgroundColor: 'transparent'
   },
   details: {
@@ -39,13 +42,13 @@ const Product = (props) => {
     event.target.checked ? props.selectProduct(dataSourceIndex, product.productId) : props.deselectProduct(dataSourceIndex, product.productId)
   }
   return (
-    <div>
+    <div className={classes.root}>
     <Checkbox
       checked={selected}
       onChange={handleChange}
       color="primary"
     />
-    <ExpansionPanel defaultExpanded className={classes.panel}>
+    <ExpansionPanel defaultExpanded={false} className={classes.panel}>
       <ExpansionPanelSummary
         expandIcon={<ExpandMoreIcon/>}
         aria-controls='panel1c-content'
