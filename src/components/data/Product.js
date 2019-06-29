@@ -153,9 +153,9 @@ const Product = (props) => {
           !!product.eligibilities && product.eligibilities.length > 0 &&
           <div>
             <div className={classes.sectionTitle}>Eligibilities:</div>
-            <div className={classes.sectionContent}>
+            <ul className={classes.sectionContent}>
               {product.eligibilities.map((eligibility, index) => <Eligibility key={index} eligibility={eligibility}/>)}
-            </div>
+            </ul>
           </div>
         }
         {

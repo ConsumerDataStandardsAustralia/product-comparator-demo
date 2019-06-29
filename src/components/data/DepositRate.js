@@ -23,6 +23,10 @@ const DepositRate = (props) => {
           (depositRateType === 'FIXED' || depositRateType === 'INTRODUCTORY') && !!additionalValue &&
           <span> {moment.duration(additionalValue).humanize()}</span>
         }
+        {
+          (depositRateType === 'BONUS' || depositRateType === 'BUNDLE_BONUS' || depositRateType === 'FLOATING' || depositRateType === 'MARKET_LINKED') &&
+          <span> {additionalValue}</span>
+        }
       </div>
       {!!calculationFrequency && <div>Calculated {moment.duration(calculationFrequency).humanize(true)}</div>}
       {!!applicationFrequency && <div>Applied {moment.duration(applicationFrequency).humanize(true)}</div>}

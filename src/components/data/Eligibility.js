@@ -1,13 +1,21 @@
 import React from 'react'
 
 const Eligibility = (props) => {
-  const {eligibility} = props
+  const {eligibilityType, additionalValue, additionalInfo, additionalInfoUri} = props.eligibility
   return (
-    <div>
-      <div>{eligibility.eligibilityType}: {eligibility.additionalValue}</div>
-      <div>{eligibility.additionalInfo}</div>
-      <div>For more info, click <a href={eligibility.additionalInfoUri} target='_blank'>{eligibility.additionalInfoUri}</a></div>
-    </div>
+    <li>
+      <div>
+        {eligibilityType}
+        {eligibilityType === 'OTHER' && <span> {additionalInfo}</span>}
+        {eligibilityType === 'MIN_AGE' && <span> {additionalValue}</span>}
+        {eligibilityType === 'MAX_AGE' && <span> {additionalValue}</span>}
+        {eligibilityType === 'EMPLOYMENT_STATUS' && <span> {additionalValue}</span>}
+        {eligibilityType === 'RESIDENCY_STATUS' && <span> {additionalValue}</span>}
+        {eligibilityType === 'MIN_INCOME' && <span> ${additionalValue}</span>}
+        {eligibilityType === 'MIN_TURNOVER' && <span> ${additionalValue}</span>}
+      </div>
+      {!!additionalInfoUri && <div><a href={additionalInfoUri} target='_blank'>More info</a></div>}
+    </li>
   )
 }
 

@@ -50,6 +50,21 @@ const interestPaymentDueDict = {
   ADVANCE: 'in Advance'
 }
 
+const eligibilityTypeDict = {
+  BUSINESS: 'Business',
+  PENSION_RECIPIENT: 'Pension Recipient',
+  MIN_AGE: 'Minimum Age',
+  MAX_AGE: 'Maximum Age',
+  MIN_INCOME: 'Minimum Income',
+  MIN_TURNOVER: 'Minimum Turnover',
+  STAFF: 'Staff',
+  STUDENT: 'Student',
+  EMPLOYMENT_STATUS: 'Employment Status',
+  RESIDENCY_STATUS: 'Residency Status',
+  NATURAL_PERSON: 'Natural Person',
+  OTHER: 'Other'
+}
+
 export const translateProductCategory = (category) => productCategoryDict[category]
 
 export const translateConstraintType = (constraintType) => constraintTypeDict[constraintType]
@@ -59,3 +74,5 @@ export const translateDepositRateType = (depositRateType) => depositRateTypeDict
 export const translateLendingRateType = (lendingRateType) => lendingRateTypeDict[lendingRateType]
 
 export const translateInterestPaymentDue = (interestPaymentDue) => interestPaymentDueDict[interestPaymentDue]
+
+export const translateEligibilityType = (eligibilityType) => eligibilityTypeDict[eligibilityType]
