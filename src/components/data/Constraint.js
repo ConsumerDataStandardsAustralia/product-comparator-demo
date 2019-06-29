@@ -1,13 +1,14 @@
 import React from 'react'
+import {translateConstraintType} from "../../utils/dict";
 
 const Constraint = (props) => {
-  const {constraint} = props
+  const {constraintType, additionalInfo, additionalValue, additionalInfoUri} = props.constraint
   return (
-    <div>
-      <div>{constraint.constraintType}: {constraint.additionalValue}</div>
-      <div>{constraint.additionalInfo}</div>
-      <div>For more info, click <a href={constraint.additionalInfoUri} target='_blank'>{constraint.additionalInfoUri}</a></div>
-    </div>
+    <li>
+      <div>{translateConstraintType(constraintType)}: ${additionalValue}</div>
+      {!!additionalInfo && <div>{additionalInfo}</div>}
+      {!!additionalInfoUri && <div><a href={additionalInfoUri} target='_blank'>More info</a></div>}
+    </li>
   )
 }
 

@@ -13,6 +13,14 @@ const productCategoryDict = {
   REGULATED_TRUST_ACCOUNTS: "Regulated Trust Accounts"
 }
 
-export const translateProductCategory = (category) => {
-  return productCategoryDict[category]
+const constraintTypeDict = {
+  MIN_BALANCE: 'Minimum Balance',
+  MAX_BALANCE: 'Maximum Balance',
+  OPENING_BALANCE: 'Opening Balance',
+  MAX_LIMIT: 'Maximum Credit Limit',
+  MIN_LIMIT: 'Minimum Credit Limit'
 }
+
+export const translateProductCategory = (category) => productCategoryDict[category]
+
+export const translateConstraintType = (constraintType) => constraintTypeDict[constraintType]

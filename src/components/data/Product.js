@@ -135,9 +135,9 @@ const Product = (props) => {
           !!product.constraints && product.constraints.length > 0 &&
           <div>
             <div className={classes.sectionTitle}>Constraints:</div>
-            <div className={classes.sectionContent}>
+            <ul className={classes.sectionContent}>
               {product.constraints.map((constraint, index) => <Constraint key={index} constraint={constraint}/>)}
-            </div>
+            </ul>
           </div>
         }
         {
