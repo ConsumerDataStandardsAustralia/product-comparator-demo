@@ -10,21 +10,36 @@ import {
 export default function(state=[], action) {
   switch (action.type) {
     case LOAD_DATA_SOURCE:
-      // TODO load data source from local storage
-      return []
+      return loadDataSources()
     case ADD_DATA_SOURCE:
       return [...state, {name: '', url: ''}]
     case SAVE_DATA_SOURCE:
-      return state.map((dataSource, index) => (index === action.index ? {...action.payload, saved: true} : dataSource))
+      let dataSources = state.map((dataSource, index) => (index === action.index ? {...action.payload, saved: true} : dataSource));
+      persistSavedDataSources(dataSources)
+      return dataSources
     case DELETE_DATA_SOURCE:
-      const dataSources = [...state]
+      dataSources = [...state]
       dataSources.splice(action.index, 1)
+      persistSavedDataSources(dataSources)
       return dataSources
     case MODIFY_DATA_SOURCE_NAME:
-      return state.map((dataSource, index) => (index === action.index ? {...action.payload} : dataSource))
+      dataSources = state.map((dataSource, index) => (index === action.index ? {...action.payload} : dataSource));
+      persistSavedDataSources(dataSources)
+      return dataSources
     case MODIFY_DATA_SOURCE_URL:
-      return state.map((dataSource, index) => (index === action.index ? {...action.payload, saved: false} : dataSource))
+      dataSources = state.map((dataSource, index) => (index === action.index ? {...action.payload, saved: false} : dataSource))
+      persistSavedDataSources(dataSources)
+      return dataSources
     default:
       return [...state]
   }
+}
+
+function persistSavedDataSources(dataSources) {
+  window.localStorage.setItem("cds-banking-prd-ds", JSON.stringify(dataSources.filter(dataSource => dataSource.saved)))
+}
+
+function loadDataSources() {
+  const ds = window.localStorage.getItem("cds-banking-prd-ds")
+  return !!ds ? JSON.parse(ds) : []
 }
