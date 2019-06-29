@@ -3,12 +3,12 @@ import React from 'react'
 const Bundle = (props) => {
   const {bundle} = props
   return (
-    <div>
+    <li>
       <div>{bundle.name}</div>
       <div>{bundle.description}</div>
-      <div>{bundle.additionalInfo}</div>
-      <div>For more info, click <a href={bundle.additionalInfoUri} target='_blank'>{bundle.additionalInfoUri}</a></div>
-    </div>
+      {!!bundle.additionalInfo && <div>{bundle.additionalInfo}</div>}
+      {!!bundle.additionalInfoUri && <div><a href={bundle.additionalInfoUri} target='_blank'>More info</a></div>}
+    </li>
   )
 }
 
