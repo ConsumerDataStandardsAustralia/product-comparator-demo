@@ -180,7 +180,9 @@ const Product = (props) => {
           !!product.lendingRates && product.lendingRates.length > 0 &&
           <div>
             <div className={classes.sectionTitle}>Lending Rates:</div>
-            {product.lendingRates.map((lendingRate, index) => <LendingRate key={index} lendingRate={lendingRate}/>)}
+            <ul className={classes.sectionContent}>
+              {product.lendingRates.map((lendingRate, index) => <LendingRate key={index} lendingRate={lendingRate}/>)}
+            </ul>
           </div>
         }
       </div>

@@ -31,8 +31,31 @@ const depositRateTypeDict = {
   MARKET_LINKED: 'Market Linked'
 }
 
+const lendingRateTypeDict = {
+  FIXED: 'Fixed',
+  VARIABLE: 'Variable',
+  INTRODUCTORY: 'Introductory',
+  FLOATING: 'Floating',
+  MARKET_LINKED: 'Market Linked',
+  DISCOUNT: 'Discount',
+  PENALTY: 'Penalty',
+  CASH_ADVANCE: 'Cash Advance',
+  PURCHASE: 'Purchase',
+  BUNDLE_DISCOUNT_FIXED: 'Bundle Discount Fixed',
+  BUNDLE_DISCOUNT_VARIABLE: 'Bundle Discount Variable'
+}
+
+const interestPaymentDueDict = {
+  ARREARS: 'in Arrears',
+  ADVANCE: 'in Advance'
+}
+
 export const translateProductCategory = (category) => productCategoryDict[category]
 
 export const translateConstraintType = (constraintType) => constraintTypeDict[constraintType]
 
 export const translateDepositRateType = (depositRateType) => depositRateTypeDict[depositRateType]
+
+export const translateLendingRateType = (lendingRateType) => lendingRateTypeDict[lendingRateType]
+
+export const translateInterestPaymentDue = (interestPaymentDue) => interestPaymentDueDict[interestPaymentDue]

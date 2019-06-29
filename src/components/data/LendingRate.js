@@ -1,24 +1,39 @@
 import React from 'react'
 import RateTier from './RateTier'
+import {translateInterestPaymentDue, translateLendingRateType} from "../../utils/dict";
+import * as moment from "moment";
 
 const LendingRate = (props) => {
-  const {lendingRate} = props
+  const {
+    lendingRateType,
+    rate,
+    calculationFrequency,
+    applicationFrequency,
+    comparisonRate,
+    interestPaymentDue,
+    tiers,
+    additionalValue,
+    additionalInfo,
+    additionalInfoUri
+  } = props.lendingRate
   return (
-    <div>
-      <div>{lendingRate.lendingRateType}</div>
-      <div>{lendingRate.rate}</div>
-      <div>Calculated {lendingRate.calculationFrequency}</div>
-      <div>Applied {lendingRate.applicationFrequency}</div>
-      <div>Applied {lendingRate.interestPaymentDue}</div>
-      {
-        !!lendingRate.tiers && lendingRate.tiers.map((tier, index) => (
-          <RateTier key={index} tier={tier}/>
-        ))
-      }
-      <div>Additional Value {lendingRate.additionalValue}</div>
-      <div>Additional Info {lendingRate.additionalInfo}</div>
-      <div>For more info, click <a href={lendingRate.additionalInfoUri} target='_blank'>{lendingRate.additionalInfoUri}</a></div>
-    </div>
+    <li>
+      <div>{(rate * 100).toFixed(2)}%</div>
+      {!!comparisonRate && <div>Comparision rate: {(comparisonRate * 100).toFixed(2)}%</div>}
+      <div>
+        {translateLendingRateType(lendingRateType)}
+        {
+          (lendingRateType === 'FIXED' || lendingRateType === 'INTRODUCTORY') && !!additionalValue &&
+          <span> {moment.duration(additionalValue).humanize()}</span>
+        }
+      </div>
+      {!!calculationFrequency && <div>Calculated {moment.duration(calculationFrequency).humanize(true)}</div>}
+      {!!applicationFrequency && <div>Applied {moment.duration(applicationFrequency).humanize(true)}</div>}
+      {!!interestPaymentDue && <div>Interest Payment {translateInterestPaymentDue(interestPaymentDue)}</div>}
+      {!!tiers && tiers.length > 0 && tiers.map((tier, index) => <RateTier key={index} tier={tier}/>)}
+      {!!additionalInfo && <div>{additionalInfo}</div>}
+      {!!additionalInfoUri && <div><a href={additionalInfoUri} target='_blank'>More info</a></div>}
+    </li>
   )
 }
 
