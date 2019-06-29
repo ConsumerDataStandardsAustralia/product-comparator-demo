@@ -9,9 +9,10 @@ import Tooltip from '@material-ui/core/Tooltip'
 import {
   saveDataSource,
   deleteDataSource,
-  modifyDataSource
+  modifyDataSourceName,
+  modifyDataSourceUrl
 } from '../../store/data-source'
-import { deleteData } from '../../store/data'
+import { modifyData, deleteData } from '../../store/data'
 import {connect} from 'react-redux'
 import isUrl from '../../utils/url'
 import Snackbar from '@material-ui/core/Snackbar'
@@ -46,7 +47,12 @@ const DataSource = (props) => {
   const { dataSource, index } = props
 
   const handleChange = name => event => {
-    props.modifyDataSource(index, {...dataSource, [name]: event.target.value})
+    if (name === 'name') {
+      props.modifyDataSourceName(index, {...dataSource, [name]: event.target.value})
+    } else if (name === 'url') {
+      props.modifyDataSourceUrl(index, {...dataSource, [name]: event.target.value})
+      dataSource.saved && props.modifyData(index)
+    }
   }
 
   const save = () => {
@@ -142,6 +148,6 @@ const DataSource = (props) => {
   )
 }
 
-const mapDispatchToProps = { saveDataSource, deleteDataSource, modifyDataSource, deleteData }
+const mapDispatchToProps = { saveDataSource, deleteDataSource, modifyDataSourceName, modifyDataSourceUrl, modifyData, deleteData }
 
 export default connect(null, mapDispatchToProps)(DataSource)

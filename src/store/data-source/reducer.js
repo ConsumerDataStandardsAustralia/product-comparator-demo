@@ -3,7 +3,8 @@ import {
   ADD_DATA_SOURCE,
   SAVE_DATA_SOURCE,
   DELETE_DATA_SOURCE,
-  MODIFY_DATA_SOURCE
+  MODIFY_DATA_SOURCE_NAME,
+  MODIFY_DATA_SOURCE_URL
 } from './actions'
 
 export default function(state=[], action) {
@@ -17,11 +18,11 @@ export default function(state=[], action) {
       return state.map((dataSource, index) => (index === action.index ? {...action.payload, saved: true} : dataSource))
     case DELETE_DATA_SOURCE:
       const dataSources = [...state]
-      console.log('before', state)
       dataSources.splice(action.index, 1)
-      console.log('after', dataSources)
       return dataSources
-    case MODIFY_DATA_SOURCE:
+    case MODIFY_DATA_SOURCE_NAME:
+      return state.map((dataSource, index) => (index === action.index ? {...action.payload} : dataSource))
+    case MODIFY_DATA_SOURCE_URL:
       return state.map((dataSource, index) => (index === action.index ? {...action.payload, saved: false} : dataSource))
     default:
       return [...state]

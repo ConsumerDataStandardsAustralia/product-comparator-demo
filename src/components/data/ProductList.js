@@ -53,7 +53,7 @@ class ProductList extends React.Component {
         <h2>{dataSource.name}</h2>
         {
           !!totalRecords && (processedRecords < totalRecords) &&
-          <LinearProgress variant="determinate" value={processedRecords * 100 / totalRecords} style={{width: '95%'}} />
+          <LinearProgress variant="determinate" value={processedRecords * 100 / totalRecords} style={{width: '93%'}} />
         }
         {
           progress === START_RETRIEVE_PRODUCT_LIST && <p>Getting {productListUrl}...</p> ||

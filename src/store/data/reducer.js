@@ -3,9 +3,9 @@ import {
   RETRIEVE_PRODUCT_LIST,
   RETRIEVE_PRODUCT_DETAIL,
   SELECT_PRODUCT,
-  DESELECT_PRODUCT, DELETE_DATA
+  DESELECT_PRODUCT, DELETE_DATA, MODIFY_DATA
 } from './actions'
-import {fulfilled, rejected} from '../../utils/async-actions'
+import {fulfilled} from '../../utils/async-actions'
 
 export default function(state = {selectedProducts:[], productList:[]}, action) {
   switch (action.type) {
@@ -65,6 +65,13 @@ export default function(state = {selectedProducts:[], productList:[]}, action) {
       return {
         selectedProducts: state.selectedProducts.filter(prd => (prd.dataSourceIdx !== action.payload)),
         productList: productList
+      }
+    case MODIFY_DATA:
+      const prdList = [...state.productList]
+      prdList[action.payload] = {}
+      return {
+        selectedProducts: state.selectedProducts.filter(prd => (prd.dataSourceIdx !== action.payload)),
+        productList: prdList
       }
     default:
       return {...state}

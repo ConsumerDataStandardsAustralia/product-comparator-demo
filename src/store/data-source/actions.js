@@ -2,7 +2,8 @@ export const LOAD_DATA_SOURCE = 'LOAD_DATA_SOURCE'
 export const ADD_DATA_SOURCE = 'ADD_DATA_SOURCE'
 export const SAVE_DATA_SOURCE = 'SAVE_DATA_SOURCE'
 export const DELETE_DATA_SOURCE = 'DELETE_DATA_SOURCE'
-export const MODIFY_DATA_SOURCE = 'MODIFY_DATA_SOURCE'
+export const MODIFY_DATA_SOURCE_NAME = 'MODIFY_DATA_SOURCE_NAME'
+export const MODIFY_DATA_SOURCE_URL = 'MODIFY_DATA_SOURCE_URL'
 
 export function loadDataSource() {
   return {
@@ -31,9 +32,17 @@ export function deleteDataSource(index) {
   }
 }
 
-export function modifyDataSource(index, payload) {
+export function modifyDataSourceName(index, payload) {
   return {
-    type: MODIFY_DATA_SOURCE,
+    type: MODIFY_DATA_SOURCE_NAME,
+    index: index,
+    payload: payload
+  }
+}
+
+export function modifyDataSourceUrl(index, payload) {
+  return {
+    type: MODIFY_DATA_SOURCE_URL,
     index: index,
     payload: payload
   }

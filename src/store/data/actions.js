@@ -5,6 +5,7 @@ export const RETRIEVE_ALL_PRODUCT_DETAILS = 'RETRIEVE_ALL_PRODUCT_DETAILS'
 export const SELECT_PRODUCT = 'SELECT_PRODUCT'
 export const DESELECT_PRODUCT = 'DESELECT_PRODUCT'
 export const DELETE_DATA = 'DELETE_DATA'
+export const MODIFY_DATA = 'MODIFY_DATA'
 
 export const startRetrieveProductList = (dataSourceIdx, productListUrl) => ({
   type: START_RETRIEVE_PRODUCT_LIST,
@@ -53,5 +54,10 @@ export const deselectProduct = (dataSourceIdx, product) => ({
 
 export const deleteData = (dataSourceIdx) => ({
   type: DELETE_DATA,
+  payload: dataSourceIdx
+})
+
+export const modifyData = (dataSourceIdx) => ({
+  type: MODIFY_DATA,
   payload: dataSourceIdx
 })
