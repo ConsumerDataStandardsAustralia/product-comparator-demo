@@ -144,9 +144,9 @@ const Product = (props) => {
           !!product.depositRates && product.depositRates.length > 0 &&
           <div>
             <div className={classes.sectionTitle}>Deposit Rates:</div>
-            <div className={classes.sectionContent}>
+            <ul className={classes.sectionContent}>
               {product.depositRates.map((depositRate, index) => <DepositRate key={index} depositRate={depositRate}/>)}
-            </div>
+            </ul>
           </div>
         }
         {

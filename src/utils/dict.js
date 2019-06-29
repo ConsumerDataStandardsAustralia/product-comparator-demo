@@ -21,6 +21,18 @@ const constraintTypeDict = {
   MIN_LIMIT: 'Minimum Credit Limit'
 }
 
+const depositRateTypeDict = {
+  FIXED: 'Fixed',
+  BONUS: 'Bonus',
+  BUNDLE_BONUS: 'Bundle Bonus',
+  VARIABLE: 'Variable',
+  INTRODUCTORY: 'Introductory',
+  FLOATING: 'Floating',
+  MARKET_LINKED: 'Market Linked'
+}
+
 export const translateProductCategory = (category) => productCategoryDict[category]
 
 export const translateConstraintType = (constraintType) => constraintTypeDict[constraintType]
+
+export const translateDepositRateType = (depositRateType) => depositRateTypeDict[depositRateType]
