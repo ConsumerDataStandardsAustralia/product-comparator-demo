@@ -30,10 +30,14 @@ const useStyles = makeStyles(theme => ({
     fontSize: theme.typography.pxToRem(20),
   },
   details: {
-    maxWidth: 800,
+    maxWidth:'95%',
     marginLeft: 'auto',
     marginRight: 'auto',
     marginBottom: 20
+  },
+  item: {
+    maxHeight: 400,
+    overflow: 'auto'
   },
   button: {
     margin: theme.spacing(1)
@@ -56,16 +60,18 @@ const DataPanel = (props) => {
           <SubjectIcon/><Typography style={{paddingLeft: 8}}>Products</Typography>
         </div>
       </ExpansionPanelSummary>
+      <div className={classes.details}>
       {
         savedDataSources.length > 0 &&
-        <Grid container alignItems='center' spacing={2} className={classes.container}>
+        <Grid container alignItems='flex-start' spacing={2} className={classes.container}>
           {savedDataSources.map((dataSource, index) => (
-            <Grid item xs={12} key={index}>
+            <Grid item xs={savedDataSources.length === 1 ? 12 : 6} key={index} className={classes.item}>
               <ProductList dataSource={dataSource} dataSourceIndex={index}/>
             </Grid>
           ))}
         </Grid>
       }
+      </div>
       <Divider/>
       <ExpansionPanelActions>
         <Fab variant='extended' size='medium' color='primary' disabled={props.selectedProducts.length < 2}

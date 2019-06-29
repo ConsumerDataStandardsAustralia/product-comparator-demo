@@ -20,7 +20,7 @@ class ProductList extends React.Component {
     const { dataSource, dataSourceIndex } = this.props
     let productList = this.props.data.productList[dataSourceIndex];
     productList = !!productList ? productList : {}
-    const { progress, totalRecords, records, detailRecords, failedDetailRecords, products, productListUrl, productDetails } = productList
+    const { progress, totalRecords, detailRecords, failedDetailRecords, products, productListUrl, productDetails } = productList
     const productsByCategory = {}
     if (!!totalRecords && totalRecords === (detailRecords + failedDetailRecords)) {
       const productsMap = {}
@@ -56,8 +56,8 @@ class ProductList extends React.Component {
           <LinearProgress variant="determinate" value={processedRecords * 100 / totalRecords} style={{width: '95%'}} />
         }
         {
-          progress === START_RETRIEVE_PRODUCT_LIST && <p style={{marginBottom: 30}}>Getting {productListUrl}...</p> ||
-          processedRecords < totalRecords && <p style={{marginBottom: 30}}>Getting product details...</p>
+          progress === START_RETRIEVE_PRODUCT_LIST && <p>Getting {productListUrl}...</p> ||
+          processedRecords < totalRecords && <p>Getting product details...</p>
         }
         {
           !!products && processedRecords === totalRecords &&
