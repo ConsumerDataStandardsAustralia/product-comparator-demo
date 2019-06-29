@@ -24,13 +24,21 @@ const LendingRate = (props) => {
         {translateLendingRateType(lendingRateType)}
         {
           (lendingRateType === 'FIXED' || lendingRateType === 'INTRODUCTORY') && !!additionalValue &&
-          <span> {moment.duration(additionalValue).humanize()}</span>
+          <span> - {moment.duration(additionalValue).humanize()}</span>
         }
         {
-          (lendingRateType === 'DISCOUNT' || lendingRateType === 'PENALTY'
-            || lendingRateType === 'FLOATING' || lendingRateType === 'MARKET_LINKED'
-            || lendingRateType === 'BUNDLE_DISCOUNT_FIXED' || lendingRateType === 'BUNDLE_DISCOUNT_VARIABLE') &&
-          <span> {additionalValue}</span>
+          ( lendingRateType === 'DISCOUNT' ||
+            lendingRateType === 'PENALTY' ||
+            lendingRateType === 'FLOATING' ||
+            lendingRateType === 'MARKET_LINKED' ||
+            lendingRateType === 'BUNDLE_DISCOUNT_FIXED' ||
+            lendingRateType === 'BUNDLE_DISCOUNT_VARIABLE') &&
+          <span> - {additionalValue}</span>
+        }
+        {
+          ( lendingRateType === 'VARIABLE' ||
+            lendingRateType === 'PURCHASE' ) && !!additionalValue &&
+          <span> - {additionalValue}</span>
         }
       </div>
       {!!calculationFrequency && <div>Calculated {moment.duration(calculationFrequency).humanize(true)}</div>}

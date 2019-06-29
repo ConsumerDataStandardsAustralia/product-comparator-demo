@@ -21,17 +21,20 @@ const DepositRate = (props) => {
         {translateDepositRateType(depositRateType)}
         {
           (depositRateType === 'FIXED' || depositRateType === 'INTRODUCTORY') && !!additionalValue &&
-          <span> {moment.duration(additionalValue).humanize()}</span>
+          <span> - {moment.duration(additionalValue).humanize()}</span>
         }
         {
-          (depositRateType === 'BONUS' || depositRateType === 'BUNDLE_BONUS' || depositRateType === 'FLOATING' || depositRateType === 'MARKET_LINKED') &&
-          <span> {additionalValue}</span>
+          ( depositRateType === 'BONUS' ||
+            depositRateType === 'BUNDLE_BONUS' ||
+            depositRateType === 'FLOATING' ||
+            depositRateType === 'MARKET_LINKED') &&
+          <span> - {additionalValue}</span>
         }
       </div>
       {!!calculationFrequency && <div>Calculated {moment.duration(calculationFrequency).humanize(true)}</div>}
       {!!applicationFrequency && <div>Applied {moment.duration(applicationFrequency).humanize(true)}</div>}
       {!!tiers && tiers.length > 0 && tiers.map((tier, index) => <RateTier key={index} tier={tier}/>)}
-      {!!additionalInfo && <div>Additional Info {additionalInfo}</div>}
+      {!!additionalInfo && <div>{additionalInfo}</div>}
       {!!additionalInfoUri && <div><a href={additionalInfoUri} target='_blank'>More info</a></div>}
     </li>
   )

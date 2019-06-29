@@ -162,9 +162,9 @@ const Product = (props) => {
           !!product.features && product.features.length > 0 &&
           <div>
             <div className={classes.sectionTitle}>Features:</div>
-            <div className={classes.sectionContent}>
+            <ul className={classes.sectionContent}>
               {product.features.map((feature, index) => <Feature key={index} feature={feature}/>)}
-            </div>
+            </ul>
           </div>
         }
         {

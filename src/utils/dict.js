@@ -1,4 +1,4 @@
-const productCategoryDict = {
+export const productCategoryDict = {
   RESIDENTIAL_MORTGAGES: "Residential Mortgages",
   CRED_AND_CHRG_CARDS: "Credit and Charge Cards",
   PERS_LOANS: "Personal Loans",
@@ -13,7 +13,7 @@ const productCategoryDict = {
   REGULATED_TRUST_ACCOUNTS: "Regulated Trust Accounts"
 }
 
-const constraintTypeDict = {
+export const constraintTypeDict = {
   MIN_BALANCE: 'Minimum Balance',
   MAX_BALANCE: 'Maximum Balance',
   OPENING_BALANCE: 'Opening Balance',
@@ -21,7 +21,7 @@ const constraintTypeDict = {
   MIN_LIMIT: 'Minimum Credit Limit'
 }
 
-const depositRateTypeDict = {
+export const depositRateTypeDict = {
   FIXED: 'Fixed',
   BONUS: 'Bonus',
   BUNDLE_BONUS: 'Bundle Bonus',
@@ -31,7 +31,7 @@ const depositRateTypeDict = {
   MARKET_LINKED: 'Market Linked'
 }
 
-const lendingRateTypeDict = {
+export const lendingRateTypeDict = {
   FIXED: 'Fixed',
   VARIABLE: 'Variable',
   INTRODUCTORY: 'Introductory',
@@ -45,12 +45,12 @@ const lendingRateTypeDict = {
   BUNDLE_DISCOUNT_VARIABLE: 'Bundle Discount Variable'
 }
 
-const interestPaymentDueDict = {
+export const interestPaymentDueDict = {
   ARREARS: 'in Arrears',
   ADVANCE: 'in Advance'
 }
 
-const eligibilityTypeDict = {
+export const eligibilityTypeDict = {
   BUSINESS: 'Business',
   PENSION_RECIPIENT: 'Pension Recipient',
   MIN_AGE: 'Minimum Age',
@@ -65,6 +65,32 @@ const eligibilityTypeDict = {
   OTHER: 'Other'
 }
 
+export const featureTypeDict = {
+  CARD_ACCESS: 'Card Access',
+  ADDITIONAL_CARDS: 'Additional Cards',
+  UNLIMITED_TXNS: 'Unlimited Transactions',
+  FREE_TXNS: 'Free Transactions',
+  FREE_TXNS_ALLOWANCE: 'Free Transaction Allowance',
+  LOYALTY_PROGRAM: 'Loyalty Program',
+  OFFSET: 'Offset',
+  OVERDRAFT: 'Overdraft',
+  REDRAW: 'Redraw',
+  INSURANCE: 'Insurance',
+  BALANCE_TRANSFERS: 'Balance Transfer',
+  INTEREST_FREE: 'Interest Free',
+  INTEREST_FREE_TRANSFERS: 'Interest Free Transfers',
+  DIGITAL_WALLET: 'Digital Wallet',
+  DIGITAL_BANKING: 'Digital Banking',
+  NPP_PAYID: 'NPP PayID',
+  NPP_ENABLED: 'NPP Enabled',
+  DONATE_INTEREST: 'Donate Interest',
+  BILL_PAYMENT: 'Bill Payment',
+  COMPLEMENTARY_PRODUCT_DISCOUNTS: 'Complementary Product Discounts',
+  BONUS_REWARDS: 'Bonus Rewards',
+  NOTIFICATIONS: 'Notifications',
+  OTHER: 'Other'
+}
+
 export const translateProductCategory = (category) => productCategoryDict[category]
 
 export const translateConstraintType = (constraintType) => constraintTypeDict[constraintType]
@@ -76,3 +102,5 @@ export const translateLendingRateType = (lendingRateType) => lendingRateTypeDict
 export const translateInterestPaymentDue = (interestPaymentDue) => interestPaymentDueDict[interestPaymentDue]
 
 export const translateEligibilityType = (eligibilityType) => eligibilityTypeDict[eligibilityType]
+
+export const translateFeatureType = (featureType) => featureTypeDict[featureType]

@@ -5,7 +5,7 @@ const Constraint = (props) => {
   const {constraintType, additionalInfo, additionalValue, additionalInfoUri} = props.constraint
   return (
     <li>
-      <div>{translateConstraintType(constraintType)}: ${additionalValue}</div>
+      <div>{translateConstraintType(constraintType)} - ${additionalValue}</div>
       {!!additionalInfo && <div>{additionalInfo}</div>}
       {!!additionalInfoUri && <div><a href={additionalInfoUri} target='_blank'>More info</a></div>}
     </li>
