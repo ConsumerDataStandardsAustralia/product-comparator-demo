@@ -1,9 +1,8 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import ExpansionPanel from '@material-ui/core/ExpansionPanel'
-import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary'
-import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails'
-import {makeStyles} from "@material-ui/core"
+import MuiExpansionPanel from '@material-ui/core/ExpansionPanel'
+import MuiExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary'
+import { withStyles, makeStyles } from "@material-ui/core"
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import Typography from "@material-ui/core/Typography"
 import Bundle from './Bundle'
@@ -21,16 +20,56 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     alignItems: 'flex-start'
   },
-  panel: {
-    boxShadow: 'none',
-    width: '90%',
-    backgroundColor: 'transparent'
-  },
   details: {
     display: 'block',
     lineHeight: '1.8rem'
   }
 }))
+
+const ExpansionPanel = withStyles({
+  root: {
+    width: '100%',
+    backgroundColor: 'transparent',
+    boxShadow: 'none',
+    '&:not(:last-child)': {
+      borderBottom: 0,
+    },
+    '&:before': {
+      display: 'none',
+    },
+    '&$expanded': {
+      margin: 'auto',
+    },
+  },
+  expanded: {},
+})(MuiExpansionPanel);
+
+const ExpansionPanelSummary = withStyles({
+  root: {
+    paddingLeft: 0,
+    paddingRight: 24,
+    alignItems: 'flex-start',
+    backgroundColor: 'transparent',
+    marginBottom: -1,
+    maxHeight: 48,
+    '&$expanded': {
+      maxHeight: 48,
+    },
+  },
+  content: {
+    margin: '8px 0',
+    '&$expanded': {
+      margin: '8px 0',
+    },
+  },
+  expandIcon: {
+    paddingTop: 8,
+    '&$expanded': {
+      paddingTop: 8
+    }
+  },
+  expanded: {},
+})(MuiExpansionPanelSummary);
 
 const Product = (props) => {
   const classes = useStyles()
@@ -47,14 +86,14 @@ const Product = (props) => {
       onChange={handleChange}
       color="primary"
     />
-    <ExpansionPanel defaultExpanded={false} className={classes.panel}>
+    <ExpansionPanel defaultExpanded={false}>
       <ExpansionPanelSummary
         expandIcon={<ExpandMoreIcon/>}
         aria-controls='panel1c-content'
       >
         <Typography>{product.name}</Typography>
       </ExpansionPanelSummary>
-      <ExpansionPanelDetails className={classes.details}>
+      <div className={classes.details}>
         <div>{product.description}</div>
         <div>
           Effective from {product.effectiveFrom} to {product.effectiveTo}
@@ -119,7 +158,7 @@ const Product = (props) => {
             ))
           }
         </div>
-      </ExpansionPanelDetails>
+      </div>
     </ExpansionPanel>
     </div>
   )
