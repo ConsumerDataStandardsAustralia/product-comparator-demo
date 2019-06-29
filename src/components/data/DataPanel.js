@@ -48,7 +48,7 @@ const useStyles = makeStyles(theme => ({
 }))
 
 const DataPanel = (props) => {
-  const {savedDataSources} = props
+  const {dataSources, savedDataSourcesCount} = props
   const classes = useStyles()
   return (
     <ExpansionPanel defaultExpanded className={classes.panel}>
@@ -62,10 +62,11 @@ const DataPanel = (props) => {
       </ExpansionPanelSummary>
       <div className={classes.details}>
       {
-        savedDataSources.length > 0 &&
+        savedDataSourcesCount > 0 &&
         <Grid container alignItems='flex-start' spacing={2} className={classes.container}>
-          {savedDataSources.map((dataSource, index) => (
-            <Grid item xs={savedDataSources.length === 1 ? 12 : 6} key={index} className={classes.item}>
+          {dataSources.map((dataSource, index) => (
+            dataSource.saved &&
+            <Grid item xs={savedDataSourcesCount === 1 ? 12 : 6} key={index} className={classes.item}>
               <ProductList dataSource={dataSource} dataSourceIndex={index}/>
             </Grid>
           ))}
@@ -85,7 +86,8 @@ const DataPanel = (props) => {
 }
 
 const mapStateToProps = state=>({
-  savedDataSources: state.dataSources.filter(dataSource => dataSource.saved),
+  dataSources : state.dataSources,
+  savedDataSourcesCount: state.dataSources.filter(dataSource => dataSource.saved).length,
   selectedProducts: state.data.selectedProducts
 })
 

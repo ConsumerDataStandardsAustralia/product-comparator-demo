@@ -11,6 +11,7 @@ import {
   deleteDataSource,
   modifyDataSource
 } from '../../store/data-source'
+import { deleteData } from '../../store/data'
 import {connect} from 'react-redux'
 import isUrl from '../../utils/url'
 import Snackbar from '@material-ui/core/Snackbar'
@@ -72,6 +73,7 @@ const DataSource = (props) => {
 
   const del = () => {
     props.deleteDataSource(index)
+    props.deleteData(index)
   }
 
   const isDataSourceValid = () => {
@@ -140,6 +142,6 @@ const DataSource = (props) => {
   )
 }
 
-const mapDispatchToProps = { saveDataSource, deleteDataSource, modifyDataSource }
+const mapDispatchToProps = { saveDataSource, deleteDataSource, modifyDataSource, deleteData }
 
 export default connect(null, mapDispatchToProps)(DataSource)

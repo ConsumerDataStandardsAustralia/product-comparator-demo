@@ -3,7 +3,7 @@ import {
   RETRIEVE_PRODUCT_LIST,
   RETRIEVE_PRODUCT_DETAIL,
   SELECT_PRODUCT,
-  DESELECT_PRODUCT
+  DESELECT_PRODUCT, DELETE_DATA
 } from './actions'
 import {fulfilled, rejected} from '../../utils/async-actions'
 
@@ -58,6 +58,13 @@ export default function(state = {selectedProducts:[], productList:[]}, action) {
         selectedProducts: state.selectedProducts.filter(
             prd => (prd.dataSourceIdx !== payload.dataSourceIdx || prd.product.productId !== payload.product.productId)),
         productList: [...state.productList]
+      }
+    case DELETE_DATA:
+      const productList = [...state.productList]
+      productList.splice(action.payload, 1)
+      return {
+        selectedProducts: state.selectedProducts.filter(prd => (prd.dataSourceIdx !== action.payload)),
+        productList: productList
       }
     default:
       return {...state}
