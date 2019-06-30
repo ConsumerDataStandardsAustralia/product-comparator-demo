@@ -13,7 +13,7 @@ import { fade } from '@material-ui/core/styles/colorManipulator'
 import Fab from '@material-ui/core/Fab'
 import Grid from '@material-ui/core/Grid'
 import ProductList from './ProductList'
-
+import { compareProducts } from '../../store/comparison'
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -50,8 +50,16 @@ const useStyles = makeStyles(theme => ({
 const DataPanel = (props) => {
   const {dataSources, savedDataSourcesCount} = props
   const classes = useStyles()
+  const [expanded, setExpanded] = React.useState(true)
+  const compare = () => {
+    props.compareProducts(props.selectedProducts)
+    setExpanded(false)
+  }
+  const toggleExpansion = (event, newExpanded) => {
+    setExpanded(newExpanded)
+  }
   return (
-    <ExpansionPanel defaultExpanded className={classes.panel}>
+    <ExpansionPanel defaultExpanded className={classes.panel} expanded={expanded} onChange={toggleExpansion}>
       <ExpansionPanelSummary
         expandIcon={<ExpandMoreIcon/>}
         aria-controls='panel1c-content'
@@ -76,7 +84,7 @@ const DataPanel = (props) => {
       <Divider/>
       <ExpansionPanelActions>
         <Fab variant='extended' size='medium' color='primary' disabled={props.selectedProducts.length < 2}
-             className={classes.button} onClick={props.addDataSource}>
+             className={classes.button} onClick={compare}>
           <CompareIcon className={classes.leftIcon}/>
           Compare
         </Fab>
@@ -91,4 +99,6 @@ const mapStateToProps = state=>({
   selectedProducts: state.data.selectedProducts
 })
 
-export default connect(mapStateToProps)(DataPanel)
+const mapDispatchToProps = { compareProducts }
+
+export default connect(mapStateToProps, mapDispatchToProps)(DataPanel)

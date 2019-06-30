@@ -154,6 +154,16 @@ const Product = (props) => {
           </div>
         }
         {
+          !!product.lendingRates && product.lendingRates.length > 0 &&
+          <div>
+            <div className={classes.sectionTitle}>Lending Rates:</div>
+            <ul className={classes.sectionContent}>
+              {product.lendingRates.sort((a, b)=>ecomp(a.lendingRateType, b.lendingRateType)).map(
+                (lendingRate, index) => <LendingRate key={index} lendingRate={lendingRate}/>)}
+            </ul>
+          </div>
+        }
+        {
           !!product.eligibilities && product.eligibilities.length > 0 &&
           <div>
             <div className={classes.sectionTitle}>Eligibilities:</div>
@@ -180,16 +190,6 @@ const Product = (props) => {
             <ul className={classes.sectionContent}>
               {product.fees.sort((a, b)=>ecomp(a.feeType, b.feeType)).map(
                 (fee, index) => <Fee key={index} fee={fee}/>)}
-            </ul>
-          </div>
-        }
-        {
-          !!product.lendingRates && product.lendingRates.length > 0 &&
-          <div>
-            <div className={classes.sectionTitle}>Lending Rates:</div>
-            <ul className={classes.sectionContent}>
-              {product.lendingRates.sort((a, b)=>ecomp(a.lendingRateType, b.lendingRateType)).map(
-                (lendingRate, index) => <LendingRate key={index} lendingRate={lendingRate}/>)}
             </ul>
           </div>
         }

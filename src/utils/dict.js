@@ -123,6 +123,25 @@ export const rateApplicationMethodDict = {
   PER_TIER: 'Per Tier'
 }
 
+export const productDataKeys = [
+  {key: 'description', label: 'Description'},
+  {key: 'brand', label: 'Brand'},
+  {key: 'brandName', label: 'Brand Name'},
+  {key: 'lastUpdated', label: 'Last Updated'},
+  {key: 'isTailored', label: 'Tailored?'},
+  {key: 'effectiveFrom', label: 'Effective From'},
+  {key: 'effectiveTo', label: 'Effective To'},
+  {key: 'applicationUri', label: 'Application Link'},
+  {key: 'additionalInformation', label: 'Additional Information'},
+  {key: 'bundles', label: 'Bundles'},
+  {key: 'constraints', label: 'Constraints'},
+  {key: 'depositRates', label: 'Deposit Rates'},
+  {key: 'lendingRates', label: 'Lending Rates'},
+  {key: 'eligibilities', label: 'Eligibility'},
+  {key: 'features', label: 'Features'},
+  {key: 'fees', label: 'Fees'}
+]
+
 export const translateProductCategory = (category) => productCategoryDict[category]
 
 export const translateConstraintType = (constraintType) => constraintTypeDict[constraintType]
