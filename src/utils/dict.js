@@ -103,6 +103,14 @@ export const feeTypeDict = {
   EXIT: 'Exit'
 }
 
+export const discountTypeDict = {
+  BALANCE: 'Balance',
+  DEPOSITS: 'Deposits',
+  PAYMENTS: 'Payments',
+  FEE_CAP: 'Fee Cap',
+  ELIGIBILITY_ONLY: 'Eligibility Only'
+}
+
 export const translateProductCategory = (category) => productCategoryDict[category]
 
 export const translateConstraintType = (constraintType) => constraintTypeDict[constraintType]
@@ -118,3 +126,5 @@ export const translateEligibilityType = (eligibilityType) => eligibilityTypeDict
 export const translateFeatureType = (featureType) => featureTypeDict[featureType]
 
 export const translateFeeType = (feeType) => feeTypeDict[feeType]
+
+export const translateDiscountType = (discountType) => discountTypeDict[discountType]

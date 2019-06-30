@@ -7,7 +7,7 @@ const Eligibility = (props) => {
     <li>
       <div>
         {translateEligibilityType(eligibilityType)}
-        {eligibilityType === 'OTHER' && <span> {additionalInfo}</span>}
+        {eligibilityType === 'OTHER' && <span> - {additionalInfo}</span>}
         {
           ( eligibilityType === 'MIN_AGE' ||
             eligibilityType === 'MAX_AGE' ||

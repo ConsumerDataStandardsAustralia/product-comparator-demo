@@ -2,8 +2,17 @@ import React from 'react'
 import FeeDiscount from "./FeeDiscount";
 import * as moment from "moment";
 import {translateFeeType} from "../../utils/dict";
+import {makeStyles} from "@material-ui/core";
+
+const useStyles = makeStyles(() => ({
+  sectionContent: {
+    marginTop: 0,
+    marginBottom: 0
+  }
+}))
 
 const Fee = (props) => {
+  const classes = useStyles()
   const {
     name,
     feeType,
@@ -38,9 +47,10 @@ const Fee = (props) => {
       {!!additionalInfo && <div>{additionalInfo}</div>}
       {!!additionalInfoUri && <div><a href={additionalInfoUri} target='_blank'>More info</a></div>}
       {
-        !!discounts && discounts.length > 0 && discounts.map((discount, index) =>(
-          <FeeDiscount key={index} discount={discount}/>
-        ))
+        !!discounts && discounts.length > 0 &&
+        <ul className={classes.sectionContent}>
+          {discounts.map((discount, index) =><FeeDiscount key={index} discount={discount}/>)}
+        </ul>
       }
     </li>
   )
