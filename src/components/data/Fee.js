@@ -5,6 +5,9 @@ import {translateFeeType} from "../../utils/dict";
 import {makeStyles} from "@material-ui/core";
 
 const useStyles = makeStyles(() => ({
+  sectionTitle: {
+    fontStyle: 'italic'
+  },
   sectionContent: {
     marginTop: 0,
     marginBottom: 0
@@ -48,9 +51,12 @@ const Fee = (props) => {
       {!!additionalInfoUri && <div><a href={additionalInfoUri} target='_blank'>More info</a></div>}
       {
         !!discounts && discounts.length > 0 &&
-        <ul className={classes.sectionContent}>
-          {discounts.map((discount, index) =><FeeDiscount key={index} discount={discount}/>)}
-        </ul>
+          <div>
+            <div className={classes.sectionTitle}>Discounts:</div>
+            <ul className={classes.sectionContent}>
+              {discounts.map((discount, index) =><FeeDiscount key={index} discount={discount}/>)}
+            </ul>
+          </div>
       }
     </li>
   )

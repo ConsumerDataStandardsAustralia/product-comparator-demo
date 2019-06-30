@@ -2,8 +2,20 @@ import React from 'react'
 import RateTier from './RateTier'
 import {translateDepositRateType} from "../../utils/dict";
 import * as moment from "moment";
+import {makeStyles} from "@material-ui/core";
+
+const useStyles = makeStyles(() => ({
+  sectionTitle: {
+    fontStyle: 'italic'
+  },
+  sectionContent: {
+    marginTop: 0,
+    marginBottom: 0
+  }
+}))
 
 const DepositRate = (props) => {
+  const classes = useStyles()
   const {
     rate,
     depositRateType,
@@ -33,7 +45,15 @@ const DepositRate = (props) => {
       </div>
       {!!calculationFrequency && <div>Calculated {moment.duration(calculationFrequency).humanize().replace('a ', 'every ')}</div>}
       {!!applicationFrequency && <div>Applied {moment.duration(applicationFrequency).humanize().replace('a ', 'every ')}</div>}
-      {!!tiers && tiers.length > 0 && tiers.map((tier, index) => <RateTier key={index} tier={tier}/>)}
+      {
+        !!tiers && tiers.length > 0 &&
+          <div>
+            <div className={classes.sectionTitle}>Rate Tiers:</div>
+            <ul className={classes.sectionContent}>
+              {tiers.map((tier, index) => <RateTier key={index} tier={tier}/>)}
+            </ul>
+          </div>
+      }
       {!!additionalInfo && <div>{additionalInfo}</div>}
       {!!additionalInfoUri && <div><a href={additionalInfoUri} target='_blank'>More info</a></div>}
     </li>

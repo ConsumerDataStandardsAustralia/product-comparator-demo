@@ -1,20 +1,38 @@
 import React from 'react'
 import RateCondition from "./RateCondition";
 import RateSubTier from "./RateSubTier";
+import {translateRateApplicationMethod, translateUnitOfMeasure} from "../../utils/dict";
+import {makeStyles} from "@material-ui/core";
+
+const useStyles = makeStyles(() => ({
+  sectionTitle: {
+    fontStyle: 'italic'
+  },
+  sectionContent: {
+    marginLeft: 30
+  }
+}))
 
 const RateTier = (props) => {
-  const {tier} = props
+  const classes = useStyles()
+  const {name, unitOfMeasure, minimumValue, maximumValue, rateApplicationMethod, applicabilityConditions, subTier} = props.tier
   return (
-      !!tier &&
-    <div>
-      <div>{tier.name}</div>
-      <div>{tier.unitOfMeasure}</div>
-      <div>{tier.minimumValue}</div>
-      <div>{tier.maximumValue}</div>
-      <div>{tier.rateApplicationMethod}</div>
-      <RateCondition rateCondition={tier.rateCondition}/>
-      <RateSubTier subTier={tier.subTier}/>
-    </div>
+    <li>
+      <div>{name}</div>
+      <div>Minimum {minimumValue} {translateUnitOfMeasure(unitOfMeasure)}</div>
+      {!!maximumValue && <div>Maximum {maximumValue} {translateUnitOfMeasure(unitOfMeasure)}</div>}
+      {!!rateApplicationMethod && <div>Applied on {translateRateApplicationMethod(rateApplicationMethod)}</div>}
+      {!!applicabilityConditions && <RateCondition rateCondition={applicabilityConditions}/>}
+      {
+        !!subTier &&
+        <div>
+          <div className={classes.sectionTitle}>Sub Tier: </div>
+          <div className={classes.sectionContent}>
+            <RateSubTier subTier={subTier}/>
+          </div>
+        </div>
+      }
+    </li>
   )
 }
 

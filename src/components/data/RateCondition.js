@@ -1,12 +1,11 @@
 import React from 'react'
 
 const RateCondition = (props) => {
-  const {rateCondition} = props
+  const {additionalInfo, additionalInfoUri} = props.rateCondition
   return (
-      !!rateCondition &&
     <div>
-      <div>{rateCondition.additionalInfo}</div>
-      <div>For more info, click <a href={rateCondition.additionInfoUri} target='_blank'>{rateCondition.additionInfoUri}</a></div>
+      {!!additionalInfo && <div>{additionalInfo}</div>}
+      {!!additionalInfoUri && <div><a href={additionalInfoUri} target='_blank'>More info</a></div>}
     </div>
   )
 }

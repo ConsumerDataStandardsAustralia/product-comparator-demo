@@ -111,6 +111,18 @@ export const discountTypeDict = {
   ELIGIBILITY_ONLY: 'Eligibility Only'
 }
 
+export const unitOfMeasureDict = {
+  DOLLAR: 'Dollars',
+  PERCENT: 'Percent',
+  MONTH: 'Month(s)',
+  DAY: 'Day(s)'
+}
+
+export const rateApplicationMethodDict = {
+  WHOLE_BALANCE: 'Whole Balance',
+  PER_TIER: 'Per Tier'
+}
+
 export const translateProductCategory = (category) => productCategoryDict[category]
 
 export const translateConstraintType = (constraintType) => constraintTypeDict[constraintType]
@@ -128,3 +140,7 @@ export const translateFeatureType = (featureType) => featureTypeDict[featureType
 export const translateFeeType = (feeType) => feeTypeDict[feeType]
 
 export const translateDiscountType = (discountType) => discountTypeDict[discountType]
+
+export const translateUnitOfMeasure = (unitOfMeasure) => unitOfMeasureDict[unitOfMeasure]
+
+export const translateRateApplicationMethod = (rateApplicationMethod) => rateApplicationMethodDict[rateApplicationMethod]

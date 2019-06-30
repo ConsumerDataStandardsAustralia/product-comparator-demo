@@ -1,17 +1,16 @@
 import React from 'react'
 import RateCondition from "./RateCondition";
+import {translateRateApplicationMethod, translateUnitOfMeasure} from "../../utils/dict";
 
 const RateSubTier = (props) => {
-  const {subTier} = props
+  const {name, unitOfMeasure, minimumValue, maximumValue, rateApplicationMethod, applicabilityConditions} = props.subTier
   return (
-      !!subTier &&
     <div>
-      <div>{subTier.name}</div>
-      <div>{subTier.unitOfMeasure}</div>
-      <div>{subTier.minimumValue}</div>
-      <div>{subTier.maximumValue}</div>
-      <div>{subTier.rateApplicationMethod}</div>
-      <RateCondition rateCondition={subTier.applicabilityConditions}/>
+      <div>{name}</div>
+      <div>Minimum {minimumValue} {translateUnitOfMeasure(unitOfMeasure)}</div>
+      {!!maximumValue && <div>Maximum {maximumValue} {translateUnitOfMeasure(unitOfMeasure)}</div>}
+      {!!rateApplicationMethod && <div>Applied on {translateRateApplicationMethod(rateApplicationMethod)}</div>}
+      {!!applicabilityConditions && <RateCondition rateCondition={applicabilityConditions}/>}
     </div>
   )
 }

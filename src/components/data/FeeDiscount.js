@@ -5,6 +5,9 @@ import {translateDiscountType} from "../../utils/dict";
 import * as moment from "moment";
 
 const useStyles = makeStyles(() => ({
+  sectionTitle: {
+    fontStyle: 'italic'
+  },
   sectionContent: {
     marginTop: 0,
     marginBottom: 0
@@ -36,7 +39,7 @@ const FeeDiscount = (props) => {
       <div>
         Discount Type - {translateDiscountType(discountType)}
         {
-          ( discountType === 'BALANCE' ||
+          (discountType === 'BALANCE' ||
             discountType === 'DEPOSITS' ||
             discountType === 'PAYMENTS') &&
           <span> - ${additionalValue}</span>
@@ -52,9 +55,12 @@ const FeeDiscount = (props) => {
       {!!additionalInfoUri && <div><a href={additionalInfoUri} target='_blank'>More info</a></div>}
       {
         !!eligibility && eligibility.length > 0 &&
-        <ul className={classes.sectionContent}>
-          {eligibility.map((discountEligibility, index) => <DiscountEligibility key={index} eligibility={discountEligibility}/>)}
-        </ul>
+        <div>
+          <div className={classes.sectionTitle}>Discount Eligibilities</div>
+          <ul className={classes.sectionContent}>
+            {eligibility.map((discountEligibility, index) => <DiscountEligibility key={index} eligibility={discountEligibility}/>)}
+          </ul>
+        </div>
       }
     </li>
   )
