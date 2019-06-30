@@ -3,6 +3,7 @@ import DiscountEligibility from "./DiscountEligibility";
 import {makeStyles} from "@material-ui/core";
 import {translateDiscountType} from "../../utils/dict";
 import * as moment from "moment";
+import ecomp from "../../utils/enum-comp";
 
 const useStyles = makeStyles(() => ({
   sectionTitle: {
@@ -58,7 +59,8 @@ const FeeDiscount = (props) => {
         <div>
           <div className={classes.sectionTitle}>Discount Eligibilities</div>
           <ul className={classes.sectionContent}>
-            {eligibility.map((discountEligibility, index) => <DiscountEligibility key={index} eligibility={discountEligibility}/>)}
+            {eligibility.sort((a, b)=>ecomp(a.discountEligibilityType, b.discountEligibilityType)).map(
+              (discountEligibility, index) => <DiscountEligibility key={index} eligibility={discountEligibility}/>)}
           </ul>
         </div>
       }

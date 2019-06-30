@@ -22,7 +22,8 @@ class ProductList extends React.Component {
     productList = !!productList ? productList : {}
     const { progress, totalRecords, detailRecords, failedDetailRecords, products, productListUrl, productDetails } = productList
     const productsByCategory = {}
-    if (!!totalRecords && totalRecords === (detailRecords + failedDetailRecords)) {
+    const processedRecords = detailRecords + failedDetailRecords
+    if (!!totalRecords && totalRecords === processedRecords) {
       const productsMap = {}
       if (failedDetailRecords > 0) {
         products.forEach(product => {productsMap[product.productId] = product})
@@ -47,7 +48,6 @@ class ProductList extends React.Component {
       })
     }
 
-    const processedRecords = detailRecords + failedDetailRecords
     return (
       <div>
         <h2>{dataSource.name}</h2>
@@ -61,7 +61,7 @@ class ProductList extends React.Component {
         }
         {
           !!products && processedRecords === totalRecords &&
-          Object.keys(productsByCategory).map((category, index) => (
+          Object.keys(productsByCategory).sort().map((category, index) => (
             <ProductCategory key={index} category={category} products={productsByCategory[category]} dataSourceIndex={dataSourceIndex}/>
           ))
         }

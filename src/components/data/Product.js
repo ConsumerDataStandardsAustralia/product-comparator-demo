@@ -16,6 +16,7 @@ import Checkbox from '@material-ui/core/Checkbox'
 import {deselectProduct, selectProduct} from '../../store/data'
 import DateTime from './DateTime';
 import AdditionalInfo from "./AdditionalInfo";
+import ecomp from '../../utils/enum-comp'
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -127,7 +128,8 @@ const Product = (props) => {
           <div>
             <div className={classes.sectionTitle}>Bundles:</div>
             <ul className={classes.sectionContent}>
-              {product.bundles.map((bundle, index) => <Bundle key={index} bundle={bundle}/>)}
+              {product.bundles.sort((a, b)=>ecomp(a.name, b.name)).map(
+                (bundle, index) => <Bundle key={index} bundle={bundle}/>)}
             </ul>
           </div>
         }
@@ -136,7 +138,8 @@ const Product = (props) => {
           <div>
             <div className={classes.sectionTitle}>Constraints:</div>
             <ul className={classes.sectionContent}>
-              {product.constraints.map((constraint, index) => <Constraint key={index} constraint={constraint}/>)}
+              {product.constraints.sort((a, b)=>ecomp(a.constraintType, b.constraintType)).map(
+                (constraint, index) => <Constraint key={index} constraint={constraint}/>)}
             </ul>
           </div>
         }
@@ -145,7 +148,8 @@ const Product = (props) => {
           <div>
             <div className={classes.sectionTitle}>Deposit Rates:</div>
             <ul className={classes.sectionContent}>
-              {product.depositRates.map((depositRate, index) => <DepositRate key={index} depositRate={depositRate}/>)}
+              {product.depositRates.sort((a, b)=>ecomp(a.depositRateType, b.depositRateType)).map(
+                (depositRate, index) => <DepositRate key={index} depositRate={depositRate}/>)}
             </ul>
           </div>
         }
@@ -154,7 +158,8 @@ const Product = (props) => {
           <div>
             <div className={classes.sectionTitle}>Eligibilities:</div>
             <ul className={classes.sectionContent}>
-              {product.eligibilities.map((eligibility, index) => <Eligibility key={index} eligibility={eligibility}/>)}
+              {product.eligibilities.sort((a, b)=>ecomp(a.eligibilityType, b.eligibilityType)).map(
+                (eligibility, index) => <Eligibility key={index} eligibility={eligibility}/>)}
             </ul>
           </div>
         }
@@ -163,7 +168,8 @@ const Product = (props) => {
           <div>
             <div className={classes.sectionTitle}>Features:</div>
             <ul className={classes.sectionContent}>
-              {product.features.map((feature, index) => <Feature key={index} feature={feature}/>)}
+              {product.features.sort((a, b)=>ecomp(a.featureType, b.featureType)).map(
+                (feature, index) => <Feature key={index} feature={feature}/>)}
             </ul>
           </div>
         }
@@ -172,7 +178,8 @@ const Product = (props) => {
           <div>
             <div className={classes.sectionTitle}>Fees:</div>
             <ul className={classes.sectionContent}>
-              {product.fees.map((fee, index) => <Fee key={index} fee={fee}/>)}
+              {product.fees.sort((a, b)=>ecomp(a.feeType, b.feeType)).map(
+                (fee, index) => <Fee key={index} fee={fee}/>)}
             </ul>
           </div>
         }
@@ -181,7 +188,8 @@ const Product = (props) => {
           <div>
             <div className={classes.sectionTitle}>Lending Rates:</div>
             <ul className={classes.sectionContent}>
-              {product.lendingRates.map((lendingRate, index) => <LendingRate key={index} lendingRate={lendingRate}/>)}
+              {product.lendingRates.sort((a, b)=>ecomp(a.lendingRateType, b.lendingRateType)).map(
+                (lendingRate, index) => <LendingRate key={index} lendingRate={lendingRate}/>)}
             </ul>
           </div>
         }

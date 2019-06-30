@@ -3,6 +3,7 @@ import RateTier from './RateTier'
 import {translateDepositRateType} from "../../utils/dict";
 import * as moment from "moment";
 import {makeStyles} from "@material-ui/core";
+import ecomp from "../../utils/enum-comp";
 
 const useStyles = makeStyles(() => ({
   sectionTitle: {
@@ -50,7 +51,7 @@ const DepositRate = (props) => {
           <div>
             <div className={classes.sectionTitle}>Rate Tiers:</div>
             <ul className={classes.sectionContent}>
-              {tiers.map((tier, index) => <RateTier key={index} tier={tier}/>)}
+              {tiers.sort((a, b)=>ecomp(a.name, b.name)).map((tier, index) => <RateTier key={index} tier={tier}/>)}
             </ul>
           </div>
       }

@@ -3,6 +3,7 @@ import FeeDiscount from "./FeeDiscount";
 import * as moment from "moment";
 import {translateFeeType} from "../../utils/dict";
 import {makeStyles} from "@material-ui/core";
+import ecomp from "../../utils/enum-comp";
 
 const useStyles = makeStyles(() => ({
   sectionTitle: {
@@ -54,7 +55,8 @@ const Fee = (props) => {
           <div>
             <div className={classes.sectionTitle}>Discounts:</div>
             <ul className={classes.sectionContent}>
-              {discounts.map((discount, index) =><FeeDiscount key={index} discount={discount}/>)}
+              {discounts.sort((a, b)=>ecomp(a.discountType, b.discountType)).map(
+                (discount, index) =><FeeDiscount key={index} discount={discount}/>)}
             </ul>
           </div>
       }

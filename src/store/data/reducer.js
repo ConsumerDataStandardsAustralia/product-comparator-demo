@@ -25,7 +25,6 @@ export default function(state = {selectedProducts:[], productList:[]}, action) {
         ...a.productList[idx],
         progress: action.type,
         totalRecords: response.meta.totalRecords,
-        records: !!item && !!item.records ? item.records + response.data.products.length : response.data.products.length,
         products: !!item && !!item.products ? [...item.products, ...response.data.products] : [...response.data.products],
         detailRecords: !!item && !!item.detailRecords ? item.detailRecords : 0,
         failedDetailRecords: 0,

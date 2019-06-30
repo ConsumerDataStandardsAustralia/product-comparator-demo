@@ -2,8 +2,21 @@ import React from 'react'
 import RateTier from './RateTier'
 import {translateInterestPaymentDue, translateLendingRateType} from "../../utils/dict";
 import * as moment from "moment";
+import ecomp from "../../utils/enum-comp";
+import {makeStyles} from "@material-ui/core";
+
+const useStyles = makeStyles(() => ({
+  sectionTitle: {
+    fontStyle: 'italic'
+  },
+  sectionContent: {
+    marginTop: 0,
+    marginBottom: 0
+  }
+}))
 
 const LendingRate = (props) => {
+  const classes = useStyles()
   const {
     lendingRateType,
     rate,
@@ -44,7 +57,15 @@ const LendingRate = (props) => {
       {!!calculationFrequency && <div>Calculated {moment.duration(calculationFrequency).humanize().replace('a ', 'every ')}</div>}
       {!!applicationFrequency && <div>Applied {moment.duration(applicationFrequency).humanize().replace('a ', 'every ')}</div>}
       {!!interestPaymentDue && <div>Interest Payment {translateInterestPaymentDue(interestPaymentDue)}</div>}
-      {!!tiers && tiers.length > 0 && tiers.map((tier, index) => <RateTier key={index} tier={tier}/>)}
+      {
+        !!tiers && tiers.length > 0 &&
+        <div>
+          <div className={classes.sectionTitle}>Rate Tiers:</div>
+          <ul className={classes.sectionContent}>
+            {tiers.sort((a, b)=>ecomp(a.name, b.name)).map((tier, index) => <RateTier key={index} tier={tier}/>)}
+          </ul>
+        </div>
+      }
       {!!additionalInfo && <div>{additionalInfo}</div>}
       {!!additionalInfoUri && <div><a href={additionalInfoUri} target='_blank'>More info</a></div>}
     </li>
