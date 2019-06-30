@@ -11,10 +11,9 @@ export default function(state = {selectedProducts:[], productList:[]}, action) {
   switch (action.type) {
     case START_RETRIEVE_PRODUCT_LIST:
       const s = {selectedProducts: [...state.selectedProducts], productList: [...state.productList]}
-      s.productList[action.payload.dataSourceIdx] = {
-        ...s.productList[action.payload.dataSourceIdx],
-        progress: action.type,
-        productListUrl: action.payload.productListUrl
+      s.productList[action.payload] = {
+        ...s.productList[action.payload],
+        progress: action.type
       }
       return s
     case fulfilled(RETRIEVE_PRODUCT_LIST):

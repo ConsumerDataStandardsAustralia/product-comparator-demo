@@ -12,7 +12,7 @@ class ProductList extends React.Component {
     const { url } = dataSource
     const normalisedUrl = normalise(url)
     const productListUrl = normalisedUrl + '/banking/products'
-    this.props.startRetrieveProductList(dataSourceIndex, productListUrl)
+    this.props.startRetrieveProductList(dataSourceIndex)
     this.props.retrieveProductList(dataSourceIndex, normalisedUrl, productListUrl)
   }
 
@@ -20,7 +20,7 @@ class ProductList extends React.Component {
     const { dataSource, dataSourceIndex } = this.props
     let productList = this.props.data.productList[dataSourceIndex];
     productList = !!productList ? productList : {}
-    const { progress, totalRecords, detailRecords, failedDetailRecords, products, productListUrl, productDetails } = productList
+    const { progress, totalRecords, detailRecords, failedDetailRecords, products, productDetails } = productList
     const productsByCategory = {}
     const processedRecords = detailRecords + failedDetailRecords
     if (!!totalRecords && totalRecords === processedRecords) {
@@ -56,7 +56,9 @@ class ProductList extends React.Component {
           <LinearProgress variant="determinate" value={processedRecords * 100 / totalRecords} style={{width: '93%'}} />
         }
         {
-          progress === START_RETRIEVE_PRODUCT_LIST && <p>Getting {productListUrl}...</p> ||
+          progress === START_RETRIEVE_PRODUCT_LIST && <p>Getting all current products...</p>
+        }
+        {
           processedRecords < totalRecords && <p>Getting product details...</p>
         }
         {

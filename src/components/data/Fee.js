@@ -49,7 +49,7 @@ const Fee = (props) => {
       {!!currency && <div>Currency - {currency}</div>}
       {feeType !== 'PERIODIC' && !!additionalValue && <div>{additionalValue}</div>}
       {!!additionalInfo && <div>{additionalInfo}</div>}
-      {!!additionalInfoUri && <div><a href={additionalInfoUri} target='_blank'>More info</a></div>}
+      {!!additionalInfoUri && <div><a href={additionalInfoUri} target='_blank' rel='noopener noreferrer'>More info</a></div>}
       {
         !!discounts && discounts.length > 0 &&
           <div>

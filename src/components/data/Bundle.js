@@ -7,7 +7,7 @@ const Bundle = (props) => {
       <div>{bundle.name}</div>
       <div>{bundle.description}</div>
       {!!bundle.additionalInfo && <div>{bundle.additionalInfo}</div>}
-      {!!bundle.additionalInfoUri && <div><a href={bundle.additionalInfoUri} target='_blank'>More info</a></div>}
+      {!!bundle.additionalInfoUri && <div><a href={bundle.additionalInfoUri} target='_blank' rel='noopener noreferrer'>More info</a></div>}
     </li>
   )
 }

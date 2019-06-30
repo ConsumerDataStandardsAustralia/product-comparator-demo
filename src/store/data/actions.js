@@ -7,9 +7,9 @@ export const DESELECT_PRODUCT = 'DESELECT_PRODUCT'
 export const DELETE_DATA = 'DELETE_DATA'
 export const MODIFY_DATA = 'MODIFY_DATA'
 
-export const startRetrieveProductList = (dataSourceIdx, productListUrl) => ({
+export const startRetrieveProductList = (dataSourceIdx) => ({
   type: START_RETRIEVE_PRODUCT_LIST,
-  payload: { dataSourceIdx, productListUrl }
+  payload: dataSourceIdx
 })
 
 export const retrieveProductList = (dataSourceIdx, baseUrl, productListUrl) => {

@@ -54,7 +54,7 @@ const Feature = (props) => {
         }
         {featureType === 'FREE_TXNS_ALLOWANCE' && <span> - ${additionalValue}</span>}
       </div>
-      {!!additionalInfoUri && <div><a href={additionalInfoUri} target='_blank'>More info</a></div>}
+      {!!additionalInfoUri && <div><a href={additionalInfoUri} target='_blank' rel='noopener noreferrer'>More info</a></div>}
     </li>
   )
 }

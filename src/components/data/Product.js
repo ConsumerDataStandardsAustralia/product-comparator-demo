@@ -115,7 +115,7 @@ const Product = (props) => {
         <div>{product.isTailored ? 'Tailored' : 'Not Tailored'}</div>
         {!!product.effectiveFrom && <div>Effective from <DateTime rfc3339={product.effectiveFrom}/></div>}
         {!!product.effectiveTo && <div>Effective to <DateTime rfc3339={product.effectiveTo}/></div>}
-        {!!product.applicationUri && <div><a href={product.applicationUri} target='_blank'>Apply here</a></div>}
+        {!!product.applicationUri && <div><a href={product.applicationUri} target='_blank' rel='noopener noreferrer'>Apply here</a></div>}
         {
           !!product.additionalInformation &&
           <div>

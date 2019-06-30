@@ -53,7 +53,7 @@ const FeeDiscount = (props) => {
       <div>{description}</div>
       {discountType === 'ELIGIBILITY_ONLY' && additionalValue && <div>{additionalValue}</div>}
       {!!additionalInfo && <div>{additionalInfo}</div>}
-      {!!additionalInfoUri && <div><a href={additionalInfoUri} target='_blank'>More info</a></div>}
+      {!!additionalInfoUri && <div><a href={additionalInfoUri} target='_blank' rel='noopener noreferrer'>More info</a></div>}
       {
         !!eligibility && eligibility.length > 0 &&
         <div>
