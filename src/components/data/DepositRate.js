@@ -21,7 +21,7 @@ const DepositRate = (props) => {
         {translateDepositRateType(depositRateType)}
         {
           (depositRateType === 'FIXED' || depositRateType === 'INTRODUCTORY') && !!additionalValue &&
-          <span> - {moment.duration(additionalValue).humanize()}</span>
+          <span> - {moment.duration(additionalValue).humanize().replace('a ', 'every ')}</span>
         }
         {
           ( depositRateType === 'BONUS' ||
@@ -31,8 +31,8 @@ const DepositRate = (props) => {
           <span> - {additionalValue}</span>
         }
       </div>
-      {!!calculationFrequency && <div>Calculated {moment.duration(calculationFrequency).humanize(true)}</div>}
-      {!!applicationFrequency && <div>Applied {moment.duration(applicationFrequency).humanize(true)}</div>}
+      {!!calculationFrequency && <div>Calculated {moment.duration(calculationFrequency).humanize().replace('a ', 'every ')}</div>}
+      {!!applicationFrequency && <div>Applied {moment.duration(applicationFrequency).humanize().replace('a ', 'every ')}</div>}
       {!!tiers && tiers.length > 0 && tiers.map((tier, index) => <RateTier key={index} tier={tier}/>)}
       {!!additionalInfo && <div>{additionalInfo}</div>}
       {!!additionalInfoUri && <div><a href={additionalInfoUri} target='_blank'>More info</a></div>}

@@ -48,7 +48,10 @@ const Feature = (props) => {
             featureType === 'BILL_PAYMENT') && !!additionalInfo &&
           <div>{additionalInfo}</div>
         }
-        {(featureType === 'INTEREST_FREE' || featureType === 'INTEREST_FREE_TRANSFERS') && <span> - {moment.duration(additionalValue).humanize()}</span>}
+        {
+          (featureType === 'INTEREST_FREE' || featureType === 'INTEREST_FREE_TRANSFERS') &&
+          <span> - {moment.duration(additionalValue).humanize().replace('a ', 'every ')}</span>
+        }
         {featureType === 'FREE_TXNS_ALLOWANCE' && <span> - ${additionalValue}</span>}
       </div>
       {!!additionalInfoUri && <div><a href={additionalInfoUri} target='_blank'>More info</a></div>}

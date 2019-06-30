@@ -91,6 +91,18 @@ export const featureTypeDict = {
   OTHER: 'Other'
 }
 
+export const feeTypeDict = {
+  PERIODIC: 'Periodic',
+  TRANSACTION: 'Transaction',
+  WITHDRAWAL: 'Withdrawal',
+  DEPOSIT: 'Deposit',
+  PAYMENT: 'Payment',
+  PURCHASE: 'Purchase',
+  EVENT: 'Event',
+  UPFRONT: 'Upfront',
+  EXIT: 'Exit'
+}
+
 export const translateProductCategory = (category) => productCategoryDict[category]
 
 export const translateConstraintType = (constraintType) => constraintTypeDict[constraintType]
@@ -104,3 +116,5 @@ export const translateInterestPaymentDue = (interestPaymentDue) => interestPayme
 export const translateEligibilityType = (eligibilityType) => eligibilityTypeDict[eligibilityType]
 
 export const translateFeatureType = (featureType) => featureTypeDict[featureType]
+
+export const translateFeeType = (feeType) => feeTypeDict[feeType]

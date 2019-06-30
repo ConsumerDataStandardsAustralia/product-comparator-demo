@@ -171,9 +171,9 @@ const Product = (props) => {
           !!product.fees && product.fees.length > 0 &&
           <div>
             <div className={classes.sectionTitle}>Fees:</div>
-            <div className={classes.sectionContent}>
+            <ul className={classes.sectionContent}>
               {product.fees.map((fee, index) => <Fee key={index} fee={fee}/>)}
-            </div>
+            </ul>
           </div>
         }
         {
