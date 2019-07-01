@@ -83,7 +83,8 @@ const DataPanel = (props) => {
       </div>
       <Divider/>
       <ExpansionPanelActions>
-        <Fab variant='extended' size='medium' color='primary' disabled={props.selectedProducts.length < 2}
+        <Fab variant='extended' size='medium' color='primary'
+             disabled={props.selectedProducts.length < 2 || props.selectedProducts.length > 4}
              className={classes.button} onClick={compare}>
           <CompareIcon className={classes.leftIcon}/>
           Compare
