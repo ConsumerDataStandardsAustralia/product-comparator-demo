@@ -36,7 +36,8 @@ const useStyles = makeStyles(() => ({
   sectionContent: {
     marginTop: 0,
     marginBottom: 0,
-    paddingLeft: 20
+    paddingLeft: 20,
+    paddingRight: 20
   }
 }))
 
