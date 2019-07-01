@@ -2,10 +2,8 @@ export const START_RETRIEVE_PRODUCT_LIST = 'START_RETRIEVE_PRODUCT_LIST'
 export const RETRIEVE_PRODUCT_LIST = 'RETRIEVE_PRODUCT_LIST'
 export const RETRIEVE_PRODUCT_DETAIL = 'RETRIEVE_PRODUCT_DETAIL'
 export const RETRIEVE_ALL_PRODUCT_DETAILS = 'RETRIEVE_ALL_PRODUCT_DETAILS'
-export const SELECT_PRODUCT = 'SELECT_PRODUCT'
-export const DESELECT_PRODUCT = 'DESELECT_PRODUCT'
 export const DELETE_DATA = 'DELETE_DATA'
-export const MODIFY_DATA = 'MODIFY_DATA'
+export const CLEAR_DATA = 'CLEAR_DATA'
 
 export const startRetrieveProductList = (dataSourceIdx) => ({
   type: START_RETRIEVE_PRODUCT_LIST,
@@ -51,22 +49,12 @@ export const retrieveAllProductDetails = (actions) => dispatch => dispatch({
   payload: Promise.all(actions.map(action => dispatch(action)))
 })
 
-export const selectProduct = (dataSourceIdx, product) => ({
-  type: SELECT_PRODUCT,
-  payload: { dataSourceIdx, product }
-})
-
-export const deselectProduct = (dataSourceIdx, product) => ({
-  type: DESELECT_PRODUCT,
-  payload: { dataSourceIdx, product }
-})
-
 export const deleteData = (dataSourceIdx) => ({
   type: DELETE_DATA,
   payload: dataSourceIdx
 })
 
-export const modifyData = (dataSourceIdx) => ({
-  type: MODIFY_DATA,
+export const clearData = (dataSourceIdx) => ({
+  type: CLEAR_DATA,
   payload: dataSourceIdx
 })

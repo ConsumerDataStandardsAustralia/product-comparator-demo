@@ -97,7 +97,7 @@ const DataPanel = (props) => {
 const mapStateToProps = state=>({
   dataSources : state.dataSources,
   savedDataSourcesCount: state.dataSources.filter(dataSource => dataSource.saved).length,
-  selectedProducts: state.data.selectedProducts
+  selectedProducts: state.selection
 })
 
 const mapDispatchToProps = { compareProducts }

@@ -12,7 +12,8 @@ import {
   modifyDataSourceName,
   modifyDataSourceUrl
 } from '../../store/data-source'
-import { modifyData, deleteData } from '../../store/data'
+import { clearSelection} from "../../store/selection"
+import { deleteData, clearData } from '../../store/data'
 import {connect} from 'react-redux'
 import isUrl from '../../utils/url'
 import Snackbar from '@material-ui/core/Snackbar'
@@ -51,7 +52,10 @@ const DataSource = (props) => {
       props.modifyDataSourceName(index, {...dataSource, [name]: event.target.value})
     } else if (name === 'url') {
       props.modifyDataSourceUrl(index, {...dataSource, [name]: event.target.value})
-      dataSource.saved && props.modifyData(index)
+      if (dataSource.saved) {
+        props.clearSelection(index)
+        props.clearData(index)
+      }
     }
   }
 
@@ -80,6 +84,7 @@ const DataSource = (props) => {
   const del = () => {
     props.deleteDataSource(index)
     props.deleteData(index)
+    props.clearSelection(index)
   }
 
   const isDataSourceValid = () => {
@@ -148,6 +153,14 @@ const DataSource = (props) => {
   )
 }
 
-const mapDispatchToProps = { saveDataSource, deleteDataSource, modifyDataSourceName, modifyDataSourceUrl, modifyData, deleteData }
+const mapDispatchToProps = {
+  saveDataSource,
+  deleteDataSource,
+  modifyDataSourceName,
+  modifyDataSourceUrl,
+  clearSelection,
+  deleteData,
+  clearData
+}
 
 export default connect(null, mapDispatchToProps)(DataSource)

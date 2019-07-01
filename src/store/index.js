@@ -5,11 +5,13 @@ import { createLogger } from 'redux-logger'
 import { combineReducers } from 'redux'
 import dataSources from './data-source/reducer'
 import data from './data/reducer'
+import selection from './selection/reducer'
 import comparison from './comparison/reducer'
 
 const rootReducer = combineReducers({
   dataSources,
   data,
+  selection,
   comparison
 })
 

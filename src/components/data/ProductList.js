@@ -18,7 +18,7 @@ class ProductList extends React.Component {
 
   render() {
     const { dataSource, dataSourceIndex } = this.props
-    let productList = this.props.data.productList[dataSourceIndex];
+    let productList = this.props.productList[dataSourceIndex];
     productList = !!productList ? productList : {}
     const { progress, totalRecords, detailRecords, failedDetailRecords, products, productDetails } = productList
     const productsByCategory = {}
@@ -73,7 +73,7 @@ class ProductList extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  data: state.data
+  productList: state.data
 })
 
 const mapDispatchToProps = {startRetrieveProductList, retrieveProductList}

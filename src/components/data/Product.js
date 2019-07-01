@@ -13,7 +13,7 @@ import Eligibility from './Eligibility'
 import Feature from './Feature'
 import Fee from './Fee'
 import Checkbox from '@material-ui/core/Checkbox'
-import {deselectProduct, selectProduct} from '../../store/data'
+import {deselectProduct, selectProduct} from '../../store/selection'
 import DateTime from './DateTime';
 import AdditionalInfo from "./AdditionalInfo";
 import ecomp from '../../utils/enum-comp'
@@ -200,7 +200,7 @@ const Product = (props) => {
 }
 
 const mapStateToProps = state => ({
-  selectedProducts: state.data.selectedProducts
+  selectedProducts: state.selection
 })
 
 const mapDispatchToProps = { selectProduct, deselectProduct }
