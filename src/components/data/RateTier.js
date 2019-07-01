@@ -9,7 +9,7 @@ const useStyles = makeStyles(() => ({
     fontStyle: 'italic'
   },
   sectionContent: {
-    marginLeft: 30
+    paddingLeft: 20
   }
 }))
 

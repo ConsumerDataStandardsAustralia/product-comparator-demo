@@ -4,7 +4,8 @@ import {makeStyles} from "@material-ui/core";
 const useStyles = makeStyles(() => ({
   ul: {
     marginTop: 0,
-    marginBottom: 0
+    marginBottom: 0,
+    paddingLeft: 20
   },
   tableCell: {
     marginTop: 0,
