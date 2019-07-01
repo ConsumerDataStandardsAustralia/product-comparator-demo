@@ -8,7 +8,7 @@ import ComparisonPanel from "./comparison/ComparisonPanel";
 function Page() {
   return (
     <Container maxWidth='lg'>
-      <Header title='Banking Products Viewer'/>
+      <Header title='Banking Products Comparator'/>
       <DataSourcePanel/>
       <DataPanel/>
       <ComparisonPanel/>
