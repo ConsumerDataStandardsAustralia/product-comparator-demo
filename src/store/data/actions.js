@@ -12,10 +12,12 @@ export const startRetrieveProductList = (dataSourceIdx) => ({
   payload: dataSourceIdx
 })
 
-const headers = new Headers({'Accept': 'application/json'})
+const commonHeaders = new Headers({'Accept': 'application/json'})
+const anzHeaders = new Headers({'Accept': 'application/json', 'x-v': 1})
 
 export const retrieveProductList = (dataSourceIdx, baseUrl, productListUrl) => {
   return (dispatch) => {
+    const headers = baseUrl.indexOf('api.anz') !== -1 ? anzHeaders : commonHeaders
     const request = new Request(productListUrl,{headers: headers})
     const response = dispatch({
       type: RETRIEVE_PRODUCT_LIST,
@@ -35,6 +37,7 @@ export const retrieveProductList = (dataSourceIdx, baseUrl, productListUrl) => {
 }
 
 export const retrieveProductDetail = (dataSourceIdx, url, productId) => {
+  const headers = url.indexOf('api.anz') !== -1 ? anzHeaders : commonHeaders
   const request = new Request(url + '/banking/products/' + productId,{headers: headers})
   return {
     type: RETRIEVE_PRODUCT_DETAIL,
