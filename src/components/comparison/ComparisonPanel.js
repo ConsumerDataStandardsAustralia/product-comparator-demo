@@ -38,6 +38,14 @@ const useStyles = makeStyles(theme => ({
     maxWidth:'95%',
     marginLeft: 'auto',
     marginRight: 'auto'
+  },
+  headCell: {
+    color: fade('#000', 0.9),
+    fontWeight: 500,
+    fontSize: '1rem'
+  },
+  dataCell: {
+    verticalAlign: 'top'
   }
 }))
 
@@ -54,40 +62,40 @@ const render = (product, key) => {
     case 'isTailored':
       return product[key] ? 'Yes' : 'No'
     case 'additionalInformation':
-      return <AdditionalInfo additionalInfo={product[key]}/>
+      return <AdditionalInfo additionalInfo={product[key]} tableCell/>
     case 'bundles':
       return !!product[key] && product[key].length > 0 &&
-        <ul>
+        <ul style={{margin: 0, padding:0}}>
             {product[key].sort((a, b)=>ecomp(a.name, b.name)).map((bundle, index) => <Bundle key={index} bundle={bundle}/>)}
         </ul>
     case 'constraints':
       return !!product[key] && product[key].length > 0 &&
-        <ul>
+        <ul style={{margin: 0, padding:0}}>
           {product[key].sort((a, b)=>ecomp(a.name, b.name)).map((constraint, index) => <Constraint key={index} constraint={constraint}/>)}
         </ul>
     case 'depositRates':
       return !!product[key] && product[key].length > 0 &&
-        <ul>
+        <ul style={{margin: 0, padding:0}}>
           {product[key].sort((a, b)=>ecomp(a.name, b.name)).map((depositRate, index) => <DepositRate key={index} depositRate={depositRate}/>)}
         </ul>
     case 'lendingRates':
       return !!product[key] && product[key].length > 0 &&
-        <ul>
+        <ul style={{margin: 0, padding:0}}>
           {product[key].sort((a, b)=>ecomp(a.name, b.name)).map((lendingRate, index) => <LendingRate key={index} lendingRate={lendingRate}/>)}
         </ul>
     case 'eligibilities':
       return !!product[key] && product[key].length > 0 &&
-        <ul>
+        <ul style={{margin: 0, padding:0}}>
           {product[key].sort((a, b)=>ecomp(a.name, b.name)).map((eligibility, index) =><Eligibility key={index} eligibility={eligibility}/>)}
         </ul>
     case 'features':
       return !!product[key] && product[key].length > 0 &&
-        <ul>
+        <ul style={{margin: 0, padding:0}}>
           {product[key].sort((a, b)=>ecomp(a.name, b.name)).map((feature, index) => <Feature key={index} feature={feature}/>)}
         </ul>
     case 'fees':
       return !!product[key] && product[key].length > 0 &&
-        <ul>
+        <ul style={{margin: 0, padding:0}}>
           {product[key].sort((a, b)=>ecomp(a.name, b.name)).map((fee, index) => <Fee key={index} fee={fee}/>)}
         </ul>
     default:
@@ -114,7 +122,7 @@ const ComparisonPanel = (props) => {
           <TableRow>
             <TableCell>''</TableCell>
             {products.map(productData =>
-              <TableCell>
+              <TableCell className={classes.headCell}>
                 {dataSources[productData.dataSourceIdx].name} - {productData.product.name}
               </TableCell>)}
           </TableRow>
@@ -122,11 +130,11 @@ const ComparisonPanel = (props) => {
         <TableBody>
           {productDataKeys.map(dataKey => (
             <TableRow key={dataKey.key}>
-              <TableCell component="th" scope="row" align="right">
+              <TableCell component="th" scope="row" align="right" className={classes.dataCell}>
                 {dataKey.label}
               </TableCell>
               {products.map(productData =>
-                <TableCell>{render(productData.product, dataKey.key)}</TableCell>
+                <TableCell className={classes.dataCell}>{render(productData.product, dataKey.key)}</TableCell>
               )}
             </TableRow>
           ))}

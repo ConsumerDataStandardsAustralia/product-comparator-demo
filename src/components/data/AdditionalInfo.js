@@ -5,14 +5,20 @@ const useStyles = makeStyles(() => ({
   ul: {
     marginTop: 0,
     marginBottom: 0
+  },
+  tableCell: {
+    marginTop: 0,
+    marginBottom: 0,
+    padding: 0
   }
 }))
 
 const AdditionalInfo = (props) => {
+  const {tableCell} = props
   const {overviewUri, termsUri, eligibilityUri, feesAndPricingUri, bundleUri} = props.additionalInfo
   const classes = useStyles()
   return (
-    <ul className={classes.ul}>
+    <ul className={!!tableCell ? classes.tableCell : classes.ul}>
       {!!overviewUri && <li><a href={overviewUri} target='_blank' rel="noopener noreferrer">Overview</a></li>}
       {!!termsUri && <li><a href={termsUri} target='_blank' rel="noopener noreferrer">Terms</a></li>}
       {!!eligibilityUri && <li><a href={eligibilityUri} target='_blank' rel="noopener noreferrer">Eligibility</a></li>}
