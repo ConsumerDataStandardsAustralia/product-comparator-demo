@@ -120,7 +120,7 @@ const ComparisonPanel = (props) => {
       <Table className={classes.table}>
         <TableHead>
           <TableRow>
-            <TableCell>''</TableCell>
+            <TableCell/>
             {products.map(productData =>
               <TableCell className={classes.headCell}>
                 {dataSources[productData.dataSourceIdx].name} - {productData.product.name}

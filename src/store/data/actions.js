@@ -12,11 +12,14 @@ export const startRetrieveProductList = (dataSourceIdx) => ({
   payload: dataSourceIdx
 })
 
+const headers = new Headers({'Accept': 'application/json'})
+
 export const retrieveProductList = (dataSourceIdx, baseUrl, productListUrl) => {
   return (dispatch) => {
+    const request = new Request(productListUrl,{headers: headers})
     const response = dispatch({
       type: RETRIEVE_PRODUCT_LIST,
-      payload: fetch(productListUrl).then(
+      payload: fetch(request).then(
           response => response.json()).then(json=>({idx: dataSourceIdx, response: json}))
     })
     response.then(({value})=> {
@@ -31,11 +34,14 @@ export const retrieveProductList = (dataSourceIdx, baseUrl, productListUrl) => {
   }
 }
 
-export const retrieveProductDetail = (dataSourceIdx, url, productId) => ({
-  type: RETRIEVE_PRODUCT_DETAIL,
-  payload: fetch(url + '/banking/products/' + productId).then(
-      response => response.json()).then(json => ({idx: dataSourceIdx, response: json}))
-})
+export const retrieveProductDetail = (dataSourceIdx, url, productId) => {
+  const request = new Request(url + '/banking/products/' + productId,{headers: headers})
+  return {
+    type: RETRIEVE_PRODUCT_DETAIL,
+    payload: fetch(request).then(
+        response => response.json()).then(json => ({idx: dataSourceIdx, response: json}))
+  }
+}
 
 export const retrieveAllProductDetails = (actions) => dispatch => dispatch({
   type: RETRIEVE_ALL_PRODUCT_DETAILS,
