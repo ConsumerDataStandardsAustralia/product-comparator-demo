@@ -35,9 +35,19 @@ const useStyles = makeStyles(theme => ({
     fontSize: theme.typography.pxToRem(20),
   },
   table: {
-    maxWidth:'95%',
+    width:'95%',
     marginLeft: 'auto',
     marginRight: 'auto'
+  },
+  headerContainer: {
+    width: '100%',
+    display: 'table'
+  },
+  dataContainer: {
+    height: 600,
+    width: '100%',
+    overflow: 'auto',
+    display: 'block'
   },
   headCell: {
     color: fade('#000', 0.9),
@@ -120,21 +130,25 @@ const ComparisonPanel = (props) => {
       <Table className={classes.table}>
         <TableHead>
           <TableRow>
-            <TableCell/>
-            {products.map(productData =>
-              <TableCell className={classes.headCell}>
+            <TableCell width='16%'/>
+            {products.map((productData, index) =>
+              <TableCell key={index} className={classes.headCell} width={`${90/products.length}%`}>
                 {dataSources[productData.dataSourceIdx].name} - {productData.product.name}
               </TableCell>)}
           </TableRow>
         </TableHead>
-        <TableBody>
+      </Table>
+      <Table className={classes.table}>
+        <TableBody className={classes.dataContainer}>
           {productDataKeys.map(dataKey => (
-            <TableRow key={dataKey.key}>
-              <TableCell component="th" scope="row" align="right" className={classes.dataCell}>
+            <TableRow key={dataKey.key} className={classes.table}>
+              <TableCell component='th' scope='row' align='right' className={classes.dataCell} width='16%'>
                 {dataKey.label}
               </TableCell>
-              {products.map(productData =>
-                <TableCell className={classes.dataCell}>{render(productData.product, dataKey.key)}</TableCell>
+              {products.map((productData, index) =>
+                <TableCell key={index} className={classes.dataCell} width={`${90/products.length}%`}>
+                  {render(productData.product, dataKey.key)}
+                </TableCell>
               )}
             </TableRow>
           ))}
