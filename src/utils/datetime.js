@@ -1,4 +1,4 @@
-import * as moment from 'moment'
+import {pattern} from 'iso8601-duration'
 
 export function format(rfc3339DateTime) {
   const date = new Date(Date.parse(rfc3339DateTime)).toString()
@@ -8,5 +8,5 @@ export function format(rfc3339DateTime) {
 }
 
 export function isDuration(str) {
-  return moment.isDuration(moment.duration(str))
+  return pattern.test(str)
 }

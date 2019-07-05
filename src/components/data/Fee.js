@@ -50,17 +50,11 @@ const Fee = (props) => {
       </div>
       {!!currency && <div>Currency - {currency}</div>}
       {
-        feeType !== 'PERIODIC' && !!additionalValue &&
+        feeType !== 'PERIODIC' && !!additionalValue && 
         <div>
           {isDuration(additionalValue) ? moment.duration(additionalValue).humanize().replace('a ', 'every ') : additionalValue}
-        </div>
-      }
-      {
-        !!additionalInfo &&
-        <div>
-          {isDuration(additionalInfo) ? moment.duration(additionalInfo).humanize().replace('a ', 'every ') : additionalInfo}
-        </div>
-      }
+        </div>}
+      {!!additionalInfo && <div>{additionalInfo}</div>}
       {!!additionalInfoUri && <div><a href={additionalInfoUri} target='_blank' rel='noopener noreferrer'>More info</a></div>}
       {
         !!discounts && discounts.length > 0 &&

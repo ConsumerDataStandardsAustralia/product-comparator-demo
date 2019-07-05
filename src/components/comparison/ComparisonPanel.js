@@ -51,8 +51,8 @@ const useStyles = makeStyles(theme => ({
   },
   headCell: {
     color: fade('#000', 0.9),
-    fontWeight: 500,
-    fontSize: '1rem'
+    fontWeight: 700,
+    fontSize: '0.8rem'
   },
   dataCell: {
     verticalAlign: 'top'
