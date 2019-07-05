@@ -19,3 +19,7 @@ or
 ### Credits
 Background image photo by Artem Beliaikin @belart84 from Pexels
 https://www.pexels.com/photo/woman-wearing-pink-dress-standing-on-shore-2316088/
+
+### License
+
+MIT
