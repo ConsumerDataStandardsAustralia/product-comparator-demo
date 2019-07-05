@@ -13,16 +13,16 @@ import TableCell from '@material-ui/core/TableCell'
 import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
 import {productDataKeys} from '../../utils/dict'
-import {format} from "../../utils/datetime";
-import AdditionalInfo from "../data/AdditionalInfo";
-import ecomp from "../../utils/enum-comp";
-import Bundle from "../data/Bundle";
-import Constraint from "../data/Constraint";
-import DepositRate from "../data/DepositRate";
-import LendingRate from "../data/LendingRate";
-import Eligibility from "../data/Eligibility";
-import Feature from "../data/Feature";
-import Fee from "../data/Fee";
+import {format} from '../../utils/datetime'
+import AdditionalInfo from '../data/AdditionalInfo'
+import ecomp from '../../utils/enum-comp'
+import Bundle from '../data/Bundle'
+import Constraint from '../data/Constraint'
+import DepositRate from '../data/DepositRate'
+import LendingRate from '../data/LendingRate'
+import Eligibility from '../data/Eligibility'
+import Feature from '../data/Feature'
+import Fee from '../data/Fee'
 
 const useStyles = makeStyles(theme => ({
   panel: {

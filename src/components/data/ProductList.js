@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import {START_RETRIEVE_PRODUCT_LIST, startRetrieveProductList, retrieveProductList} from '../../store/data'
 import LinearProgress from '@material-ui/core/LinearProgress'
 import ProductCategory from './ProductCategory'
-import {normalise} from "../../utils/url";
+import {normalise} from '../../utils/url'
 
 class ProductList extends React.Component {
 
@@ -49,11 +49,10 @@ class ProductList extends React.Component {
     }
 
     return (
-      <div>
-        <h2>{dataSource.name}</h2>
+      <div style={{maxHeight: 300, overflow: 'auto'}}>
         {
           !!totalRecords && (processedRecords < totalRecords) &&
-          <LinearProgress variant="determinate" value={processedRecords * 100 / totalRecords} style={{width: '93%'}} />
+          <LinearProgress variant='determinate' value={processedRecords * 100 / totalRecords} style={{width: '93%'}} />
         }
         {
           progress === START_RETRIEVE_PRODUCT_LIST && <p>Getting all current products...</p>

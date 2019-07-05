@@ -1,6 +1,6 @@
-import React from "react"
-import {format} from "../../utils/datetime"
-import {makeStyles} from "@material-ui/core";
+import React from 'react'
+import {format} from '../../utils/datetime'
+import {makeStyles} from '@material-ui/core'
 
 const useStyles = makeStyles(() => ({
   datetime: {

@@ -35,10 +35,6 @@ const useStyles = makeStyles(theme => ({
     marginRight: 'auto',
     marginBottom: 20
   },
-  item: {
-    maxHeight: 400,
-    overflow: 'auto'
-  },
   button: {
     margin: theme.spacing(1)
   },
@@ -58,6 +54,11 @@ const DataPanel = (props) => {
   const toggleExpansion = (event, newExpanded) => {
     setExpanded(newExpanded)
   }
+
+  const getWidth = (dataSourceCount, min) => {
+    return Math.max(12 / dataSourceCount, min)
+  }
+
   return (
     <ExpansionPanel defaultExpanded className={classes.panel} expanded={expanded} onChange={toggleExpansion}>
       <ExpansionPanelSummary
@@ -74,7 +75,13 @@ const DataPanel = (props) => {
         <Grid container alignItems='flex-start' spacing={2} className={classes.container}>
           {dataSources.map((dataSource, index) => (
             dataSource.saved &&
-            <Grid item xs={savedDataSourcesCount === 1 ? 12 : 6} key={index} className={classes.item}>
+            <Grid item key={index}
+                  xs={getWidth(savedDataSourcesCount, 6)}
+                  md={getWidth(savedDataSourcesCount, 4)}
+                  lg={getWidth(savedDataSourcesCount, 3)}
+                  xl={getWidth(savedDataSourcesCount, 3)}
+            >
+              <h2>{dataSource.name}</h2>
               <ProductList dataSource={dataSource} dataSourceIndex={index}/>
             </Grid>
           ))}

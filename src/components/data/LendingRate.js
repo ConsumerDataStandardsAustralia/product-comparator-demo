@@ -1,9 +1,9 @@
 import React from 'react'
 import RateTier from './RateTier'
-import {translateInterestPaymentDue, translateLendingRateType} from "../../utils/dict";
-import * as moment from "moment";
-import ecomp from "../../utils/enum-comp";
-import {makeStyles} from "@material-ui/core";
+import {translateInterestPaymentDue, translateLendingRateType} from '../../utils/dict'
+import * as moment from 'moment'
+import ecomp from '../../utils/enum-comp'
+import {makeStyles} from '@material-ui/core'
 
 const useStyles = makeStyles(() => ({
   sectionTitle: {

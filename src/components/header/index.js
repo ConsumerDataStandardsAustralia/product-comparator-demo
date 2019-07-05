@@ -1,7 +1,7 @@
 import React from 'react'
-import { makeStyles } from "@material-ui/core"
+import { makeStyles } from '@material-ui/core'
 import logo from './CDS-logo.png'
-import Typography from "@material-ui/core/Typography";
+import Typography from '@material-ui/core/Typography'
 
 const useStyles = makeStyles(theme => ({
   header: {
@@ -21,7 +21,7 @@ export default (props) => {
   const classes = useStyles()
   return (
     <div className={classes.header}>
-      <img src={logo} alt="CDS logo"/>
+      <img src={logo} alt='CDS logo'/>
       <Typography className={classes.title}>{props.title}</Typography>
     </div>
   )

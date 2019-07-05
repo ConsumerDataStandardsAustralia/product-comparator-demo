@@ -14,8 +14,8 @@ import Feature from './Feature'
 import Fee from './Fee'
 import Checkbox from '@material-ui/core/Checkbox'
 import {deselectProduct, selectProduct} from '../../store/selection'
-import DateTime from './DateTime';
-import AdditionalInfo from "./AdditionalInfo";
+import DateTime from './DateTime'
+import AdditionalInfo from './AdditionalInfo'
 import ecomp from '../../utils/enum-comp'
 
 const useStyles = makeStyles(() => ({
@@ -57,7 +57,7 @@ const ExpansionPanel = withStyles({
     },
   },
   expanded: {},
-})(MuiExpansionPanel);
+})(MuiExpansionPanel)
 
 const ExpansionPanelSummary = withStyles({
   root: {
@@ -71,7 +71,7 @@ const ExpansionPanelSummary = withStyles({
     '&$expanded': {
       maxHeight: 36,
       minHeight: 24,
-    },
+    }
   },
   content: {
     margin: '8px 0',
@@ -86,7 +86,7 @@ const ExpansionPanelSummary = withStyles({
     }
   },
   expanded: {},
-})(MuiExpansionPanelSummary);
+})(MuiExpansionPanelSummary)
 
 const Product = (props) => {
   const classes = useStyles()
@@ -108,9 +108,9 @@ const Product = (props) => {
         expandIcon={<ExpandMoreIcon/>}
         aria-controls='panel1c-content'
       >
-        <Typography>{product.name}</Typography>
+        <Typography style={{fontSize: '0.8rem'}}>{product.name}</Typography>
       </ExpansionPanelSummary>
-      <div className={classes.details}>
+      <div style={{fontSize: '0.8rem'}}>
         <div>{product.description}</div>
         <div>Brand: {product.brand} {!!product.bandName && <span>({product.bandName})</span>}</div>
         <div>Last updated at <DateTime rfc3339={product.lastUpdated}/></div>

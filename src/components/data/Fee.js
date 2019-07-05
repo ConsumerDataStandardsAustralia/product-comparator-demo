@@ -1,9 +1,10 @@
 import React from 'react'
-import FeeDiscount from "./FeeDiscount";
-import * as moment from "moment";
-import {translateFeeType} from "../../utils/dict";
-import {makeStyles} from "@material-ui/core";
-import ecomp from "../../utils/enum-comp";
+import FeeDiscount from './FeeDiscount'
+import * as moment from 'moment'
+import {translateFeeType} from '../../utils/dict'
+import {makeStyles} from '@material-ui/core'
+import ecomp from '../../utils/enum-comp'
+import {isDuration} from '../../utils/datetime'
 
 const useStyles = makeStyles(() => ({
   sectionTitle: {
@@ -48,8 +49,18 @@ const Fee = (props) => {
 
       </div>
       {!!currency && <div>Currency - {currency}</div>}
-      {feeType !== 'PERIODIC' && !!additionalValue && <div>{additionalValue}</div>}
-      {!!additionalInfo && <div>{additionalInfo}</div>}
+      {
+        feeType !== 'PERIODIC' && !!additionalValue &&
+        <div>
+          {isDuration(additionalValue) ? moment.duration(additionalValue).humanize().replace('a ', 'every ') : additionalValue}
+        </div>
+      }
+      {
+        !!additionalInfo &&
+        <div>
+          {isDuration(additionalInfo) ? moment.duration(additionalInfo).humanize().replace('a ', 'every ') : additionalInfo}
+        </div>
+      }
       {!!additionalInfoUri && <div><a href={additionalInfoUri} target='_blank' rel='noopener noreferrer'>More info</a></div>}
       {
         !!discounts && discounts.length > 0 &&

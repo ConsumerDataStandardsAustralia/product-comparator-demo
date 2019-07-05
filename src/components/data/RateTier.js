@@ -1,8 +1,8 @@
 import React from 'react'
-import RateCondition from "./RateCondition";
-import RateSubTier from "./RateSubTier";
-import {translateRateApplicationMethod, translateUnitOfMeasure} from "../../utils/dict";
-import {makeStyles} from "@material-ui/core";
+import RateCondition from './RateCondition'
+import RateSubTier from './RateSubTier'
+import {translateRateApplicationMethod, translateUnitOfMeasure} from '../../utils/dict'
+import {makeStyles} from '@material-ui/core'
 
 const useStyles = makeStyles(() => ({
   sectionTitle: {

@@ -1,6 +1,6 @@
 import React from 'react'
 import Product from './Product'
-import {translateProductCategory} from "../../utils/dict";
+import {translateProductCategory} from '../../utils/dict'
 
 const strcomp = (a, b) => {
   if ( a < b) return -1

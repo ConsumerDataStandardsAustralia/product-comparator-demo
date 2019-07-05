@@ -1,5 +1,5 @@
 import React from 'react'
-import {translateEligibilityType} from "../../utils/dict";
+import {translateEligibilityType} from '../../utils/dict'
 
 const Eligibility = (props) => {
   const {eligibilityType, additionalValue, additionalInfo, additionalInfoUri} = props.eligibility

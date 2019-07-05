@@ -12,7 +12,7 @@ import {
   modifyDataSourceName,
   modifyDataSourceUrl
 } from '../../store/data-source'
-import { clearSelection} from "../../store/selection"
+import { clearSelection} from '../../store/selection'
 import { deleteData, clearData } from '../../store/data'
 import {connect} from 'react-redux'
 import isUrl from '../../utils/url'

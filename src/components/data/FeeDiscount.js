@@ -1,9 +1,9 @@
 import React from 'react'
-import DiscountEligibility from "./DiscountEligibility";
-import {makeStyles} from "@material-ui/core";
-import {translateDiscountType} from "../../utils/dict";
-import * as moment from "moment";
-import ecomp from "../../utils/enum-comp";
+import DiscountEligibility from './DiscountEligibility'
+import {makeStyles} from '@material-ui/core'
+import {translateDiscountType} from '../../utils/dict'
+import * as moment from 'moment'
+import ecomp from '../../utils/enum-comp'
 
 const useStyles = makeStyles(() => ({
   sectionTitle: {
