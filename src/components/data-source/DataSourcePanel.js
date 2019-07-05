@@ -47,7 +47,7 @@ class DataSourcePanel extends React.Component {
   render() {
     const {classes, dataSources, addDataSource} = this.props
     return (
-      <ExpansionPanel defaultExpanded className={classes.panel}>
+      <ExpansionPanel defaultExpanded={false} className={classes.panel}>
         <ExpansionPanelSummary
           expandIcon={<ExpandMoreIcon/>}
           aria-controls='panel1c-content'

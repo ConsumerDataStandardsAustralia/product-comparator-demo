@@ -7,6 +7,12 @@ import {
   MODIFY_DATA_SOURCE_URL
 } from './actions'
 
+const defaults = [
+  {name: 'ANZ', url: 'https://api.anz/cds-au/v1', saved: true},
+  {name: 'CBA', url: 'https://api.commbank.com.au/cds-au/v1', saved: true},
+  {name: 'Westpac', url: 'https://digital-api.westpac.com.au/cds-au/v1', saved: true}
+]
+
 export default function(state=[], action) {
   switch (action.type) {
     case LOAD_DATA_SOURCE:
@@ -41,5 +47,5 @@ function persistSavedDataSources(dataSources) {
 
 function loadDataSources() {
   const ds = window.localStorage.getItem("cds-banking-prd-ds")
-  return !!ds ? JSON.parse(ds) : []
+  return !!ds ? JSON.parse(ds) : defaults
 }
