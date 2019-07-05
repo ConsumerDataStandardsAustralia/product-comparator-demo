@@ -71,6 +71,8 @@ const render = (product, key) => {
       return !!product[key] ? format(product[key]) : ''
     case 'isTailored':
       return product[key] ? 'Yes' : 'No'
+    case 'applicationUri':
+      return !!product[key] && <a href={product[key]} target='_blank' rel='noopener noreferrer'>Apply here</a>
     case 'additionalInformation':
       return <AdditionalInfo additionalInfo={product[key]} tableCell/>
     case 'bundles':

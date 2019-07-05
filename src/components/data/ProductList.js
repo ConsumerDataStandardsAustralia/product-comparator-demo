@@ -17,7 +17,7 @@ class ProductList extends React.Component {
   }
 
   render() {
-    const { dataSource, dataSourceIndex } = this.props
+    const { dataSourceIndex } = this.props
     let productList = this.props.productList[dataSourceIndex];
     productList = !!productList ? productList : {}
     const { progress, totalRecords, detailRecords, failedDetailRecords, products, productDetails } = productList
