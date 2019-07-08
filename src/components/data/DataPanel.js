@@ -48,6 +48,10 @@ const DataPanel = (props) => {
   const classes = useStyles()
   const [expanded, setExpanded] = React.useState(true)
   const compare = () => {
+    if( /Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+      alert('The screen size is too small! Please use a bigger screen to compare.')
+      return
+    }
     props.compareProducts(props.selectedProducts)
     setExpanded(false)
   }
@@ -76,9 +80,10 @@ const DataPanel = (props) => {
           {dataSources.map((dataSource, index) => (
             dataSource.saved &&
             <Grid item key={index}
-                  xs={getWidth(savedDataSourcesCount, 6)}
-                  md={getWidth(savedDataSourcesCount, 4)}
-                  lg={getWidth(savedDataSourcesCount, 3)}
+                  xs={getWidth(savedDataSourcesCount, 12)}
+                  sm={getWidth(savedDataSourcesCount, 12)}
+                  md={getWidth(savedDataSourcesCount, 6)}
+                  lg={getWidth(savedDataSourcesCount, 4)}
                   xl={getWidth(savedDataSourcesCount, 3)}
             >
               <h2>{dataSource.name}</h2>
