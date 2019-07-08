@@ -10,13 +10,22 @@ export const startRetrieveProductList = (dataSourceIdx) => ({
   payload: dataSourceIdx
 })
 
-const commonHeaders = new Headers({'Accept': 'application/json'})
-const anzHeaders = new Headers({'Accept': 'application/json', 'x-v': 1})
+const cors_proxy = 'http://178.128.92.176:8080/'
+const origin = window.location.protocol + '//' + window.location.host
+const headers = {'Accept': 'application/json'}
 
 export const retrieveProductList = (dataSourceIdx, baseUrl, productListUrl) => {
+  const lowerCaseBaseUrl = baseUrl.toLowerCase()
+  if (lowerCaseBaseUrl.indexOf('api.anz') !== -1) {
+    headers['x-v'] = 1
+  }
+  let finalBaseUrl = baseUrl, finalProductListUrl = productListUrl
+  if (!lowerCaseBaseUrl.startsWith(origin)) {
+    finalBaseUrl = cors_proxy + baseUrl
+    finalProductListUrl = cors_proxy + productListUrl
+  }
   return (dispatch) => {
-    const headers = baseUrl.indexOf('api.anz') !== -1 ? anzHeaders : commonHeaders
-    const request = new Request(productListUrl,{headers: headers})
+    const request = new Request(finalProductListUrl,{headers: new Headers(headers)})
     const response = dispatch({
       type: RETRIEVE_PRODUCT_LIST,
       payload: fetch(request).then(
@@ -24,7 +33,7 @@ export const retrieveProductList = (dataSourceIdx, baseUrl, productListUrl) => {
     })
     response.then(({value})=> {
       const {products} = value.response.data
-      const actions = products.map(product => retrieveProductDetail(dataSourceIdx, baseUrl, product.productId))
+      const actions = products.map(product => retrieveProductDetail(dataSourceIdx, finalBaseUrl, product.productId))
       const {next} = value.response.links
       if (!!next && next !== productListUrl) {
         actions.push(retrieveProductList(dataSourceIdx, baseUrl, next))
@@ -35,8 +44,7 @@ export const retrieveProductList = (dataSourceIdx, baseUrl, productListUrl) => {
 }
 
 export const retrieveProductDetail = (dataSourceIdx, url, productId) => {
-  const headers = url.indexOf('api.anz') !== -1 ? anzHeaders : commonHeaders
-  const request = new Request(url + '/banking/products/' + productId,{headers: headers})
+  const request = new Request(url + '/banking/products/' + productId,{headers: new Headers(headers)})
   return {
     type: RETRIEVE_PRODUCT_DETAIL,
     payload: fetch(request).then(
