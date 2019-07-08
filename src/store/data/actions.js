@@ -10,17 +10,17 @@ export const startRetrieveProductList = (dataSourceIdx) => ({
   payload: dataSourceIdx
 })
 
-const cors_proxy = 'http://178.128.92.176:8080/'
-const origin = window.location.protocol + '//' + window.location.host
 const headers = {'Accept': 'application/json'}
 
 export const retrieveProductList = (dataSourceIdx, baseUrl, productListUrl) => {
+  const cors_proxy = 'http://178.128.92.176:8080/'
   const lowerCaseBaseUrl = baseUrl.toLowerCase()
   if (lowerCaseBaseUrl.indexOf('api.anz') !== -1) {
     headers['x-v'] = 1
   }
   let finalBaseUrl = baseUrl, finalProductListUrl = productListUrl
-  if (!lowerCaseBaseUrl.startsWith(origin)) {
+  const origin = window.location.protocol + '//' + window.location.host
+  if (!lowerCaseBaseUrl.startsWith(origin) && lowerCaseBaseUrl.indexOf('//localhost') === -1) {
     finalBaseUrl = cors_proxy + baseUrl
     finalProductListUrl = cors_proxy + productListUrl
   }
