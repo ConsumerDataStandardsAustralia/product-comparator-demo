@@ -7,7 +7,7 @@ import ComparisonPanel from './comparison/ComparisonPanel'
 
 function Page() {
   return (
-    <Container maxWidth='lg'>
+    <Container maxWidth='false'>
       <Header title='Banking Products Comparator (demo)'/>
       <DataSourcePanel/>
       <DataPanel/>
