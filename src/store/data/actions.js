@@ -13,7 +13,7 @@ export const startRetrieveProductList = (dataSourceIdx) => ({
 const headers = {'Accept': 'application/json'}
 
 export const retrieveProductList = (dataSourceIdx, baseUrl, productListUrl) => {
-  const cors_proxy = 'https://cors-anywhere.herokuapp.com/'
+  const cors_proxy = 'https://prd-comparison-proxy.herokuapp.com/'
   const lowerCaseBaseUrl = baseUrl.toLowerCase()
   if (lowerCaseBaseUrl.indexOf('api.anz') !== -1) {
     headers['x-v'] = 1
