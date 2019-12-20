@@ -2,7 +2,6 @@
 [![Build Status](https://travis-ci.com/ConsumerDataStandardsAustralia/banking-products-comparator.svg?branch=master)](https://travis-ci.com/ConsumerDataStandardsAustralia/banking-products-comparator)
 [![license](https://img.shields.io/github/license/ConsumerDataStandardsAustralia/banking-products-comparator)](https://github.com/ConsumerDataStandardsAustralia/banking-products-comparator/blob/master/LICENSE)
 [![issues](https://img.shields.io/github/issues/ConsumerDataStandardsAustralia/banking-products-comparator)](https://github.com/ConsumerDataStandardsAustralia/banking-products-comparator/issues)
-[![LoC](https://tokei.rs/b1/github/ConsumerDataStandardsAustralia/banking-products-comparator)](https://github.com/ConsumerDataStandardsAustralia/banking-products-comparator)
 
 A PoC of banking products view/comparison web app utilising the open banking product API
 
