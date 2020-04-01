@@ -95,7 +95,7 @@ const render = (product, key) => {
         <ul style={{margin: 0, padding:0}}>
           {product[key].sort((a, b)=>ecomp(a.name, b.name)).map((lendingRate, index) => <LendingRate key={index} lendingRate={lendingRate}/>)}
         </ul>
-    case 'eligibilities':
+    case 'eligibility':
       return !!product[key] && product[key].length > 0 &&
         <ul style={{margin: 0, padding:0}}>
           {product[key].sort((a, b)=>ecomp(a.name, b.name)).map((eligibility, index) =><Eligibility key={index} eligibility={eligibility}/>)}
