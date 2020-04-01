@@ -166,11 +166,11 @@ const Product = (props) => {
           </div>
         }
         {
-          !!product.eligibilities && product.eligibilities.length > 0 &&
+          !!product.eligibility && product.eligibility.length > 0 &&
           <div>
             <div className={classes.sectionTitle}>Eligibilities:</div>
             <ul className={classes.sectionContent}>
-              {product.eligibilities.sort((a, b)=>ecomp(a.eligibilityType, b.eligibilityType)).map(
+              {product.eligibility.sort((a, b)=>ecomp(a.eligibilityType, b.eligibilityType)).map(
                 (eligibility, index) => <Eligibility key={index} eligibility={eligibility}/>)}
             </ul>
           </div>
