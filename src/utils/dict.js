@@ -137,7 +137,7 @@ export const productDataKeys = [
   {key: 'constraints', label: 'Constraints'},
   {key: 'depositRates', label: 'Deposit Rates'},
   {key: 'lendingRates', label: 'Lending Rates'},
-  {key: 'eligibilities', label: 'Eligibility'},
+  {key: 'eligibility', label: 'Eligibility'},
   {key: 'features', label: 'Features'},
   {key: 'fees', label: 'Fees'}
 ]

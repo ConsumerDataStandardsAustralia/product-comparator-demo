@@ -9,7 +9,7 @@ import {
 
 const defaults = [
   {name: 'ANZ', url: 'https://api.anz/cds-au/v1', saved: true},
-  {name: 'CBA', url: 'https://api.commbank.com.au/cds-au/v1', saved: true},
+  {name: 'CBA', url: 'https://api.commbank.com.au/public/cds-au/v1', saved: true},
   {name: 'NAB', url: 'https://openbank.api.nab.com.au/cds-au/v1', saved: true},
   {name: 'Westpac', url: 'https://digital-api.westpac.com.au/cds-au/v1', saved: true}
 ]
