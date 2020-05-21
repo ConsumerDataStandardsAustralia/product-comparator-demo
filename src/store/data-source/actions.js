@@ -4,10 +4,13 @@ export const SAVE_DATA_SOURCE = 'SAVE_DATA_SOURCE'
 export const DELETE_DATA_SOURCE = 'DELETE_DATA_SOURCE'
 export const MODIFY_DATA_SOURCE_NAME = 'MODIFY_DATA_SOURCE_NAME'
 export const MODIFY_DATA_SOURCE_URL = 'MODIFY_DATA_SOURCE_URL'
+export const ENABLE_DATA_SOURCE = 'ENABLE_DATA_SOURCE'
 
 export function loadDataSource() {
+  const ds = window.localStorage.getItem("cds-banking-prd-ds")
   return {
-    type: LOAD_DATA_SOURCE
+    type: LOAD_DATA_SOURCE,
+    payload: !!ds ? Promise.resolve(JSON.parse(ds)) : fetch(process.env.PUBLIC_URL + '/datasources.json').then(response => response.json())
   }
 }
 
@@ -43,6 +46,14 @@ export function modifyDataSourceName(index, payload) {
 export function modifyDataSourceUrl(index, payload) {
   return {
     type: MODIFY_DATA_SOURCE_URL,
+    index: index,
+    payload: payload
+  }
+}
+
+export function enableDataSource(index, payload) {
+  return {
+    type: ENABLE_DATA_SOURCE,
     index: index,
     payload: payload
   }

@@ -28,8 +28,18 @@ export const retrieveProductList = (dataSourceIdx, baseUrl, productListUrl) => {
     const request = new Request(finalProductListUrl,{headers: new Headers(headers)})
     const response = dispatch({
       type: RETRIEVE_PRODUCT_LIST,
-      payload: fetch(request).then(
-          response => response.json()).then(json=>({idx: dataSourceIdx, response: json}))
+      payload: fetch(request).then(response => {
+          if (response.ok) {
+            return response.json()
+          } else {
+            console.error(response)
+            return {
+              meta: {totalRecords: 0},
+              data: {products: []},
+              links: {}
+            }
+          }
+      }).then(json=>({idx: dataSourceIdx, response: json}))
     })
     response.then(({value})=> {
       const {products} = value.response.data

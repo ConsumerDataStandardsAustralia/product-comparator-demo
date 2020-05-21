@@ -1,6 +1,7 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import Grid from '@material-ui/core/Grid'
+import Checkbox from '@material-ui/core/Checkbox'
 import TextField from '@material-ui/core/TextField'
 import IconButton from '@material-ui/core/IconButton'
 import DoneOutlineIcon from '@material-ui/icons/DoneOutline'
@@ -9,6 +10,7 @@ import Tooltip from '@material-ui/core/Tooltip'
 import {
   saveDataSource,
   deleteDataSource,
+  enableDataSource,
   modifyDataSourceName,
   modifyDataSourceUrl
 } from '../../store/data-source'
@@ -52,7 +54,13 @@ const DataSource = (props) => {
       props.modifyDataSourceName(index, {...dataSource, [name]: event.target.value})
     } else if (name === 'url') {
       props.modifyDataSourceUrl(index, {...dataSource, [name]: event.target.value})
-      if (dataSource.saved) {
+      if (!dataSource.unsaved) {
+        props.clearSelection(index)
+        props.clearData(index)
+      }
+    } else if (name === 'enabled') {
+      props.enableDataSource(index, {...dataSource, [name]: event.target.checked})
+      if (dataSource.enabled) {
         props.clearSelection(index)
         props.clearData(index)
       }
@@ -92,12 +100,17 @@ const DataSource = (props) => {
   }
 
   return (
-    <Grid container spacing={3}>
+    <Grid container spacing={1}>
+      <Grid item xs={1}>
+        <Checkbox
+          checked={dataSource.enabled}
+          onChange={handleChange('enabled')}
+        />
+      </Grid>
       <Grid item xs={3}>
         <TextField
           error={!dataSource.name.trim().length}
           required={true}
-          label='Name'
           onChange={handleChange('name')}
           margin='normal'
           placeholder='e.g. Acme Bank'
@@ -105,11 +118,10 @@ const DataSource = (props) => {
           fullWidth
         />
       </Grid>
-      <Grid item xs={8}>
+      <Grid item xs={7}>
         <TextField
           error={!isUrl(dataSource.url)}
           required={true}
-          label='Banking product API base url'
           onChange={handleChange('url')}
           placeholder='e.g. https://data.holder/cds-au/v1'
           value={dataSource.url}
@@ -136,15 +148,15 @@ const DataSource = (props) => {
         </Snackbar>
       </Grid>
       <Grid item xs={1} className={classes.buttonContainer}>
-        { dataSource.saved ?
-          <Tooltip title='Delete'>
+        { dataSource.unsaved ?
+        <Tooltip title='Save'>
+          <IconButton aria-label='Save' className={classes.margin} onClick={save}>
+            <DoneOutlineIcon fontSize='large' color={isDataSourceValid() ? 'primary' : 'action'}/>
+          </IconButton>
+        </Tooltip> :
+        <Tooltip title='Delete'>
             <IconButton aria-label='Delete' className={classes.margin} onClick={del}>
               <DeleteIcon fontSize='large' color='secondary'/>
-            </IconButton>
-          </Tooltip>:
-          <Tooltip title='Save'>
-            <IconButton aria-label='Save' className={classes.margin} onClick={save}>
-              <DoneOutlineIcon fontSize='large' color={isDataSourceValid() ? 'primary' : 'action'}/>
             </IconButton>
           </Tooltip>
         }
@@ -156,6 +168,7 @@ const DataSource = (props) => {
 const mapDispatchToProps = {
   saveDataSource,
   deleteDataSource,
+  enableDataSource,
   modifyDataSourceName,
   modifyDataSourceUrl,
   clearSelection,

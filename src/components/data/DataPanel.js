@@ -78,7 +78,7 @@ const DataPanel = (props) => {
         savedDataSourcesCount > 0 &&
         <Grid container alignItems='flex-start' spacing={2} className={classes.container}>
           {dataSources.map((dataSource, index) => (
-            dataSource.saved &&
+            !dataSource.unsaved && dataSource.enabled &&
             <Grid item key={index}
                   xs={getWidth(savedDataSourcesCount, 12)}
                   sm={getWidth(savedDataSourcesCount, 12)}
@@ -108,7 +108,7 @@ const DataPanel = (props) => {
 
 const mapStateToProps = state=>({
   dataSources : state.dataSources,
-  savedDataSourcesCount: state.dataSources.filter(dataSource => dataSource.saved).length,
+  savedDataSourcesCount: state.dataSources.filter(dataSource => !dataSource.unsaved && dataSource.enabled).length,
   selectedProducts: state.selection
 })
 
