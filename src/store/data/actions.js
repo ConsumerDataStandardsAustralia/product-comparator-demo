@@ -10,14 +10,14 @@ export const startRetrieveProductList = (dataSourceIdx) => ({
   payload: dataSourceIdx
 })
 
-const headers = {'Accept': 'application/json'}
+const headers = {
+  'Accept': 'application/json',
+  'x-v': 1
+}
 
 export const retrieveProductList = (dataSourceIdx, baseUrl, productListUrl) => {
   const cors_proxy = 'https://prd-comparison-proxy.herokuapp.com/'
   const lowerCaseBaseUrl = baseUrl.toLowerCase()
-  if (lowerCaseBaseUrl.indexOf('api.anz') !== -1) {
-    headers['x-v'] = 1
-  }
   let finalBaseUrl = baseUrl, finalProductListUrl = productListUrl
   const origin = window.location.protocol + '//' + window.location.host
   if (!lowerCaseBaseUrl.startsWith(origin) && lowerCaseBaseUrl.indexOf('//localhost') === -1) {

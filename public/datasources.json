@@ -1,6 +1,6 @@
 [
-    {"name": "ANZ", "url": "https://api.anz/cds-au/v1", "enabled": true},
-    {"name": "CBA", "url": "https://api.commbank.com.au/public/cds-au/v1", "enabled": true},
-    {"name": "NAB", "url": "https://openbank.api.nab.com.au/cds-au/v1", "enabled": true},
-    {"name": "Westpac", "url": "https://digital-api.westpac.com.au/cds-au/v1", "enabled": true}
+    {"name": "ANZ", "url": "https://api.anz/cds-au/v1"},
+    {"name": "CBA", "url": "https://api.commbank.com.au/public/cds-au/v1"},
+    {"name": "NAB", "url": "https://openbank.api.nab.com.au/cds-au/v1"},
+    {"name": "Westpac", "url": "https://digital-api.westpac.com.au/cds-au/v1"}
 ]

@@ -10,7 +10,14 @@ export function loadDataSource() {
   const ds = window.localStorage.getItem("cds-banking-prd-ds")
   return {
     type: LOAD_DATA_SOURCE,
-    payload: !!ds ? Promise.resolve(JSON.parse(ds)) : fetch(process.env.PUBLIC_URL + '/datasources.json').then(response => response.json())
+    payload: ds ? Promise.resolve(JSON.parse(ds)) : fetch(process.env.PUBLIC_URL + '/datasources.json')
+      .then(response => response.json())
+      .then(datasources => {
+        for (let i = 0; i < 4 && i < datasources.length; i++) {
+          datasources[i].enabled = true
+        }
+        return datasources
+      })
   }
 }
 
