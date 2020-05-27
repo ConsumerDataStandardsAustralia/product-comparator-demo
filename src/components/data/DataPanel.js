@@ -86,7 +86,7 @@ const DataPanel = (props) => {
                   lg={getWidth(savedDataSourcesCount, 4)}
                   xl={getWidth(savedDataSourcesCount, 3)}
             >
-              <h2>{dataSource.name}</h2>
+              <div className="title"><img src={dataSource.icon} alt=""/><h2>{dataSource.name}</h2></div>
               <ProductList dataSource={dataSource} dataSourceIndex={index}/>
             </Grid>
           ))}

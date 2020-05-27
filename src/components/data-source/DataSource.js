@@ -12,6 +12,7 @@ import {
   deleteDataSource,
   enableDataSource,
   modifyDataSourceName,
+  modifyDataSourceIcon,
   modifyDataSourceUrl
 } from '../../store/data-source'
 import { clearSelection} from '../../store/selection'
@@ -58,6 +59,8 @@ const DataSource = (props) => {
         props.clearSelection(index)
         props.clearData(index)
       }
+    } else if (name === 'icon') {
+      props.modifyDataSourceIcon(index, {...dataSource, [name]: event.target.value})
     } else if (name === 'enabled') {
       props.enableDataSource(index, {...dataSource, [name]: event.target.checked})
       if (dataSource.enabled) {
@@ -118,7 +121,7 @@ const DataSource = (props) => {
           fullWidth
         />
       </Grid>
-      <Grid item xs={7}>
+      <Grid item xs={4}>
         <TextField
           error={!isUrl(dataSource.url)}
           required={true}
@@ -147,6 +150,16 @@ const DataSource = (props) => {
             />
         </Snackbar>
       </Grid>
+      <Grid item xs={3}>
+        <TextField
+          error={dataSource.icon && !isUrl(dataSource.icon)}
+          onChange={handleChange('icon')}
+          placeholder='e.g. https://data.holder/images/bank.png'
+          value={dataSource.icon}
+          margin='normal'
+          fullWidth
+        />
+      </Grid>
       <Grid item xs={1} className={classes.buttonContainer}>
         { dataSource.unsaved ?
         <Tooltip title='Save'>
@@ -171,6 +184,7 @@ const mapDispatchToProps = {
   enableDataSource,
   modifyDataSourceName,
   modifyDataSourceUrl,
+  modifyDataSourceIcon,
   clearSelection,
   deleteData,
   clearData
