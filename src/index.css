@@ -13,3 +13,20 @@ body {
 a {
   text-decoration: none;
 }
+
+.title {
+  height: 100px;
+  display: table-row;
+}
+
+.title img {
+  display: table-cell;
+  max-width: 100px;
+  max-height: 100px;
+  vertical-align: middle;
+}
+
+.title h2  {
+  display: table-cell;
+  vertical-align: middle;
+}

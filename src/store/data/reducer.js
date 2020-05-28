@@ -30,16 +30,18 @@ export default function(state = [], action) {
     case fulfilled(RETRIEVE_PRODUCT_DETAIL):
       const b = [...state]
       const index = action.payload.idx
-      const productDetails = [...b[index].productDetails]
-      let valid = !!action.payload.response.data
-      if (valid) {
-        productDetails.push(action.payload.response.data)
-      }
-      b[index] = {
-        ...b[index],
-        detailRecords: b[index].detailRecords + (valid ? 1 : 0),
-        failedDetailRecords: b[index].failedDetailRecords + (valid ? 0: 1),
-        productDetails: productDetails
+      if (b[index].productDetails) {
+        const productDetails = [...b[index].productDetails]
+        let valid = !!action.payload.response.data
+        if (valid) {
+          productDetails.push(action.payload.response.data)
+        }
+        b[index] = {
+          ...b[index],
+          detailRecords: b[index].detailRecords + (valid ? 1 : 0),
+          failedDetailRecords: b[index].failedDetailRecords + (valid ? 0: 1),
+          productDetails: productDetails
+        }
       }
       return b
     case DELETE_DATA:

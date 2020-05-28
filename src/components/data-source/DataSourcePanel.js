@@ -9,6 +9,7 @@ import AccountBalanceIcon from '@material-ui/icons/AccountBalance'
 import Typography from '@material-ui/core/Typography'
 import Divider from '@material-ui/core/Divider'
 import PlayListAddIcon from '@material-ui/icons/PlaylistAdd'
+import Grid from '@material-ui/core/Grid'
 import DataSource from './DataSource'
 import { fade } from '@material-ui/core/styles/colorManipulator'
 import { loadDataSource, addDataSource } from '../../store/data-source'
@@ -25,7 +26,7 @@ const styles = theme => ({
     fontSize: theme.typography.pxToRem(20),
   },
   details: {
-    maxWidth: 800,
+    maxWidth: '80%',
     marginLeft: 'auto',
     marginRight: 'auto',
     marginBottom: 20
@@ -58,6 +59,12 @@ class DataSourcePanel extends React.Component {
         </ExpansionPanelSummary>
         { dataSources.length > 0 &&
         <div className={classes.details}>
+          <Grid container spacing={1} style={{fontSize: 'smaller', fontStyle: 'italic'}}>
+            <Grid item xs={1}><span>Enabled</span></Grid>
+            <Grid item xs={3}><span>Name</span></Grid>
+            <Grid item xs={4}><span>Banking product API base url</span></Grid>
+            <Grid item xs={3}><span>Icon url</span></Grid>
+          </Grid>
           {dataSources.map((dataSource, index) => <DataSource key={index} dataSource={dataSource} index={index}/>)}
         </div>
         }

@@ -6,7 +6,7 @@
 A PoC of banking products view/comparison web app utilising the open banking product API
 
 ### Development requirements
-* [NodeJS](https://nodejs.org/en/) - Javascript runtime (comes with [npm](https://www.npmjs.com/get-npm))
+* [NodeJS](https://nodejs.org/en/) v10+ - Javascript runtime (comes with [npm](https://www.npmjs.com/get-npm))
 * [Yarn](https://yarnpkg.com) (Optional but preferred) - Javascript package manager
 
 ### Get started

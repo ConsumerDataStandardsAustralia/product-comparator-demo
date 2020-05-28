@@ -1,27 +1,23 @@
 import {
+  ENABLE_DATA_SOURCE,
   LOAD_DATA_SOURCE,
   ADD_DATA_SOURCE,
   SAVE_DATA_SOURCE,
   DELETE_DATA_SOURCE,
   MODIFY_DATA_SOURCE_NAME,
+  MODIFY_DATA_SOURCE_ICON,
   MODIFY_DATA_SOURCE_URL
 } from './actions'
-
-const defaults = [
-  {name: 'ANZ', url: 'https://api.anz/cds-au/v1', saved: true},
-  {name: 'CBA', url: 'https://api.commbank.com.au/public/cds-au/v1', saved: true},
-  {name: 'NAB', url: 'https://openbank.api.nab.com.au/cds-au/v1', saved: true},
-  {name: 'Westpac', url: 'https://digital-api.westpac.com.au/cds-au/v1', saved: true}
-]
+import {fulfilled} from '../../utils/async-actions'
 
 export default function(state=[], action) {
   switch (action.type) {
-    case LOAD_DATA_SOURCE:
-      return loadDataSources()
+    case fulfilled(LOAD_DATA_SOURCE):
+      return action.payload
     case ADD_DATA_SOURCE:
       return [...state, {name: '', url: ''}]
     case SAVE_DATA_SOURCE:
-      let dataSources = state.map((dataSource, index) => (index === action.index ? {...action.payload, saved: true} : dataSource));
+      let dataSources = state.map((dataSource, index) => (index === action.index ? {...action.payload, unsaved: false} : dataSource));
       persistSavedDataSources(dataSources)
       return dataSources
     case DELETE_DATA_SOURCE:
@@ -30,11 +26,13 @@ export default function(state=[], action) {
       persistSavedDataSources(dataSources)
       return dataSources
     case MODIFY_DATA_SOURCE_NAME:
+    case MODIFY_DATA_SOURCE_ICON:
+    case ENABLE_DATA_SOURCE:
       dataSources = state.map((dataSource, index) => (index === action.index ? {...action.payload} : dataSource));
       persistSavedDataSources(dataSources)
       return dataSources
     case MODIFY_DATA_SOURCE_URL:
-      dataSources = state.map((dataSource, index) => (index === action.index ? {...action.payload, saved: false} : dataSource))
+      dataSources = state.map((dataSource, index) => (index === action.index ? {...action.payload, unsaved: true} : dataSource))
       persistSavedDataSources(dataSources)
       return dataSources
     default:
@@ -43,10 +41,5 @@ export default function(state=[], action) {
 }
 
 function persistSavedDataSources(dataSources) {
-  window.localStorage.setItem("cds-banking-prd-ds", JSON.stringify(dataSources.filter(dataSource => dataSource.saved)))
-}
-
-function loadDataSources() {
-  const ds = window.localStorage.getItem("cds-banking-prd-ds")
-  return !!ds ? JSON.parse(ds) : defaults
+  window.localStorage.setItem("cds-banking-prd-ds", JSON.stringify(dataSources.filter(dataSource => !dataSource.unsaved)))
 }
