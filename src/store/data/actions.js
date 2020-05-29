@@ -30,23 +30,32 @@ export const retrieveProductList = (dataSourceIdx, baseUrl, productListUrl) => {
       type: RETRIEVE_PRODUCT_LIST,
       payload: fetch(request).then(response => {
           if (response.ok) {
-            return response.json()
-          } else {
-            console.error(response)
-            return {
-              meta: {totalRecords: 0},
-              data: {products: []},
-              links: {}
-            }
+            return response.text()
           }
-      }).then(json=>({idx: dataSourceIdx, response: json}))
+          throw response
+      })
+      .then(text => {
+          try {
+            return JSON.parse(text)
+          } catch (err) {
+            throw Error('While fetching ' + finalProductListUrl + ' got: ' + err + ' in: ' + text)
+          }
+      })
+      .catch(err => {
+          console.error('Faulty response:', err)
+          return {
+            data: {products: []},
+            links: {}
+          }
+      })
+      .then(json => ({idx: dataSourceIdx, response: json}))
     })
     response.then(({value})=> {
       const {products} = value.response.data
       const actions = products.map(product => retrieveProductDetail(dataSourceIdx, finalBaseUrl, product.productId))
       const {next} = value.response.links
       if (!!next && next !== productListUrl) {
-        actions.push(retrieveProductList(dataSourceIdx, baseUrl, next))
+        actions.push(retrieveProductList(dataSourceIdx, baseUrl, (next.startsWith(baseUrl) ? next : productListUrl.split('?')[0] + next)))
       }
       dispatch(retrieveAllProductDetails(actions))
     })

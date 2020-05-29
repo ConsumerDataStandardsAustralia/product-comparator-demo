@@ -20,7 +20,7 @@ export default function(state = [], action) {
       r[idx] = {
         ...r[idx],
         progress: action.type,
-        totalRecords: response.meta.totalRecords,
+        totalRecords: response.meta && response.meta.totalRecords ? response.meta.totalRecords : (item && item.products ? item.products.length : 0),
         products: !!item && !!item.products ? [...item.products, ...response.data.products] : [...response.data.products],
         detailRecords: !!item && !!item.detailRecords ? item.detailRecords : 0,
         failedDetailRecords: 0,
