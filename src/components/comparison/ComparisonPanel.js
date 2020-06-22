@@ -74,7 +74,7 @@ const render = (product, key) => {
     case 'applicationUri':
       return !!product[key] && <a href={product[key]} target='_blank' rel='noopener noreferrer'>Apply here</a>
     case 'additionalInformation':
-      return <AdditionalInfo additionalInfo={product[key]} tableCell/>
+      return !!product[key] && <AdditionalInfo additionalInfo={product[key]} tableCell/>
     case 'bundles':
       return !!product[key] && product[key].length > 0 &&
         <ul style={{margin: 0, padding:0}}>
