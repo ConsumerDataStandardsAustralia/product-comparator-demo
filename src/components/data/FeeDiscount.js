@@ -33,11 +33,11 @@ const FeeDiscount = (props) => {
   } = props.discount
   return (
     <li>
-      <div>${amount}</div>
-      {!!balanceRate && <div>{(balanceRate * 100).toFixed(2)}%}</div>}
-      {!!transactionRate && <div>{(transactionRate * 100).toFixed(2)}%}</div>}
-      {!!accruedRate && <div>{(accruedRate * 100).toFixed(2)}%}</div>}
-      {!!feeRate && <div>{(feeRate * 100).toFixed(2)}%}</div>}
+      {!!amount && <div>${amount}</div>}
+      {!!balanceRate && <div>Balance rate: {(balanceRate * 100).toFixed(2)}%</div>}
+      {!!transactionRate && <div>Transaction rate: {(transactionRate * 100).toFixed(2)}%</div>}
+      {!!accruedRate && <div>Accrued rate: {(accruedRate * 100).toFixed(2)}%</div>}
+      {!!feeRate && <div>Fee rate: {(feeRate * 100).toFixed(2)}%</div>}
       <div>
         Discount Type - {translateDiscountType(discountType)}
         {

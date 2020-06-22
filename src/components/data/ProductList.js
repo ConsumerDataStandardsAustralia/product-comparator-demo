@@ -8,12 +8,12 @@ import {normalise} from '../../utils/url'
 class ProductList extends React.Component {
 
   componentDidMount() {
-    const { dataSourceIndex, dataSource } = this.props
+    const { dataSourceIndex, dataSource, versionInfo } = this.props
     const { url } = dataSource
     const normalisedUrl = normalise(url)
     const productListUrl = normalisedUrl + '/banking/products'
     this.props.startRetrieveProductList(dataSourceIndex)
-    this.props.retrieveProductList(dataSourceIndex, normalisedUrl, productListUrl)
+    this.props.retrieveProductList(dataSourceIndex, normalisedUrl, productListUrl, versionInfo.xV, versionInfo.xMinV)
   }
 
   render() {
@@ -72,7 +72,8 @@ class ProductList extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  productList: state.data
+  productList: state.data,
+  versionInfo: state.versionInfo
 })
 
 const mapDispatchToProps = {startRetrieveProductList, retrieveProductList}
