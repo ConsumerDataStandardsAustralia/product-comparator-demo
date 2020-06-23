@@ -11,8 +11,15 @@ import Divider from '@material-ui/core/Divider'
 import PlayListAddIcon from '@material-ui/icons/PlaylistAdd'
 import Grid from '@material-ui/core/Grid'
 import DataSource from './DataSource'
+import TextField from '@material-ui/core/TextField'
+import MenuItem from '@material-ui/core/MenuItem'
 import { fade } from '@material-ui/core/styles/colorManipulator'
 import { loadDataSource, addDataSource } from '../../store/data-source'
+import { loadVersionInfo, saveVersionInfo } from '../../store/version-info'
+import { startRetrieveProductList, retrieveProductList } from '../../store/data'
+import { clearSelection} from '../../store/selection'
+import { clearData } from '../../store/data'
+import { normalise } from '../../utils/url'
 import Fab from '@material-ui/core/Fab'
 
 const styles = theme => ({
@@ -34,6 +41,13 @@ const styles = theme => ({
   button: {
     margin: theme.spacing(1)
   },
+  version: {
+    textAlign: 'center',
+    '& .MuiTextField-root': {
+      margin: theme.spacing(2),
+      width: '20ch'
+    },
+  },
   leftIcon: {
     marginRight: theme.spacing(1),
   }
@@ -43,10 +57,25 @@ class DataSourcePanel extends React.Component {
 
   componentDidMount() {
     this.props.loadDataSource()
+    this.props.loadVersionInfo()
   }
 
   render() {
-    const {classes, dataSources, addDataSource} = this.props
+    const {classes, dataSources, addDataSource, versionInfo} = this.props
+
+    const handleVersionChange = (xV, xMinV) => {
+      this.props.saveVersionInfo({xV: xV, xMinV: xMinV})
+      dataSources.forEach((dataSource, dataSourceIndex) => {
+        if (!dataSource.unsaved && dataSource.enabled) {
+          this.props.clearSelection(dataSourceIndex)
+          this.props.clearData(dataSourceIndex)
+          this.props.startRetrieveProductList(dataSourceIndex)
+          const normalisedUrl = normalise(dataSource.url)
+          this.props.retrieveProductList(dataSourceIndex, normalisedUrl, normalisedUrl + '/banking/products', xV, xMinV)
+        }
+      })
+    }
+
     return (
       <ExpansionPanel defaultExpanded={false} className={classes.panel}>
         <ExpansionPanelSummary
@@ -68,6 +97,36 @@ class DataSourcePanel extends React.Component {
           {dataSources.map((dataSource, index) => <DataSource key={index} dataSource={dataSource} index={index}/>)}
         </div>
         }
+        <div className={classes.version}>
+          <TextField
+            id="xV"
+            select
+            label="x-v"
+            value={versionInfo.xV}
+            onChange={event => handleVersionChange(event.target.value, versionInfo.xMinV)}
+            helperText="Preferred version"
+          >
+            {[1,2,3].map(option => (
+              <MenuItem key={option} value={option}>
+                {option}
+              </MenuItem>
+            ))}
+          </TextField>
+          <TextField
+            id="xMinV"
+            select
+            label="x-min-v"
+            value={versionInfo.xMinV}
+            onChange={event => handleVersionChange(versionInfo.xV, event.target.value)}
+            helperText="Minimal acceptable version"
+          >
+            {[1,2,3].map((option) => (
+              <MenuItem key={option} value={option}>
+                {option}
+              </MenuItem>
+            ))}
+          </TextField>
+        </div>
         <Divider/>
         <ExpansionPanelActions>
           <Fab variant='extended' size='medium' color='primary' className={classes.button} onClick={addDataSource}>
@@ -81,9 +140,19 @@ class DataSourcePanel extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  dataSources: state.dataSources
+  dataSources: state.dataSources,
+  versionInfo: state.versionInfo
 })
 
-const mapDispatchToProps = { loadDataSource, addDataSource }
+const mapDispatchToProps = {
+  loadDataSource,
+  addDataSource,
+  loadVersionInfo,
+  saveVersionInfo,
+  startRetrieveProductList,
+  retrieveProductList,
+  clearSelection,
+  clearData
+}
 
 export default withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(DataSourcePanel))
