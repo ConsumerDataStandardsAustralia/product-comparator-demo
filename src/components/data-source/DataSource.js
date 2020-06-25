@@ -152,7 +152,7 @@ const DataSource = (props) => {
       </Grid>
       <Grid item xs={3}>
         <TextField
-          error={dataSource.icon && !isUrl(dataSource.icon)}
+          error={!!dataSource.icon && !isUrl(dataSource.icon)}
           onChange={handleChange('icon')}
           placeholder='e.g. https://data.holder/images/bank.png'
           value={dataSource.icon}
