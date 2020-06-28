@@ -46,8 +46,8 @@ export const lendingRateTypeDict = {
 }
 
 export const interestPaymentDueDict = {
-  ARREARS: 'in Arrears',
-  ADVANCE: 'in Advance'
+  IN_ARREARS: 'in Arrears',
+  IN_ADVANCE: 'in Advance'
 }
 
 export const eligibilityTypeDict = {
@@ -123,6 +123,11 @@ export const rateApplicationMethodDict = {
   PER_TIER: 'Per Tier'
 }
 
+export const repaymentTypeDict = {
+  INTEREST_ONLY: 'Interest Only',
+  PRINCIPAL_AND_INTEREST: 'Principal and Interest'
+}
+
 export const productDataKeys = [
   {key: 'description', label: 'Description'},
   {key: 'brand', label: 'Brand'},
@@ -151,6 +156,8 @@ export const translateDepositRateType = (depositRateType) => depositRateTypeDict
 export const translateLendingRateType = (lendingRateType) => lendingRateTypeDict[lendingRateType]
 
 export const translateInterestPaymentDue = (interestPaymentDue) => interestPaymentDueDict[interestPaymentDue]
+
+export const translateRepaymentType = (repaymentType) => repaymentTypeDict[repaymentType]
 
 export const translateEligibilityType = (eligibilityType) => eligibilityTypeDict[eligibilityType]
 
