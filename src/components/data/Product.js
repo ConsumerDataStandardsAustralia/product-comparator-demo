@@ -12,6 +12,7 @@ import LendingRate from './LendingRate'
 import Eligibility from './Eligibility'
 import Feature from './Feature'
 import Fee from './Fee'
+import CardArt from './CardArt'
 import Checkbox from '@material-ui/core/Checkbox'
 import {deselectProduct, selectProduct} from '../../store/selection'
 import DateTime from './DateTime'
@@ -192,6 +193,17 @@ const Product = (props) => {
             <ul className={classes.sectionContent}>
               {product.fees.sort((a, b)=>ecomp(a.feeType, b.feeType)).map(
                 (fee, index) => <Fee key={index} fee={fee}/>)}
+            </ul>
+          </div>
+        }
+        {
+          !!product.cardArt && product.cardArt.length > 0 &&
+          <div>
+            <div className={classes.sectionTitle}>Card Art:</div>
+            <ul className={classes.sectionContent}>
+              {product.cardArt.map((cardArt, index) =>
+                <CardArt key={index} cardArt={cardArt}/>
+              )}
             </ul>
           </div>
         }

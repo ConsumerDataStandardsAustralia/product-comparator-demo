@@ -15,7 +15,8 @@ const useStyles = makeStyles(() => ({
 
 const RateTier = (props) => {
   const classes = useStyles()
-  const {name, unitOfMeasure, minimumValue, maximumValue, rateApplicationMethod, applicabilityConditions, subTier} = props.tier
+  const {name, unitOfMeasure, minimumValue, maximumValue, rateApplicationMethod, applicabilityConditions, subTier,
+    additionalInfo, additionalInfoUri} = props.tier
   return (
     <li>
       <div>{name}</div>
@@ -32,6 +33,8 @@ const RateTier = (props) => {
           </div>
         </div>
       }
+      {!!additionalInfo && <div>{additionalInfo}</div>}
+      {!!additionalInfoUri && <div><a href={additionalInfoUri} target='_blank' rel='noopener noreferrer'>More info</a></div>}
     </li>
   )
 }

@@ -23,6 +23,7 @@ import LendingRate from '../data/LendingRate'
 import Eligibility from '../data/Eligibility'
 import Feature from '../data/Feature'
 import Fee from '../data/Fee'
+import CardArt from '../data/CardArt'
 
 const useStyles = makeStyles(theme => ({
   panel: {
@@ -109,6 +110,11 @@ const render = (product, key) => {
       return !!product[key] && product[key].length > 0 &&
         <ul style={{margin: 0, padding:0}}>
           {product[key].sort((a, b)=>ecomp(a.name, b.name)).map((fee, index) => <Fee key={index} fee={fee}/>)}
+        </ul>
+    case 'cardArt':
+      return !!product[key] && product[key].length > 0 &&
+        <ul style={{margin: 0, padding:0}}>
+          {product[key].map((cardArt, index) => <CardArt key={index} cardArt={cardArt}/>)}
         </ul>
     default:
       return ''
