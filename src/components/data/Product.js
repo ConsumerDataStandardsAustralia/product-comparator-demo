@@ -97,6 +97,7 @@ const Product = (props) => {
   const handleChange = event => {
     event.target.checked ? props.selectProduct(dataSourceIndex, product) : props.deselectProduct(dataSourceIndex, product)
   }
+  const blob = new Blob([JSON.stringify(product, null, 2)], {type : 'application/json'})
   return (
     <div className={classes.root}>
     <Checkbox
@@ -114,7 +115,7 @@ const Product = (props) => {
       <div style={{fontSize: '0.8rem'}}>
         <div>{product.description}</div>
         <div>Brand: {product.brand} {!!product.bandName && <span>({product.bandName})</span>}</div>
-        <div>Last updated at <DateTime rfc3339={product.lastUpdated}/></div>
+        <div>Last updated at <DateTime rfc3339={product.lastUpdated}/> <a href={URL.createObjectURL(blob)} target="_blank" rel="noopener noreferrer">JSON</a></div>
         <div>{product.isTailored ? 'Tailored' : 'Not Tailored'}</div>
         {!!product.effectiveFrom && <div>Effective from <DateTime rfc3339={product.effectiveFrom}/></div>}
         {!!product.effectiveTo && <div>Effective to <DateTime rfc3339={product.effectiveTo}/></div>}
