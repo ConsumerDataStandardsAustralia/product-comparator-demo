@@ -3,6 +3,16 @@
     {"name": "CBA", "url": "https://api.commbank.com.au/public/cds-au/v1", "icon": "https://www.commbank.com.au/content/dam/commbank-assets/cba-stacked.jpg"},
     {"name": "NAB", "url": "https://openbank.api.nab.com.au/cds-au/v1"},
     {"name": "Westpac", "url": "https://digital-api.westpac.com.au/cds-au/v1"},
-    {"name": "Suncorp", "url": "https://api-pub-cdr.suncorpbank.com.au/cds-au/v1", "icon": "https://suncorp.com.au/content/dam/suncorp/corporate/images/logos/Suncorp_New_Logo.png"},
-    {"name": "People's Choice", "url": "https://api.peopleschoice.com.au/public/cds-au/v1"}
+    {"name": "Adelaide Bank", "url": "https://api.cdr.adelaidebank.com.au/cds-au/v1"},
+    {"name": "AWA Alliance Bank", "url": "https://api.cdr.awaalliancebank.com.au/cds-au/v1"},
+    {"name": "BDCU Alliance Bank", "url": "https://api.cdr.bdcualliancebank.com.au/cds-au/v1"},
+    {"name": "Bendigo Bank", "url": "https://api.cdr.bendigobank.com.au/cds-au/v1"},
+    {"name": "Circle Alliance Bank", "url": "https://api.cdr.circle.com.au/cds-au/v1"},
+    {"name": "Delphi Bank", "url": "https://api.cdr.delphibank.com.au/cds-au/v1"},
+    {"name": "Leveraged", "url": "https://api.cdr.leveraged.com.au/cds-au/v1"},
+    {"name": "Nova Alliance Bank", "url": "https://api.cdr.novaalliancebank.com.au/cds-au/v1"},
+    {"name": "People's Choice", "url": "https://api.peopleschoice.com.au/public/cds-au/v1"},
+    {"name": "Rural Bank", "url": "https://api.cdr.ruralbank.com.au/cds-au/v1"},
+    {"name": "Service One Alliance Bank", "url": "https://api.cdr.serviceone.com.au/cds-au/v1"},
+    {"name": "Suncorp", "url": "https://api-pub-cdr.suncorpbank.com.au/cds-au/v1", "icon": "https://suncorp.com.au/content/dam/suncorp/corporate/images/logos/Suncorp_New_Logo.png"}
 ]
