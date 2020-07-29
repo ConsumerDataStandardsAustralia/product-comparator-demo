@@ -6,7 +6,7 @@ import {
 export default function(state={xV: 1, xMinV: 1}, action) {
   switch (action.type) {
     case LOAD_VERSION_INFO:
-      return {xV: loadVersionField("x-v") || 1, xMinV: loadVersionField("x-min-v") || 1}
+      return {xV: loadVersionField("x-v") || 3, xMinV: loadVersionField("x-min-v") || 1}
     case SAVE_VERSION_INFO:
       const vi = action.versionInfo
       saveVersionField("x-v", vi.xV)
