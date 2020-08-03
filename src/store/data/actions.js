@@ -14,17 +14,9 @@ const headers = {
   'Accept': 'application/json'
 }
 
-export const retrieveProductList = (dataSourceIdx, baseUrl, productListUrl, xV, xMinV) => {
-  const cors_proxy = 'https://prd-comparison-proxy.herokuapp.com/'
-  const lowerCaseBaseUrl = baseUrl.toLowerCase()
-  let finalBaseUrl = baseUrl, finalProductListUrl = productListUrl
-  const origin = window.location.protocol + '//' + window.location.host
-  if (!lowerCaseBaseUrl.startsWith(origin) && lowerCaseBaseUrl.indexOf('//localhost') === -1) {
-    finalBaseUrl = cors_proxy + baseUrl
-    finalProductListUrl = cors_proxy + productListUrl
-  }
-  return (dispatch) => {
-    const request = new Request(finalProductListUrl, {headers: new Headers({...headers, 'x-v': xV, 'x-min-v': xMinV})})
+export const retrieveProductList = (dataSourceIdx, baseUrl, productListUrl, xV, xMinV) =>
+  (dispatch) => {
+    const request = new Request(productListUrl, {headers: new Headers({...headers, 'x-v': xV, 'x-min-v': xMinV})})
     const response = dispatch({
       type: RETRIEVE_PRODUCT_LIST,
       payload: fetch(request).then(response => {
@@ -42,7 +34,7 @@ export const retrieveProductList = (dataSourceIdx, baseUrl, productListUrl, xV, 
     })
     response.then(({value})=> {
       const {products} = value.response.data
-      const actions = products.map(product => retrieveProductDetail(dataSourceIdx, finalBaseUrl, product.productId, xV, xMinV))
+      const actions = products.map(product => retrieveProductDetail(dataSourceIdx, baseUrl, product.productId, xV, xMinV))
       const {next} = value.response.links
       if (!!next && next !== productListUrl) {
         actions.push(retrieveProductList(dataSourceIdx, baseUrl, next, xV, xMinV))
@@ -50,7 +42,6 @@ export const retrieveProductList = (dataSourceIdx, baseUrl, productListUrl, xV, 
       dispatch(retrieveAllProductDetails(actions))
     })
   }
-}
 
 export const retrieveProductDetail = (dataSourceIdx, url, productId, xV, xMinV) => {
   const request = new Request(url + '/banking/products/' + productId, {
