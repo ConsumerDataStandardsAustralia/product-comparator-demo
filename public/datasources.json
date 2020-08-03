@@ -2,7 +2,7 @@
     {"name": "ANZ", "url": "https://api.anz/cds-au/v1", "icon": "https://www.anz.com.au/content/dam/anzcomau/logos/anz/ANZ-MB-Logo-3rd-Party-RGB.png"},
     {"name": "CBA", "url": "https://api.commbank.com.au/public/cds-au/v1", "icon": "https://www.commbank.com.au/content/dam/commbank-assets/cba-stacked.jpg"},
     {"name": "NAB", "url": "https://openbank.api.nab.com.au/cds-au/v1"},
-    {"name": "Westpac", "url": "https://digital-api.westpac.com.au/cds-au/v1"},
+    {"name": "Westpac", "url": "https://digital-api.westpac.com.au/cds-au/v1", "icon": "https://banking.westpac.com.au/wbc/banking/Themes/Default/Desktop/WBC/Core/Images/logo_white_bg.png.6c772a263bf42d99a2c098bf0739fc5b504ed28d.png"},
     {"name": "Adelaide Bank", "url": "https://api.cdr.adelaidebank.com.au/cds-au/v1"},
     {"name": "AWA Alliance Bank", "url": "https://api.cdr.awaalliancebank.com.au/cds-au/v1"},
     {"name": "BDCU Alliance Bank", "url": "https://api.cdr.bdcualliancebank.com.au/cds-au/v1"},
