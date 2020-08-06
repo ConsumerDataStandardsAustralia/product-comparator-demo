@@ -1,5 +1,6 @@
 export const LOAD_DATA_SOURCE = 'LOAD_DATA_SOURCE'
 export const ADD_DATA_SOURCE = 'ADD_DATA_SOURCE'
+export const SYNC_DATA_SOURCES = 'SYNC_DATA_SOURCES'
 export const SAVE_DATA_SOURCE = 'SAVE_DATA_SOURCE'
 export const DELETE_DATA_SOURCE = 'DELETE_DATA_SOURCE'
 export const MODIFY_DATA_SOURCE_NAME = 'MODIFY_DATA_SOURCE_NAME'
@@ -7,12 +8,21 @@ export const MODIFY_DATA_SOURCE_URL = 'MODIFY_DATA_SOURCE_URL'
 export const MODIFY_DATA_SOURCE_ICON = 'MODIFY_DATA_SOURCE_ICON'
 export const ENABLE_DATA_SOURCE = 'ENABLE_DATA_SOURCE'
 
-export function loadDataSource() {
+function fetchDatasources() {
+  return fetch(process.env.PUBLIC_URL + '/datasources.json')
+    .then(response => response.json())
+}
+
+function loadLocalDatasources() {
   const ds = window.localStorage.getItem("cds-banking-prd-ds")
+  return ds ? JSON.parse(ds) : false
+}
+
+export function loadDataSource() {
+  const ds = loadLocalDatasources()
   return {
     type: LOAD_DATA_SOURCE,
-    payload: ds ? Promise.resolve(JSON.parse(ds)) : fetch(process.env.PUBLIC_URL + '/datasources.json')
-      .then(response => response.json())
+    payload: ds ? Promise.resolve(ds) : fetchDatasources()
       .then(datasources => {
         for (let i = 0; i < 4 && i < datasources.length; i++) {
           datasources[i].enabled = true
@@ -25,6 +35,31 @@ export function loadDataSource() {
 export function addDataSource() {
   return {
     type: ADD_DATA_SOURCE
+  }
+}
+
+export function syncDataSources() {
+  return {
+    type: SYNC_DATA_SOURCES,
+    payload: fetchDatasources().then(datasources => {
+      const localDatasources = loadLocalDatasources()
+      if (localDatasources) {
+        datasources.forEach(ds => {
+          const lds = localDatasources.filter(lds => lds.name === ds.name)[0]
+          if (lds) {
+            lds.url = ds.url
+            if (ds.icon) {
+              lds.icon = ds.icon
+            }
+          } else {
+            localDatasources.push(ds)
+            localDatasources.sort((a, b) => a.name < b.name ? -1 : 1)
+          }
+        })
+        return localDatasources
+      }
+      return datasources
+    })
   }
 }
 

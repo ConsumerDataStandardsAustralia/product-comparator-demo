@@ -5,6 +5,7 @@ import ExpansionPanel from '@material-ui/core/ExpansionPanel'
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary'
 import ExpansionPanelActions from '@material-ui/core/ExpansionPanelActions'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
+import SyncIcon from '@material-ui/icons/Sync'
 import AccountBalanceIcon from '@material-ui/icons/AccountBalance'
 import Typography from '@material-ui/core/Typography'
 import Divider from '@material-ui/core/Divider'
@@ -14,13 +15,14 @@ import DataSource from './DataSource'
 import TextField from '@material-ui/core/TextField'
 import MenuItem from '@material-ui/core/MenuItem'
 import { fade } from '@material-ui/core/styles/colorManipulator'
-import { loadDataSource, addDataSource } from '../../store/data-source'
+import { loadDataSource, addDataSource, syncDataSources } from '../../store/data-source'
 import { loadVersionInfo, saveVersionInfo } from '../../store/version-info'
 import { startRetrieveProductList, retrieveProductList } from '../../store/data'
 import { clearSelection} from '../../store/selection'
 import { clearData } from '../../store/data'
 import { normalise } from '../../utils/url'
 import Fab from '@material-ui/core/Fab'
+import Tooltip from '@material-ui/core/Tooltip'
 
 const styles = theme => ({
   panel: {
@@ -37,9 +39,6 @@ const styles = theme => ({
     marginLeft: 'auto',
     marginRight: 'auto',
     marginBottom: 20
-  },
-  button: {
-    margin: theme.spacing(1)
   },
   version: {
     textAlign: 'center',
@@ -61,7 +60,8 @@ class DataSourcePanel extends React.Component {
   }
 
   render() {
-    const {classes, dataSources, addDataSource, versionInfo} = this.props
+    const {classes, dataSources, addDataSource, syncDataSources, versionInfo} = this.props
+    const versions = [1, 2, 3]
 
     const handleVersionChange = (xV, xMinV) => {
       this.props.saveVersionInfo({xV: xV, xMinV: xMinV})
@@ -97,42 +97,56 @@ class DataSourcePanel extends React.Component {
           {dataSources.map((dataSource, index) => <DataSource key={index} dataSource={dataSource} index={index}/>)}
         </div>
         }
-        <div className={classes.version}>
-          <TextField
-            id="xV"
-            select
-            label="x-v"
-            value={versionInfo.xV}
-            onChange={event => handleVersionChange(event.target.value, versionInfo.xMinV)}
-            helperText="Preferred version"
-          >
-            {[1,2,3].map(option => (
-              <MenuItem key={option} value={option}>
-                {option}
-              </MenuItem>
-            ))}
-          </TextField>
-          <TextField
-            id="xMinV"
-            select
-            label="x-min-v"
-            value={versionInfo.xMinV}
-            onChange={event => handleVersionChange(versionInfo.xV, event.target.value)}
-            helperText="Minimal acceptable version"
-          >
-            {[1,2,3].map((option) => (
-              <MenuItem key={option} value={option}>
-                {option}
-              </MenuItem>
-            ))}
-          </TextField>
-        </div>
         <Divider/>
         <ExpansionPanelActions>
-          <Fab variant='extended' size='medium' color='primary' className={classes.button} onClick={addDataSource}>
-            <PlayListAddIcon className={classes.leftIcon}/>
-            Add
-          </Fab>
+          <Grid container alignItems="center">
+            <Grid item xs={1}>
+              <Tooltip title='Synchronise'>
+                <Fab size='medium' color='secondary' onClick={syncDataSources}>
+                  <SyncIcon/>
+                </Fab>
+              </Tooltip>
+            </Grid>
+            <Grid item xs={10}>
+              <div className={classes.version}>
+                <TextField
+                  id="xV"
+                  select
+                  label="x-v"
+                  value={versionInfo.xV}
+                  onChange={event => handleVersionChange(event.target.value, versionInfo.xMinV)}
+                  helperText="Preferred version"
+                >
+                  {versions.map(option => (
+                    <MenuItem key={option} value={option}>
+                      {option}
+                    </MenuItem>
+                  ))}
+                </TextField>
+                <TextField
+                  id="xMinV"
+                  select
+                  label="x-min-v"
+                  value={versionInfo.xMinV}
+                  onChange={event => handleVersionChange(versionInfo.xV, event.target.value)}
+                  helperText="Minimal acceptable version"
+                >
+                  {versions.map((option) => (
+                    <MenuItem key={option} value={option}>
+                      {option}
+                    </MenuItem>
+                  ))}
+                </TextField>
+              </div>
+            </Grid>
+            <Grid item xs={1} style={{textAlign: 'end'}}>
+              <Tooltip title='Add'>
+                <Fab size='medium' color='primary' onClick={addDataSource}>
+                  <PlayListAddIcon/>
+                </Fab>
+              </Tooltip>
+            </Grid>
+          </Grid>
         </ExpansionPanelActions>
       </ExpansionPanel>
     )
@@ -147,6 +161,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = {
   loadDataSource,
   addDataSource,
+  syncDataSources,
   loadVersionInfo,
   saveVersionInfo,
   startRetrieveProductList,

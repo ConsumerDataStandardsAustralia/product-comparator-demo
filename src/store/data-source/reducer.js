@@ -2,6 +2,7 @@ import {
   ENABLE_DATA_SOURCE,
   LOAD_DATA_SOURCE,
   ADD_DATA_SOURCE,
+  SYNC_DATA_SOURCES,
   SAVE_DATA_SOURCE,
   DELETE_DATA_SOURCE,
   MODIFY_DATA_SOURCE_NAME,
@@ -16,6 +17,9 @@ export default function(state=[], action) {
       return action.payload
     case ADD_DATA_SOURCE:
       return [...state, {name: '', url: ''}]
+    case fulfilled(SYNC_DATA_SOURCES):
+      persistSavedDataSources(action.payload)
+      return action.payload
     case SAVE_DATA_SOURCE:
       let dataSources = state.map((dataSource, index) => (index === action.index ? {...action.payload, unsaved: false} : dataSource));
       persistSavedDataSources(dataSources)
