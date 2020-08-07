@@ -9,6 +9,7 @@
     {"name": "Bendigo Bank", "url": "https://api.cdr.bendigobank.com.au/cds-au/v1"},
     {"name": "Circle Alliance Bank", "url": "https://api.cdr.circle.com.au/cds-au/v1"},
     {"name": "Delphi Bank", "url": "https://api.cdr.delphibank.com.au/cds-au/v1"},
+    {"name": "Heritage Bank", "url": "https://product.api.heritage.com.au/cds-au/v1"},
     {"name": "Leveraged", "url": "https://api.cdr.leveraged.com.au/cds-au/v1"},
     {"name": "Nova Alliance Bank", "url": "https://api.cdr.novaalliancebank.com.au/cds-au/v1"},
     {"name": "People's Choice", "url": "https://api.peopleschoice.com.au/public/cds-au/v1"},
