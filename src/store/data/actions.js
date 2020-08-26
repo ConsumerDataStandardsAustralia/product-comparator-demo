@@ -36,8 +36,12 @@ export const retrieveProductList = (dataSourceIdx, baseUrl, productListUrl, xV, 
       const {products} = value.response.data
       const actions = products.map(product => retrieveProductDetail(dataSourceIdx, baseUrl, product.productId, xV, xMinV))
       const {next} = value.response.links
-      if (!!next && next !== productListUrl) {
-        actions.push(retrieveProductList(dataSourceIdx, baseUrl, next, xV, xMinV))
+      if (!!next) {
+        if (next === productListUrl) {
+          console.error('The link next should not be the same as the current page URL.')
+        } else {
+          actions.push(retrieveProductList(dataSourceIdx, baseUrl, next, xV, xMinV))
+        }
       }
       dispatch(retrieveAllProductDetails(actions))
     })
