@@ -23,7 +23,7 @@ export default function(state = [], action) {
         totalRecords: response.meta.totalRecords,
         products: !!item && !!item.products ? [...item.products, ...response.data.products] : [...response.data.products],
         detailRecords: !!item && !!item.detailRecords ? item.detailRecords : 0,
-        failedDetailRecords: 0,
+        failedDetailRecords: !!item && !!item.failedDetailRecords ? item.failedDetailRecords : 0,
         productDetails: !!item && !!item.productDetails ? [...item.productDetails] : []
       }
       return r
@@ -32,14 +32,17 @@ export default function(state = [], action) {
       const index = action.payload.idx
       if (b[index].productDetails) {
         const productDetails = [...b[index].productDetails]
-        let valid = !!action.payload.response.data
-        if (valid) {
-          productDetails.push(action.payload.response.data)
+        let data = action.payload.response.data
+        if (!!data && productDetails.some(prod => prod.productId === data.productId
+            && prod.productCategory === data.productCategory)) {
+          console.error(`Product with id ${data.productId} already exists in ${data.productCategory}`)
+        } else {
+          productDetails.push(data)
         }
         b[index] = {
           ...b[index],
-          detailRecords: b[index].detailRecords + (valid ? 1 : 0),
-          failedDetailRecords: b[index].failedDetailRecords + (valid ? 0: 1),
+          detailRecords: b[index].detailRecords + (data ? 1 : 0),
+          failedDetailRecords: b[index].failedDetailRecords + (data ? 0 : 1),
           productDetails: productDetails
         }
       }
