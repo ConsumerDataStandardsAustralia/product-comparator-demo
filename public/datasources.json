@@ -8,6 +8,7 @@
     {"name": "BDCU Alliance Bank", "url": "https://api.cdr.bdcualliancebank.com.au/cds-au/v1"},
     {"name": "Bendigo Bank", "url": "https://api.cdr.bendigobank.com.au/cds-au/v1"},
     {"name": "BOQ", "url": "https://secure.api.boq.com.au/cds-au/v1", "icon": "https://www.boq.com.au/content/dam/boq/images/blog-images/BOQ_png_notagline_stk.png"},
+    {"name": "BOQ Specialist", "url": "https://secure.api.boqspecialist.com.au/cds-au/v1", "icon": "https://www.boqspecialist.com.au/content/dam/boqs/images/logo.png"},
     {"name": "Circle Alliance Bank", "url": "https://api.cdr.circle.com.au/cds-au/v1"},
     {"name": "Delphi Bank", "url": "https://api.cdr.delphibank.com.au/cds-au/v1"},
     {"name": "Heritage Bank", "url": "https://product.api.heritage.com.au/cds-au/v1"},
