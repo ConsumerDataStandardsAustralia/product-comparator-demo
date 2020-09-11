@@ -18,5 +18,6 @@
     {"name": "People's Choice", "url": "https://api.peopleschoice.com.au/public/cds-au/v1"},
     {"name": "Rural Bank", "url": "https://api.cdr.ruralbank.com.au/cds-au/v1"},
     {"name": "Service One Alliance Bank", "url": "https://api.cdr.serviceone.com.au/cds-au/v1"},
-    {"name": "Suncorp", "url": "https://api-pub-cdr.suncorpbank.com.au/cds-au/v1", "icon": "https://suncorp.com.au/content/dam/suncorp/corporate/images/logos/Suncorp_New_Logo.png"}
+    {"name": "Suncorp", "url": "https://api-pub-cdr.suncorpbank.com.au/cds-au/v1", "icon": "https://suncorp.com.au/content/dam/suncorp/corporate/images/logos/Suncorp_New_Logo.png"},
+    {"name": "Newcastle Permanent Building Society", "url": "https://api.newcastlepermanent.com.au/cds-au/v1"}
 ]
