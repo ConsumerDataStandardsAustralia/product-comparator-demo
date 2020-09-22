@@ -17,7 +17,7 @@
     {"name": "Leveraged", "url": "https://api.cdr.leveraged.com.au/cds-au/v1"},
     {"name": "ME Bank", "url": "https://api.mebank.com.au/cds-au/v1", "icon": "https://www.mebank.com.au/getmedia/c79ff77e-5b3b-4410-9a1b-98e98a79f025/ME-logo-600px-black-transparent.png"},
     {"name": "MyState Bank", "url": "https://openbanking.api.mystate.com.au/public/cds-au/v1"},
-    {"name": "Newcastle Permanent Building Society", "url": "https://api.newcastlepermanent.com.au/cds-au/v1"},
+    {"name": "Newcastle Permanent Building Society", "url": "https://api.newcastlepermanent.com.au/cds-au/v1", "icon": "https://www.newcastlepermanent.com.au/-/media/images/houselogo.png"},
     {"name": "Nova Alliance Bank", "url": "https://api.cdr.novaalliancebank.com.au/cds-au/v1"},
     {"name": "People's Choice", "url": "https://api.peopleschoice.com.au/public/cds-au/v1"},
     {"name": "Regional Australia Bank", "url": "https://public-data.cdr.regaustbank.io/cds-au/v1", "icon": "https://www.regionalaustraliabank.com.au/-/media/CommunityMutual/Images/Logo/regional-australia-bank-primary-logo.png"},
