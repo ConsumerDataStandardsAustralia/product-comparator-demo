@@ -20,6 +20,7 @@
     {"name": "Newcastle Permanent Building Society", "url": "https://api.newcastlepermanent.com.au/cds-au/v1", "icon": "https://www.newcastlepermanent.com.au/-/media/images/houselogo.png"},
     {"name": "Nova Alliance Bank", "url": "https://api.cdr.novaalliancebank.com.au/cds-au/v1"},
     {"name": "People's Choice", "url": "https://api.peopleschoice.com.au/public/cds-au/v1"},
+    {"name": "Rabobank", "url": "https://openbanking.api.rabobank.com.au/cds-au/v1", "icon": "https://www.rabobank.com.au/-/media/rabobank-au/images/logo/RB_logo_stacked_200x242px.png"},
     {"name": "Regional Australia Bank", "url": "https://public-data.cdr.regaustbank.io/cds-au/v1", "icon": "https://www.regionalaustraliabank.com.au/-/media/CommunityMutual/Images/Logo/regional-australia-bank-primary-logo.png"},
     {"name": "Rural Bank", "url": "https://api.cdr.ruralbank.com.au/cds-au/v1"},
     {"name": "Service One Alliance Bank", "url": "https://api.cdr.serviceone.com.au/cds-au/v1"},
