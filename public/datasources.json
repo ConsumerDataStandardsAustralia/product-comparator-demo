@@ -5,6 +5,7 @@
     {"name": "Westpac", "url": "https://digital-api.westpac.com.au/cds-au/v1", "icon": "https://banking.westpac.com.au/wbc/banking/Themes/Default/Desktop/WBC/Core/Images/logo_white_bg.png.6c772a263bf42d99a2c098bf0739fc5b504ed28d.png"},
     {"name": "Adelaide Bank", "url": "https://api.cdr.adelaidebank.com.au/cds-au/v1"},
     {"name": "AMP Bank", "url": "https://api.cdr-api.amp.com.au/cds-au/v1", "icon": "https://www.amp.com.au/content/dam/amp-au/data/icons/amp-logo-reversed.svg"},
+    {"name": "Auswide Bank", "url": "https://api.auswidebank.com.au/OpenBanking/cds-au/v1/banking/products", "icon": "https://www.auswidebank.com.au/resources/images/templates/shared/auswide-bank-logo.png"}
     {"name": "AWA Alliance Bank", "url": "https://api.cdr.awaalliancebank.com.au/cds-au/v1"},
     {"name": "BDCU Alliance Bank", "url": "https://api.cdr.bdcualliancebank.com.au/cds-au/v1"},
     {"name": "Bendigo Bank", "url": "https://api.cdr.bendigobank.com.au/cds-au/v1"},
