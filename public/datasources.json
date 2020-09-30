@@ -1,4 +1,5 @@
 [
+    {"name": "Arab Bank Australia Limited", "url": "https://openbanking-api.arabbank.com.au/public/cds-au/v1", "icon": "https://www.arabbank.com.au/themes/arabbank/images/abal-logo.svg"}
     {"name": "ANZ", "url": "https://api.anz/cds-au/v1", "icon": "https://www.anz.com.au/content/dam/anzcomau/logos/anz/ANZ-MB-Logo-3rd-Party-RGB.png"},
     {"name": "CBA", "url": "https://api.commbank.com.au/public/cds-au/v1", "icon": "https://www.commbank.com.au/content/dam/commbank-assets/cba-stacked.jpg"},
     {"name": "NAB", "url": "https://openbank.api.nab.com.au/cds-au/v1"},
