@@ -28,4 +28,5 @@
     {"name": "Suncorp", "url": "https://api-pub-cdr.suncorpbank.com.au/cds-au/v1", "icon": "https://suncorp.com.au/content/dam/suncorp/corporate/images/logos/Suncorp_New_Logo.png"},
     {"name": "Unity Bank", "url": "https://ibanking.unitybank.com.au/openbanking/cds-au/v1", "icon": "https://asset.unitybank.com.au/images/Unity-logo-335x115.png"},
     {"name": "Virgin Money Australia", "url": "https://secure.api.virginmoney.com.au/cds-au/v1", "icon": "https://virginmoney.com.au/content/dam/virginmoney/logos/logo_footer.png"}
+	{"name": "G&C Mutual Bank", "url": "https://ibank.gcmutualbank.com.au/openbanking/cds-au/v1", "icon": "https://www.gcmutual.bank/media/3018/gc-mutual-bank-logo.png"},
 ]
