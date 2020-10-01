@@ -14,6 +14,7 @@
     {"name": "Delphi Bank", "url": "https://api.cdr.delphibank.com.au/cds-au/v1"},
     {"name": "Heritage Bank", "url": "https://product.api.heritage.com.au/cds-au/v1"},
     {"name": "ING", "url": "https://apic.ing.com.au/cds-au/v1"},
+    {"name": "G&C Mutual Bank", "url": "https://ibank.gcmutualbank.com.au/openbanking/cds-au/v1", "icon": "https://www.gcmutual.bank/media/3018/gc-mutual-bank-logo.png"},
     {"name": "Leveraged", "url": "https://api.cdr.leveraged.com.au/cds-au/v1"},
     {"name": "ME Bank", "url": "https://api.mebank.com.au/cds-au/v1", "icon": "https://www.mebank.com.au/getmedia/c79ff77e-5b3b-4410-9a1b-98e98a79f025/ME-logo-600px-black-transparent.png"},
     {"name": "MyState Bank", "url": "https://openbanking.api.mystate.com.au/public/cds-au/v1"},
@@ -28,5 +29,4 @@
     {"name": "Suncorp", "url": "https://api-pub-cdr.suncorpbank.com.au/cds-au/v1", "icon": "https://suncorp.com.au/content/dam/suncorp/corporate/images/logos/Suncorp_New_Logo.png"},
     {"name": "Unity Bank", "url": "https://ibanking.unitybank.com.au/openbanking/cds-au/v1", "icon": "https://asset.unitybank.com.au/images/Unity-logo-335x115.png"},
     {"name": "Virgin Money Australia", "url": "https://secure.api.virginmoney.com.au/cds-au/v1", "icon": "https://virginmoney.com.au/content/dam/virginmoney/logos/logo_footer.png"}
-	{"name": "G&C Mutual Bank", "url": "https://ibank.gcmutualbank.com.au/openbanking/cds-au/v1", "icon": "https://www.gcmutual.bank/media/3018/gc-mutual-bank-logo.png"},
 ]
