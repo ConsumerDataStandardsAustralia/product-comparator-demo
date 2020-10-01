@@ -6,6 +6,7 @@
     {"name": "Adelaide Bank", "url": "https://api.cdr.adelaidebank.com.au/cds-au/v1"},
     {"name": "AMP Bank", "url": "https://api.cdr-api.amp.com.au/cds-au/v1", "icon": "https://www.amp.com.au/content/dam/amp-au/data/icons/amp-logo-reversed.svg"},
     {"name": "Arab Bank Australia Limited", "url": "https://openbanking-api.arabbank.com.au/public/cds-au/v1", "icon": "https://www.arabbank.com.au/themes/arabbank/images/abal-logo.svg"},
+    {"name": "Australian Military Bank","url": "https://product.api.australianmilitarybank.com.au/cds-au/v1","icon": "https://www.australianmilitarybank.com.au/sites/default/files/favicon.ico"},
     {"name": "AWA Alliance Bank", "url": "https://api.cdr.awaalliancebank.com.au/cds-au/v1"},
     {"name": "BDCU Alliance Bank", "url": "https://api.cdr.bdcualliancebank.com.au/cds-au/v1"},
     {"name": "Bendigo Bank", "url": "https://api.cdr.bendigobank.com.au/cds-au/v1"},
