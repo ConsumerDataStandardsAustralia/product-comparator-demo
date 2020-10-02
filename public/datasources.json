@@ -7,6 +7,7 @@
     {"name": "AMP Bank", "url": "https://api.cdr-api.amp.com.au/cds-au/v1", "icon": "https://www.amp.com.au/content/dam/amp-au/data/icons/amp-logo-reversed.svg"},
     {"name": "Arab Bank Australia Limited", "url": "https://openbanking-api.arabbank.com.au/public/cds-au/v1", "icon": "https://www.arabbank.com.au/themes/arabbank/images/abal-logo.svg"},
     {"name": "AWA Alliance Bank", "url": "https://api.cdr.awaalliancebank.com.au/cds-au/v1"},
+    {"name": "Bank of China Australia", "url": "https://obdevp.bank-of-china.net.au/cds-au/v1", "icon": "https://www.bankofchina.com/images/boc2013_ovs_logo.png"},
     {"name": "BDCU Alliance Bank", "url": "https://api.cdr.bdcualliancebank.com.au/cds-au/v1"},
     {"name": "Bendigo Bank", "url": "https://api.cdr.bendigobank.com.au/cds-au/v1"},
     {"name": "BOQ", "url": "https://secure.api.boq.com.au/cds-au/v1", "icon": "https://www.boq.com.au/content/dam/boq/images/blog-images/BOQ_png_notagline_stk.png"},
