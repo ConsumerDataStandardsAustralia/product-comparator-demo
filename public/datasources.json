@@ -32,6 +32,7 @@
     {"name": "Northern Inland Credit Union", "url": "https://prd.nicu.com.au/cds-au/v1", "icon": "https://asset.nicu.com.au/images/NICU_logo.png"},
     {"name": "Nova Alliance Bank", "url": "https://api.cdr.novaalliancebank.com.au/cds-au/v1"},
     {"name": "People's Choice", "url": "https://api.peopleschoice.com.au/public/cds-au/v1"},
+    {"name": "Police Bank", "url": "https://product.api.policebank.com.au/cds-au/v1", "icon": "https://www.policebank.com.au/wp-content/uploads/2018/05/PoliceBank_NoTagline_NoPadding_CMYK.png"},
     {"name": "P&N Bank", "url": "https://ob-api.pnbank.com.au/cds-au/v1", "icon": "https://www.pnbank.com.au/Static/Theme/assets/images/pnbank-logo-narrow--7465fe2f1d3e10cf7acfc008991cebef.svg"},
     {"name": "QBANK", "url": "https://banking.qbank.com.au/openbanking/cds-au/v1", "icon": "https://www.qbank.com.au/getmedia/a76807cb-5d38-478a-83d5-b6fc2acc7fa7/QBank_150.png.aspx"},
     {"name": "Rabobank", "url": "https://openbanking.api.rabobank.com.au/cds-au/v1", "icon": "https://www.rabobank.com.au/-/media/rabobank-au/images/logo/RB_logo_stacked_200x242px.png"},
