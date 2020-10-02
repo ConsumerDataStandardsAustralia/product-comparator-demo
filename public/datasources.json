@@ -14,6 +14,7 @@
     {"name": "Circle Alliance Bank", "url": "https://api.cdr.circle.com.au/cds-au/v1"},
     {"name": "Credit Union SA", "url": "https://openbanking.api.creditunionsa.com.au/cds-au/v1", "icon": "https://www.creditunionsa.com.au/globalassets/images/logos/open-banking/cusa-logo_stacked_trans_250px.png"},
     {"name": "Delphi Bank", "url": "https://api.cdr.delphibank.com.au/cds-au/v1"},
+    {"name": "Goldfields Money", "url": "https://prd.bnk.com.au/cds-au/v1", "icon": "https://d26ocd7o1oup8r.cloudfront.net/2020/09/BNK-Online-Banking-Logo-300920.png"},
     {"name": "Greater Bank", "url": "https://public.cdr-api.greater.com.au/cds-au/v1", "icon": "https://www.greater.com.au/media/2356486/greaterbank_openbanking_logo.png"},
     {"name": "Heritage Bank", "url": "https://product.api.heritage.com.au/cds-au/v1"},
     {"name": "ING", "url": "https://apic.ing.com.au/cds-au/v1"},
