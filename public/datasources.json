@@ -35,6 +35,7 @@
     {"name": "Newcastle Permanent Building Society", "url": "https://api.newcastlepermanent.com.au/cds-au/v1", "icon": "https://www.newcastlepermanent.com.au/-/media/images/houselogo.png"},
     {"name": "Northern Inland Credit Union", "url": "https://prd.nicu.com.au/cds-au/v1", "icon": "https://asset.nicu.com.au/images/NICU_logo.png"},
     {"name": "Nova Alliance Bank", "url": "https://api.cdr.novaalliancebank.com.au/cds-au/v1"},
+    {"name": "PayPal", "url": "https://api.paypal.com/v1/identity/cds-au/v1", "icon": "https://www.paypalobjects.com/webstatic/en_US/i/buttons/PP_logo_h_200x51.png"},
     {"name": "People's Choice", "url": "https://api.peopleschoice.com.au/public/cds-au/v1"},
     {"name": "Police Bank", "url": "https://product.api.policebank.com.au/cds-au/v1", "icon": "https://www.policebank.com.au/wp-content/uploads/2018/05/PoliceBank_NoTagline_NoPadding_CMYK.png"},
     {"name": "P&N Bank", "url": "https://ob-api.pnbank.com.au/cds-au/v1", "icon": "https://www.pnbank.com.au/Static/Theme/assets/images/pnbank-logo-narrow--7465fe2f1d3e10cf7acfc008991cebef.svg"},
