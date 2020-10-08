@@ -51,5 +51,6 @@
     {"name": "Traditional Credit Union Limited", "url": "https://prd.tcu.com.au/cds-au/v1", "icon": "https://tcu.com.au/wp-content/uploads/2020/09/TCU_logo_icon.png"},
     {"name": "Unity Bank", "url": "https://ibanking.unitybank.com.au/openbanking/cds-au/v1", "icon": "https://asset.unitybank.com.au/images/Unity-logo-335x115.png"},
     {"name": "Virgin Money Australia", "url": "https://secure.api.virginmoney.com.au/cds-au/v1", "icon": "https://virginmoney.com.au/content/dam/virginmoney/logos/logo_footer.png"},
-    {"name": "Volt Bank", "url": "https://api.voltbank.com.au/cds-au/v1", "icon": "https://openbanking.voltbank.com.au/logos/logo?v=1600930338006"}
+    {"name": "Volt Bank", "url": "https://api.voltbank.com.au/cds-au/v1", "icon": "https://openbanking.voltbank.com.au/logos/logo?v=1600930338006"},
+    {"name": "Xinja Bank", "url": "https://cdr.openbank.api.xinja.com/cds-au/v1", "icon": "https://xinja.com.au/wp-content/uploads/2019/09/xinja-email-logo-grey-pink-400x96.png"}
 ]
