@@ -15,6 +15,7 @@
     {"name": "bcu", "url": "https://ob-api.bcu.com.au/cds-au/v1", "icon": "https://www.bcu.com.au/content-publishers/logo/BCU_Logo_CMYK_200px.png"},
     {"name": "BDCU Alliance Bank", "url": "https://api.cdr.bdcualliancebank.com.au/cds-au/v1"},
     {"name": "Bendigo Bank", "url": "https://api.cdr.bendigobank.com.au/cds-au/v1"},
+    {"name": "Beyond Bank Australia", "url": "https://public.cdr.api.beyondbank.com.au/cds-au/v1", "icon": "https://beyondbank.com.au/dam/document-repository/mpos/Beyond-Logo-RGB.png"},
     {"name": "BOQ", "url": "https://secure.api.boq.com.au/cds-au/v1", "icon": "https://www.boq.com.au/content/dam/boq/images/blog-images/BOQ_png_notagline_stk.png"},
     {"name": "BOQ Specialist", "url": "https://secure.api.boqspecialist.com.au/cds-au/v1", "icon": "https://www.boqspecialist.com.au/content/dam/boqs/images/logo.png"},
     {"name": "Circle Alliance Bank", "url": "https://api.cdr.circle.com.au/cds-au/v1"},
