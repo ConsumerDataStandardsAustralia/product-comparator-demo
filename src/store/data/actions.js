@@ -2,6 +2,8 @@ export const START_RETRIEVE_PRODUCT_LIST = 'START_RETRIEVE_PRODUCT_LIST'
 export const RETRIEVE_PRODUCT_LIST = 'RETRIEVE_PRODUCT_LIST'
 export const RETRIEVE_PRODUCT_DETAIL = 'RETRIEVE_PRODUCT_DETAIL'
 export const RETRIEVE_ALL_PRODUCT_DETAILS = 'RETRIEVE_ALL_PRODUCT_DETAILS'
+export const RETRIEVE_STATUS = 'RETRIEVE_STATUS'
+export const RETRIEVE_OUTAGES = 'RETRIEVE_OUTAGES'
 export const DELETE_DATA = 'DELETE_DATA'
 export const CLEAR_DATA = 'CLEAR_DATA'
 
@@ -72,3 +74,25 @@ export const clearData = (dataSourceIdx) => ({
   type: CLEAR_DATA,
   payload: dataSourceIdx
 })
+
+export const retrieveStatus = (dataSourceIdx, url, xV, xMinV) => {
+  const request = new Request(url + '/discovery/status', {
+    headers: new Headers({...headers, 'x-v': xV, 'x-min-v': xMinV})
+  })
+  return {
+    type: RETRIEVE_STATUS,
+    payload: fetch(request).then(
+        response => response.json()).then(json => ({ord: dataSourceIdx, resp: json}))
+  }
+}
+
+export const retrieveOutages = (dataSourceIdx, url, xV, xMinV) => {
+  const request = new Request(url + '/discovery/outages', {
+    headers: new Headers({...headers, 'x-v': xV, 'x-min-v': xMinV})
+  })
+  return {
+    type: RETRIEVE_OUTAGES,
+    payload: fetch(request).then(
+        response => response.json()).then(json => ({oord: dataSourceIdx, oresp: json}))
+  }
+}
