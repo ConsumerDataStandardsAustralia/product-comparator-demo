@@ -19,6 +19,7 @@
     {"name": "BOQ", "url": "https://secure.api.boq.com.au/cds-au/v1", "icon": "https://www.boq.com.au/content/dam/boq/images/blog-images/BOQ_png_notagline_stk.png"},
     {"name": "BOQ Specialist", "url": "https://secure.api.boqspecialist.com.au/cds-au/v1", "icon": "https://www.boqspecialist.com.au/content/dam/boqs/images/logo.png"},
     {"name": "Circle Alliance Bank", "url": "https://api.cdr.circle.com.au/cds-au/v1"},
+    {"name": "Citibank", "url": "https://aspac.api.citi.com/gcb/cds-au/v1", "icon": "https://https://www.cdn.citibank.com/v1/augcb/cbol/files/images/logos/logo_new.jpg"},
     {"name": "Community First Credit Union", "url": "https://netbank.communityfirst.com.au/cf-openbanking/cds-au/v1", "icon": "https://www.communityfirst.com.au/sites/default/files/ob_logo.png"},
     {"name": "Credit Union SA", "url": "https://openbanking.api.creditunionsa.com.au/cds-au/v1", "icon": "https://www.creditunionsa.com.au/globalassets/images/logos/open-banking/cusa-logo_stacked_trans_250px.png"},
     {"name": "Delphi Bank", "url": "https://api.cdr.delphibank.com.au/cds-au/v1"},
