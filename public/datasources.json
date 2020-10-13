@@ -57,4 +57,5 @@
     {"name": "Virgin Money Australia", "url": "https://secure.api.virginmoney.com.au/cds-au/v1", "icon": "https://virginmoney.com.au/content/dam/virginmoney/logos/logo_footer.png"},
     {"name": "Volt Bank", "url": "https://api.voltbank.com.au/cds-au/v1", "icon": "https://openbanking.voltbank.com.au/logos/logo?v=1600930338006"},
     {"name": "Xinja Bank", "url": "https://cdr.openbank.api.xinja.com/cds-au/v1", "icon": "https://xinja.com.au/wp-content/uploads/2019/09/xinja-email-logo-grey-pink-400x96.png"}
+    {"name": "Bankwest", "url": "https://open-api.bankwest.com.au/bwpublic/cds-au/v1", "icon": "https://www.bankwest.com.au/content/dam/bankwest/web-assets/images/global/logo/logo-bankwest-horizontal-charcoal.png"}
 ]
