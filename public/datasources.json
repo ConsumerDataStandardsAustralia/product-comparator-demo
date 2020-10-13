@@ -12,6 +12,7 @@
     {"name": "Bank Australia", "url": "https://cds.api.bankaust.com.au/cds-au/v1", "icon": "https://www.bankaust.com.au/globalassets/assets/imagery/logos/bank-australia/ba-horizontal-logo.png"},
     {"name": "Bank of China Australia", "url": "https://obdevp.bank-of-china.net.au/cds-au/v1", "icon": "https://www.bankofchina.com/images/boc2013_ovs_logo.png"},
     {"name": "BankVic", "url": "https://ib.bankvic.com.au/openbanking/cds-au/v1", "icon": "https://www.datocms-assets.com/28619/1591331902-bv-x5f-logo-x5f-master-x5f-vert-x5f-cmyk.svg"},
+    {"name": "Bankwest", "url": "https://open-api.bankwest.com.au/bwpublic/cds-au/v1", "icon": "https://www.bankwest.com.au/content/dam/bankwest/web-assets/images/global/logo/logo-bankwest-horizontal-charcoal.png"},
     {"name": "bcu", "url": "https://ob-api.bcu.com.au/cds-au/v1", "icon": "https://www.bcu.com.au/content-publishers/logo/BCU_Logo_CMYK_200px.png"},
     {"name": "BDCU Alliance Bank", "url": "https://api.cdr.bdcualliancebank.com.au/cds-au/v1"},
     {"name": "Bendigo Bank", "url": "https://api.cdr.bendigobank.com.au/cds-au/v1"},
