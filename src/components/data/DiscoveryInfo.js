@@ -61,7 +61,7 @@ const DiscoveryInfo = (props) => {
         savedDataSourcesCount > 0 &&
         <Grid container alignItems='flex-start' spacing={2} className={classes.container}>
           {dataSources.map((dataSource, index) => (
-            !dataSource.unsaved && dataSource.enabled &&
+            !dataSource.unsaved && dataSource.enabled && !dataSource.deleted &&
             <Grid item key={index}
                   xs={getWidth(savedDataSourcesCount, 12)}
                   sm={getWidth(savedDataSourcesCount, 12)}
@@ -82,7 +82,7 @@ const DiscoveryInfo = (props) => {
 
 const mapStateToProps = state=>({
   dataSources : state.dataSources,
-  savedDataSourcesCount: state.dataSources.filter(dataSource => !dataSource.unsaved && dataSource.enabled).length,
+  savedDataSourcesCount: state.dataSources.filter(dataSource => !dataSource.unsaved && !dataSource.deleted && dataSource.enabled).length,
   versionInfo: state.versionInfo
 })
 

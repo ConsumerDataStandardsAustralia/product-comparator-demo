@@ -66,7 +66,7 @@ class DataSourcePanel extends React.Component {
     const handleVersionChange = (xV, xMinV) => {
       this.props.saveVersionInfo({xV: xV, xMinV: xMinV})
       dataSources.forEach((dataSource, dataSourceIndex) => {
-        if (!dataSource.unsaved && dataSource.enabled) {
+        if (!dataSource.unsaved && !dataSource.deleted && dataSource.enabled) {
           this.props.clearSelection(dataSourceIndex)
           this.props.clearData(dataSourceIndex)
           this.props.startRetrieveProductList(dataSourceIndex)
@@ -94,7 +94,8 @@ class DataSourcePanel extends React.Component {
             <Grid item xs={4}><span>Banking product API base url</span></Grid>
             <Grid item xs={3}><span>Icon url</span></Grid>
           </Grid>
-          {dataSources.map((dataSource, index) => <DataSource key={index} dataSource={dataSource} index={index}/>)}
+          {dataSources.map((dataSource, index) =>
+            !dataSource.deleted && <DataSource key={index} dataSource={dataSource} index={index}/>)}
         </div>
         }
         <Divider/>

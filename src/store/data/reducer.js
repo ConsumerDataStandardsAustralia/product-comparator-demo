@@ -33,11 +33,13 @@ export default function(state = [], action) {
       if (s[index].productDetails) {
         const productDetails = [...s[index].productDetails]
         let data = action.payload.response.data
-        if (!!data && productDetails.some(prod => prod.productId === data.productId
-            && prod.productCategory === data.productCategory)) {
-          console.error(`Product with id ${data.productId} already exists in ${data.productCategory}`)
-        } else {
-          productDetails.push(data)
+        if (!!data) {
+          if (productDetails.some(prod => prod.productId === data.productId
+              && prod.productCategory === data.productCategory)) {
+            console.error(`Product with id ${data.productId} already exists in ${data.productCategory}`)
+          } else {
+            productDetails.push(data)
+          }
         }
         s[index] = {
           ...s[index],
@@ -62,7 +64,6 @@ export default function(state = [], action) {
       }
       return s
     case DELETE_DATA:
-      return s.splice(action.payload, 1)
     case CLEAR_DATA:
       s[action.payload] = {}
       return s
