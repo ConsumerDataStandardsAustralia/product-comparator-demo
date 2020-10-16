@@ -100,6 +100,7 @@ export const feeTypeDict = {
   PURCHASE: 'Purchase',
   EVENT: 'Event',
   UPFRONT: 'Upfront',
+  VARIABLE: 'Variable',
   EXIT: 'Exit'
 }
 
