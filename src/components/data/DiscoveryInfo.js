@@ -1,14 +1,21 @@
 import React from 'react'
 import ExpansionPanel from '@material-ui/core/ExpansionPanel'
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary'
+import ExpansionPanelActions from '@material-ui/core/ExpansionPanelActions'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import SubjectIcon from '@material-ui/icons/Subject'
 import Typography from '@material-ui/core/Typography'
 import Grid from '@material-ui/core/Grid'
+import Divider from '@material-ui/core/Divider'
+import RefreshIcon from '@material-ui/icons/Refresh';
+import Fab from '@material-ui/core/Fab'
+import Tooltip from '@material-ui/core/Tooltip'
 import StatusOutages from './StatusOutages'
 import { makeStyles } from '@material-ui/core/styles'
 import { fade } from '@material-ui/core/styles/colorManipulator'
 import { connect } from 'react-redux'
+import { normalise } from '../../utils/url'
+import { retrieveStatus, retrieveOutages } from '../../store/data'
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -46,6 +53,17 @@ const DiscoveryInfo = (props) => {
     return Math.max(12 / dataSourceCount, min)
   }
 
+  const refreshStatusOutages = () => {
+    const { versionInfo } = props
+    props.dataSources.forEach((dataSource, index) => {
+      const url = normalise(dataSource.url)
+      if (!dataSource.unsaved && dataSource.enabled && !dataSource.deleted) {
+        props.retrieveStatus(index, url, versionInfo.xV, versionInfo.xMinV)
+        props.retrieveOutages(index, url, versionInfo.xV, versionInfo.xMinV)
+      }
+    })
+  }
+    
   return (
     <ExpansionPanel defaultExpanded className={classes.panel} expanded={expanded} onChange={toggleExpansion}>
       <ExpansionPanelSummary
@@ -76,6 +94,16 @@ const DiscoveryInfo = (props) => {
         </Grid>
       }
       </div>
+
+      <Divider/>
+
+      <ExpansionPanelActions>
+        <Tooltip title='Refresh'>
+          <Fab size='medium' color='primary' onClick={refreshStatusOutages}>
+            <RefreshIcon/>
+          </Fab>
+        </Tooltip>
+      </ExpansionPanelActions>
     </ExpansionPanel>
   )
 }
@@ -86,4 +114,9 @@ const mapStateToProps = state=>({
   versionInfo: state.versionInfo
 })
 
-export default connect(mapStateToProps)(DiscoveryInfo)
+const mapDispatchToProps = {
+  retrieveStatus,
+  retrieveOutages
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(DiscoveryInfo)
