@@ -26,7 +26,7 @@ export default function(state=[], action) {
       return dataSources
     case DELETE_DATA_SOURCE:
       dataSources = [...state]
-      dataSources.splice(action.index, 1)
+      dataSources[action.index].deleted = true
       persistSavedDataSources(dataSources)
       return dataSources
     case MODIFY_DATA_SOURCE_NAME:
@@ -45,5 +45,6 @@ export default function(state=[], action) {
 }
 
 function persistSavedDataSources(dataSources) {
-  window.localStorage.setItem("cds-banking-prd-ds", JSON.stringify(dataSources.filter(dataSource => !dataSource.unsaved)))
+  window.localStorage.setItem("cds-banking-prd-ds",
+    JSON.stringify(dataSources.filter(dataSource => !dataSource.unsaved && !dataSource.deleted)))
 }

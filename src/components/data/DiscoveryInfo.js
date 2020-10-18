@@ -1,19 +1,21 @@
 import React from 'react'
-import {connect} from 'react-redux'
-import {makeStyles} from '@material-ui/core/styles'
 import ExpansionPanel from '@material-ui/core/ExpansionPanel'
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary'
 import ExpansionPanelActions from '@material-ui/core/ExpansionPanelActions'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import SubjectIcon from '@material-ui/icons/Subject'
 import Typography from '@material-ui/core/Typography'
-import Divider from '@material-ui/core/Divider'
-import CompareIcon from '@material-ui/icons/Compare'
-import { fade } from '@material-ui/core/styles/colorManipulator'
-import Fab from '@material-ui/core/Fab'
 import Grid from '@material-ui/core/Grid'
-import ProductList from './ProductList'
-import { compareProducts } from '../../store/comparison'
+import Divider from '@material-ui/core/Divider'
+import RefreshIcon from '@material-ui/icons/Refresh';
+import Fab from '@material-ui/core/Fab'
+import Tooltip from '@material-ui/core/Tooltip'
+import StatusOutages from './StatusOutages'
+import { makeStyles } from '@material-ui/core/styles'
+import { fade } from '@material-ui/core/styles/colorManipulator'
+import { connect } from 'react-redux'
+import { normalise } from '../../utils/url'
+import { retrieveStatus, retrieveOutages } from '../../store/data'
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -34,27 +36,15 @@ const useStyles = makeStyles(theme => ({
     marginLeft: 'auto',
     marginRight: 'auto',
     marginBottom: 20
-  },
-  button: {
-    margin: theme.spacing(1)
-  },
-  leftIcon: {
-    marginRight: theme.spacing(1),
   }
 }))
 
-const DataPanel = (props) => {
+const DiscoveryInfo = (props) => {
+
   const {dataSources, savedDataSourcesCount} = props
   const classes = useStyles()
   const [expanded, setExpanded] = React.useState(true)
-  const compare = () => {
-    if( /Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
-      alert('The screen size is too small! Please use a bigger screen to compare.')
-      return
-    }
-    props.compareProducts(props.selectedProducts)
-    setExpanded(false)
-  }
+
   const toggleExpansion = (event, newExpanded) => {
     setExpanded(newExpanded)
   }
@@ -63,6 +53,17 @@ const DataPanel = (props) => {
     return Math.max(12 / dataSourceCount, min)
   }
 
+  const refreshStatusOutages = () => {
+    const { versionInfo } = props
+    props.dataSources.forEach((dataSource, index) => {
+      const url = normalise(dataSource.url)
+      if (!dataSource.unsaved && dataSource.enabled && !dataSource.deleted) {
+        props.retrieveStatus(index, url, versionInfo.xV, versionInfo.xMinV)
+        props.retrieveOutages(index, url, versionInfo.xV, versionInfo.xMinV)
+      }
+    })
+  }
+    
   return (
     <ExpansionPanel defaultExpanded className={classes.panel} expanded={expanded} onChange={toggleExpansion}>
       <ExpansionPanelSummary
@@ -70,7 +71,7 @@ const DataPanel = (props) => {
         aria-controls='panel1c-content'
       >
         <div className={classes.heading}>
-          <SubjectIcon/><Typography style={{paddingLeft: 8}}>Products</Typography>
+          <SubjectIcon/><Typography style={{paddingLeft: 8}}>Status &amp; Outages</Typography>
         </div>
       </ExpansionPanelSummary>
       <div className={classes.details}>
@@ -87,20 +88,21 @@ const DataPanel = (props) => {
                   xl={getWidth(savedDataSourcesCount, 3)}
             >
               <div className="title">{!!dataSource.icon && <span><img src={dataSource.icon} alt=""/></span>}<h2>{dataSource.name}</h2></div>
-              <ProductList dataSource={dataSource} dataSourceIndex={index}/>
+              <StatusOutages dataSource={dataSource} dataSourceIndex={index}/>
             </Grid>
           ))}
         </Grid>
       }
       </div>
+
       <Divider/>
+
       <ExpansionPanelActions>
-        <Fab variant='extended' size='medium' color='primary'
-             disabled={props.selectedProducts.length < 2 || props.selectedProducts.length > 4}
-             className={classes.button} onClick={compare}>
-          <CompareIcon className={classes.leftIcon}/>
-          Compare
-        </Fab>
+        <Tooltip title='Refresh'>
+          <Fab size='medium' color='primary' onClick={refreshStatusOutages}>
+            <RefreshIcon/>
+          </Fab>
+        </Tooltip>
       </ExpansionPanelActions>
     </ExpansionPanel>
   )
@@ -109,9 +111,12 @@ const DataPanel = (props) => {
 const mapStateToProps = state=>({
   dataSources : state.dataSources,
   savedDataSourcesCount: state.dataSources.filter(dataSource => !dataSource.unsaved && !dataSource.deleted && dataSource.enabled).length,
-  selectedProducts: state.selection
+  versionInfo: state.versionInfo
 })
 
-const mapDispatchToProps = { compareProducts }
+const mapDispatchToProps = {
+  retrieveStatus,
+  retrieveOutages
+}
 
-export default connect(mapStateToProps, mapDispatchToProps)(DataPanel)
+export default connect(mapStateToProps, mapDispatchToProps)(DiscoveryInfo)

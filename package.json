@@ -14,6 +14,7 @@
     "gh-pages": "^2.0.1",
     "iso8601-duration": "^1.2.0",
     "moment": "^2.24.0",
+    "pluralize": "^8.0.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-redux": "^7.1.0",
