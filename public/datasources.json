@@ -26,6 +26,7 @@
     {"name": "Community First Credit Union", "url": "https://netbank.communityfirst.com.au/cf-openbanking/cds-au/v1", "icon": "https://www.communityfirst.com.au/sites/default/files/ob_logo.png"},
     {"name": "Credit Union SA", "url": "https://openbanking.api.creditunionsa.com.au/cds-au/v1", "icon": "https://www.creditunionsa.com.au/globalassets/images/logos/open-banking/cusa-logo_stacked_trans_250px.png"},
     {"name": "Delphi Bank", "url": "https://api.cdr.delphibank.com.au/cds-au/v1"},
+    {"name": "Defence Bank Limited", "url": "https://product.defencebank.com.au/cds-au/v1", "icon": "https://www.defencebank.com.au/globalassets/images/dblogo/DB_Logo_150x150px.png"},
     {"name": "Easy Street Financial Services", "url": "https://ebranch.easystreet.com.au/es-openbanking/cds-au/v1", "icon": "https://www.easystreet.com.au/sites/default/files/ob_logo.png"},
     {"name": "First Option Bank", "url": "https://internetbanking.firstoption.com.au/OpenBanking/cds-au/v1", "icon": "https://firstoptionbank.com.au/wp-content/uploads/2020/06/FO_Bank_logo_black.png"},
     {"name": "Geelong Bank", "url": "https://online.geelongbank.com.au/OpenBanking/cds-au/v1"},
