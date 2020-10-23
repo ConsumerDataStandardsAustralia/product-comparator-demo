@@ -27,6 +27,7 @@
     {"name": "Credit Union SA", "url": "https://openbanking.api.creditunionsa.com.au/cds-au/v1", "icon": "https://www.creditunionsa.com.au/globalassets/images/logos/open-banking/cusa-logo_stacked_trans_250px.png"},
     {"name": "Delphi Bank", "url": "https://api.cdr.delphibank.com.au/cds-au/v1"},
     {"name": "Easy Street Financial Services", "url": "https://ebranch.easystreet.com.au/es-openbanking/cds-au/v1", "icon": "https://www.easystreet.com.au/sites/default/files/ob_logo.png"},
+    {"name": "First Choice Credit Union", "url": "https://public.cdr-api.firstchoicecu.com.au/cds-au/v1"},
     {"name": "First Option Bank", "url": "https://internetbanking.firstoption.com.au/OpenBanking/cds-au/v1", "icon": "https://firstoptionbank.com.au/wp-content/uploads/2020/06/FO_Bank_logo_black.png"},
     {"name": "Geelong Bank", "url": "https://online.geelongbank.com.au/OpenBanking/cds-au/v1"},
     {"name": "Goldfields Money", "url": "https://prd.bnk.com.au/cds-au/v1", "icon": "https://d26ocd7o1oup8r.cloudfront.net/2020/09/BNK-Online-Banking-Logo-300920.png"},
