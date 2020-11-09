@@ -12,7 +12,16 @@ export default function isUrl(s) {
     nonLocalhostDomainRE.test(lowerCase);
 }
 
+function getLocation(url) {
+  var l = document.createElement("a")
+  l.href = url
+  return l
+}
+
 export function normalise(url) {
-  if (url.endsWith('/')) return url.substr(0, url.length - 1)
+  if (url.endsWith('/')) url = url.substr(0, url.length - 1)
+  if (!url.endsWith('/cds-au/v1') && getLocation(url).hostname !== 'localhost') {
+    url += '/cds-au/v1'
+  }
   return url
 }
