@@ -73,7 +73,7 @@ class ProductList extends React.Component {
 
 const mapStateToProps = state => ({
   productList: state.data,
-  versionInfo: state.versionInfo
+  versionInfo: state.versionInfo.vHeaders
 })
 
 const mapDispatchToProps = {startRetrieveProductList, retrieveProductList}

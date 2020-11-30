@@ -111,7 +111,7 @@ const DiscoveryInfo = (props) => {
 const mapStateToProps = state=>({
   dataSources : state.dataSources,
   savedDataSourcesCount: state.dataSources.filter(dataSource => !dataSource.unsaved && !dataSource.deleted && dataSource.enabled).length,
-  versionInfo: state.versionInfo
+  versionInfo: state.versionInfo.vHeaders
 })
 
 const mapDispatchToProps = {

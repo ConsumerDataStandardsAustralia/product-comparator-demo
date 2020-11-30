@@ -8,8 +8,9 @@
     "lodash.template": "^4.5.0"
   },
   "dependencies": {
-    "@material-ui/core": "^4.1.2",
+    "@material-ui/core": "^4.9.10",
     "@material-ui/icons": "^4.2.1",
+    "@material-ui/lab": "^4.0.0-alpha.56",
     "clsx": "^1.0.4",
     "gh-pages": "^2.0.1",
     "iso8601-duration": "^1.2.0",
@@ -18,7 +19,7 @@
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-redux": "^7.1.0",
-    "react-scripts": "^3.4.0",
+    "react-scripts": "^4.0.1",
     "redux": "^4.0.1",
     "redux-logger": "^3.0.6",
     "redux-promise-middleware": "^6.1.1",

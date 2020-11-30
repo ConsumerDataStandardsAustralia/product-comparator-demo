@@ -6,6 +6,9 @@ import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary'
 import ExpansionPanelActions from '@material-ui/core/ExpansionPanelActions'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import SyncIcon from '@material-ui/icons/Sync'
+import EditIcon from '@material-ui/icons/Edit'
+import DoneOutlineIcon from '@material-ui/icons/DoneOutline'
+import IconButton from '@material-ui/core/IconButton'
 import AccountBalanceIcon from '@material-ui/icons/AccountBalance'
 import Typography from '@material-ui/core/Typography'
 import Divider from '@material-ui/core/Divider'
@@ -13,10 +16,10 @@ import PlayListAddIcon from '@material-ui/icons/PlaylistAdd'
 import Grid from '@material-ui/core/Grid'
 import DataSource from './DataSource'
 import TextField from '@material-ui/core/TextField'
-import MenuItem from '@material-ui/core/MenuItem'
+import Autocomplete from '@material-ui/lab/Autocomplete'
 import { fade } from '@material-ui/core/styles/colorManipulator'
 import { loadDataSource, addDataSource, syncDataSources } from '../../store/data-source'
-import { loadVersionInfo, saveVersionInfo } from '../../store/version-info'
+import { loadVersionInfo, saveVersionInfo, setVersionsEditable, setVersionsReadOnly } from '../../store/version-info'
 import { startRetrieveProductList, retrieveProductList } from '../../store/data'
 import { clearSelection} from '../../store/selection'
 import { clearData } from '../../store/data'
@@ -60,20 +63,25 @@ class DataSourcePanel extends React.Component {
   }
 
   render() {
-    const {classes, dataSources, addDataSource, syncDataSources, versionInfo} = this.props
-    const versions = [1, 2, 3]
+    const {classes, dataSources, addDataSource, syncDataSources, vHeaders} = this.props
+    const versions = ['1', '2', '3']
+    let {xV, xMinV} = vHeaders
 
-    const handleVersionChange = (xV, xMinV) => {
-      this.props.saveVersionInfo({xV: xV, xMinV: xMinV})
-      dataSources.forEach((dataSource, dataSourceIndex) => {
-        if (!dataSource.unsaved && !dataSource.deleted && dataSource.enabled) {
-          this.props.clearSelection(dataSourceIndex)
-          this.props.clearData(dataSourceIndex)
-          this.props.startRetrieveProductList(dataSourceIndex)
-          const normalisedUrl = normalise(dataSource.url)
-          this.props.retrieveProductList(dataSourceIndex, normalisedUrl, normalisedUrl + '/banking/products', xV, xMinV)
-        }
-      })
+    const updateVersions = () => {
+      if (xV && xMinV && (xV !== vHeaders.xV || xMinV !== vHeaders.xMinV)) {
+        this.props.saveVersionInfo({xV, xMinV})
+        dataSources.forEach((dataSource, dataSourceIndex) => {
+          if (!dataSource.unsaved && !dataSource.deleted && dataSource.enabled) {
+            this.props.clearSelection(dataSourceIndex)
+            this.props.clearData(dataSourceIndex)
+            this.props.startRetrieveProductList(dataSourceIndex)
+            const normalisedUrl = normalise(dataSource.url)
+            this.props.retrieveProductList(dataSourceIndex, normalisedUrl, normalisedUrl + '/banking/products', xV, xMinV)
+          }
+        })
+      } else {
+        this.props.setVersionsReadOnly()
+      }
     }
 
     return (
@@ -109,36 +117,47 @@ class DataSourcePanel extends React.Component {
               </Tooltip>
             </Grid>
             <Grid item xs={10}>
+              {this.props.readOnly ?
               <div className={classes.version}>
-                <TextField
-                  id="xV"
-                  select
-                  label="x-v"
-                  value={versionInfo.xV}
-                  onChange={event => handleVersionChange(event.target.value, versionInfo.xMinV)}
-                  helperText="Preferred version"
-                >
-                  {versions.map(option => (
-                    <MenuItem key={option} value={option}>
-                      {option}
-                    </MenuItem>
-                  ))}
-                </TextField>
-                <TextField
-                  id="xMinV"
-                  select
-                  label="x-min-v"
-                  value={versionInfo.xMinV}
-                  onChange={event => handleVersionChange(versionInfo.xV, event.target.value)}
-                  helperText="Minimal acceptable version"
-                >
-                  {versions.map((option) => (
-                    <MenuItem key={option} value={option}>
-                      {option}
-                    </MenuItem>
-                  ))}
-                </TextField>
+                <TextField value={xV} label="x-v" helperText="Preferred version"  inputProps={{readOnly: true}} />
+                <TextField value={xMinV} label="x-min-v" helperText="Minimal acceptable version"  inputProps={{readOnly: true}} />
+                <IconButton color="primary" style={{marginTop: 20}} onClick={this.props.setVersionsEditable}>
+                  <Tooltip title="Change x-v, x-min-v">
+                    <EditIcon />
+                  </Tooltip>
+                </IconButton>
               </div>
+              :
+              <div className={classes.version}>
+                <Autocomplete
+                  id="xV"
+                  freeSolo
+                  options={versions}
+                  value={xV}
+                  renderInput={params => (
+                    <TextField {...params} label="x-v" helperText="Preferred version"/>
+                  )}
+                  onInputChange={(ev, value) => xV = value}
+                  style={{display: 'inline'}}
+                />
+                <Autocomplete
+                  id="xMinV"
+                  freeSolo
+                  options={versions}
+                  value={xMinV}
+                  renderInput={params => (
+                    <TextField {...params} label="x-min-v" helperText="Minimal acceptable version"/>
+                  )}
+                  onInputChange={(ev, value) => xMinV = value}
+                  style={{display: 'inline'}}
+                />
+                <IconButton color="primary" style={{marginTop: 20}} onClick={updateVersions}>
+                  <Tooltip title="Apply x-v, x-min-v">
+                    <DoneOutlineIcon />
+                  </Tooltip>
+                </IconButton>
+              </div>
+              }
             </Grid>
             <Grid item xs={1} style={{textAlign: 'end'}}>
               <Tooltip title='Add'>
@@ -156,7 +175,8 @@ class DataSourcePanel extends React.Component {
 
 const mapStateToProps = state => ({
   dataSources: state.dataSources,
-  versionInfo: state.versionInfo
+  vHeaders: state.versionInfo.vHeaders,
+  readOnly: !state.versionInfo.editable
 })
 
 const mapDispatchToProps = {
@@ -165,6 +185,8 @@ const mapDispatchToProps = {
   syncDataSources,
   loadVersionInfo,
   saveVersionInfo,
+  setVersionsEditable,
+  setVersionsReadOnly,
   startRetrieveProductList,
   retrieveProductList,
   clearSelection,
