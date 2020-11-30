@@ -1,7 +1,7 @@
 import React from 'react'
-import ExpansionPanel from '@material-ui/core/ExpansionPanel'
-import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary'
-import ExpansionPanelActions from '@material-ui/core/ExpansionPanelActions'
+import Accordion from '@material-ui/core/Accordion'
+import AccordionSummary from '@material-ui/core/AccordionSummary'
+import AccordionActions from '@material-ui/core/AccordionActions'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import SubjectIcon from '@material-ui/icons/Subject'
 import Typography from '@material-ui/core/Typography'
@@ -65,15 +65,15 @@ const DiscoveryInfo = (props) => {
   }
     
   return (
-    <ExpansionPanel defaultExpanded className={classes.panel} expanded={expanded} onChange={toggleExpansion}>
-      <ExpansionPanelSummary
+    <Accordion defaultExpanded className={classes.panel} expanded={expanded} onChange={toggleExpansion}>
+      <AccordionSummary
         expandIcon={<ExpandMoreIcon/>}
         aria-controls='panel1c-content'
       >
         <div className={classes.heading}>
           <SubjectIcon/><Typography style={{paddingLeft: 8}}>Status &amp; Outages</Typography>
         </div>
-      </ExpansionPanelSummary>
+      </AccordionSummary>
       <div className={classes.details}>
       {
         savedDataSourcesCount > 0 &&
@@ -97,14 +97,14 @@ const DiscoveryInfo = (props) => {
 
       <Divider/>
 
-      <ExpansionPanelActions>
+      <AccordionActions>
         <Tooltip title='Refresh'>
           <Fab size='medium' color='primary' onClick={refreshStatusOutages}>
             <RefreshIcon/>
           </Fab>
         </Tooltip>
-      </ExpansionPanelActions>
-    </ExpansionPanel>
+      </AccordionActions>
+    </Accordion>
   )
 }
 

@@ -1,9 +1,9 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {withStyles} from '@material-ui/core/styles'
-import ExpansionPanel from '@material-ui/core/ExpansionPanel'
-import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary'
-import ExpansionPanelActions from '@material-ui/core/ExpansionPanelActions'
+import Accordion from '@material-ui/core/Accordion'
+import AccordionSummary from '@material-ui/core/AccordionSummary'
+import AccordionActions from '@material-ui/core/AccordionActions'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import SyncIcon from '@material-ui/icons/Sync'
 import EditIcon from '@material-ui/icons/Edit'
@@ -85,15 +85,15 @@ class DataSourcePanel extends React.Component {
     }
 
     return (
-      <ExpansionPanel defaultExpanded={false} className={classes.panel}>
-        <ExpansionPanelSummary
+      <Accordion defaultExpanded={false} className={classes.panel}>
+        <AccordionSummary
           expandIcon={<ExpandMoreIcon/>}
           aria-controls='panel1c-content'
         >
           <div className={classes.heading}>
             <AccountBalanceIcon/><Typography  style={{paddingLeft: 8}}>Banks</Typography>
           </div>
-        </ExpansionPanelSummary>
+        </AccordionSummary>
         { dataSources.length > 0 &&
         <div className={classes.details}>
           <Grid container spacing={1} style={{fontSize: 'smaller', fontStyle: 'italic'}}>
@@ -107,7 +107,7 @@ class DataSourcePanel extends React.Component {
         </div>
         }
         <Divider/>
-        <ExpansionPanelActions>
+        <AccordionActions>
           <Grid container alignItems="center">
             <Grid item xs={1}>
               <Tooltip title='Synchronise'>
@@ -167,8 +167,8 @@ class DataSourcePanel extends React.Component {
               </Tooltip>
             </Grid>
           </Grid>
-        </ExpansionPanelActions>
-      </ExpansionPanel>
+        </AccordionActions>
+      </Accordion>
     )
   }
 }

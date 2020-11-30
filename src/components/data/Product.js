@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import MuiExpansionPanel from '@material-ui/core/ExpansionPanel'
-import MuiExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary'
+import MuiAccordion from '@material-ui/core/Accordion'
+import MuiAccordionSummary from '@material-ui/core/AccordionSummary'
 import {makeStyles, withStyles} from '@material-ui/core'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import Typography from '@material-ui/core/Typography'
@@ -42,7 +42,7 @@ const useStyles = makeStyles(() => ({
   }
 }))
 
-const ExpansionPanel = withStyles({
+const Accordion = withStyles({
   root: {
     width: '100%',
     backgroundColor: 'transparent',
@@ -58,9 +58,9 @@ const ExpansionPanel = withStyles({
     },
   },
   expanded: {},
-})(MuiExpansionPanel)
+})(MuiAccordion)
 
-const ExpansionPanelSummary = withStyles({
+const AccordionSummary = withStyles({
   root: {
     paddingLeft: 0,
     paddingRight: 24,
@@ -87,7 +87,7 @@ const ExpansionPanelSummary = withStyles({
     }
   },
   expanded: {},
-})(MuiExpansionPanelSummary)
+})(MuiAccordionSummary)
 
 const Product = (props) => {
   const classes = useStyles()
@@ -105,13 +105,13 @@ const Product = (props) => {
       onChange={handleChange}
       color='primary'
     />
-    <ExpansionPanel defaultExpanded={false}>
-      <ExpansionPanelSummary
+    <Accordion defaultExpanded={false}>
+      <AccordionSummary
         expandIcon={<ExpandMoreIcon/>}
         aria-controls='panel1c-content'
       >
         <Typography style={{fontSize: '0.8rem'}}>{product.name}</Typography>
-      </ExpansionPanelSummary>
+      </AccordionSummary>
       <div style={{fontSize: '0.8rem'}}>
         <div>{product.description}</div>
         <div>Brand: {product.brand} {!!product.bandName && <span>({product.bandName})</span>}</div>
@@ -209,7 +209,7 @@ const Product = (props) => {
           </div>
         }
       </div>
-    </ExpansionPanel>
+    </Accordion>
     </div>
   )
 }
