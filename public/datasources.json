@@ -54,7 +54,6 @@
     {"name": "P&N Bank", "url": "https://ob-api.pnbank.com.au", "icon": "https://www.pnbank.com.au/Static/Theme/assets/images/pnbank-logo-narrow--7465fe2f1d3e10cf7acfc008991cebef.svg"},
     {"name": "QBANK", "url": "https://banking.qbank.com.au/openbanking", "icon": "https://www.qbank.com.au/getmedia/a76807cb-5d38-478a-83d5-b6fc2acc7fa7/QBank_150.png.aspx"},
     {"name": "Rabobank", "url": "https://openbanking.api.rabobank.com.au", "icon": "https://www.rabobank.com.au/-/media/rabobank-au/images/logo/RB_logo_stacked_200x242px.png"},
-    {"name": "RACQ Bank", "url": "https://api2.racq.com.au/external", "icon": "https://cdn.intelligencebank.com/au/share/0Mvj/Y0GpK/RqBJZ/original/RACQ-BANK-LOGO_HOR_RGB.png"},
     {"name": "Regional Australia Bank", "url": "https://public-data.cdr.regaustbank.io", "icon": "https://www.regionalaustraliabank.com.au/-/media/CommunityMutual/Images/Logo/regional-australia-bank-primary-logo.png"},
     {"name": "Rural Bank", "url": "https://api.cdr.ruralbank.com.au"},
     {"name": "Service One Alliance Bank", "url": "https://api.cdr.serviceone.com.au"},
