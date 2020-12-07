@@ -11,7 +11,7 @@ import {
 } from './actions'
 import {fulfilled} from '../../utils/async-actions'
 
-export default function(state=[], action) {
+export default function dataSources(state=[], action) {
   switch (action.type) {
     case fulfilled(LOAD_DATA_SOURCE):
       return action.payload

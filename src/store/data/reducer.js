@@ -9,7 +9,7 @@ import {
 } from './actions'
 import {fulfilled} from '../../utils/async-actions'
 
-export default function(state = [], action) {
+export default function data(state = [], action) {
   const s = [...state]
   switch (action.type) {
     case START_RETRIEVE_PRODUCT_LIST:

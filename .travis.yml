@@ -8,7 +8,7 @@ script:
   - yarn build
 deploy:
   provider: pages
-  skip_cleanup: true
+  skip_cleanup: false
   github_token: $github_token
   local_dir: build
   on:

@@ -1,6 +1,6 @@
 import {SELECT_PRODUCT, DESELECT_PRODUCT, CLEAR_SELECTION} from './actions'
 
-export default function(state = [], action) {
+export default function selection(state = [], action) {
     switch (action.type) {
         case SELECT_PRODUCT:
             return [...state, action.payload]

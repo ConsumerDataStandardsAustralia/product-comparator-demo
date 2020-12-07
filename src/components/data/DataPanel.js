@@ -1,9 +1,9 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {makeStyles} from '@material-ui/core/styles'
-import ExpansionPanel from '@material-ui/core/ExpansionPanel'
-import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary'
-import ExpansionPanelActions from '@material-ui/core/ExpansionPanelActions'
+import Accordion from '@material-ui/core/Accordion'
+import AccordionSummary from '@material-ui/core/AccordionSummary'
+import AccordionActions from '@material-ui/core/AccordionActions'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import SubjectIcon from '@material-ui/icons/Subject'
 import Typography from '@material-ui/core/Typography'
@@ -64,15 +64,15 @@ const DataPanel = (props) => {
   }
 
   return (
-    <ExpansionPanel defaultExpanded className={classes.panel} expanded={expanded} onChange={toggleExpansion}>
-      <ExpansionPanelSummary
+    <Accordion defaultExpanded className={classes.panel} expanded={expanded} onChange={toggleExpansion}>
+      <AccordionSummary
         expandIcon={<ExpandMoreIcon/>}
         aria-controls='panel1c-content'
       >
         <div className={classes.heading}>
           <SubjectIcon/><Typography style={{paddingLeft: 8}}>Products</Typography>
         </div>
-      </ExpansionPanelSummary>
+      </AccordionSummary>
       <div className={classes.details}>
       {
         savedDataSourcesCount > 0 &&
@@ -94,15 +94,15 @@ const DataPanel = (props) => {
       }
       </div>
       <Divider/>
-      <ExpansionPanelActions>
+      <AccordionActions>
         <Fab variant='extended' size='medium' color='primary'
              disabled={props.selectedProducts.length < 2 || props.selectedProducts.length > 4}
              className={classes.button} onClick={compare}>
           <CompareIcon className={classes.leftIcon}/>
           Compare
         </Fab>
-      </ExpansionPanelActions>
-    </ExpansionPanel>
+      </AccordionActions>
+    </Accordion>
   )
 }
 

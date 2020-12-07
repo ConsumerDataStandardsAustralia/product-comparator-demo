@@ -77,7 +77,7 @@ const Interval = props => {
 }
 
 const mapStateToProps = state => ({
-  versionInfo: state.versionInfo,
+  versionInfo: state.versionInfo.vHeaders,
   data: state.data
 })
 
