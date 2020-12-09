@@ -1,7 +1,7 @@
 import React from 'react'
 import RateTier from './RateTier'
+import Duration from './Duration'
 import {translateDepositRateType} from '../../utils/dict'
-import * as moment from 'moment'
 import {makeStyles} from '@material-ui/core'
 import ecomp from '../../utils/enum-comp'
 
@@ -35,7 +35,7 @@ const DepositRate = (props) => {
         {translateDepositRateType(depositRateType)}
         {
           (depositRateType === 'FIXED' || depositRateType === 'INTRODUCTORY') && !!additionalValue &&
-          <span> - {moment.duration(additionalValue).humanize().replace('a ', 'every ')}</span>
+          <span> - every <Duration value={additionalValue}/></span>
         }
         {
           ( depositRateType === 'BONUS' ||
@@ -45,8 +45,8 @@ const DepositRate = (props) => {
           <span> - {additionalValue}</span>
         }
       </div>
-      {!!calculationFrequency && <div>Calculated {moment.duration(calculationFrequency).humanize().replace('a ', 'every ')}</div>}
-      {!!applicationFrequency && <div>Applied {moment.duration(applicationFrequency).humanize().replace('a ', 'every ')}</div>}
+      {!!calculationFrequency && <div>Calculated every <Duration value={calculationFrequency}/></div>}
+      {!!applicationFrequency && <div>Applied every <Duration value={applicationFrequency}/></div>}
       {
         !!tiers && tiers.length > 0 &&
           <div>
