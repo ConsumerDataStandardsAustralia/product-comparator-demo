@@ -1,7 +1,7 @@
 import React from 'react'
 import RateTier from './RateTier'
+import Duration from './Duration'
 import {translateInterestPaymentDue, translateLendingRateType, translateRepaymentType} from '../../utils/dict'
-import * as moment from 'moment'
 import ecomp from '../../utils/enum-comp'
 import {makeStyles} from '@material-ui/core'
 
@@ -40,7 +40,7 @@ const LendingRate = (props) => {
         {translateLendingRateType(lendingRateType)}
         {
           (lendingRateType === 'FIXED' || lendingRateType === 'INTRODUCTORY') && !!additionalValue &&
-          <span> - {moment.duration(additionalValue).humanize().replace('a ', 'every ')}</span>
+          <span> - every <Duration value={additionalValue}/></span>
         }
         {
           ( lendingRateType === 'DISCOUNT' ||
@@ -57,8 +57,8 @@ const LendingRate = (props) => {
           <span> - {additionalValue}</span>
         }
       </div>
-      {!!calculationFrequency && <div>Calculated {moment.duration(calculationFrequency).humanize().replace('a ', 'every ')}</div>}
-      {!!applicationFrequency && <div>Applied {moment.duration(applicationFrequency).humanize().replace('a ', 'every ')}</div>}
+      {!!calculationFrequency && <div>Calculated every <Duration value={calculationFrequency}/></div>}
+      {!!applicationFrequency && <div>Applied every <Duration value={applicationFrequency}/></div>}
       {!!interestPaymentDue && <div>Interest Payment {translateInterestPaymentDue(interestPaymentDue)}</div>}
       {!!repaymentType && <div>Repayment Type {translateRepaymentType(repaymentType)}</div>}
       {!!loanPurpose && <div>Loan Purpose {loanPurpose}</div>}

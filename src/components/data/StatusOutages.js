@@ -1,7 +1,6 @@
 import React from 'react'
-import pluralize from 'pluralize'
 import DateTime from './DateTime'
-import { parse } from 'iso8601-duration'
+import Duration from './Duration'
 import { connect } from 'react-redux'
 import { normalise } from '../../utils/url'
 import { retrieveStatus, retrieveOutages } from '../../store/data'
@@ -53,29 +52,16 @@ class StatusOutages extends React.Component {
 
 const Outage = props => {
   const { outage } = props
-  const duration = parse(outage.duration)
   return (
     <li>
       <div>Outage Time: <DateTime rfc3339={outage.outageTime}/></div>
-      <div>Planned Duration:
-        <Interval num={duration.years} unit='year'/>
-        <Interval num={duration.months} unit='month'/>
-        <Interval num={duration.days} unit='day'/>
-        <Interval num={duration.hours} unit='hour'/>
-        <Interval num={duration.minutes} unit='minute'/>
-        <Interval num={duration.seconds} unit='second'/>
+      <div>Planned Duration: <Duration value={outage.duration}/>
       </div>
       {!!outage.isPartial && <div>Partial: {outage.isPartial}</div>}
       <div>&laquo;{outage.explanation}&raquo;</div>
     </li>
   )
 }
-
-const Interval = props => {
-  const { unit, num } = props
-  return !!num && <span> {num} {pluralize(unit, num)}</span>
-}
-
 const mapStateToProps = state => ({
   versionInfo: state.versionInfo.vHeaders,
   data: state.data
