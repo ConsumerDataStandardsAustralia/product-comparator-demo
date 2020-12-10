@@ -35,7 +35,7 @@ const DepositRate = (props) => {
         {translateDepositRateType(depositRateType)}
         {
           (depositRateType === 'FIXED' || depositRateType === 'INTRODUCTORY') && !!additionalValue &&
-          <span> - every <Duration value={additionalValue}/></span>
+          <span> - <Duration prefix="every" value={additionalValue}/></span>
         }
         {
           ( depositRateType === 'BONUS' ||
@@ -45,8 +45,8 @@ const DepositRate = (props) => {
           <span> - {additionalValue}</span>
         }
       </div>
-      {!!calculationFrequency && <div>Calculated every <Duration value={calculationFrequency}/></div>}
-      {!!applicationFrequency && <div>Applied every <Duration value={applicationFrequency}/></div>}
+      {!!calculationFrequency && <div>Calculated <Duration prefix="every" value={calculationFrequency}/></div>}
+      {!!applicationFrequency && <div>Applied <Duration prefix="every" value={applicationFrequency}/></div>}
       {
         !!tiers && tiers.length > 0 &&
           <div>

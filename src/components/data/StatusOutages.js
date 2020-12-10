@@ -55,8 +55,7 @@ const Outage = props => {
   return (
     <li>
       <div>Outage Time: <DateTime rfc3339={outage.outageTime}/></div>
-      <div>Planned Duration: <Duration value={outage.duration}/>
-      </div>
+      {!!outage.duration && <div>Planned Duration: <Duration value={outage.duration}/></div>}
       {!!outage.isPartial && <div>Partial: {outage.isPartial}</div>}
       <div>&laquo;{outage.explanation}&raquo;</div>
     </li>

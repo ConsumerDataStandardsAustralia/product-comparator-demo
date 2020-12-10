@@ -40,7 +40,7 @@ const LendingRate = (props) => {
         {translateLendingRateType(lendingRateType)}
         {
           (lendingRateType === 'FIXED' || lendingRateType === 'INTRODUCTORY') && !!additionalValue &&
-          <span> - every <Duration value={additionalValue}/></span>
+          <span> - <Duration prefix="every" value={additionalValue}/></span>
         }
         {
           ( lendingRateType === 'DISCOUNT' ||
@@ -57,8 +57,8 @@ const LendingRate = (props) => {
           <span> - {additionalValue}</span>
         }
       </div>
-      {!!calculationFrequency && <div>Calculated every <Duration value={calculationFrequency}/></div>}
-      {!!applicationFrequency && <div>Applied every <Duration value={applicationFrequency}/></div>}
+      {!!calculationFrequency && <div>Calculated <Duration prefix="every" value={calculationFrequency}/></div>}
+      {!!applicationFrequency && <div>Applied <Duration prefix="every" value={applicationFrequency}/></div>}
       {!!interestPaymentDue && <div>Interest Payment {translateInterestPaymentDue(interestPaymentDue)}</div>}
       {!!repaymentType && <div>Repayment Type {translateRepaymentType(repaymentType)}</div>}
       {!!loanPurpose && <div>Loan Purpose {loanPurpose}</div>}

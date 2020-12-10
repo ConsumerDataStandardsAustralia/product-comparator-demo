@@ -50,7 +50,7 @@ const Feature = (props) => {
         }
         {
           (featureType === 'INTEREST_FREE' || featureType === 'INTEREST_FREE_TRANSFERS') &&
-          <span> - every <Duration value={additionalValue}/></span>
+          <span> - <Duration prefix="every" value={additionalValue}/></span>
         }
         {featureType === 'FREE_TXNS_ALLOWANCE' && <span> - ${additionalValue}</span>}
       </div>

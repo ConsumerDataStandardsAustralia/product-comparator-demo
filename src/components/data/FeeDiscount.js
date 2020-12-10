@@ -48,7 +48,7 @@ const FeeDiscount = (props) => {
         }
         {
           discountType === 'FEE_CAP' &&
-          <span> - every <Duration value={additionalValue}/></span>
+          <span> - <Duration prefix="every" value={additionalValue}/></span>
         }
       </div>
       <div>{description}</div>
