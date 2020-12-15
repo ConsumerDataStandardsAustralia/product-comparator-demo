@@ -20,7 +20,7 @@
     {"name": "Beyond Bank Australia", "url": "https://public.cdr.api.beyondbank.com.au", "icon": "https://beyondbank.com.au/dam/document-repository/mpos/Beyond-Logo-RGB.png"},
     {"name": "BOQ", "url": "https://secure.api.boq.com.au", "icon": "https://www.boq.com.au/content/dam/boq/images/blog-images/BOQ_png_notagline_stk.png"},
     {"name": "BOQ Specialist", "url": "https://secure.api.boqspecialist.com.au", "icon": "https://www.boqspecialist.com.au/content/dam/boqs/images/logo.png"},
-    {"name": "Cairns Bank", "url": "https://ibanking.cairnsbank.com.au/openbanking-penny"},
+    {"name": "Cairns Bank", "url": "https://ibanking.cairnsbank.com.au/openbanking-penny", "icon": "https://cairnsbank.com.au/fileadmin/templates/assets/images/cairns-bank-logo.png"},
     {"name": "The Capricornian Ltd", "url": "https://onlinebanking.capricornian.com.au/OpenBanking", "icon": "https://www.capricornian.com.au/wp-content/themes/capricornian/images/capricornian-logo.png"},
     {"name": "Circle Alliance Bank", "url": "https://api.cdr.circle.com.au"},
     {"name": "Citibank", "url": "https://aspac.api.citi.com/gcb", "icon": "https://www.cdn.citibank.com/v1/augcb/cbol/files/images/logos/logo_new.jpg"},
