@@ -34,6 +34,7 @@
     {"name": "Credit Union SA", "url": "https://openbanking.api.creditunionsa.com.au", "icon": "https://www.creditunionsa.com.au/globalassets/images/logos/open-banking/cusa-logo_stacked_trans_250px.png"},
     {"name": "Defence Bank Limited", "url": "https://product.defencebank.com.au", "icon": "https://www.defencebank.com.au/globalassets/images/dblogo/DB_Logo_150x150px.png"},
     {"name": "Delphi Bank", "url": "https://api.cdr.delphibank.com.au"},
+    {"name": "Dnister Ukrainian Credit Co-operative", "url": "https://public.cdr-api.dnister.com.au"},
     {"name": "Easy Street Financial Services", "url": "https://ebranch.easystreet.com.au/es-openbanking", "icon": "https://www.easystreet.com.au/sites/default/files/ob_logo.png"},
     {"name": "Endeavour Mutual Bank", "url": "https://netbank.endeavour.bank/openbankingesb"},
     {"name": "Family First Credit Union", "url": "https://online.familyfirst.com.au/OpenBanking"},
