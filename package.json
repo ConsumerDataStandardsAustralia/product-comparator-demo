@@ -5,7 +5,8 @@
   "private": true,
   "resolutions": {
     "lodash": "^4.17.14",
-    "lodash.template": "^4.5.0"
+    "lodash.template": "^4.5.0",
+    "immer": "^8.0.1"
   },
   "dependencies": {
     "@material-ui/core": "^4.9.10",
@@ -26,6 +27,7 @@
     "redux-thunk": "^2.3.0"
   },
   "scripts": {
+    "preinstall": "npx npm-force-resolutions",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
