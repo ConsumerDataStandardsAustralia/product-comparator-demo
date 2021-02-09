@@ -30,7 +30,7 @@
     {"name": "Citibank", "url": "https://aspac.api.citi.com/gcb", "icon": "https://www.cdn.citibank.com/v1/augcb/cbol/files/images/logos/logo_new.jpg"},
     {"name": "Coastline Credit Union", "url": "https://public.cdr-api.coastline.com.au"},
     {"name": "Community First Credit Union", "url": "https://netbank.communityfirst.com.au/cf-openbanking", "icon": "https://www.communityfirst.com.au/sites/default/files/ob_logo.png"},
-    {"name": "Credit Union Australia","url": "https://openbanking.apiext.cua.com.au"},
+    {"name": "Credit Union Australia","url": "https://openbanking.apiext.cua.com.au", "icon": "https://www.cua.com.au/_media/images/hidden/ACCC_y723gAyZx8/CUA_Logo_RGB_2020.png"}, 
     {"name": "Credit Union SA", "url": "https://openbanking.api.creditunionsa.com.au", "icon": "https://www.creditunionsa.com.au/globalassets/images/logos/open-banking/cusa-logo_stacked_trans_250px.png"},
     {"name": "Defence Bank Limited", "url": "https://product.defencebank.com.au", "icon": "https://www.defencebank.com.au/globalassets/images/dblogo/DB_Logo_150x150px.png"},
     {"name": "Delphi Bank", "url": "https://api.cdr.delphibank.com.au"},
