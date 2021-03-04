@@ -82,7 +82,7 @@
     {"name": "South West Slopes Credit Union", "url": "https://online.swscu.com.au/OpenBanking"},
     {"name": "Southern Cross Credit Union", "url": "https://mvp1.sccu.com.au/OpenBanking"},
     {"name": "Summerland Credit Union", "url": "https://public.cdr-api.summerland.com.au"},
-    {"name": "Suncorp", "url": "https://api-pub-cdr.suncorpbank.com.au", "icon": "https://suncorp.com.au/content/dam/suncorp/corporate/images/logos/Suncorp_New_Logo.png"},
+    {"name": "Suncorp", "url": "https://prd.suncorpbank.com.au", "icon": "https://suncorp.com.au/content/dam/suncorp/corporate/images/logos/Suncorp_New_Logo.png"},
     {"name": "Sydney Mutual Bank", "url": "https://internetbanking.sydneymutual.bank/openbankingscu"},
     {"name": "Teachers Mutual Bank", "url": "https://ob.tmbl.com.au/tmbank"},
     {"name": "The Mac Credit Union", "url": "https://onlinebanking.themaccu.com.au/OpenBanking"},
