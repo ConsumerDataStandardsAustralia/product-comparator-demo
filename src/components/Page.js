@@ -1,6 +1,7 @@
 import React from 'react'
 import DataSourcePanel from './data-source/DataSourcePanel'
 import DataPanel from './data/DataPanel'
+import ConsolePanel from './data/ConsolePanel'
 import Header from './header'
 import { Container } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
@@ -28,6 +29,7 @@ function Page() {
     <Container maxWidth={false}>
       <Header title='Banking Products Comparator (demo)'/>
       <DataSourcePanel/>
+      <ConsolePanel/>
       <AppBar position="static" style={{marginTop: 8, marginBottom: 8}}>
         <Tabs value={value} onChange={handleChange}>
           <Tab label="Products" />

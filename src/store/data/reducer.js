@@ -29,23 +29,20 @@ export default function data(state = [], action) {
       }
       return s
     case fulfilled(RETRIEVE_PRODUCT_DETAIL):
-      const index = action.payload.idx
-      if (s[index].productDetails) {
-        const productDetails = [...s[index].productDetails]
-        let data = action.payload.response.data
-        if (!!data) {
-          if (productDetails.some(prod => prod.productId === data.productId
-              && prod.productCategory === data.productCategory)) {
-            console.error(`Product with id ${data.productId} already exists in ${data.productCategory}`)
-          } else {
+      if (action.payload) {
+        const index = action.payload.idx
+        if (s[index].productDetails) {
+          const productDetails = [...s[index].productDetails]
+          let data = action.payload.response.data
+          if (!!data) {
             productDetails.push(data)
           }
-        }
-        s[index] = {
-          ...s[index],
-          detailRecords: s[index].detailRecords + (data ? 1 : 0),
-          failedDetailRecords: s[index].failedDetailRecords + (data ? 0 : 1),
-          productDetails: productDetails
+          s[index] = {
+            ...s[index],
+            detailRecords: s[index].detailRecords + (data ? 1 : 0),
+            failedDetailRecords: s[index].failedDetailRecords + (data ? 0 : 1),
+            productDetails: productDetails
+          }
         }
       }
       return s
