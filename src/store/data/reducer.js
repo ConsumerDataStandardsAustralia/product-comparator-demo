@@ -47,17 +47,21 @@ export default function data(state = [], action) {
       }
       return s
     case fulfilled(RETRIEVE_STATUS):
-      const {ord, resp} = action.payload
-      s[ord] = {
-        ...s[ord],
-        statusDetails: resp ? resp.data : null
+      if (action.payload) {
+        const {ord, resp} = action.payload
+        s[ord] = {
+          ...s[ord],
+          statusDetails: resp ? resp.data : null
+        }
       }
       return s
     case fulfilled(RETRIEVE_OUTAGES):
-      const {oord, oresp} = action.payload
-      s[oord] = {
-        ...s[oord],
-        outagesDetails: oresp ? oresp.data : null
+      if (action.payload) {
+        const {oord, oresp} = action.payload
+        s[oord] = {
+          ...s[oord],
+          outagesDetails: oresp ? oresp.data : null
+        }
       }
       return s
     case DELETE_DATA:
