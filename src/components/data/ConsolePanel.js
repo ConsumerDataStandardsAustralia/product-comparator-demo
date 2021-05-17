@@ -76,7 +76,7 @@ const TreeView = ({
 }) => {
   const [isToggled, setIsToggled] = React.useState(toggled)
   const isDataArray = data && Array.isArray(data)
-  const plainText = !data || !isDataArray && (data instanceof Error || typeof data !== 'object')
+  const plainText = !data || (!isDataArray && (data instanceof Error || typeof data !== 'object'))
 
   return (
     <div
