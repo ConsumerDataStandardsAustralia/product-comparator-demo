@@ -40,7 +40,7 @@ class StatusOutages extends React.Component {
         <h4>Scheduled Outages</h4>
         <ul style={{fontSize: '0.8rem'}}>
         {outagesDetails.outages.map((outage, index) =>
-          <li><Outage outage={outage} key={index}/></li>
+          <Outage outage={outage} key={index}/>
         )}
         </ul>
       </>

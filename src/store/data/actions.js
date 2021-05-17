@@ -28,7 +28,7 @@ export const retrieveProductList = (dataSourceIdx, baseUrl, productListUrl, xV, 
           if (response.ok) {
             return response.json()
           }
-          throw new Error(`Response not ok. Status: ${response.status} (${response.statusText})`)
+          throw new Error(`Response not OK. Status: ${response.status} (${response.statusText})`)
         })
         .then(obj => {
           dispatch(conoutInfo(`Received retrieveProductList() response for ${productListUrl}:`, obj))
@@ -68,7 +68,12 @@ export const retrieveProductDetail = (dataSourceIdx, url, productId, xV, xMinV) 
   dispatch({
     type: RETRIEVE_PRODUCT_DETAIL,
     payload: fetch(request)
-      .then(response => response.json())
+      .then(response => {
+        if (response.ok) {
+          return response.json()
+        }
+        throw new Error(`Response not OK. Status: ${response.status} (${response.statusText})`)
+      })
       .then(obj => {
         dispatch(conoutInfo(`Received response for ${fullUrl}:`, obj))
         return obj
@@ -104,24 +109,36 @@ export const clearData = (dataSourceIdx) => ({
   payload: dataSourceIdx
 })
 
-export const retrieveStatus = (dataSourceIdx, url, xV, xMinV) => {
-  const request = new Request(url + '/discovery/status', {
+export const retrieveStatus = (dataSourceIdx, url, xV, xMinV) => dispatch => {
+  const fullUrl = url + '/discovery/status'
+  const request = new Request(fullUrl, {
     headers: new Headers({...headers, 'x-v': xV, 'x-min-v': xMinV})
   })
-  return {
+  dispatch(conoutInfo('Requesting retrieveStatus(): ' + fullUrl))
+  dispatch({
     type: RETRIEVE_STATUS,
-    payload: fetch(request).then(
-        response => response.json()).then(json => ({ord: dataSourceIdx, resp: json}))
-  }
+    payload: fetch(request)
+      .then(response => response.json())
+      .then(json => ({ord: dataSourceIdx, resp: json}))
+      .catch(error => {
+        dispatch(conoutError('Caught ' + error + ' while requesting ' + fullUrl))
+      })
+  })
 }
 
-export const retrieveOutages = (dataSourceIdx, url, xV, xMinV) => {
-  const request = new Request(url + '/discovery/outages', {
+export const retrieveOutages = (dataSourceIdx, url, xV, xMinV) => dispatch => {
+  const fullUrl = url + '/discovery/outages'
+  const request = new Request(fullUrl, {
     headers: new Headers({...headers, 'x-v': xV, 'x-min-v': xMinV})
   })
-  return {
+  dispatch(conoutInfo('Requesting retrieveOutages(): ' + fullUrl))
+  dispatch({
     type: RETRIEVE_OUTAGES,
-    payload: fetch(request).then(
-        response => response.json()).then(json => ({oord: dataSourceIdx, oresp: json}))
-  }
+    payload: fetch(request)
+      .then(response => response.json())
+      .then(json => ({oord: dataSourceIdx, oresp: json}))
+      .catch(error => {
+        dispatch(conoutError('Caught ' + error + ' while requesting ' + fullUrl))
+      })
+  })
 }

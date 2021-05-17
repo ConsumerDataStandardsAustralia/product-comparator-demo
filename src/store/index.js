@@ -1,7 +1,6 @@
 import { createStore, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
 import promise from 'redux-promise-middleware'
-import { createLogger } from 'redux-logger'
 import { combineReducers } from 'redux'
 import conout from './conout/reducer'
 import dataSources from './data-source/reducer'
@@ -19,6 +18,5 @@ const rootReducer = combineReducers({
   comparison
 })
 
-const logger = createLogger({ collapsed: true })
-const middleWares = [thunk, promise, logger]
+const middleWares = [thunk, promise]
 export default createStore(rootReducer, applyMiddleware(...middleWares))

@@ -46,7 +46,7 @@ a {
   display: inline;
 }
 
-.tree-element.is-child {
+.tree-element.child {
   margin-left: 16px;
 }
 

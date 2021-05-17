@@ -38,7 +38,7 @@ const useStyles = makeStyles(theme => ({
 
 const ConsolePanel = (props) => {
   const classes = useStyles()
-  const [expanded, setExpanded] = React.useState(true)
+  const [expanded, setExpanded] = React.useState(false)
   const toggleExpansion = (event, newExpanded) => {
     setExpanded(newExpanded)
   }
@@ -57,7 +57,7 @@ const ConsolePanel = (props) => {
         {props.conout.map((msg, i) =>
           <div key={i}>
             <span className={classes.timestamp}>{moment(msg.timestamp).format('L HH:mm:ss.SSS')}</span>
-            <span style={{color: msg.type === 'CONSOLE_OUT_ERROR' ? 'red' : 'black'}}>{msg.payload.txt}</span>
+            <span style={{color: msg.payload.lvl === 'error' ? 'red' : 'black'}}>{msg.payload.txt}</span>
             {msg.payload.obj && <TreeView data={msg.payload.obj}/>}
           </div>
         )}
@@ -75,13 +75,13 @@ const TreeView = ({
   isParentToggled = true
 }) => {
   const [isToggled, setIsToggled] = React.useState(toggled)
-  const isDataArray = Array.isArray(data)
-  const plainText = !isDataArray && (data instanceof Error || typeof data !== 'object')
+  const isDataArray = data && Array.isArray(data)
+  const plainText = !data || !isDataArray && (data instanceof Error || typeof data !== 'object')
 
   return (
     <div
       className={`tree-element${isParentToggled ? '' : ' collapsed'} ${
-        isChildElement ? 'is-child' : 'parent'
+        isChildElement ? 'child' : 'parent'
       }`}
     >
       <span
@@ -89,7 +89,7 @@ const TreeView = ({
         onClick={() => setIsToggled(!isToggled)}
       />
       {name ? <strong>&nbsp;&nbsp;{name}: </strong> : <span>&nbsp;&nbsp;</span>}
-      {plainText ? data + '' :
+      {plainText ? (data ? data + '' : data) :
       <>
         {isDataArray ? '[' : '{'}
         {!isToggled && '...'}

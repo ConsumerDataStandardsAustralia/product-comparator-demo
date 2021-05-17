@@ -1,36 +1,25 @@
-export const CONSOLE_OUT_INFO = 'CONSOLE_OUT_INFO'
-export const CONSOLE_OUT_TRACE = 'CONSOLE_OUT_TRACE'
-export const CONSOLE_OUT_WARN = 'CONSOLE_OUT_WARN'
-export const CONSOLE_OUT_ERROR = 'CONSOLE_OUT_ERROR'
+export const CONSOLE_OUT = 'CONSOLE_OUT'
 
 export const conoutInfo = (txt, obj) => {
-  return {
-    type: CONSOLE_OUT_INFO,
-    payload: {txt, obj},
-    timestamp: new Date()
-  }
+  return createLogEntry({lvl: 'log', txt, obj})
 }
 
 export const conoutTrace = (txt, obj) => {
-  return {
-    type: CONSOLE_OUT_TRACE,
-    payload: {txt, obj},
-    timestamp: new Date()
-  }
+  return createLogEntry({lvl: 'trace', txt, obj})
 }
 
 export const conoutWarn = (txt, obj) => {
-  return {
-    type: CONSOLE_OUT_WARN,
-    payload: {txt, obj},
-    timestamp: new Date()
-  }
+  return createLogEntry({lvl: 'warn', txt, obj})
 }
 
 export const conoutError = (txt, obj) => {
+  return createLogEntry({lvl: 'error', txt, obj})
+}
+
+function createLogEntry(payload) {
   return {
-    type: CONSOLE_OUT_ERROR,
-    payload: {txt, obj},
+    type: CONSOLE_OUT,
+    payload,
     timestamp: new Date()
   }
 }
