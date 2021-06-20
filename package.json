@@ -4,8 +4,9 @@
   "version": "0.1.0",
   "private": true,
   "resolutions": {
-    "lodash": "^4.17.14",
+    "lodash": "^4.17.20",
     "lodash.template": "^4.5.0",
+    "ssri": "^8.0.1",
     "immer": "^8.0.1"
   },
   "dependencies": {
