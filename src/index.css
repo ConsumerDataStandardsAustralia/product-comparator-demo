@@ -36,3 +36,49 @@ a {
   vertical-align: middle;
   padding-bottom: 6px;
 }
+
+.tree-element {
+  margin: 0 0 0 4px;
+  position: relative;
+}
+
+.tree-element.parent {
+  display: inline;
+}
+
+.tree-element.child {
+  margin-left: 16px;
+}
+
+div.tree-element:before {
+  content: '';
+  position: absolute;
+  top: 24px;
+  left: 1px;
+  height: calc(100% - 48px);
+  border-left: 1px solid gray;
+}
+
+p.tree-element {
+  margin-left: 16px;
+}
+
+.tree-toggler {
+  position: absolute;
+  top: 10px;
+  left: 0px;
+  width: 0;
+  height: 0;
+  border-top: 4px solid transparent;
+  border-bottom: 4px solid transparent;
+  border-left: 5px solid gray;
+  cursor: pointer;
+}
+
+.tree-toggler.open {
+  transform: rotate(90deg);
+}
+
+.collapsed {
+  display: none;
+}
