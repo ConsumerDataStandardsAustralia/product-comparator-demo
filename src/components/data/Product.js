@@ -192,7 +192,7 @@ const Product = (props) => {
           <div>
             <div className={classes.sectionTitle}>Fees:</div>
             <ul className={classes.sectionContent}>
-              {product.fees.sort((a, b)=>ecomp(a.feeType, b.feeType)).map(
+              {product.fees.filter(fee => fee).sort((a, b)=>ecomp(a.feeType, b.feeType)).map(
                 (fee, index) => <Fee key={index} fee={fee}/>)}
             </ul>
           </div>
