@@ -109,7 +109,7 @@ const render = (product, key) => {
     case 'fees':
       return !!product[key] && product[key].length > 0 &&
         <ul style={{margin: 0, padding:0}}>
-          {product[key].sort((a, b)=>ecomp(a.name, b.name)).map((fee, index) => <Fee key={index} fee={fee}/>)}
+          {product[key].filter(fee => fee).sort((a, b)=>ecomp(a.name, b.name)).map((fee, index) => <Fee key={index} fee={fee}/>)}
         </ul>
     case 'cardArt':
       return !!product[key] && product[key].length > 0 &&
