@@ -11,7 +11,7 @@ export const CLEAR_DATA = 'CLEAR_DATA'
 
 export const startRetrieveProductList = (dataSourceIdx) => ({
   type: START_RETRIEVE_PRODUCT_LIST,
-  payload: dataSourceIdx
+  payload: {idx: dataSourceIdx}
 })
 
 const headers = {
@@ -85,12 +85,13 @@ export const retrieveProductDetail = (dataSourceIdx, url, productId, xV, xMinV) 
         if (productDetails.some(prod => prod.productId === data.productId
             && prod.productCategory === data.productCategory)) {
           dispatch(conoutWarn(`Product with id ${data.productId} already exists in ${data.productCategory}`))
-          return null
+          return {idx: dataSourceIdx, response: null}
         }
         return {idx: dataSourceIdx, response: json}
       })
       .catch(error => {
         dispatch(conoutError('Caught ' + error + ' while requesting ' + fullUrl))
+        return {idx: dataSourceIdx, response: null}
       })
   })
 }
@@ -120,7 +121,7 @@ export const retrieveStatus = (dataSourceIdx, url, xV, xMinV) => dispatch => {
     type: RETRIEVE_STATUS,
     payload: fetch(request)
       .then(response => response.json())
-      .then(json => ({ord: dataSourceIdx, resp: json}))
+      .then(json => ({idx: dataSourceIdx, response: json}))
       .catch(error => {
         dispatch(conoutError('Caught ' + error + ' while requesting ' + fullUrl))
       })
@@ -137,7 +138,7 @@ export const retrieveOutages = (dataSourceIdx, url, xV, xMinV) => dispatch => {
     type: RETRIEVE_OUTAGES,
     payload: fetch(request)
       .then(response => response.json())
-      .then(json => ({oord: dataSourceIdx, oresp: json}))
+      .then(json => ({idx: dataSourceIdx, response: json}))
       .catch(error => {
         dispatch(conoutError('Caught ' + error + ' while requesting ' + fullUrl))
       })
