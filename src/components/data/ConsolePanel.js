@@ -81,7 +81,7 @@ const TreeView = ({
   return (
     <div
       className={`tree-element${isParentToggled ? '' : ' collapsed'} ${
-        isChildElement ? 'child' : 'parent'
+        isChildElement || isToggled ? 'child' : 'parent'
       }`}
     >
       <span

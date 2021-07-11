@@ -11,39 +11,37 @@ import {fulfilled} from '../../utils/async-actions'
 
 export default function data(state = [], action) {
   const s = [...state]
+  const {idx, response} = action.payload
+  const item = s[idx]
   switch (action.type) {
     case START_RETRIEVE_PRODUCT_LIST:
-      s[action.payload] = {...s[action.payload] , progress: action.type}
+      if (item) {
+        item.progress = action.type
+      } else {
+        s[action.payload] = {
+          progress: action.type,
+          detailRecords: 0,
+          failedDetailRecords: 0,
+          productDetails: []
+        }
+      }
       return s
     case fulfilled(RETRIEVE_PRODUCT_LIST):
-      const {idx, response} = action.payload
-      const item = s[idx]
-      s[idx] = {
-        ...s[idx],
-        progress: action.type,
-        totalRecords: response.meta.totalRecords,
-        products: !!item && !!item.products ? [...item.products, ...response.data.products] : [...response.data.products],
-        detailRecords: !!item && !!item.detailRecords ? item.detailRecords : 0,
-        failedDetailRecords: !!item && !!item.failedDetailRecords ? item.failedDetailRecords : 0,
-        productDetails: !!item && !!item.productDetails ? [...item.productDetails] : []
+      item.progress = action.type
+      item.totalRecords = response.meta.totalRecords
+      if (item.products) {
+        item.products.push.apply(response.data.products)
+      } else {
+        item.products = response.data.products
       }
       return s
     case fulfilled(RETRIEVE_PRODUCT_DETAIL):
-      if (action.payload) {
-        const index = action.payload.idx
-        if (s[index].productDetails) {
-          const productDetails = [...s[index].productDetails]
-          let data = action.payload.response.data
-          if (!!data) {
-            productDetails.push(data)
-          }
-          s[index] = {
-            ...s[index],
-            detailRecords: s[index].detailRecords + (data ? 1 : 0),
-            failedDetailRecords: s[index].failedDetailRecords + (data ? 0 : 1),
-            productDetails: productDetails
-          }
-        }
+      const data = response.data
+      if (data) {
+        item.productDetails.push(data)
+        item.detailRecords++
+      } {
+        item.failedDetailRecords++
       }
       return s
     case fulfilled(RETRIEVE_STATUS):
