@@ -54,7 +54,7 @@ const ConsolePanel = (props) => {
         </div>
       </AccordionSummary>
       <div className={classes.details}>
-        {props.conout.map((msg, i) =>
+        {props.conout.actions.map((msg, i) =>
           <div key={i}>
             <span className={classes.timestamp}>{moment(msg.timestamp).format('L HH:mm:ss.SSS')}</span>
             <span style={{color: msg.payload.lvl === 'error' ? 'red' : 'black'}}>{msg.payload.txt}</span>

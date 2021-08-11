@@ -120,8 +120,16 @@ export const retrieveStatus = (dataSourceIdx, url, xV, xMinV) => dispatch => {
   dispatch({
     type: RETRIEVE_STATUS,
     payload: fetch(request)
-      .then(response => response.json())
-      .then(json => ({idx: dataSourceIdx, response: json}))
+      .then(response => {
+        if (response.ok) {
+          return response.json()
+        }
+        throw new Error(`Response not OK. Status: ${response.status} (${response.statusText})`)
+      })
+      .then(obj => {
+        dispatch(conoutInfo(`Received response for ${fullUrl}:`, obj))
+        return {idx: dataSourceIdx, response: obj}
+      })
       .catch(error => {
         dispatch(conoutError('Caught ' + error + ' while requesting ' + fullUrl))
       })
@@ -137,8 +145,16 @@ export const retrieveOutages = (dataSourceIdx, url, xV, xMinV) => dispatch => {
   dispatch({
     type: RETRIEVE_OUTAGES,
     payload: fetch(request)
-      .then(response => response.json())
-      .then(json => ({idx: dataSourceIdx, response: json}))
+      .then(response => {
+        if (response.ok) {
+          return response.json()
+        }
+        throw new Error(`Response not OK. Status: ${response.status} (${response.statusText})`)
+      })
+      .then(obj => {
+        dispatch(conoutInfo(`Received response for ${fullUrl}:`, obj))
+        return {idx: dataSourceIdx, response: obj}
+      })
       .catch(error => {
         dispatch(conoutError('Caught ' + error + ' while requesting ' + fullUrl))
       })

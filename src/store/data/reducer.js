@@ -10,15 +10,15 @@ import {
 import {fulfilled} from '../../utils/async-actions'
 
 export default function data(state = [], action) {
-  const s = [...state]
-  const {idx, response} = action.payload
-  const item = s[idx]
   switch (action.type) {
-    case START_RETRIEVE_PRODUCT_LIST:
+    case START_RETRIEVE_PRODUCT_LIST: {
+      const s = [...state]
+      const {idx} = action.payload
+      const item = s[idx]
       if (item) {
         item.progress = action.type
       } else {
-        s[action.payload] = {
+        s[idx] = {
           progress: action.type,
           detailRecords: 0,
           failedDetailRecords: 0,
@@ -26,7 +26,11 @@ export default function data(state = [], action) {
         }
       }
       return s
-    case fulfilled(RETRIEVE_PRODUCT_LIST):
+    }
+    case fulfilled(RETRIEVE_PRODUCT_LIST): {
+      const s = [...state]
+      const {idx, response} = action.payload
+      const item = s[idx]
       item.progress = action.type
       item.totalRecords = response.meta.totalRecords
       if (item.products) {
@@ -35,38 +39,42 @@ export default function data(state = [], action) {
         item.products = response.data.products
       }
       return s
-    case fulfilled(RETRIEVE_PRODUCT_DETAIL):
-      const data = response.data
-      if (data) {
-        item.productDetails.push(data)
+    }
+    case fulfilled(RETRIEVE_PRODUCT_DETAIL): {
+      const s = [...state]
+      const {idx, response} = action.payload
+      const item = s[idx]
+      if (response) {
+        item.productDetails.push(response.data)
         item.detailRecords++
-      } {
+      } else {
         item.failedDetailRecords++
       }
       return s
-    case fulfilled(RETRIEVE_STATUS):
+    }
+    case fulfilled(RETRIEVE_STATUS): {
+      const s = [...state]
       if (action.payload) {
-        const {ord, resp} = action.payload
-        s[ord] = {
-          ...s[ord],
-          statusDetails: resp ? resp.data : null
-        }
+        const {idx, response} = action.payload
+        s[idx].statusDetails = response ? response.data : null
       }
       return s
-    case fulfilled(RETRIEVE_OUTAGES):
+    }
+    case fulfilled(RETRIEVE_OUTAGES): {
+      const s = [...state]
       if (action.payload) {
-        const {oord, oresp} = action.payload
-        s[oord] = {
-          ...s[oord],
-          outagesDetails: oresp ? oresp.data : null
-        }
+        const {idx, response} = action.payload
+        s[idx].outagesDetails = response ? response.data : null
       }
       return s
+    }
     case DELETE_DATA:
-    case CLEAR_DATA:
+    case CLEAR_DATA: {
+      const s = [...state]
       s[action.payload] = {}
       return s
+    }
     default:
-      return s
+      return state
   }
 }

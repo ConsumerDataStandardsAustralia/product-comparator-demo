@@ -23,7 +23,7 @@ export default function versionInfo(state={vHeaders: {xV: '3', xMinV: '1'}}, act
     case SET_VERSIONS_READ_ONLY:
       return {vHeaders}
     default:
-      return {...state}
+      return state
   }
 }
 

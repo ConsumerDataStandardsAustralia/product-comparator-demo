@@ -40,7 +40,7 @@ export default function dataSources(state=[], action) {
       persistSavedDataSources(dataSources)
       return dataSources
     default:
-      return [...state]
+      return state
   }
 }
 

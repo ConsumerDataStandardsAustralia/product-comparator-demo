@@ -1,9 +1,9 @@
 import { CONSOLE_OUT } from './actions'
 
-export default function conout(state = [], action) {
+export default function conout(state = {actions: []}, action) {
   if (action.type === CONSOLE_OUT) {
       const { payload } = action
-      state = [...state, action]
+      state.actions.push(action)
       if (typeof payload.obj === 'undefined') {
         console[payload.lvl](payload.txt)
       } else {
