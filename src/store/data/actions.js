@@ -21,6 +21,7 @@ const headers = {
 export const retrieveProductList = (dataSourceIdx, baseUrl, productListUrl, xV, xMinV) =>
   (dispatch) => {
     const request = new Request(productListUrl, {headers: new Headers({...headers, 'x-v': xV, 'x-min-v': xMinV})})
+    dispatch(conoutInfo(`Requesting retrieveProductList() for ${productListUrl}`))
     const response = dispatch({
       type: RETRIEVE_PRODUCT_LIST,
       payload: fetch(request)
