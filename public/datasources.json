@@ -54,7 +54,7 @@
     {"name": "IMB Bank", "url": "https://api.openbanking.imb.com.au"},
     {"name": "ING", "url": "https://apic.ing.com.au", "icon": "https://www.ing.com.au/img/logos/Logo-sm@2x.png"},
     {"name": "G&C Mutual Bank", "url": "https://ibank.gcmutualbank.com.au/openbanking", "icon": "https://www.gcmutual.bank/media/3018/gc-mutual-bank-logo.png"},
-    {"name": "Judo Bank", "url": "https://open.judo.bank", "icon": "https://judocdn.azurewebsites.net/sig/logo.png"},
+    {"name": "Judo Bank", "url": "https://public.open.judo.bank", "icon": "https://judocdn.azurewebsites.net/sig/logo.png"},
     {"name": "Laboratories Credit Union", "url": "https://internetbanking.lcu.com.au/openbanking", "icon": "https://asset.lcu.com.au/images/StandardLCULogo-nobackground.png"},
     {"name": "Leveraged", "url": "https://api.cdr.leveraged.com.au"},
     {"name": "Macquarie Bank Limited","url": "https://api.macquariebank.io","icon": "https://www.macquarie.com.au/assets/bfs/global/macquarie-logo_black.svg"},
