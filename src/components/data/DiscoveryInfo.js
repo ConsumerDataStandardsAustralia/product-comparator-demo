@@ -7,7 +7,7 @@ import SubjectIcon from '@material-ui/icons/Subject'
 import Typography from '@material-ui/core/Typography'
 import Grid from '@material-ui/core/Grid'
 import Divider from '@material-ui/core/Divider'
-import RefreshIcon from '@material-ui/icons/Refresh';
+import RefreshIcon from '@material-ui/icons/Refresh'
 import Fab from '@material-ui/core/Fab'
 import Tooltip from '@material-ui/core/Tooltip'
 import StatusOutages from './StatusOutages'

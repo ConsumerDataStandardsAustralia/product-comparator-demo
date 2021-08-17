@@ -71,7 +71,7 @@ export default function data(state = [], action) {
     case DELETE_DATA:
     case CLEAR_DATA: {
       const s = [...state]
-      s[action.payload] = {}
+      s[action.payload] = null
       return s
     }
     default:
