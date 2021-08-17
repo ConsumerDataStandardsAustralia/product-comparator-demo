@@ -8,9 +8,9 @@ const useStyles = makeStyles(() => ({
   }
 }))
 
-const DateTime = (props) => {
+const DateTime = ({rfc3339}) => {
   const classes = useStyles()
-  return (<span className={classes.datetime}>{format(props.rfc3339)}</span>)
+  return (<span className={classes.datetime}>{format(rfc3339)}</span>)
 }
 
 export default DateTime

@@ -1,13 +1,22 @@
 import React from 'react'
 import Accordion from '@material-ui/core/Accordion'
+import AccordionActions from '@material-ui/core/AccordionActions'
 import AccordionSummary from '@material-ui/core/AccordionSummary'
 import ComputerIcon from '@material-ui/icons/Computer'
+import Divider from '@material-ui/core/Divider'
+import Grid from '@material-ui/core/Grid'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import Typography from '@material-ui/core/Typography'
+import Fab from '@material-ui/core/Fab'
+import Tooltip from '@material-ui/core/Tooltip'
+import RefreshIcon from '@material-ui/icons/Refresh'
+import DeleteIcon from '@material-ui/icons/Delete'
 import { connect } from 'react-redux'
 import { fade } from '@material-ui/core/styles/colorManipulator'
 import { makeStyles } from '@material-ui/core/styles'
 import moment from 'moment'
+import { refreshConout, cleanConout } from '../../store/conout/actions'
+import _ from 'lodash';
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -27,6 +36,8 @@ const useStyles = makeStyles(theme => ({
     maxWidth:'95%',
     marginLeft: 'auto',
     marginRight: 'auto',
+    maxHeight: 300,
+    overflow: 'auto',
     marginBottom: 20
   },
   timestamp: {
@@ -62,6 +73,25 @@ const ConsolePanel = (props) => {
           </div>
         )}
       </div>
+      <Divider/>
+      <AccordionActions>
+        <Grid container alignItems="center">
+          <Grid item xs={1}>
+            <Tooltip title='Clean'>
+              <Fab size='medium' color='secondary' onClick={props.cleanConout}>
+                <DeleteIcon/>
+              </Fab>
+            </Tooltip>
+          </Grid>
+          <Grid item xs={11} style={{textAlign: 'end'}}>
+            <Tooltip title='Synchronise'>
+              <Fab size='medium' color='primary' onClick={props.refreshConout}>
+                <RefreshIcon/>
+              </Fab>
+            </Tooltip>
+          </Grid>
+        </Grid>
+      </AccordionActions>
     </Accordion>
   )
 }
@@ -84,15 +114,17 @@ const TreeView = ({
         isChildElement || isToggled ? 'child' : 'parent'
       }`}
     >
-      <span
-        className={`tree-toggler${isToggled ? ' open' : ''}${plainText ? ' collapsed' : ''}`}
-        onClick={() => setIsToggled(!isToggled)}
-      />
-      {name ? <strong>&nbsp;&nbsp;{name}: </strong> : <span>&nbsp;&nbsp;</span>}
-      {plainText ? (data ? data + '' : data) :
+      {!_.isEmpty(data) && <>
+        <span
+          className={`tree-toggler${isToggled ? ' open' : ''}${plainText ? ' collapsed' : ''}`}
+          onClick={() => setIsToggled(!isToggled)}/>
+        <>&nbsp;&nbsp;</>
+      </>}
+      {name && <strong>{name}: </strong>}
+      {plainText ? (data ? data + '' : (data === null ? 'null' : data)) :
       <>
         {isDataArray ? '[' : '{'}
-        {!isToggled && '...'}
+        {!isToggled && !_.isEmpty(data) && '...'}
         {Object.keys(data).map((v, i, a) => {
           return typeof data[v] === 'object' ? (
             <TreeView
@@ -122,8 +154,7 @@ const TreeView = ({
   )
 }
 
-const Print = prop => {
-  const { val } = prop
+const Print = ({ val }) => {
   const framing = typeof val === 'string' ? '"' : ''
   return framing + val + framing
 }
@@ -132,6 +163,6 @@ const mapStateToProps = state => ({
   conout: state.conout
 })
 
-const mapDispatchToProps = {}
+const mapDispatchToProps = {refreshConout, cleanConout}
 
 export default connect(mapStateToProps, mapDispatchToProps)(ConsolePanel)

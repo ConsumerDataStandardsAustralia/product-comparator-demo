@@ -94,18 +94,20 @@ class DataSourcePanel extends React.Component {
             <AccountBalanceIcon/><Typography  style={{paddingLeft: 8}}>Banks</Typography>
           </div>
         </AccordionSummary>
-        { dataSources.length > 0 &&
-        <div className={classes.details}>
-          <Grid container spacing={1} style={{fontSize: 'smaller', fontStyle: 'italic'}}>
-            <Grid item xs={1}><span>Enabled</span></Grid>
-            <Grid item xs={3}><span>Name</span></Grid>
-            <Grid item xs={4}><span>Banking product API base url</span></Grid>
-            <Grid item xs={3}><span>Icon url</span></Grid>
-          </Grid>
-          {dataSources.map((dataSource, index) =>
-            !dataSource.deleted && <DataSource key={index} dataSource={dataSource} index={index}/>)}
+        <div style={{maxHeight: 300, overflow: 'auto'}}>
+          { dataSources.length > 0 &&
+          <div className={classes.details}>
+            <Grid container spacing={1} style={{fontSize: 'smaller', fontStyle: 'italic'}}>
+              <Grid item xs={1}><span>Enabled</span></Grid>
+              <Grid item xs={3}><span>Name</span></Grid>
+              <Grid item xs={4}><span>Banking product API base url</span></Grid>
+              <Grid item xs={3}><span>Icon url</span></Grid>
+            </Grid>
+            {dataSources.map((dataSource, index) =>
+              !dataSource.deleted && <DataSource key={index} dataSource={dataSource} index={index}/>)}
+          </div>
+          }
         </div>
-        }
         <Divider/>
         <AccordionActions>
           <Grid container alignItems="center">
