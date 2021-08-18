@@ -11,5 +11,5 @@ export default function selection(state = [], action) {
             return state.filter(prd => (prd.dataSourceIdx !== action.payload))
         default:
             return state
-        }
+    }
 }
