@@ -64,7 +64,7 @@
     {"name": "MOVE Bank", "url": "https://api.movebank.com.au/OpenBanking", "icon": "https://movebank.com.au/media/3405/move-bank-logo-website.png"},
     {"name": "MyState Bank", "url": "https://openbanking.api.mystate.com.au/public"},
     {"name": "Newcastle Permanent Building Society", "url": "https://api.newcastlepermanent.com.au", "icon": "https://www.newcastlepermanent.com.au/-/media/images/houselogo.png"},
-    {"name": "Northern Inland Credit Union", "url": "https://prd.nicu.com.au", "icon": "https://asset.nicu.com.au/images/NICU_logo.png"},
+    {"name": "Northern Inland Credit Union", "url": "https://api.cds.nicu.com.au", "icon": "https://asset.nicu.com.au/images/NICU_logo.png"},
     {"name": "Nova Alliance Bank", "url": "https://api.cdr.novaalliancebank.com.au"},
     {"name": "PayPal", "url": "https://api.paypal.com/v1/identity", "icon": "https://www.paypalobjects.com/webstatic/en_US/i/buttons/PP_logo_h_200x51.png"},
     {"name": "People's Choice", "url": "https://api.peopleschoice.com.au/public","icon": "https://www.peopleschoicecu.com.au/globalassets/content-images/600x500-pccu-logo.png"},
