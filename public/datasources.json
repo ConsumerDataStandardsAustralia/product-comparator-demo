@@ -62,7 +62,7 @@
     {"name": "ME Bank", "url": "https://api.mebank.com.au", "icon": "https://www.mebank.com.au/getmedia/c79ff77e-5b3b-4410-9a1b-98e98a79f025/ME-logo-600px-black-transparent.png"},
     {"name": "MyLife MyFinance", "url": "https://openbanking-api.mylifemyfinance.com.au"},
     {"name": "MOVE Bank", "url": "https://api.movebank.com.au/OpenBanking", "icon": "https://movebank.com.au/media/3405/move-bank-logo-website.png"},
-    {"name": "MyState Bank", "url": "https://openbank.api.mystate.com.au"},
+    {"name": "MyState Bank", "url": "https://openbank.api.mystate.com.au", "icon": "https://mystate.com.au/wp-content/uploads/MyState_Logo_s.png"},
     {"name": "Newcastle Permanent Building Society", "url": "https://api.newcastlepermanent.com.au", "icon": "https://www.newcastlepermanent.com.au/-/media/images/houselogo.png"},
     {"name": "Northern Inland Credit Union", "url": "https://api.cds.nicu.com.au", "icon": "https://asset.nicu.com.au/images/NICU_logo.png"},
     {"name": "Nova Alliance Bank", "url": "https://api.cdr.novaalliancebank.com.au"},
