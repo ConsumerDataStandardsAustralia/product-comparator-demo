@@ -81,7 +81,6 @@
     {"name": "People's Choice", "url": "https://api.peopleschoice.com.au/public","icon": "https://www.peopleschoicecu.com.au/globalassets/content-images/600x500-pccu-logo.png"},
     {"name": "Police Bank", "url": "https://product.api.policebank.com.au", "icon": "https://www.policebank.com.au/wp-content/uploads/2018/05/PoliceBank_NoTagline_NoPadding_CMYK.png"},
     {"name": "Police Credit Union", "url": "https://api.policecu.com.au/openbanking"},
-    {"name": "Pulse Credit Union", "url": "https://public.cdr-api.pulsecredit.com.au"},
     {"name": "P&N Bank", "url": "https://ob-api.pnbank.com.au", "icon": "https://www.pnbank.com.au/Static/Theme/assets/images/pnbank-logo-narrow--7465fe2f1d3e10cf7acfc008991cebef.svg"},
     {"name": "QBANK", "url": "https://banking.qbank.com.au/openbanking", "icon": "https://www.qbank.com.au/getmedia/a76807cb-5d38-478a-83d5-b6fc2acc7fa7/QBank_150.png.aspx"},
     {"name": "Qudos Bank", "url": "https://public.cdr-api.qudosbank.com.au"},
