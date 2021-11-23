@@ -12,7 +12,7 @@
     {"name": "Auswide Bank", "url": "https://api.auswidebank.com.au/OpenBanking", "icon": "https://www.auswidebank.com.au/resources/images/templates/shared/auswide-bank-logo.png"},
     {"name": "AWA Alliance Bank", "url": "https://api.cdr.awaalliancebank.com.au"},
     {"name": "Bank Australia", "url": "https://cds.api.bankaust.com.au", "icon": "https://www.bankaust.com.au/globalassets/assets/imagery/logos/bank-australia/ba-horizontal-logo.png"},
-    {"name": "Bank First", "url": "https://ibank.bankfirst.com.au/openbanking"},
+    {"name": "Bank First", "url": "https://public.cdr.bankfirst.com.au"},
     {"name": "Bank of China Australia", "url": "https://obdevp.bank-of-china.net.au", "icon": "https://www.bankofchina.com/images/boc2013_ovs_logo.png"},
     {"name": "Bank of Sydney", "url": "https://openbank.api.banksyd.com.au", "icon": "https://www.banksyd.com.au/globalassets/images/logos/bos-logo-edge-fix.svg"},
     {"name": "BankVic", "url": "https://ib.bankvic.com.au/openbanking", "icon": "https://www.datocms-assets.com/28619/1591331902-bv-x5f-logo-x5f-master-x5f-vert-x5f-cmyk.svg"},
