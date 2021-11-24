@@ -51,7 +51,7 @@
     {"name": "HSBC Bank", "url": "https://api.hsbc.com.au"},
     {"name": "Hume Bank", "url": "https://ibank.humebank.com.au/openbanking"},
     {"name": "Illawarra Credit Union", "url": "https://onlineteller.cu.com.au/OpenBanking", "icon": "https://www.illawarracu.com.au/content/themes/nucleo-icu/assets/images/logo.png"},
-    {"name": "IMB Bank", "url": "https://api.openbanking.imb.com.au"},
+    {"name": "IMB Bank", "url": "https://openbank.openbanking.imb.com.au"},
     {"name": "ING", "url": "https://apic.ing.com.au", "icon": "https://www.ing.com.au/img/logos/Logo-sm@2x.png"},
     {"name": "G&C Mutual Bank", "url": "https://ibank.gcmutualbank.com.au/openbanking", "icon": "https://www.gcmutual.bank/media/3018/gc-mutual-bank-logo.png"},
     {"name": "Judo Bank", "url": "https://public.open.judo.bank", "icon": "https://judocdn.azurewebsites.net/sig/logo.png"},
