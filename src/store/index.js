@@ -8,11 +8,13 @@ import versionInfo from './version-info/reducer'
 import data from './data/reducer'
 import selection from './selection/reducer'
 import comparison from './comparison/reducer'
+import { requester } from './requester/reducer'
 
 const rootReducer = combineReducers({
   conout,
   dataSources,
   versionInfo,
+  requester,
   data,
   selection,
   comparison
