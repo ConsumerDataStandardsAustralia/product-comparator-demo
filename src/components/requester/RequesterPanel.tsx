@@ -324,6 +324,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(RequesterPanel)
 function resolvePath(apiCallName: string): string {
   switch (apiCallName) {
     case 'Get Accounts': return '/banking/accounts'
+    case 'Get Bulk Balances': return '/banking/accounts/balances'
     default: return 'Not implemented'
   }
 }
