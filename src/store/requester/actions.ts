@@ -12,13 +12,18 @@ export class RequesterActionPayload implements RequesterAction {
   constructor(public type: string, public payload: any) {}
 }
 
-export const callEndpoint = (urlStr: string, headers: any, params: any) => {
+export const callEndpoint = (urlStr: string, headers: any, params: any, body: string) => {
   console.log('callEndpoint(', urlStr, ', ', headers, ', ', params, ')')
   const url = new URL(urlStr);
   Object.keys(params).forEach(key => url.searchParams.append(key, params[key]))
+  let requestInfo: RequestInit = {headers}
+  if (body) {
+    requestInfo.body = body
+    requestInfo.method = 'POST'
+  }
   return new RequesterActionPayload(
     RequesterActionType[RequesterActionType.REQUESTER_CALL_ENDPOINT],
-    fetch(url.toString(), {headers}).then(response => {
+    fetch(url.toString(), requestInfo).then(response => {
       if (response.ok) {
         return response.json()
       }

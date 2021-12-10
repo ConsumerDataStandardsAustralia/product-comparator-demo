@@ -80,6 +80,7 @@ const RequesterPanel = (props: any) => {
   let [baseUrl, setBaseUrl] = React.useState('')
   let [accessToken, setAccessToken] = React.useState('')
   let [ipAddr, setIpAddr] = React.useState('0.0.0.0')
+  let [accountIds, setAccountIds] = React.useState('')
 
   function callEndpoint() {
     console.log('callEndpoint()')
@@ -106,7 +107,15 @@ const RequesterPanel = (props: any) => {
     if (prodCategory !== 'ALL') {
       callParams['product-category'] = prodCategory
     }
-    props.callEndpoint(normalise(baseUrl) + resolvePath(apiCallName), headers, callParams)
+    let body: string | null = null
+    if (apiCallName === 'Get Balances For Specific Accounts') {
+      let accountIdsArr = accountIds.split(',')
+      body = `{"data":{"accountIds":${JSON.stringify(accountIdsArr)}}}`
+    }
+    if (body) {
+      headers['Content-Type'] = 'application/json'
+    }
+    props.callEndpoint(normalise(baseUrl) + resolvePath(apiCallName), headers, callParams, body)
   }
 
   useEffect(() => {
@@ -291,6 +300,11 @@ const RequesterPanel = (props: any) => {
           <Grid item xs={6}>
             <TextField value={pageSize} label="Page size" onChange={ev => setPageSize(ev.target.value)} />
           </Grid>
+          {apiCallName === 'Get Balances For Specific Accounts' &&
+          <Grid item xs={6}>
+            <TextField value={accountIds} label="Account IDs" onChange={ev => setAccountIds(ev.target.value)} helperText="Comma-separated account IDs" />
+          </Grid>
+          }
           <Grid item xs={6}>
             <Button variant="contained" color="primary" onClick={callEndpoint}>Call</Button>
           </Grid>
@@ -325,6 +339,7 @@ function resolvePath(apiCallName: string): string {
   switch (apiCallName) {
     case 'Get Accounts': return '/banking/accounts'
     case 'Get Bulk Balances': return '/banking/accounts/balances'
+    case 'Get Balances For Specific Accounts': return '/banking/accounts/balances'
     default: return 'Not implemented'
   }
 }
