@@ -12,6 +12,10 @@ export class RequesterActionPayload implements RequesterAction {
   constructor(public type: string, public payload: any) {}
 }
 
+export const clearResult = () => {
+  return new RequesterActionPayload(RequesterActionType[RequesterActionType.REQUESTER_SELECT_ENDPOINT], Promise.resolve(null))
+}
+
 export const callEndpoint = (urlStr: string, headers: any, params: any, body: string) => {
   console.log('callEndpoint(', urlStr, ', ', headers, ', ', params, ')')
   const url = new URL(urlStr);

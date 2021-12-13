@@ -22,7 +22,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import { fade } from '@material-ui/core/styles/colorManipulator'
 import { connect } from 'react-redux'
 import { normalise } from '../../utils/url'
-import { callEndpoint } from '../../store/requester/actions'
+import { clearResult, callEndpoint } from '../../store/requester/actions'
 import TreeView from '../data/TreeView'
 
 const useStyles = makeStyles(theme => ({
@@ -81,6 +81,7 @@ const RequesterPanel = (props: any) => {
   let [accessToken, setAccessToken] = React.useState('')
   let [ipAddr, setIpAddr] = React.useState('0.0.0.0')
   let [accountIds, setAccountIds] = React.useState('')
+  let [accountId, setAccountId] = React.useState('')
 
   function callEndpoint() {
     console.log('callEndpoint()')
@@ -108,14 +109,20 @@ const RequesterPanel = (props: any) => {
       callParams['product-category'] = prodCategory
     }
     let body: string | null = null
-    if (apiCallName === 'Get Balances For Specific Accounts') {
-      let accountIdsArr = accountIds.split(',')
-      body = `{"data":{"accountIds":${JSON.stringify(accountIdsArr)}}}`
+    let pathParams: any = {}
+    switch (apiCallName) {
+      case 'Get Balances For Specific Accounts':
+        let accountIdsArr = accountIds.split(',')
+        body = `{"data":{"accountIds":${JSON.stringify(accountIdsArr)}}}`
+        break
+      case 'Get Account Balance':
+        pathParams.accountId = accountId
+        break
     }
     if (body) {
       headers['Content-Type'] = 'application/json'
     }
-    props.callEndpoint(normalise(baseUrl) + resolvePath(apiCallName), headers, callParams, body)
+    props.callEndpoint(normalise(baseUrl) + resolvePath(apiCallName, pathParams), headers, callParams, body)
   }
 
   useEffect(() => {
@@ -162,7 +169,7 @@ const RequesterPanel = (props: any) => {
                 labelId="apiCallSelectLabel"
                 id="apiCallSelect"
                 value={apiCallName}
-                onChange={ev => setApiCallName(ev.target.value as string)}
+                onChange={ev => {props.clearResult(); setApiCallName(ev.target.value as string)}}
               >
                 <ListSubheader>Banking APIs</ListSubheader>
                 <MenuItem value="Get Accounts">Get Accounts</MenuItem>
@@ -192,7 +199,7 @@ const RequesterPanel = (props: any) => {
           </Grid>
           <Grid item xs={6}>
             <div style={{fontSize: 'large'}}>
-              {normalise(baseUrl)}{resolvePath(apiCallName)}
+              {normalise(baseUrl)}{resolvePath(apiCallName, {accountId})}
             </div>
           </Grid>
           <Grid item xs={12}>
@@ -301,11 +308,14 @@ const RequesterPanel = (props: any) => {
             <TextField value={pageSize} label="Page size" onChange={ev => setPageSize(ev.target.value)} />
           </Grid>
           {apiCallName === 'Get Balances For Specific Accounts' &&
-          <Grid item xs={6}>
-            <TextField value={accountIds} label="Account IDs" onChange={ev => setAccountIds(ev.target.value)} helperText="Comma-separated account IDs" />
-          </Grid>
-          }
-          <Grid item xs={6}>
+          <Grid item xs={12}>
+            <TextField value={accountIds} label="Account IDs" onChange={ev => setAccountIds(ev.target.value)} helperText="Comma-separated account IDs" style={{width: '100%'}} />
+          </Grid>}
+          {apiCallName === 'Get Account Balance' &&
+          <Grid item xs={12}>
+            <TextField value={accountId} label="Account ID" onChange={ev => setAccountId(ev.target.value)} style={{width: '100%'}} />
+          </Grid>}
+          <Grid item xs={12}>
             <Button variant="contained" color="primary" onClick={callEndpoint}>Call</Button>
           </Grid>
         </Grid>
@@ -315,7 +325,7 @@ const RequesterPanel = (props: any) => {
 
       {props.requester && (
       <>
-        <p>Result: {props.requester.url}</p>
+        <p>Result:</p>
         <TreeView data={props.requester} />
       </>
       )}
@@ -330,16 +340,18 @@ const mapStateToProps = (state: any) => ({
 })
 
 const mapDispatchToProps = {
+  clearResult,
   callEndpoint
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(RequesterPanel)
 
-function resolvePath(apiCallName: string): string {
+function resolvePath(apiCallName: string, pathParams: any): string {
   switch (apiCallName) {
     case 'Get Accounts': return '/banking/accounts'
     case 'Get Bulk Balances': return '/banking/accounts/balances'
     case 'Get Balances For Specific Accounts': return '/banking/accounts/balances'
+    case 'Get Account Balance': return '/banking/accounts/' + pathParams.accountId + '/balance'
     default: return 'Not implemented'
   }
 }
