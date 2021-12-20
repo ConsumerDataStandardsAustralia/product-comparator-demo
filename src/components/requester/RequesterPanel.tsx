@@ -116,6 +116,7 @@ const RequesterPanel = (props: any) => {
         body = `{"data":{"accountIds":${JSON.stringify(accountIdsArr)}}}`
         break
       case 'Get Account Balance':
+      case 'Get Account Detail':
         pathParams.accountId = accountId
         break
     }
@@ -311,7 +312,7 @@ const RequesterPanel = (props: any) => {
           <Grid item xs={12}>
             <TextField value={accountIds} label="Account IDs" onChange={ev => setAccountIds(ev.target.value)} helperText="Comma-separated account IDs" style={{width: '100%'}} />
           </Grid>}
-          {apiCallName === 'Get Account Balance' &&
+          {(apiCallName === 'Get Account Balance' || apiCallName === 'Get Account Detail') &&
           <Grid item xs={12}>
             <TextField value={accountId} label="Account ID" onChange={ev => setAccountId(ev.target.value)} style={{width: '100%'}} />
           </Grid>}
@@ -348,10 +349,15 @@ export default connect(mapStateToProps, mapDispatchToProps)(RequesterPanel)
 
 function resolvePath(apiCallName: string, pathParams: any): string {
   switch (apiCallName) {
-    case 'Get Accounts': return '/banking/accounts'
-    case 'Get Bulk Balances': return '/banking/accounts/balances'
-    case 'Get Balances For Specific Accounts': return '/banking/accounts/balances'
-    case 'Get Account Balance': return '/banking/accounts/' + pathParams.accountId + '/balance'
+    case 'Get Accounts':
+      return '/banking/accounts'
+    case 'Get Bulk Balances':
+    case 'Get Balances For Specific Accounts':
+      return '/banking/accounts/balances'
+    case 'Get Account Balance':
+      return '/banking/accounts/' + pathParams.accountId + '/balance'
+    case 'Get Account Detail':
+      return '/banking/accounts/' + pathParams.accountId
     default: return 'Not implemented'
   }
 }
