@@ -82,6 +82,7 @@ const RequesterPanel = (props: any) => {
   let [ipAddr, setIpAddr] = React.useState('0.0.0.0')
   let [accountIds, setAccountIds] = React.useState('')
   let [accountId, setAccountId] = React.useState('')
+  let [transactionId, setTransactionId] = React.useState('')
 
   function callEndpoint() {
     console.log('callEndpoint()')
@@ -119,6 +120,10 @@ const RequesterPanel = (props: any) => {
       case 'Get Account Detail':
       case 'Get Transactions For Account':
         pathParams.accountId = accountId
+        break
+      case 'Get Transaction Detail':
+        pathParams.accountId = accountId
+        pathParams.transactionId = transactionId
         break
     }
     if (body) {
@@ -201,7 +206,7 @@ const RequesterPanel = (props: any) => {
           </Grid>
           <Grid item xs={6}>
             <div style={{fontSize: 'large'}}>
-              {normalise(baseUrl)}{resolvePath(apiCallName, {accountId})}
+              {normalise(baseUrl)}{resolvePath(apiCallName, {accountId, transactionId})}
             </div>
           </Grid>
           <Grid item xs={12}>
@@ -313,9 +318,14 @@ const RequesterPanel = (props: any) => {
           <Grid item xs={12}>
             <TextField value={accountIds} label="Account IDs" onChange={ev => setAccountIds(ev.target.value)} helperText="Comma-separated account IDs" style={{width: '100%'}} />
           </Grid>}
-          {(apiCallName === 'Get Account Balance' || apiCallName === 'Get Account Detail' || apiCallName === 'Get Transactions For Account') &&
+          {(apiCallName === 'Get Account Balance' || apiCallName === 'Get Account Detail' ||
+            apiCallName === 'Get Transactions For Account' || apiCallName === 'Get Transaction Detail') &&
           <Grid item xs={12}>
             <TextField value={accountId} label="Account ID" onChange={ev => setAccountId(ev.target.value)} style={{width: '100%'}} />
+          </Grid>}
+          {apiCallName === 'Get Transaction Detail' &&
+          <Grid item xs={12}>
+            <TextField value={transactionId} label="Transaction ID" onChange={ev => setTransactionId(ev.target.value)} style={{width: '100%'}} />
           </Grid>}
           <Grid item xs={12}>
             <Button variant="contained" color="primary" onClick={callEndpoint}>Call</Button>
@@ -361,6 +371,8 @@ function resolvePath(apiCallName: string, pathParams: any): string {
       return '/banking/accounts/' + pathParams.accountId
     case 'Get Transactions For Account':
       return '/banking/accounts/' + pathParams.accountId + '/transactions'
+    case 'Get Transaction Detail':
+      return '/banking/accounts/' + pathParams.accountId + '/transactions/' + pathParams.transactionId
     default: return 'Not implemented'
   }
 }
