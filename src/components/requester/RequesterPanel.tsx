@@ -119,6 +119,7 @@ const RequesterPanel = (props: any) => {
       case 'Get Account Balance':
       case 'Get Account Detail':
       case 'Get Transactions For Account':
+      case 'Get Direct Debits For Account':
         pathParams.accountId = accountId
         break
       case 'Get Transaction Detail':
@@ -319,7 +320,8 @@ const RequesterPanel = (props: any) => {
             <TextField value={accountIds} label="Account IDs" onChange={ev => setAccountIds(ev.target.value)} helperText="Comma-separated account IDs" style={{width: '100%'}} />
           </Grid>}
           {(apiCallName === 'Get Account Balance' || apiCallName === 'Get Account Detail' ||
-            apiCallName === 'Get Transactions For Account' || apiCallName === 'Get Transaction Detail') &&
+            apiCallName === 'Get Transactions For Account' || apiCallName === 'Get Transaction Detail' ||
+            apiCallName === 'Get Direct Debits For Account') &&
           <Grid item xs={12}>
             <TextField value={accountId} label="Account ID" onChange={ev => setAccountId(ev.target.value)} style={{width: '100%'}} />
           </Grid>}
@@ -373,6 +375,8 @@ function resolvePath(apiCallName: string, pathParams: any): string {
       return '/banking/accounts/' + pathParams.accountId + '/transactions'
     case 'Get Transaction Detail':
       return '/banking/accounts/' + pathParams.accountId + '/transactions/' + pathParams.transactionId
+    case 'Get Direct Debits For Account':
+      return '/banking/accounts/' + pathParams.accountId + '/direct-debits'
     default: return 'Not implemented'
   }
 }
