@@ -377,6 +377,8 @@ function resolvePath(apiCallName: string, pathParams: any): string {
       return '/banking/accounts/' + pathParams.accountId + '/transactions/' + pathParams.transactionId
     case 'Get Direct Debits For Account':
       return '/banking/accounts/' + pathParams.accountId + '/direct-debits'
+    case 'Get Bulk Direct Debits':
+      return '/banking/accounts/direct-debits'
     default: return 'Not implemented'
   }
 }
