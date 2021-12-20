@@ -85,7 +85,6 @@ const RequesterPanel = (props: any) => {
   let [transactionId, setTransactionId] = React.useState('')
 
   function callEndpoint() {
-    console.log('callEndpoint()')
     const headers : any = {
       'x-v': xV,
       'x-min-v': xMinV,
@@ -113,6 +112,7 @@ const RequesterPanel = (props: any) => {
     let pathParams: any = {}
     switch (apiCallName) {
       case 'Get Balances For Specific Accounts':
+      case 'Get Direct Debits For Specific Accounts':
         let accountIdsArr = accountIds.split(',')
         body = `{"data":{"accountIds":${JSON.stringify(accountIdsArr)}}}`
         break
@@ -315,7 +315,7 @@ const RequesterPanel = (props: any) => {
           <Grid item xs={6}>
             <TextField value={pageSize} label="Page size" onChange={ev => setPageSize(ev.target.value)} />
           </Grid>
-          {apiCallName === 'Get Balances For Specific Accounts' &&
+          {(apiCallName === 'Get Balances For Specific Accounts' || apiCallName === 'Get Direct Debits For Specific Accounts') &&
           <Grid item xs={12}>
             <TextField value={accountIds} label="Account IDs" onChange={ev => setAccountIds(ev.target.value)} helperText="Comma-separated account IDs" style={{width: '100%'}} />
           </Grid>}
@@ -378,6 +378,7 @@ function resolvePath(apiCallName: string, pathParams: any): string {
     case 'Get Direct Debits For Account':
       return '/banking/accounts/' + pathParams.accountId + '/direct-debits'
     case 'Get Bulk Direct Debits':
+    case 'Get Direct Debits For Specific Accounts':
       return '/banking/accounts/direct-debits'
     default: return 'Not implemented'
   }
