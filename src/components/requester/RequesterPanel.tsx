@@ -120,6 +120,7 @@ const RequesterPanel = (props: any) => {
       case 'Get Account Detail':
       case 'Get Transactions For Account':
       case 'Get Direct Debits For Account':
+      case 'Get Scheduled Payments for Account':
         pathParams.accountId = accountId
         break
       case 'Get Transaction Detail':
@@ -321,7 +322,7 @@ const RequesterPanel = (props: any) => {
           </Grid>}
           {(apiCallName === 'Get Account Balance' || apiCallName === 'Get Account Detail' ||
             apiCallName === 'Get Transactions For Account' || apiCallName === 'Get Transaction Detail' ||
-            apiCallName === 'Get Direct Debits For Account') &&
+            apiCallName === 'Get Direct Debits For Account' || apiCallName === 'Get Scheduled Payments for Account') &&
           <Grid item xs={12}>
             <TextField value={accountId} label="Account ID" onChange={ev => setAccountId(ev.target.value)} style={{width: '100%'}} />
           </Grid>}
@@ -380,6 +381,8 @@ function resolvePath(apiCallName: string, pathParams: any): string {
     case 'Get Bulk Direct Debits':
     case 'Get Direct Debits For Specific Accounts':
       return '/banking/accounts/direct-debits'
+    case 'Get Scheduled Payments for Account':
+      return '/banking/accounts/' + pathParams.accountId + '/payments/scheduled'
     default: return 'Not implemented'
   }
 }
