@@ -83,6 +83,7 @@ const RequesterPanel = (props: any) => {
   let [accountIds, setAccountIds] = React.useState('')
   let [accountId, setAccountId] = React.useState('')
   let [transactionId, setTransactionId] = React.useState('')
+  let [payeeId, setPayeeId] = React.useState('')
 
   function callEndpoint() {
     const headers : any = {
@@ -127,6 +128,9 @@ const RequesterPanel = (props: any) => {
       case 'Get Transaction Detail':
         pathParams.accountId = accountId
         pathParams.transactionId = transactionId
+        break
+      case 'Get Payee Detail':
+        pathParams.payeeId = payeeId
         break
     }
     if (body) {
@@ -209,7 +213,7 @@ const RequesterPanel = (props: any) => {
           </Grid>
           <Grid item xs={6}>
             <div style={{fontSize: 'large'}}>
-              {normalise(baseUrl)}{resolvePath(apiCallName, {accountId, transactionId})}
+              {normalise(baseUrl)}{resolvePath(apiCallName, {accountId, transactionId, payeeId})}
             </div>
           </Grid>
           <Grid item xs={12}>
@@ -332,6 +336,10 @@ const RequesterPanel = (props: any) => {
           <Grid item xs={12}>
             <TextField value={transactionId} label="Transaction ID" onChange={ev => setTransactionId(ev.target.value)} style={{width: '100%'}} />
           </Grid>}
+          {apiCallName === 'Get Payee Detail' &&
+          <Grid item xs={12}>
+            <TextField value={payeeId} label="Payee ID" onChange={ev => setPayeeId(ev.target.value)} style={{width: '100%'}} />
+          </Grid>}
           <Grid item xs={12}>
             <Button variant="contained" color="primary" onClick={callEndpoint}>Call</Button>
           </Grid>
@@ -388,6 +396,10 @@ function resolvePath(apiCallName: string, pathParams: any): string {
     case 'Get Scheduled Payments Bulk':
     case 'Get Scheduled Payments For Specific Accounts':
       return '/banking/payments/scheduled'
+    case 'Get Payees':
+      return '/banking/payees'
+    case 'Get Payee Detail':
+      return '/banking/payees/' + pathParams.payeeId
     default: return 'Not implemented'
   }
 }
