@@ -15,7 +15,6 @@ export const requester: Reducer<RequesterState, RequesterAction> = (state: Reque
     case fulfilled(RequesterActionType[RequesterActionType.REQUESTER_SELECT_ENDPOINT]):
       return new RequesterResponseState(null)
     case fulfilled(RequesterActionType[RequesterActionType.REQUESTER_CALL_ENDPOINT]):
-      console.log('Reducing REQUESTER_CALL_ENDPOINT. Action URL:', action.payload)
       return new RequesterResponseState(action.payload)
     default:
       return state
