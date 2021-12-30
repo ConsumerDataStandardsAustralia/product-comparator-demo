@@ -195,8 +195,6 @@ const RequesterPanel = (props: any) => {
     switch (apiCallName) {
       case 'Get Products':
       case 'Get Product Detail':
-      case 'Get Customer':
-      case 'Get Customer Detail':
       case 'Get Status':
       case 'Get Outages':
         return false
@@ -238,6 +236,10 @@ const RequesterPanel = (props: any) => {
         return '/banking/products'
       case 'Get Product Detail':
         return '/banking/products/' + productId
+      case 'Get Customer':
+        return '/common/customer'
+      case 'Get Customer Detail':
+        return '/common/customer/detail'
       default: return 'Not implemented'
     }
   }
