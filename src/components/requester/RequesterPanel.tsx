@@ -240,6 +240,10 @@ const RequesterPanel = (props: any) => {
         return '/common/customer'
       case 'Get Customer Detail':
         return '/common/customer/detail'
+      case 'Get Status':
+        return '/discovery/status'
+      case 'Get Outages':
+        return '/discovery/outages'
       default: return 'Not implemented'
     }
   }
@@ -253,7 +257,7 @@ const RequesterPanel = (props: any) => {
     }
     if (isProtected()) {
       headers.Authorization = 'Bearer ' + accessToken
-      headers['x-fapi-auth-date'] = new Date().toUTCString()
+      headers['x-fapi-auth-date'] = xFapiAuthDate
     }
     if (xFapiInteractionId) {
       headers['x-fapi-interaction-id'] = xFapiInteractionId
@@ -441,12 +445,15 @@ const RequesterPanel = (props: any) => {
           <Grid item xs={12}>
             <TextField value={xFapiInteractionId} label="x-fapi-interaction-id" onChange={ev => setXFapiInteractionId(ev.target.value)} style={{width: 350}} />
           </Grid>
+          {isProtected() &&
+          <>
           <Grid item xs={12}>
             <TextField value={xFapiAuthDate} label="x-fapi-auth-date" onChange={ev => setAuthDate(ev.target.value)} style={{width: 350}} />
           </Grid>
           <Grid item xs={12}>
             <TextField value={ipAddr} label="x-fapi-customer-ip-address" onChange={ev => setIpAddr(ev.target.value)} />
           </Grid>
+          </>}
 
           <Grid item xs={12}>
             <Divider/>
