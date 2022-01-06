@@ -56,8 +56,7 @@ export interface VersionInfoProps {
 export interface RequesterPanelProps {
   dataSources: string[],
   savedDataSourcesCount: number,
-  versionInfo: VersionInfoProps,
-  // requester: RequesterState
+  versionInfo: VersionInfoProps
 }
 
 const RequesterPanel = (props: any) => {
@@ -70,9 +69,10 @@ const RequesterPanel = (props: any) => {
     setExpanded(newExpanded)
   }
 
-  let [openStatus, setOpenStatus] = React.useState('ALL')
+  let [openStatus, setOpenStatus] = React.useState('')
+  let [owned, setOwned] = React.useState('')
   let [page, setPage] = React.useState(''), [pageSize, setPageSize] = React.useState('')
-  let [prodCategory, setProdCategory] = React.useState('ALL')
+  let [prodCategory, setProdCategory] = React.useState('')
   let [xV, setXV] = React.useState('3'), [xMinV, setXMinV] = React.useState('1')
   let [xFapiInteractionId, setXFapiInteractionId] = React.useState('')
   let [xFapiAuthDate, setAuthDate] = React.useState(new Date().toUTCString())
@@ -82,61 +82,255 @@ const RequesterPanel = (props: any) => {
   let [ipAddr, setIpAddr] = React.useState('0.0.0.0')
   let [accountIds, setAccountIds] = React.useState('')
   let [accountId, setAccountId] = React.useState('')
+  let [oldestTime, setOldestTime] = React.useState('')
+  let [newestTime, setNewestTime] = React.useState('')
+  let [minAmount, setMinAmount] = React.useState('')
+  let [maxAmount, setMaxAmount] = React.useState('')
+  let [text, setText] = React.useState('')
   let [transactionId, setTransactionId] = React.useState('')
+  let [payeeType, setPayeeType] = React.useState('')
   let [payeeId, setPayeeId] = React.useState('')
+  let [effective, setEffective] = React.useState('')
+  let [updatedSince, setUpdatedSince] = React.useState('')
+  let [brand, setBrand] = React.useState('')
+  let [productId, setProductId] = React.useState('')
+
+  function isRelevant(paramName: string) {
+    switch (apiCallName) {
+      case 'Get Accounts':
+      case 'Get Bulk Balances':
+      case 'Get Bulk Direct Debits':
+      case 'Get Scheduled Payments Bulk':
+        switch (paramName) {
+          case 'product-category':
+          case 'open-status':
+          case 'is-owned':
+          case 'page':
+          case 'page-size':
+            return true
+        }
+        return false
+      case 'Get Balances For Specific Accounts':
+      case 'Get Direct Debits For Specific Accounts':
+      case 'Get Scheduled Payments For Specific Accounts':
+        switch (paramName) {
+          case 'page':
+          case 'page-size':
+          case 'accountIds':
+            return true
+        }
+        return false
+      case 'Get Account Balance':
+      case 'Get Account Detail':
+        switch (paramName) {
+          case 'accountId':
+            return true
+        }
+        return false
+      case 'Get Transactions For Account':
+        switch (paramName) {
+          case 'accountId':
+          case 'oldest-time':
+          case 'newest-time':
+          case 'min-amount':
+          case 'max-amount':
+          case 'text':
+          case 'page':
+          case 'page-size':
+            return true
+        }
+        return false
+      case 'Get Transaction Detail':
+        switch (paramName) {
+          case 'accountId':
+          case 'transactionId':
+            return true
+        }
+        return false
+      case 'Get Direct Debits For Account':
+      case 'Get Scheduled Payments for Account':
+        switch (paramName) {
+          case 'accountId':
+          case 'page':
+          case 'page-size':
+            return true
+        }
+        return false
+      case 'Get Payees':
+        switch (paramName) {
+          case 'payeeType':
+          case 'page':
+          case 'page-size':
+            return true
+        }
+        return false
+      case 'Get Payee Detail':
+        switch (paramName) {
+          case 'payeeId':
+            return true
+        }
+        return false
+      case 'Get Products':
+        switch (paramName) {
+          case 'effective':
+          case 'updated-since':
+          case 'brand':
+          case 'product-category':
+          case 'page':
+          case 'page-size':
+            return true
+        }
+        return false
+      case 'Get Product Detail':
+        switch (paramName) {
+          case 'productId':
+            return true
+        }
+        return false
+    }
+    return false
+  }
+
+  function isProtected(): boolean {
+    switch (apiCallName) {
+      case 'Get Products':
+      case 'Get Product Detail':
+      case 'Get Status':
+      case 'Get Outages':
+        return false
+    }
+    return true
+  }
+
+
+  function resolvePath(): string {
+    switch (apiCallName) {
+      case 'Get Accounts':
+        return '/banking/accounts'
+      case 'Get Bulk Balances':
+      case 'Get Balances For Specific Accounts':
+        return '/banking/accounts/balances'
+      case 'Get Account Balance':
+        return '/banking/accounts/' + accountId + '/balance'
+      case 'Get Account Detail':
+        return '/banking/accounts/' + accountId
+      case 'Get Transactions For Account':
+        return '/banking/accounts/' + accountId + '/transactions'
+      case 'Get Transaction Detail':
+        return '/banking/accounts/' + accountId + '/transactions/' + transactionId
+      case 'Get Direct Debits For Account':
+        return '/banking/accounts/' + accountId + '/direct-debits'
+      case 'Get Bulk Direct Debits':
+      case 'Get Direct Debits For Specific Accounts':
+        return '/banking/accounts/direct-debits'
+      case 'Get Scheduled Payments for Account':
+        return '/banking/accounts/' + accountId + '/payments/scheduled'
+      case 'Get Scheduled Payments Bulk':
+      case 'Get Scheduled Payments For Specific Accounts':
+        return '/banking/payments/scheduled'
+      case 'Get Payees':
+        return '/banking/payees'
+      case 'Get Payee Detail':
+        return '/banking/payees/' + payeeId
+      case 'Get Products':
+        return '/banking/products'
+      case 'Get Product Detail':
+        return '/banking/products/' + productId
+      case 'Get Customer':
+        return '/common/customer'
+      case 'Get Customer Detail':
+        return '/common/customer/detail'
+      case 'Get Status':
+        return '/discovery/status'
+      case 'Get Outages':
+        return '/discovery/outages'
+      default: return 'Not implemented'
+    }
+  }
 
   function callEndpoint() {
     const headers : any = {
       'x-v': xV,
       'x-min-v': xMinV,
       'x-cds-client-headers': 'Q29uc3VtZXIgRGF0YSBSaWdodA==',
-      'x-fapi-auth-date': new Date().toUTCString(),
       'x-fapi-customer-ip-address': ipAddr,
-      Authorization: 'Bearer ' + accessToken
+    }
+    if (isProtected()) {
+      headers.Authorization = 'Bearer ' + accessToken
+      headers['x-fapi-auth-date'] = xFapiAuthDate
     }
     if (xFapiInteractionId) {
       headers['x-fapi-interaction-id'] = xFapiInteractionId
     }
-    const callParams: any = {
-      'open-status': openStatus,
+
+    const callParams: any = {}
+    if (isRelevant('open-status') && openStatus) {
+      callParams['open-status'] = openStatus
     }
-    if (page) {
+    if (isRelevant('page') && page) {
       callParams.page = page
     }
-    if (pageSize) {
+    if (isRelevant('page-size') && pageSize) {
       callParams['page-size'] = pageSize
     }
-    if (prodCategory !== 'ALL') {
+    if (isRelevant('product-category') && prodCategory) {
       callParams['product-category'] = prodCategory
     }
-    let body: string | null = null
-    let pathParams: any = {}
-    switch (apiCallName) {
-      case 'Get Balances For Specific Accounts':
-      case 'Get Direct Debits For Specific Accounts':
-      case 'Get Scheduled Payments For Specific Accounts':
-        let accountIdsArr = accountIds.split(',')
-        body = `{"data":{"accountIds":${JSON.stringify(accountIdsArr)}}}`
-        break
-      case 'Get Account Balance':
-      case 'Get Account Detail':
-      case 'Get Transactions For Account':
-      case 'Get Direct Debits For Account':
-      case 'Get Scheduled Payments for Account':
-        pathParams.accountId = accountId
-        break
-      case 'Get Transaction Detail':
-        pathParams.accountId = accountId
-        pathParams.transactionId = transactionId
-        break
-      case 'Get Payee Detail':
-        pathParams.payeeId = payeeId
-        break
+    if (isRelevant('is-owned') && owned) {
+      callParams['is-owned'] = owned
     }
+    if (isRelevant('oldest-time') && oldestTime) {
+      callParams['oldest-time'] = oldestTime
+    }
+    if (isRelevant('newest-time') && newestTime) {
+      callParams['newest-time'] = newestTime
+    }
+    if (isRelevant('min-amount') && minAmount) {
+      callParams['min-amount'] = minAmount
+    }
+    if (isRelevant('max-amount') && maxAmount) {
+      callParams['max-amount'] = maxAmount
+    }
+    if (isRelevant('text') && text) {
+      callParams.text = text
+    }
+    if (isRelevant('payeeType') && payeeType) {
+      callParams.type = payeeType
+    }
+    if (isRelevant('effective') && effective) {
+      callParams.effective = effective
+    }
+    if (isRelevant('updated-since') && updatedSince) {
+      callParams['updated-since'] = updatedSince
+    }
+    if (isRelevant('brand') && brand) {
+      callParams.brand = brand
+    }
+
+    let body: string | null = null
+    if (isRelevant('accountIds')) {
+      let accountIdsArr = accountIds.split(',')
+      body = `{"data":{"accountIds":${JSON.stringify(accountIdsArr)}}}`
+    }
+
+    let pathParams: any = {}
+    if (isRelevant('accountId')) {
+      pathParams.accountId = accountId
+    }
+    if (isRelevant('transactionId')) {
+      pathParams.transactionId = transactionId
+    }
+    if (isRelevant('payeeId')) {
+      pathParams.payeeId = payeeId
+    }
+    if (isRelevant('productId')) {
+      pathParams.productId = productId
+    }
+
     if (body) {
       headers['Content-Type'] = 'application/json'
     }
-    props.callEndpoint(normalise(baseUrl) + resolvePath(apiCallName, pathParams), headers, callParams, body)
+    props.callEndpoint(normalise(baseUrl) + resolvePath(), headers, callParams, body)
   }
 
   useEffect(() => {
@@ -202,7 +396,7 @@ const RequesterPanel = (props: any) => {
                 <MenuItem value="Get Payees">Get Payees</MenuItem>
                 <MenuItem value="Get Payee Detail">Get Payee Detail</MenuItem>
                 <MenuItem value="Get Products">Get Products</MenuItem>
-                <MenuItem value="Get Get Product Detail">Get Get Product Detail</MenuItem>
+                <MenuItem value="Get Product Detail">Get Product Detail</MenuItem>
                 <ListSubheader>Common APIs</ListSubheader>
                 <MenuItem value="Get Customer">Get Customer</MenuItem>
                 <MenuItem value="Get Customer Detail">Get Customer Detail</MenuItem>
@@ -213,12 +407,13 @@ const RequesterPanel = (props: any) => {
           </Grid>
           <Grid item xs={6}>
             <div style={{fontSize: 'large'}}>
-              {normalise(baseUrl)}{resolvePath(apiCallName, {accountId, transactionId, payeeId})}
+              {normalise(baseUrl)}{resolvePath()}
             </div>
           </Grid>
+          {isProtected() &&
           <Grid item xs={12}>
             <TextField style={{width: '100%'}} value={accessToken} label="Access Token" onChange={ev => setAccessToken(ev.target.value)} />
-          </Grid>
+          </Grid>}
           <Grid item xs={6}>
             <div style={{width: 200}}>
               <Autocomplete
@@ -250,17 +445,21 @@ const RequesterPanel = (props: any) => {
           <Grid item xs={12}>
             <TextField value={xFapiInteractionId} label="x-fapi-interaction-id" onChange={ev => setXFapiInteractionId(ev.target.value)} style={{width: 350}} />
           </Grid>
+          {isProtected() &&
+          <>
           <Grid item xs={12}>
             <TextField value={xFapiAuthDate} label="x-fapi-auth-date" onChange={ev => setAuthDate(ev.target.value)} style={{width: 350}} />
           </Grid>
           <Grid item xs={12}>
             <TextField value={ipAddr} label="x-fapi-customer-ip-address" onChange={ev => setIpAddr(ev.target.value)} />
           </Grid>
+          </>}
 
           <Grid item xs={12}>
             <Divider/>
           </Grid>
 
+          {isRelevant('product-category') &&
           <Grid item xs={12}>
           <FormControl>
               <InputLabel id="prodCategoryLabel">Product category</InputLabel>
@@ -269,6 +468,7 @@ const RequesterPanel = (props: any) => {
                 id="prodCategory"
                 value={prodCategory}
                 onChange={ev => setProdCategory(ev.target.value as string)}
+                style={{minWidth: 160}}
               >
                 <MenuItem value="BUSINESS_LOANS">Business Loans</MenuItem>
                 <MenuItem value="CRED_AND_CHRG_CARDS">Credit and Charge Cards</MenuItem>
@@ -282,10 +482,10 @@ const RequesterPanel = (props: any) => {
                 <MenuItem value="TRADE_FINANCE">Trade Finance</MenuItem>
                 <MenuItem value="TRANS_AND_SAVINGS_ACCOUNTS">Transaction and Savings Accounts</MenuItem>
                 <MenuItem value="TRAVEL_CARDS">Travel Cards</MenuItem>
-                <MenuItem value="ALL">All</MenuItem>
               </Select>
             </FormControl>
-          </Grid>
+          </Grid>}
+          {isRelevant('open-status') &&
           <Grid item xs={12}>
             <FormControl component="fieldset">
               <FormLabel component="legend">Open status</FormLabel>
@@ -300,7 +500,8 @@ const RequesterPanel = (props: any) => {
                 <FormControlLabel value="ALL" control={<Radio />} label="All" />
               </RadioGroup>
             </FormControl>
-          </Grid>
+          </Grid>}
+          {isRelevant('is-owned') &&
           <Grid item xs={12}>
             <FormControl component="fieldset">
               <FormLabel component="legend">Is owned</FormLabel>
@@ -308,37 +509,102 @@ const RequesterPanel = (props: any) => {
                 aria-label="is owned"
                 defaultValue="all"
                 name="radio-buttons-group"
+                value={owned}
+                onChange={ev => setOwned(ev.target.value as string)}
               >
                 <FormControlLabel value="true" control={<Radio />} label="Owned" />
                 <FormControlLabel value="false" control={<Radio />} label="Unowned" />
-                <FormControlLabel value="all" control={<Radio />} label="All" />
               </RadioGroup>
             </FormControl>
-          </Grid>
+          </Grid>}
+          {isRelevant('page') &&
           <Grid item xs={6}>
             <TextField value={page} label="Page" onChange={ev => setPage(ev.target.value)} />
-          </Grid>
+          </Grid>}
+          {isRelevant('page-size') &&
           <Grid item xs={6}>
             <TextField value={pageSize} label="Page size" onChange={ev => setPageSize(ev.target.value)} />
+          </Grid>}
+          {apiCallName === 'Get Products' &&
+          <>
+          <Grid item xs={12}>
+            <FormControl>
+              <InputLabel id="effectiveLabel">Effective</InputLabel>
+              <Select
+                labelId="effectiveLabel"
+                id="effective"
+                value={effective}
+                onChange={ev => setEffective(ev.target.value as string)}
+              >
+                <MenuItem value="CURRENT">Current</MenuItem>
+                <MenuItem value="FUTURE">Future</MenuItem>
+                <MenuItem value="ALL">All</MenuItem>
+              </Select>
+            </FormControl>
           </Grid>
-          {(apiCallName === 'Get Balances For Specific Accounts' || apiCallName === 'Get Direct Debits For Specific Accounts' ||
-            apiCallName === 'Get Scheduled Payments For Specific Accounts') &&
+          <Grid item xs={12}>
+            <TextField value={updatedSince} label="Updated Since" onChange={ev => setUpdatedSince(ev.target.value)} />
+          </Grid>
+          <Grid item xs={12}>
+            <TextField value={brand} label="Brand" onChange={ev => setBrand(ev.target.value)} />
+          </Grid>
+          </>}
+          {isRelevant('accountIds') &&
           <Grid item xs={12}>
             <TextField value={accountIds} label="Account IDs" onChange={ev => setAccountIds(ev.target.value)} helperText="Comma-separated account IDs" style={{width: '100%'}} />
           </Grid>}
-          {(apiCallName === 'Get Account Balance' || apiCallName === 'Get Account Detail' ||
-            apiCallName === 'Get Transactions For Account' || apiCallName === 'Get Transaction Detail' ||
-            apiCallName === 'Get Direct Debits For Account' || apiCallName === 'Get Scheduled Payments for Account') &&
+          {isRelevant('accountId') &&
           <Grid item xs={12}>
             <TextField value={accountId} label="Account ID" onChange={ev => setAccountId(ev.target.value)} style={{width: '100%'}} />
           </Grid>}
-          {apiCallName === 'Get Transaction Detail' &&
+          {isRelevant('oldest-time') &&
+          <Grid item xs={12}>
+            <TextField value={oldestTime} label="Oldest Time" onChange={ev => setOldestTime(ev.target.value)} style={{width: '50%'}} />
+          </Grid>}
+          {isRelevant('newest-time') &&
+          <Grid item xs={12}>
+            <TextField value={newestTime} label="Newest Time" onChange={ev => setNewestTime(ev.target.value)} style={{width: '50%'}} />
+          </Grid>}
+          {isRelevant('min-amount') &&
+          <Grid item xs={12}>
+            <TextField value={minAmount} label="Min Amount" onChange={ev => setMinAmount(ev.target.value)} />
+          </Grid>}
+          {isRelevant('max-amount') &&
+          <Grid item xs={12}>
+            <TextField value={maxAmount} label="Max Amount" onChange={ev => setMaxAmount(ev.target.value)} />
+          </Grid>}
+          {isRelevant('text') &&
+          <Grid item xs={12}>
+            <TextField value={text} label="Text" onChange={ev => setText(ev.target.value)} style={{width: '50%'}} />
+          </Grid>}
+          {isRelevant('transactionId') &&
           <Grid item xs={12}>
             <TextField value={transactionId} label="Transaction ID" onChange={ev => setTransactionId(ev.target.value)} style={{width: '100%'}} />
           </Grid>}
-          {apiCallName === 'Get Payee Detail' &&
+          {isRelevant('payeeType') &&
+          <Grid item xs={12}>
+            <FormControl>
+              <InputLabel id="payeeTypeLabel">Payee Type</InputLabel>
+              <Select
+                labelId="payeeTypeLabel"
+                id="payeeType"
+                value={payeeType}
+                onChange={ev => setPayeeType(ev.target.value as string)}
+              >
+                <MenuItem value="BILLER">Biller</MenuItem>
+                <MenuItem value="DOMESTIC">Domestic</MenuItem>
+                <MenuItem value="INTERNATIONAL">International</MenuItem>
+                <MenuItem value="ALL">All</MenuItem>
+              </Select>
+            </FormControl>
+          </Grid>}
+          {isRelevant('payeeId') &&
           <Grid item xs={12}>
             <TextField value={payeeId} label="Payee ID" onChange={ev => setPayeeId(ev.target.value)} style={{width: '100%'}} />
+          </Grid>}
+          {isRelevant('productId') &&
+          <Grid item xs={12}>
+            <TextField value={productId} label="Product ID" onChange={ev => setProductId(ev.target.value)} style={{width: '100%'}} />
           </Grid>}
           <Grid item xs={12}>
             <Button variant="contained" color="primary" onClick={callEndpoint}>Call</Button>
@@ -370,36 +636,3 @@ const mapDispatchToProps = {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(RequesterPanel)
-
-function resolvePath(apiCallName: string, pathParams: any): string {
-  switch (apiCallName) {
-    case 'Get Accounts':
-      return '/banking/accounts'
-    case 'Get Bulk Balances':
-    case 'Get Balances For Specific Accounts':
-      return '/banking/accounts/balances'
-    case 'Get Account Balance':
-      return '/banking/accounts/' + pathParams.accountId + '/balance'
-    case 'Get Account Detail':
-      return '/banking/accounts/' + pathParams.accountId
-    case 'Get Transactions For Account':
-      return '/banking/accounts/' + pathParams.accountId + '/transactions'
-    case 'Get Transaction Detail':
-      return '/banking/accounts/' + pathParams.accountId + '/transactions/' + pathParams.transactionId
-    case 'Get Direct Debits For Account':
-      return '/banking/accounts/' + pathParams.accountId + '/direct-debits'
-    case 'Get Bulk Direct Debits':
-    case 'Get Direct Debits For Specific Accounts':
-      return '/banking/accounts/direct-debits'
-    case 'Get Scheduled Payments for Account':
-      return '/banking/accounts/' + pathParams.accountId + '/payments/scheduled'
-    case 'Get Scheduled Payments Bulk':
-    case 'Get Scheduled Payments For Specific Accounts':
-      return '/banking/payments/scheduled'
-    case 'Get Payees':
-      return '/banking/payees'
-    case 'Get Payee Detail':
-      return '/banking/payees/' + pathParams.payeeId
-    default: return 'Not implemented'
-  }
-}
