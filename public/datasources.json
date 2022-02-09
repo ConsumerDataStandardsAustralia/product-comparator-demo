@@ -36,7 +36,7 @@
     {"name": "Delphi Bank", "url": "https://api.cdr.delphibank.com.au"},
     {"name": "Dnister Ukrainian Credit Co-operative", "url": "https://public.cdr-api.dnister.com.au"},
     {"name": "Easy Street Financial Services", "url": "https://ebranch.easystreet.com.au/es-openbanking", "icon": "https://www.easystreet.com.au/sites/default/files/ob_logo.png"},
-    {"name": "Family First Credit Union", "url": "https://online.familyfirst.com.au/OpenBanking"},
+    {"name": "Family First Credit Union", "url": "https://public.cdr.familyfirst.com.au", "icon": "https://familyfirst.com.au/wp-content/themes/familyfirst/images/logo.png"},
     {"name": "Fire Service Credit Unionn", "url": "https://public.cdr-api.fscu.com.au"},
     {"name": "First Choice Credit Union", "url": "https://public.cdr-api.firstchoicecu.com.au"},
     {"name": "First Option Bank", "url": "https://internetbanking.firstoption.com.au/OpenBanking", "icon": "https://firstoptionbank.com.au/wp-content/uploads/2020/06/FO_Bank_logo_black.png"},
