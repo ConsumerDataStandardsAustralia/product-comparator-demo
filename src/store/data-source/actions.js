@@ -38,14 +38,28 @@ export function addDataSource() {
   }
 }
 
+const MAJORS = ['ANZ', 'CBA', 'NAB', 'Westpac']
+
 export function syncDataSources() {
+  function saparateMajors(localDatasources, majorDatasources, minorDatasources) {
+    localDatasources.forEach(ds => {
+      if (majorDatasources.length < MAJORS.length && MAJORS.includes(ds.name)) {
+        majorDatasources.push(ds)
+      } else {
+        minorDatasources.push(ds)
+      }
+    })
+  }
+
+  const nameSort = (a, b) => a.name < b.name ? -1 : 1
+
   return {
     type: SYNC_DATA_SOURCES,
     payload: fetchDatasources().then(datasources => {
       const localDatasources = loadLocalDatasources()
       if (localDatasources) {
         datasources.forEach(ds => {
-          const lds = localDatasources.filter(lds => lds.name === ds.name)[0]
+          const lds = localDatasources.find(lds => lds.name === ds.name)
           if (lds) {
             lds.url = ds.url
             if (ds.icon) {
@@ -53,10 +67,11 @@ export function syncDataSources() {
             }
           } else {
             localDatasources.push(ds)
-            localDatasources.sort((a, b) => a.name < b.name ? -1 : 1)
           }
         })
-        return localDatasources
+        const majorDatasources = [], minorDatasources = []
+        saparateMajors(localDatasources, majorDatasources, minorDatasources)
+        return [...majorDatasources.sort(nameSort), ...minorDatasources.sort(nameSort)]
       }
       return datasources
     })

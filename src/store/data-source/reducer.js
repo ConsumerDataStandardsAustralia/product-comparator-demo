@@ -11,7 +11,7 @@ import {
 } from './actions'
 import {fulfilled} from '../../utils/async-actions'
 
-export default function(state=[], action) {
+export default function dataSources(state=[], action) {
   switch (action.type) {
     case fulfilled(LOAD_DATA_SOURCE):
       return action.payload
@@ -26,7 +26,7 @@ export default function(state=[], action) {
       return dataSources
     case DELETE_DATA_SOURCE:
       dataSources = [...state]
-      dataSources.splice(action.index, 1)
+      dataSources[action.index].deleted = true
       persistSavedDataSources(dataSources)
       return dataSources
     case MODIFY_DATA_SOURCE_NAME:
@@ -40,10 +40,11 @@ export default function(state=[], action) {
       persistSavedDataSources(dataSources)
       return dataSources
     default:
-      return [...state]
+      return state
   }
 }
 
 function persistSavedDataSources(dataSources) {
-  window.localStorage.setItem("cds-banking-prd-ds", JSON.stringify(dataSources.filter(dataSource => !dataSource.unsaved)))
+  window.localStorage.setItem("cds-banking-prd-ds",
+    JSON.stringify(dataSources.filter(dataSource => !dataSource.unsaved && !dataSource.deleted)))
 }

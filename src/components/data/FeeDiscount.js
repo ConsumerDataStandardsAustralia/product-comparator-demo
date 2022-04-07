@@ -2,7 +2,7 @@ import React from 'react'
 import DiscountEligibility from './DiscountEligibility'
 import {makeStyles} from '@material-ui/core'
 import {translateDiscountType} from '../../utils/dict'
-import * as moment from 'moment'
+import Duration from './Duration'
 import ecomp from '../../utils/enum-comp'
 
 const useStyles = makeStyles(() => ({
@@ -48,7 +48,7 @@ const FeeDiscount = (props) => {
         }
         {
           discountType === 'FEE_CAP' &&
-          <span> - {moment.duration(additionalValue).humanize().replace('a ', 'every ')}</span>
+          <span> - <Duration prefix="every" value={additionalValue}/></span>
         }
       </div>
       <div>{description}</div>

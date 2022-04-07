@@ -17,7 +17,7 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-export default (props) => {
+export default function Header(props) {
   const classes = useStyles()
   return (
     <div className={classes.header}>

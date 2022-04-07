@@ -1,8 +1,8 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {makeStyles} from '@material-ui/core/styles'
-import ExpansionPanel from '@material-ui/core/ExpansionPanel'
-import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary'
+import Accordion from '@material-ui/core/Accordion'
+import AccordionSummary from '@material-ui/core/AccordionSummary'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import CompareArrowsIcon from '@material-ui/icons/CompareArrows'
 import Typography from '@material-ui/core/Typography'
@@ -109,7 +109,7 @@ const render = (product, key) => {
     case 'fees':
       return !!product[key] && product[key].length > 0 &&
         <ul style={{margin: 0, padding:0}}>
-          {product[key].sort((a, b)=>ecomp(a.name, b.name)).map((fee, index) => <Fee key={index} fee={fee}/>)}
+          {product[key].filter(fee => fee).sort((a, b)=>ecomp(a.name, b.name)).map((fee, index) => <Fee key={index} fee={fee}/>)}
         </ul>
     case 'cardArt':
       return !!product[key] && product[key].length > 0 &&
@@ -126,15 +126,15 @@ const ComparisonPanel = (props) => {
   const classes = useStyles()
   return (
     !!products && products.length > 0 &&
-    <ExpansionPanel defaultExpanded className={classes.panel}>
-      <ExpansionPanelSummary
+    <Accordion defaultExpanded className={classes.panel}>
+      <AccordionSummary
         expandIcon={<ExpandMoreIcon/>}
         aria-controls='panel1c-content'
       >
         <div className={classes.heading}>
           <CompareArrowsIcon/><Typography style={{paddingLeft: 8}}>Products Comparison</Typography>
         </div>
-      </ExpansionPanelSummary>
+      </AccordionSummary>
       <Table className={classes.table}>
         <TableHead>
           <TableRow>
@@ -162,7 +162,7 @@ const ComparisonPanel = (props) => {
           ))}
         </TableBody>
       </Table>
-    </ExpansionPanel>
+    </Accordion>
   )
 }
 

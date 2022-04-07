@@ -100,6 +100,7 @@ export const feeTypeDict = {
   PURCHASE: 'Purchase',
   EVENT: 'Event',
   UPFRONT: 'Upfront',
+  VARIABLE: 'Variable',
   EXIT: 'Exit'
 }
 
@@ -126,6 +127,13 @@ export const rateApplicationMethodDict = {
 export const repaymentTypeDict = {
   INTEREST_ONLY: 'Interest Only',
   PRINCIPAL_AND_INTEREST: 'Principal and Interest'
+}
+
+export const discoveryStatusDict = {
+  OK: 'OK',
+  PARTIAL_FAILURE: 'Partial failure',
+  SCHEDULED_OUTAGE: 'Scheduled outage',
+  UNAVAILABLE: 'Unavailable'
 }
 
 export const productDataKeys = [
@@ -170,3 +178,5 @@ export const translateDiscountType = (discountType) => discountTypeDict[discount
 export const translateUnitOfMeasure = (unitOfMeasure) => unitOfMeasureDict[unitOfMeasure]
 
 export const translateRateApplicationMethod = (rateApplicationMethod) => rateApplicationMethodDict[rateApplicationMethod]
+
+export const translateDiscoveryStatus = (discoveryStatus) => discoveryStatusDict[discoveryStatus]

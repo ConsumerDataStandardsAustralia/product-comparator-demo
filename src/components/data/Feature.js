@@ -1,6 +1,6 @@
 import React from 'react'
 import {translateFeatureType} from '../../utils/dict'
-import * as moment from 'moment'
+import Duration from './Duration'
 
 const Feature = (props) => {
   const {featureType, additionalValue, additionalInfo, additionalInfoUri} = props.feature
@@ -50,7 +50,7 @@ const Feature = (props) => {
         }
         {
           (featureType === 'INTEREST_FREE' || featureType === 'INTEREST_FREE_TRANSFERS') &&
-          <span> - {moment.duration(additionalValue).humanize().replace('a ', 'every ')}</span>
+          <span> - <Duration prefix="every" value={additionalValue}/></span>
         }
         {featureType === 'FREE_TXNS_ALLOWANCE' && <span> - ${additionalValue}</span>}
       </div>
