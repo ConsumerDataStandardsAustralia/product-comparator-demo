@@ -17,7 +17,7 @@
     "gh-pages": "^2.0.1",
     "iso8601-duration": "^1.2.0",
     "lodash": "^4.17.20",
-    "moment": "^2.24.0",
+    "moment": "^2.29.2",
     "pluralize": "^8.0.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
