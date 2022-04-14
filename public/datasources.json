@@ -75,7 +75,7 @@
     {"name": "QBANK", "url": "https://banking.qbank.com.au/openbanking", "icon": "https://www.qbank.com.au/getmedia/a76807cb-5d38-478a-83d5-b6fc2acc7fa7/QBank_150.png.aspx"},
     {"name": "Qudos Bank", "url": "https://public.cdr-api.qudosbank.com.au"},
     {"name": "Queensland Country Bank", "url": "https://public.cdr-api.queenslandcountry.bank"},
-    {"name": "Rabobank", "url": "https://openbanking.api.rabobank.com.au", "icon": "https://www.rabobank.com.au/-/media/rabobank-au/images/logo/RB_logo_stacked_200x242px.png"},
+    {"name": "Rabobank", "url": "https://openbanking.api.rabobank.com.au/public", "icon": "https://www.rabobank.com.au/-/media/rabobank-au/images/logo/RB_logo_stacked_200x242px.png"},
     {"name": "RACQ Bank", "url": "https://cdrbank.racq.com.au", "icon": "https://cdn.intelligencebank.com/au/share/0Mvj/Y0GpK/RqBJZ/original/RACQ-BANK-LOGO_HOR_RGB.png"},
     {"name": "Regional Australia Bank", "url": "https://public-data.cdr.regaustbank.io", "icon": "https://www.regionalaustraliabank.com.au/-/media/CommunityMutual/Images/Logo/regional-australia-bank-primary-logo.png"},
     {"name": "RSL Money","url": "https://public.open.rslmoney.com.au","icon": "https://www.rslmoney.com.au/sites/default/files/favicon.ico"},
