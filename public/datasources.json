@@ -58,7 +58,7 @@
     {"name": "Leveraged", "url": "https://api.cdr.leveraged.com.au"},
     {"name": "Macquarie Bank Limited","url": "https://api.macquariebank.io","icon": "https://www.macquarie.com.au/assets/bfs/global/macquarie-logo_black.svg"},
     {"name": "Macquarie Credit Union Limited", "url": "https://banking.macquariecu.com.au/OpenBanking"},
-    {"name": "ME Bank", "url": "https://api.mebank.com.au", "icon": "https://www.mebank.com.au/getmedia/c79ff77e-5b3b-4410-9a1b-98e98a79f025/ME-logo-600px-black-transparent.png"},
+    {"name": "ME Bank", "url": "https://public.openbank.mebank.com.au", "icon": "https://www.mebank.com.au/getmedia/c79ff77e-5b3b-4410-9a1b-98e98a79f025/ME-logo-600px-black-transparent.png"},
     {"name": "MyLife MyFinance", "url": "https://openbanking-api.mylifemyfinance.com.au"},
     {"name": "MOVE Bank", "url": "https://api.movebank.com.au/OpenBanking", "icon": "https://movebank.com.au/media/3405/move-bank-logo-website.png"},
     {"name": "MyState Bank", "url": "https://openbank.api.mystate.com.au", "icon": "https://mystate.com.au/wp-content/uploads/MyState_Logo_s.png"},
