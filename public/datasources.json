@@ -101,4 +101,5 @@
     {"name": "Card Services", "url": "https://api.openbanking.cardservicesdirect.com.au", "icon": "https://www.cdn.citibank.com/v1/augcb/cbol/files/images/2021/logo-Card-Services.png"},
     {"name": "Kogan Money Credit Cards", "url": "https://api.openbanking.cards.koganmoney.com.au", "icon": "https://www.cdn.citibank.com/v1/augcb/cbol/files/images/2021/logo-Kogan-Money.png"},
     {"name": "Qantas Premier Credit Cards", "url": "https://api.openbanking.qantasmoney.com", "icon": "https://assets.qantasmoney.com/logos/qantas-money-logo-sm.svg"}
+    {"name": "Alex Bank", "url": "https://public.cdr.alex.bank", "icon": "https://www.alex.bank/assets/alex-bank-logo.png"}
 ]
