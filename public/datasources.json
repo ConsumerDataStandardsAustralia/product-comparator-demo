@@ -5,6 +5,7 @@
     {"name": "Westpac", "url": "https://digital-api.westpac.com.au", "icon": "https://banking.westpac.com.au/wbc/banking/Themes/Default/Desktop/WBC/Core/Images/logo_white_bg.png.6c772a263bf42d99a2c098bf0739fc5b504ed28d.png"},
     {"name": "86 400", "url": "https://public.cdr-api.86400.com.au"},
     {"name": "Adelaide Bank", "url": "https://api.cdr.adelaidebank.com.au"},
+    {"name": "Alex Bank", "url": "https://public.cdr.alex.bank", "icon": "https://www.alex.bank/assets/alex-bank-logo.png"},
     {"name": "AMP Bank", "url": "https://api.cdr-api.amp.com.au", "icon": "https://www.amp.com.au/content/dam/amp-au/data/icons/amp-logo-reversed.svg"},
     {"name": "Arab Bank Australia Limited", "url": "https://openbanking-api.arabbank.com.au/public", "icon": "https://www.arabbank.com.au/themes/arabbank/images/abal-logo.svg"},
     {"name": "Australian Military Bank","url": "https://public.open.australianmilitarybank.com.au","icon": "https://www.australianmilitarybank.com.au/sites/default/files/favicon.ico"},
