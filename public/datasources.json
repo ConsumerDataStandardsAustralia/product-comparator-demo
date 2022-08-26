@@ -49,7 +49,7 @@
     {"name": "Heritage Bank", "url": "https://product.api.heritage.com.au"},
     {"name": "Horizon Bank", "url": "https://onlinebanking.horizonbank.com.au/openbanking"},
     {"name": "HSBC Bank", "url": "https://api.hsbc.com.au"},
-    {"name": "Hume Bank", "url": "https://ibank.humebank.com.au/openbanking"},
+    {"name": "Hume Bank", "url": "https://ibankob.humebank.com.au/openbanking"},
     {"name": "Illawarra Credit Union", "url": "https://onlineteller.cu.com.au/OpenBanking", "icon": "https://www.illawarracu.com.au/content/themes/nucleo-icu/assets/images/logo.png"},
     {"name": "IMB Bank", "url": "https://openbank.openbanking.imb.com.au"},
     {"name": "ING", "url": "https://apic.ing.com.au", "icon": "https://www.ing.com.au/img/logos/Logo-sm@2x.png"},
