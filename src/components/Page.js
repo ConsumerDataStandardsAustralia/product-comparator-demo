@@ -10,6 +10,7 @@ import AppBar from '@material-ui/core/AppBar'
 import Tabs from '@material-ui/core/Tabs'
 import Tab from '@material-ui/core/Tab'
 import DiscoveryInfo from './data/DiscoveryInfo'
+import RequesterPanel from './requester/RequesterPanel'
 
 const useStyles = makeStyles(theme => ({
   hidden: {
@@ -34,14 +35,18 @@ function Page() {
         <Tabs value={value} onChange={handleChange}>
           <Tab label="Products" />
           <Tab label="Status and Outages" />
+          <Tab label="Requester" />
         </Tabs>
       </AppBar>
       <div className={value === 0 ? '' : classes.hidden}>
         <DataPanel/>
         <ComparisonPanel/>
       </div>
-      <div className={value === 0 ? classes.hidden : ''}>
+      <div className={value === 1 ? '' : classes.hidden}>
         <DiscoveryInfo/>
+      </div>
+      <div className={value === 2 ? '' : classes.hidden}>
+        <RequesterPanel />
       </div>
     </Container>
   );

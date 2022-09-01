@@ -13,6 +13,10 @@
     "@material-ui/core": "^4.9.10",
     "@material-ui/icons": "^4.2.1",
     "@material-ui/lab": "^4.0.0-alpha.56",
+    "@types/jest": "^27.0.1",
+    "@types/node": "^16.7.1",
+    "@types/react": "^17.0.19",
+    "@types/react-dom": "^17.0.9",
     "clsx": "^1.0.4",
     "gh-pages": "^2.0.1",
     "iso8601-duration": "^1.2.0",
@@ -26,7 +30,8 @@
     "redux": "^4.0.1",
     "redux-logger": "^3.0.6",
     "redux-promise-middleware": "^6.1.1",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "typescript": "^4.3.5"
   },
   "scripts": {
     "preinstall": "npx npm-force-resolutions",
@@ -43,5 +48,8 @@
     ">0.2%",
     "not dead",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "@types/react-redux": "^7.1.18"
+  }
 }
