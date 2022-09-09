@@ -95,7 +95,7 @@
     {"name": "Up", "url": "https://api.up.com.au", "icon": "https://up.com.au/assets/images/logo_400x400.png"},
     {"name": "Virgin Money Australia", "url": "https://secure.api.virginmoney.com.au", "icon": "https://virginmoney.com.au/content/dam/virginmoney/logos/logo_footer.png"},
     {"name": "Volt Bank", "url": "https://api.voltbank.com.au", "icon": "https://openbanking.voltbank.com.au/logos/logo?v=1600930338006"},
-    {"name": "Warwick Credit Union", "url": "https://onlinebanking.wawcu.com.au/OpenBanking"},
+    {"name": "Warwick Credit Union", "url": "https://openbanking.wcu.com.au/openbanking"},
     {"name": "WAW Credit Union", "url": "https://onlinebanking.wawcu.com.au/OpenBanking"},
     {"name": "Woolworths Team Bank", "url": "https://online.woolworthsteambank.com.au/OpenBanking"},
     {"name": "Coles Financial Services", "url": "https://api.openbanking.secure.coles.com.au", "icon": "https://www.cdn.citibank.com/v1/augcb/cbol/files/images/2021/logo-Coles-Financial-Services.png"},
