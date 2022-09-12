@@ -1,7 +1,7 @@
 {
-  "homepage": "https://consumerdatastandardsaustralia.github.io/banking-products-comparator/",
-  "name": "cds-banking-prd-viewer",
-  "version": "0.1.0",
+  "homepage": "https://consumerdatastandardsaustralia.github.io/product-comparator-demo/",
+  "name": "product-comparator-demo",
+  "version": "0.1.1",
   "private": true,
   "resolutions": {
     "lodash.template": "^4.5.0",

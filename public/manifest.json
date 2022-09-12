@@ -1,5 +1,5 @@
 {
-  "short_name": "cds-banking-prd-viewer",
-  "name": "CDS Banking Products View/Comparison App",
+  "short_name": "product-comparator-demo",
+  "name": "Product Comparator demo",
   "start_url": "."
 }

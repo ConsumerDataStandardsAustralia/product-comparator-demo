@@ -27,7 +27,7 @@ function Page() {
   
   return (
     <Container maxWidth={false}>
-      <Header title='Banking Products Comparator (demo)'/>
+      <Header title='Product Comparator (demo)'/>
       <DataSourcePanel/>
       <ConsolePanel/>
       <AppBar position="static" style={{marginTop: 8, marginBottom: 8}}>
