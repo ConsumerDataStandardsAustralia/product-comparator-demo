@@ -48,7 +48,7 @@
     {"name": "Great Southern Bank","url": "https://api.open-banking.greatsouthernbank.com.au", "icon": "https://www.greatsouthernbank.com.au/media/images/global/logo.svg"}, 
     {"name": "Heritage Bank", "url": "https://product.api.heritage.com.au"},
     {"name": "Horizon Bank", "url": "https://onlinebanking.horizonbank.com.au/openbanking"},
-    {"name": "HSBC Bank", "url": "https://api.hsbc.com.au"},
+    {"name": "HSBC Bank", "url": "https://openbanking.hsbc.com.au"},
     {"name": "Hume Bank", "url": "https://ibankob.humebank.com.au/openbanking"},
     {"name": "Illawarra Credit Union", "url": "https://onlineteller.cu.com.au/OpenBanking", "icon": "https://www.illawarracu.com.au/content/themes/nucleo-icu/assets/images/logo.png"},
     {"name": "IMB Bank", "url": "https://openbank.openbanking.imb.com.au"},
