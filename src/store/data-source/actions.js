@@ -10,7 +10,13 @@ export const ENABLE_DATA_SOURCE = 'ENABLE_DATA_SOURCE'
 
 function fetchDatasources() {
   return fetch(process.env.PUBLIC_URL + '/datasources.json')
-    .then(response => response.json())
+    .then(response => response.json().then(datasources => {
+      const filtered = [];
+      datasources.forEach(ds => {
+        if (!ds.sectors || ds.sectors.banking) filtered.push(ds);
+      })
+      return filtered;
+    }))
 }
 
 function loadLocalDatasources() {
