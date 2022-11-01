@@ -13,7 +13,7 @@ function fetchDatasources() {
     .then(response => response.json().then(datasources => {
       const filtered = [];
       datasources.forEach(ds => {
-        if (!ds.sectors || ds.sectors.banking) filtered.push(ds);
+        if (!ds.sectors || ds.sectors.includes("banking")) filtered.push(ds);
       })
       return filtered;
     }))
