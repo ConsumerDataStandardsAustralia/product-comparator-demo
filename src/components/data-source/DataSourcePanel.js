@@ -91,7 +91,7 @@ class DataSourcePanel extends React.Component {
           aria-controls='panel1c-content'
         >
           <div className={classes.heading}>
-            <AccountBalanceIcon/><Typography  style={{paddingLeft: 8}}>Banks</Typography>
+            <AccountBalanceIcon/><Typography style={{paddingLeft: 8}}>Data sources</Typography>
           </div>
         </AccordionSummary>
         <div style={{maxHeight: 300, overflow: 'auto'}}>

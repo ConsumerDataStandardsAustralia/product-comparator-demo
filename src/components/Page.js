@@ -1,6 +1,7 @@
 import React from 'react'
 import DataSourcePanel from './data-source/DataSourcePanel'
 import DataPanel from './data/DataPanel'
+import EnergyPanel from './data/EnergyPanel'
 import ConsolePanel from './data/ConsolePanel'
 import Header from './header'
 import { Container } from '@material-ui/core'
@@ -32,7 +33,8 @@ function Page() {
       <ConsolePanel/>
       <AppBar position="static" style={{marginTop: 8, marginBottom: 8}}>
         <Tabs value={value} onChange={handleChange}>
-          <Tab label="Products" />
+          <Tab label="Banking" />
+          <Tab label="Energy" />
           <Tab label="Status and Outages" />
         </Tabs>
       </AppBar>
@@ -40,7 +42,10 @@ function Page() {
         <DataPanel/>
         <ComparisonPanel/>
       </div>
-      <div className={value === 0 ? classes.hidden : ''}>
+      <div className={value === 1 ? '' : classes.hidden}>
+        <EnergyPanel/>
+      </div>
+      <div className={value === 2 ? '' : classes.hidden}>
         <DiscoveryInfo/>
       </div>
     </Container>
