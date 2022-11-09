@@ -1,10 +1,10 @@
 import React from 'react'
-import DateTime from './DateTime'
-import Duration from './Duration'
+import DateTime from '../DateTime'
+import Duration from '../Duration'
 import { connect } from 'react-redux'
-import { normalise } from '../../utils/url'
-import { retrieveStatus, retrieveOutages } from '../../store/data'
-import { translateDiscoveryStatus } from '../../utils/dict'
+import { normalise } from '../../../utils/url'
+import { retrieveStatus, retrieveOutages } from '../../../store/discovery'
+import { translateDiscoveryStatus } from '../../../utils/dict'
 
 class StatusOutages extends React.Component {
 
@@ -61,9 +61,10 @@ const Outage = props => {
     </li>
   )
 }
+
 const mapStateToProps = state => ({
   versionInfo: state.versionInfo.vHeaders,
-  data: state.data
+  data: state.discovery
 })
 
 const mapDispatchToProps = {

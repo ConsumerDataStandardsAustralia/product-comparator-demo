@@ -1,6 +1,6 @@
 import React from 'react'
-import {translateFeatureType} from '../../utils/dict'
-import Duration from './Duration'
+import {translateFeatureType} from '../../../utils/dict'
+import Duration from '../Duration'
 
 const Feature = (props) => {
   const {featureType, additionalValue, additionalInfo, additionalInfoUri} = props.feature

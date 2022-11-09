@@ -1,16 +1,16 @@
 import React from 'react'
 import DataSourcePanel from './data-source/DataSourcePanel'
-import DataPanel from './data/DataPanel'
-import EnergyPanel from './data/EnergyPanel'
+import BankingPanel from './data/banking/BankingPanel'
+import EnergyPanel from './data/energy/EnergyPanel'
 import ConsolePanel from './data/ConsolePanel'
 import Header from './header'
 import { Container } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
-import ComparisonPanel from './comparison/ComparisonPanel'
+import BankingComparisonPanel from './comparison/BankingComparisonPanel'
 import AppBar from '@material-ui/core/AppBar'
 import Tabs from '@material-ui/core/Tabs'
 import Tab from '@material-ui/core/Tab'
-import DiscoveryInfo from './data/DiscoveryInfo'
+import DiscoveryInfo from './data/discovery/DiscoveryInfo'
 
 const useStyles = makeStyles(theme => ({
   hidden: {
@@ -39,8 +39,8 @@ function Page() {
         </Tabs>
       </AppBar>
       <div className={value === 0 ? '' : classes.hidden}>
-        <DataPanel/>
-        <ComparisonPanel/>
+        <BankingPanel/>
+        <BankingComparisonPanel/>
       </div>
       <div className={value === 1 ? '' : classes.hidden}>
         <EnergyPanel/>

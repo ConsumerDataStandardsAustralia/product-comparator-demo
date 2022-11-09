@@ -5,19 +5,21 @@ import { combineReducers } from 'redux'
 import conout from './conout/reducer'
 import dataSources from './data-source/reducer'
 import versionInfo from './version-info/reducer'
-import data from './data/reducer'
+import banking from './banking/data/reducer'
 import energy from './energy/data/reducer'
+import discovery from './discovery/reducer'
 import selection from './selection/reducer'
-import comparison from './comparison/reducer'
+import bankingComparison from './banking/comparison/reducer'
 
 const rootReducer = combineReducers({
   conout,
   dataSources,
   versionInfo,
-  data,
+  banking,
   energy,
+  discovery,
   selection,
-  comparison
+  bankingComparison
 })
 
 const middleWares = [thunk, promise]

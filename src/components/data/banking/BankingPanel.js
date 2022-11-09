@@ -1,21 +1,19 @@
 import React from 'react'
+import {connect} from 'react-redux'
+import {makeStyles} from '@material-ui/core/styles'
 import Accordion from '@material-ui/core/Accordion'
 import AccordionSummary from '@material-ui/core/AccordionSummary'
 import AccordionActions from '@material-ui/core/AccordionActions'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import SubjectIcon from '@material-ui/icons/Subject'
 import Typography from '@material-ui/core/Typography'
-import Grid from '@material-ui/core/Grid'
 import Divider from '@material-ui/core/Divider'
-import RefreshIcon from '@material-ui/icons/Refresh'
-import Fab from '@material-ui/core/Fab'
-import Tooltip from '@material-ui/core/Tooltip'
-import StatusOutages from './StatusOutages'
-import { makeStyles } from '@material-ui/core/styles'
+import CompareIcon from '@material-ui/icons/Compare'
 import { fade } from '@material-ui/core/styles/colorManipulator'
-import { connect } from 'react-redux'
-import { normalise } from '../../utils/url'
-import { retrieveStatus, retrieveOutages } from '../../store/data'
+import Fab from '@material-ui/core/Fab'
+import Grid from '@material-ui/core/Grid'
+import BankingProductList from './BankingProductList'
+import { compareProducts } from '../../../store/banking/comparison'
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -36,15 +34,27 @@ const useStyles = makeStyles(theme => ({
     marginLeft: 'auto',
     marginRight: 'auto',
     marginBottom: 20
+  },
+  button: {
+    margin: theme.spacing(1)
+  },
+  leftIcon: {
+    marginRight: theme.spacing(1),
   }
 }))
 
-const DiscoveryInfo = (props) => {
-
+const BankingPanel = (props) => {
   const {dataSources, savedDataSourcesCount} = props
   const classes = useStyles()
   const [expanded, setExpanded] = React.useState(true)
-
+  const compare = () => {
+    if( /Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+      alert('The screen size is too small! Please use a bigger screen to compare.')
+      return
+    }
+    props.compareProducts(props.selectedProducts)
+    setExpanded(false)
+  }
   const toggleExpansion = (event, newExpanded) => {
     setExpanded(newExpanded)
   }
@@ -53,17 +63,6 @@ const DiscoveryInfo = (props) => {
     return Math.max(12 / dataSourceCount, min)
   }
 
-  const refreshStatusOutages = () => {
-    const { versionInfo } = props
-    props.dataSources.forEach((dataSource, index) => {
-      const url = normalise(dataSource.url)
-      if (!dataSource.unsaved && dataSource.enabled && !dataSource.deleted) {
-        props.retrieveStatus(index, url, versionInfo.xV, versionInfo.xMinV)
-        props.retrieveOutages(index, url, versionInfo.xV, versionInfo.xMinV)
-      }
-    })
-  }
-    
   return (
     <Accordion defaultExpanded className={classes.panel} expanded={expanded} onChange={toggleExpansion}>
       <AccordionSummary
@@ -71,7 +70,7 @@ const DiscoveryInfo = (props) => {
         aria-controls='panel1c-content'
       >
         <div className={classes.heading}>
-          <SubjectIcon/><Typography style={{paddingLeft: 8}}>Status &amp; Outages</Typography>
+          <SubjectIcon/><Typography style={{paddingLeft: 8}}>Products</Typography>
         </div>
       </AccordionSummary>
       <div className={classes.details}>
@@ -88,21 +87,20 @@ const DiscoveryInfo = (props) => {
                   xl={getWidth(savedDataSourcesCount, 3)}
             >
               <div className="title">{!!dataSource.icon && <span><img src={dataSource.icon} alt=""/></span>}<h2>{dataSource.name}</h2></div>
-              <StatusOutages dataSource={dataSource} dataSourceIndex={index}/>
+              <BankingProductList dataSource={dataSource} dataSourceIndex={index}/>
             </Grid>
           ))}
         </Grid>
       }
       </div>
-
       <Divider/>
-
       <AccordionActions>
-        <Tooltip title='Refresh'>
-          <Fab size='medium' color='primary' onClick={refreshStatusOutages}>
-            <RefreshIcon/>
-          </Fab>
-        </Tooltip>
+        <Fab variant='extended' size='medium' color='primary'
+             disabled={props.selectedProducts.length < 2 || props.selectedProducts.length > 4}
+             className={classes.button} onClick={compare}>
+          <CompareIcon className={classes.leftIcon}/>
+          Compare
+        </Fab>
       </AccordionActions>
     </Accordion>
   )
@@ -111,12 +109,9 @@ const DiscoveryInfo = (props) => {
 const mapStateToProps = state=>({
   dataSources : state.dataSources,
   savedDataSourcesCount: state.dataSources.filter(dataSource => !dataSource.unsaved && !dataSource.deleted && dataSource.enabled).length,
-  versionInfo: state.versionInfo.vHeaders
+  selectedProducts: state.selection
 })
 
-const mapDispatchToProps = {
-  retrieveStatus,
-  retrieveOutages
-}
+const mapDispatchToProps = { compareProducts }
 
-export default connect(mapStateToProps, mapDispatchToProps)(DiscoveryInfo)
+export default connect(mapStateToProps, mapDispatchToProps)(BankingPanel)

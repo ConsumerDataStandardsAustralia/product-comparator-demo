@@ -1,11 +1,11 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {START_RETRIEVE_PRODUCT_LIST, startRetrieveProductList, retrieveProductList} from '../../store/data'
+import {START_RETRIEVE_PRODUCT_LIST, startRetrieveProductList, retrieveProductList} from '../../../store/banking/data'
 import LinearProgress from '@material-ui/core/LinearProgress'
 import ProductCategory from './ProductCategory'
-import {normalise} from '../../utils/url'
+import {normalise} from '../../../utils/url'
 
-class ProductList extends React.Component {
+class BankingProductList extends React.Component {
 
   componentDidMount() {
     const { dataSourceIndex, dataSource, versionInfo } = this.props
@@ -72,10 +72,10 @@ class ProductList extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  productList: state.data,
+  productList: state.banking,
   versionInfo: state.versionInfo.vHeaders
 })
 
 const mapDispatchToProps = {startRetrieveProductList, retrieveProductList}
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProductList)
+export default connect(mapStateToProps, mapDispatchToProps)(BankingProductList)

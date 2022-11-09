@@ -1,5 +1,5 @@
 import React from 'react'
-import {translateConstraintType} from '../../utils/dict'
+import {translateConstraintType} from '../../../utils/dict'
 
 const Constraint = (props) => {
   const {constraintType, additionalInfo, additionalValue, additionalInfoUri} = props.constraint

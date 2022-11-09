@@ -1,10 +1,10 @@
 import React from 'react'
 import FeeDiscount from './FeeDiscount'
-import Duration from './Duration'
-import {translateFeeType} from '../../utils/dict'
+import Duration from '../Duration'
+import {translateFeeType} from '../../../utils/dict'
 import {makeStyles} from '@material-ui/core'
-import ecomp from '../../utils/enum-comp'
-import {isDuration} from '../../utils/datetime'
+import ecomp from '../../../utils/enum-comp'
+import {isDuration} from '../../../utils/datetime'
 
 const useStyles = makeStyles(() => ({
   sectionTitle: {

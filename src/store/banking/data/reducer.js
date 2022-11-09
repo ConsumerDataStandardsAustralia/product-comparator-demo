@@ -2,14 +2,12 @@ import {
   START_RETRIEVE_PRODUCT_LIST,
   RETRIEVE_PRODUCT_LIST,
   RETRIEVE_PRODUCT_DETAIL,
-  RETRIEVE_STATUS,
-  RETRIEVE_OUTAGES,
   DELETE_DATA,
   CLEAR_DATA
 } from './actions'
-import {fulfilled} from '../../utils/async-actions'
+import {fulfilled} from '../../../utils/async-actions'
 
-export default function data(state = [], action) {
+export default function banking(state = [], action) {
   switch (action.type) {
     case START_RETRIEVE_PRODUCT_LIST: {
       const s = [...state]
@@ -49,22 +47,6 @@ export default function data(state = [], action) {
         item.detailRecords++
       } else {
         item.failedDetailRecords++
-      }
-      return s
-    }
-    case fulfilled(RETRIEVE_STATUS): {
-      const s = [...state]
-      if (action.payload) {
-        const {idx, response} = action.payload
-        s[idx].statusDetails = response ? response.data : null
-      }
-      return s
-    }
-    case fulfilled(RETRIEVE_OUTAGES): {
-      const s = [...state]
-      if (action.payload) {
-        const {idx, response} = action.payload
-        s[idx].outagesDetails = response ? response.data : null
       }
       return s
     }

@@ -42,7 +42,7 @@ export const retrievePlanList = (dataSourceIdx, baseUrl, planListUrl, xV, xMinV)
         .then(json => ({idx: dataSourceIdx, response: json}))
     })
     response.then(({value})=> {
-      const {plans: plans} = value.response.data
+      const {plans} = value.response.data
       const actions = plans.map(plan => retrievePlanDetail(dataSourceIdx, baseUrl, plan.planId, xV, xMinV))
       const {next} = value.response.links
       if (!!next) {

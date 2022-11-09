@@ -1,8 +1,8 @@
 import React from 'react'
 import RateTier from './RateTier'
-import Duration from './Duration'
-import {translateInterestPaymentDue, translateLendingRateType, translateRepaymentType} from '../../utils/dict'
-import ecomp from '../../utils/enum-comp'
+import Duration from '../Duration'
+import {translateInterestPaymentDue, translateLendingRateType, translateRepaymentType} from '../../../utils/dict'
+import ecomp from '../../../utils/enum-comp'
 import {makeStyles} from '@material-ui/core'
 
 const useStyles = makeStyles(() => ({

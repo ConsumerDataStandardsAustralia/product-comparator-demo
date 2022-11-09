@@ -1,11 +1,9 @@
-import {conoutInfo, conoutError, conoutWarn} from '../conout/actions'
+import {conoutInfo, conoutError, conoutWarn} from '../../conout/actions'
 
 export const START_RETRIEVE_PRODUCT_LIST = 'START_RETRIEVE_PRODUCT_LIST'
 export const RETRIEVE_PRODUCT_LIST = 'RETRIEVE_PRODUCT_LIST'
 export const RETRIEVE_PRODUCT_DETAIL = 'RETRIEVE_PRODUCT_DETAIL'
 export const RETRIEVE_ALL_PRODUCT_DETAILS = 'RETRIEVE_ALL_PRODUCT_DETAILS'
-export const RETRIEVE_STATUS = 'RETRIEVE_STATUS'
-export const RETRIEVE_OUTAGES = 'RETRIEVE_OUTAGES'
 export const DELETE_DATA = 'DELETE_DATA'
 export const CLEAR_DATA = 'CLEAR_DATA'
 
@@ -80,7 +78,7 @@ export const retrieveProductDetail = (dataSourceIdx, url, productId, xV, xMinV) 
         return obj
       })
       .then(json => {
-        const { productDetails } = getState().data[dataSourceIdx]
+        const { productDetails } = getState().banking[dataSourceIdx]
         const { data } = json
         if (productDetails.some(prod => prod.productId === data.productId
             && prod.productCategory === data.productCategory)) {
@@ -110,53 +108,3 @@ export const clearData = (dataSourceIdx) => ({
   type: CLEAR_DATA,
   payload: dataSourceIdx
 })
-
-export const retrieveStatus = (dataSourceIdx, url, xV, xMinV) => dispatch => {
-  const fullUrl = url + '/discovery/status'
-  const request = new Request(fullUrl, {
-    headers: new Headers({...headers, 'x-v': xV, 'x-min-v': xMinV})
-  })
-  dispatch(conoutInfo('Requesting retrieveStatus(): ' + fullUrl))
-  dispatch({
-    type: RETRIEVE_STATUS,
-    payload: fetch(request)
-      .then(response => {
-        if (response.ok) {
-          return response.json()
-        }
-        throw new Error(`Response not OK. Status: ${response.status} (${response.statusText})`)
-      })
-      .then(obj => {
-        dispatch(conoutInfo(`Received response for ${fullUrl}:`, obj))
-        return {idx: dataSourceIdx, response: obj}
-      })
-      .catch(error => {
-        dispatch(conoutError('Caught ' + error + ' while requesting ' + fullUrl))
-      })
-  })
-}
-
-export const retrieveOutages = (dataSourceIdx, url, xV, xMinV) => dispatch => {
-  const fullUrl = url + '/discovery/outages'
-  const request = new Request(fullUrl, {
-    headers: new Headers({...headers, 'x-v': xV, 'x-min-v': xMinV})
-  })
-  dispatch(conoutInfo('Requesting retrieveOutages(): ' + fullUrl))
-  dispatch({
-    type: RETRIEVE_OUTAGES,
-    payload: fetch(request)
-      .then(response => {
-        if (response.ok) {
-          return response.json()
-        }
-        throw new Error(`Response not OK. Status: ${response.status} (${response.statusText})`)
-      })
-      .then(obj => {
-        dispatch(conoutInfo(`Received response for ${fullUrl}:`, obj))
-        return {idx: dataSourceIdx, response: obj}
-      })
-      .catch(error => {
-        dispatch(conoutError('Caught ' + error + ' while requesting ' + fullUrl))
-      })
-  })
-}
