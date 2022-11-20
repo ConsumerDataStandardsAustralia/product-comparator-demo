@@ -4,6 +4,7 @@ export const START_RETRIEVE_PLAN_LIST = 'START_RETRIEVE_PLAN_LIST'
 export const RETRIEVE_PLAN_LIST = 'RETRIEVE_PLAN_LIST'
 export const RETRIEVE_PLAN_DETAIL = 'RETRIEVE_PLAN_DETAIL'
 export const RETRIEVE_ALL_PLAN_DETAILS = 'RETRIEVE_ALL_PLAN_DETAILS'
+export const CLEAR_DATA = 'CLEAR_ENERGY_DATA'
 
 export const startRetrievePlanList = (dataSourceIdx) => ({
   type: START_RETRIEVE_PLAN_LIST,
@@ -14,8 +15,9 @@ const headers = {
   'Accept': 'application/json'
 }
 
-export const retrievePlanList = (dataSourceIdx, baseUrl, planListUrl, xV, xMinV) =>
+export const retrievePlanList = (dataSourceIdx, baseUrl, xV, xMinV, effective, fuelType) =>
   (dispatch) => {
+    const planListUrl = baseUrl + '/energy/plans?effective=' + effective + '&fuelType=' + fuelType
     const request = new Request(planListUrl, {headers: new Headers({...headers, 'x-v': xV, 'x-min-v': xMinV})})
     dispatch(conoutInfo(`Requesting retrievePlanList() for ${planListUrl}`))
     const response = dispatch({
@@ -49,7 +51,7 @@ export const retrievePlanList = (dataSourceIdx, baseUrl, planListUrl, xV, xMinV)
         if (next === planListUrl) {
           dispatch(conoutError(`The link next should not be the same as the current page URL (${planListUrl}):`, value.response.links))
         } else {
-          actions.push(retrievePlanList(dataSourceIdx, baseUrl, next, xV, xMinV))
+          actions.push(retrievePlanList(dataSourceIdx, next, xV, xMinV, effective, fuelType))
         }
       }
       dispatch(retrieveAllPlanDetails(actions))
@@ -85,4 +87,9 @@ export const retrievePlanDetail = (dataSourceIdx, url, planId, xV, xMinV) => (di
 export const retrieveAllPlanDetails = (actions) => dispatch => dispatch({
   type: RETRIEVE_ALL_PLAN_DETAILS,
   payload: Promise.all(actions.map(action => dispatch(action)))
+})
+
+export const clearData = (dataSourceIdx) => ({
+  type: CLEAR_DATA,
+  payload: dataSourceIdx
 })

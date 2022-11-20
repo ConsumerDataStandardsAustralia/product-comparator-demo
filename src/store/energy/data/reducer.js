@@ -1,7 +1,8 @@
 import {
   START_RETRIEVE_PLAN_LIST,
   RETRIEVE_PLAN_LIST,
-  RETRIEVE_PLAN_DETAIL
+  RETRIEVE_PLAN_DETAIL,
+  CLEAR_DATA
 } from './actions'
 import {fulfilled} from '../../../utils/async-actions'
 
@@ -46,6 +47,11 @@ export default function energy(state = [], action) {
       } else {
         item.failedDetailRecords++
       }
+      return s
+    }
+    case CLEAR_DATA: {
+      const s = [...state]
+      s[action.payload] = null
       return s
     }
     default:

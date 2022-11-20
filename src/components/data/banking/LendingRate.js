@@ -35,7 +35,7 @@ const LendingRate = (props) => {
   return (
     <li>
       <div>{(rate * 100).toFixed(2)}%</div>
-      {!!comparisonRate && <div>Comparision rate: {(comparisonRate * 100).toFixed(2)}%</div>}
+      {!!comparisonRate && <div>Comparison rate: {(comparisonRate * 100).toFixed(2)}%</div>}
       <div>
         {translateLendingRateType(lendingRateType)}
         {
