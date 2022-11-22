@@ -123,11 +123,11 @@ const DataSource = (props) => {
       </Grid>
       <Grid item xs={4}>
         <TextField
-          error={!isUrl(dataSource.url)}
+          error={!isUrl(dataSource.publicBaseUri)}
           required={true}
           onChange={handleChange('url')}
           placeholder='e.g. https://data.holder/cds-au/v1'
-          value={dataSource.url}
+          value={dataSource.publicBaseUri}
           margin='normal'
           fullWidth
         />
@@ -152,10 +152,10 @@ const DataSource = (props) => {
       </Grid>
       <Grid item xs={3}>
         <TextField
-          error={!!dataSource.icon && !isUrl(dataSource.icon)}
+          error={!!dataSource.logoUri && !isUrl(dataSource.logoUri)}
           onChange={handleChange('icon')}
           placeholder='e.g. https://data.holder/images/bank.png'
-          value={dataSource.icon}
+          value={dataSource.logoUri}
           margin='normal'
           fullWidth
         />

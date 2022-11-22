@@ -1,3 +1,5 @@
+import {conoutError} from '../conout/actions'
+
 export const LOAD_DATA_SOURCE = 'LOAD_DATA_SOURCE'
 export const ADD_DATA_SOURCE = 'ADD_DATA_SOURCE'
 export const SYNC_DATA_SOURCES = 'SYNC_DATA_SOURCES'
@@ -8,28 +10,32 @@ export const MODIFY_DATA_SOURCE_URL = 'MODIFY_DATA_SOURCE_URL'
 export const MODIFY_DATA_SOURCE_ICON = 'MODIFY_DATA_SOURCE_ICON'
 export const ENABLE_DATA_SOURCE = 'ENABLE_DATA_SOURCE'
 
-function fetchDatasources() {
-  return fetch(process.env.PUBLIC_URL + '/datasources.json')
-    .then(response => response.json())
-}
+function fetchDatasources(dispatch) {
+  return fetch('https://api.cdr.gov.au/cdr-register/v1/banking/data-holders/brands/summary')
+    .then(response => response.json()).then(obj => obj.data)
+    .catch(error => {
+      dispatch(conoutError('Caught ' + error + ' while requesting Brands Summary'))
+      return []
+    })
+  }
 
 function loadLocalDatasources() {
   const ds = window.localStorage.getItem("cds-banking-prd-ds")
   return ds ? JSON.parse(ds) : false
 }
 
-export function loadDataSource() {
-  const ds = loadLocalDatasources()
-  return {
+export const loadDataSource = () => dispatch => {
+  const ds = false
+  dispatch({
     type: LOAD_DATA_SOURCE,
-    payload: ds ? Promise.resolve(ds) : fetchDatasources()
-      .then(datasources => {
-        for (let i = 0; i < 4 && i < datasources.length; i++) {
-          datasources[i].enabled = true
-        }
-        return datasources
-      })
-  }
+    payload: ds ? Promise.resolve(ds) : fetchDatasources(dispatch)
+      // .then(datasources => {
+      //   for (let i = 0; i < 4 && i < datasources.length; i++) {
+      //     datasources[i].enabled = true
+      //   }
+      //   return datasources
+      // })
+  })
 }
 
 export function addDataSource() {

@@ -74,7 +74,7 @@ class DataSourcePanel extends React.Component {
             this.props.clearSelection(dataSourceIndex)
             this.props.clearData(dataSourceIndex)
             this.props.startRetrieveProductList(dataSourceIndex)
-            const normalisedUrl = normalise(dataSource.url)
+            const normalisedUrl = normalise(dataSource.publicBaseUri)
             this.props.retrieveProductList(dataSourceIndex, normalisedUrl, normalisedUrl + '/banking/products', xV, xMinV)
           }
         })
