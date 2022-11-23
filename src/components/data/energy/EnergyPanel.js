@@ -49,7 +49,8 @@ const useStyles = makeStyles(theme => ({
 }))
 
 const EnergyPanel = (props) => {
-  const {dataSources, savedDataSourcesCount, versionInfo} = props
+  const {dataSources, versionInfo} = props
+  const savedDataSourcesCount = dataSources.length
   const classes = useStyles()
   const [expanded, setExpanded] = React.useState(true)
   const [effective, setEffective] = React.useState('ALL')
@@ -57,15 +58,11 @@ const EnergyPanel = (props) => {
 
   React.useEffect(() => {
     dataSources.forEach((dataSource, dataSourceIndex) => {
-      if (!dataSource.unsaved && dataSource.enabled && !dataSource.deleted) {
-        props.startRetrievePlanList(dataSourceIndex)
-        props.retrievePlanList(dataSourceIndex, normalise(dataSource.url), versionInfo.xV, versionInfo.xMinV, effective, fuelType)
-      }
+      props.startRetrievePlanList(dataSourceIndex)
+      props.retrievePlanList(dataSourceIndex, normalise(dataSource.url), versionInfo.xV, versionInfo.xMinV, effective, fuelType)
     })
     return function() {
-      dataSources
-        .filter(dataSource => dataSource.unsaved || !dataSource.enabled || dataSource.deleted)
-        .forEach((dataSource, dataSourceIndex) => props.clearData(dataSourceIndex))
+      dataSources.forEach((dataSource, dataSourceIndex) => props.clearData(dataSourceIndex))
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [effective, fuelType, savedDataSourcesCount])
@@ -108,7 +105,6 @@ const EnergyPanel = (props) => {
         savedDataSourcesCount > 0 &&
         <Grid container alignItems='flex-start' spacing={2} className={classes.container}>
           {dataSources.map((dataSource, index) => (
-            !dataSource.unsaved && dataSource.enabled && !dataSource.deleted &&
             <Grid item key={index}
                   xs={getWidth(savedDataSourcesCount, 12)}
                   sm={getWidth(savedDataSourcesCount, 12)}
@@ -136,9 +132,9 @@ const EnergyPanel = (props) => {
   )
 }
 
-const mapStateToProps = state=>({
-  dataSources : state.dataSources,
-  savedDataSourcesCount: state.dataSources.filter(dataSource => !dataSource.unsaved && !dataSource.deleted && dataSource.enabled).length,
+const mapStateToProps = state => ({
+  dataSources: state.dataSources.filter(dataSource =>
+    !dataSource.unsaved && !dataSource.deleted && dataSource.enabled && (!dataSource.sectors || dataSource.sectors.includes("energy"))),
   selectedPlans: state.selection,
   versionInfo: state.versionInfo.vHeaders
 })
