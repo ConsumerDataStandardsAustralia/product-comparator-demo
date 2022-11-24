@@ -7,8 +7,9 @@ import dataSources from './data-source/reducer'
 import versionInfo from './version-info/reducer'
 import banking from './banking/data/reducer'
 import energy from './energy/data/reducer'
+import energySelection from './energy/selection/reducer'
 import discovery from './discovery/reducer'
-import selection from './selection/reducer'
+import bankingSelection from './banking/selection/reducer'
 import bankingComparison from './banking/comparison/reducer'
 
 const rootReducer = combineReducers({
@@ -18,7 +19,8 @@ const rootReducer = combineReducers({
   banking,
   energy,
   discovery,
-  selection,
+  bankingSelection,
+  energySelection,
   bankingComparison
 })
 

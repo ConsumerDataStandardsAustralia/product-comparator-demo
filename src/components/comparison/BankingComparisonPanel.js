@@ -168,7 +168,7 @@ const ComparisonPanel = (props) => {
 
 const mapStateToProps = state => ({
   dataSources: state.dataSources,
-  products: state.comparison
+  products: state.bankingComparison
 })
 
 export default connect(mapStateToProps)(ComparisonPanel)

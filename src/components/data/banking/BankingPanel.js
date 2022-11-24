@@ -44,8 +44,7 @@ const useStyles = makeStyles(theme => ({
 }))
 
 const BankingPanel = (props) => {
-  const {dataSources} = props
-  const savedDataSourcesCount = dataSources.length
+  const {dataSources, savedDataSourcesCount} = props
   const classes = useStyles()
   const [expanded, setExpanded] = React.useState(true)
   const compare = () => {
@@ -79,6 +78,7 @@ const BankingPanel = (props) => {
         savedDataSourcesCount > 0 &&
         <Grid container alignItems='flex-start' spacing={2} className={classes.container}>
           {dataSources.map((dataSource, index) => (
+            isBankingDataSource(dataSource) &&
             <Grid item key={index}
                   xs={getWidth(savedDataSourcesCount, 12)}
                   sm={getWidth(savedDataSourcesCount, 12)}
@@ -106,11 +106,14 @@ const BankingPanel = (props) => {
   )
 }
 
+function isBankingDataSource(dataSource) {
+  return !dataSource.unsaved && !dataSource.deleted && dataSource.enabled && (!dataSource.sectors || dataSource.sectors.includes("banking"))
+}
+
 const mapStateToProps = state=>({
-  dataSources : state.dataSources.filter(dataSource =>
-    !dataSource.unsaved && !dataSource.deleted && dataSource.enabled && (!dataSource.sectors || dataSource.sectors.includes("banking"))
-  ),
-  selectedProducts: state.selection
+  dataSources : state.dataSources,
+  savedDataSourcesCount: state.dataSources.filter(dataSource => isBankingDataSource(dataSource)).length,
+  selectedProducts: state.bankingSelection
 })
 
 const mapDispatchToProps = { compareProducts }
