@@ -6,7 +6,13 @@ import MuiAccordionSummary from '@material-ui/core/AccordionSummary'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import Typography from '@material-ui/core/Typography'
 import Checkbox from '@material-ui/core/Checkbox'
+import DateTime from '../DateTime'
+import AdditionalInfo from './AdditionalInfo'
 import {deselectPlan, selectPlan} from '../../../store/energy/selection'
+import Type from './Type'
+import FuelType from './FuelType'
+import CustomerType from './CustomerType'
+import ExternalLink from './ExternalLink'
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -65,11 +71,9 @@ const AccordionSummary = withStyles({
 const Plan = (props) => {
   const {plan, dataSourceIndex, selectedPlans} = props
   const classes = useStyles()
-  const selected = selectedPlans.some(
-    selection => (selection.dataSourceIdx === dataSourceIndex && selection.planId === plan.planId))
-  const handleChange = event => {
-    event.target.checked ? props.selectPlan(dataSourceIndex, plan.planId) : props.deselectPlan(dataSourceIndex, plan.planId)
-  }
+  const selected = selectedPlans.some(selection => (selection.dataSourceIdx === dataSourceIndex && selection.plan.planId === plan.planId))
+  const handleChange = event => event.target.checked ? props.selectPlan(dataSourceIndex, plan) : props.deselectPlan(dataSourceIndex, plan)
+  const blob = new Blob([JSON.stringify(plan, null, 2)], {type : 'application/json'})
 
   return (
     <div className={classes.root}>  
@@ -87,7 +91,21 @@ const Plan = (props) => {
       </AccordionSummary>
       <div style={{fontSize: '0.8rem'}}>
         <div>{plan.description}</div>
-        <div>{plan.displayName}</div>
+        <div>Brand: {plan.brand} {!!plan.brandName && <span>({plan.brandName})</span>}</div>
+        <div>Type: <Type type={plan.type} /></div>
+        <div>Fuel Type: <FuelType fuelType={plan.fuelType} /></div>
+        <div>Last updated at <DateTime rfc3339={plan.lastUpdated} /> <ExternalLink link={URL.createObjectURL(blob)}>JSON</ExternalLink></div>
+        {!!plan.effectiveFrom && <div>Effective from <DateTime rfc3339={plan.effectiveFrom} /></div>}
+        {!!plan.effectiveTo && <div>Effective to <DateTime rfc3339={plan.effectiveTo} /></div>}
+        {!!plan.applicationUri && <ExternalLink link={plan.applicationUri}>Apply here</ExternalLink>}
+        {
+          !!plan.additionalInformation &&
+          <div>
+            <div className={classes.sectionTitle}>Additional Information:</div>
+            <AdditionalInfo additionalInfo={plan.additionalInformation} />
+          </div>
+        }
+        <div>Customer Type: <CustomerType customerType={plan.customerType} /></div>
       </div>
     </Accordion>
     </div>

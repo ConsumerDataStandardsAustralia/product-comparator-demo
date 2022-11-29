@@ -132,7 +132,7 @@ const ComparisonPanel = (props) => {
         aria-controls='panel1c-content'
       >
         <div className={classes.heading}>
-          <CompareArrowsIcon/><Typography style={{paddingLeft: 8}}>Products Comparison</Typography>
+          <CompareArrowsIcon/><Typography style={{paddingLeft: 8}}>Product Comparison</Typography>
         </div>
       </AccordionSummary>
       <Table className={classes.table}>

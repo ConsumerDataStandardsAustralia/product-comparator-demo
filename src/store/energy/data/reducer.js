@@ -19,6 +19,7 @@ export default function energy(state = [], action) {
           progress: action.type,
           detailRecords: 0,
           failedDetailRecords: 0,
+          plans: [],
           planDetails: []
         }
       }
@@ -30,11 +31,7 @@ export default function energy(state = [], action) {
       const item = s[idx]
       item.progress = action.type
       item.totalRecords = response.meta.totalRecords
-      if (item.plans) {
-        item.plans.push.apply(response.data.plans)
-      } else {
-        item.plans = response.data.plans
-      }
+      item.plans = [...item.plans, ...response.data.plans]
       return s
     }
     case fulfilled(RETRIEVE_PLAN_DETAIL): {

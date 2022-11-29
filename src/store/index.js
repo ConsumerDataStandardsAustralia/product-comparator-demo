@@ -11,6 +11,7 @@ import energySelection from './energy/selection/reducer'
 import discovery from './discovery/reducer'
 import bankingSelection from './banking/selection/reducer'
 import bankingComparison from './banking/comparison/reducer'
+import energyComparison from './energy/comparison/reducer'
 
 const rootReducer = combineReducers({
   conout,
@@ -21,7 +22,8 @@ const rootReducer = combineReducers({
   discovery,
   bankingSelection,
   energySelection,
-  bankingComparison
+  bankingComparison,
+  energyComparison
 })
 
 const middleWares = [thunk, promise]

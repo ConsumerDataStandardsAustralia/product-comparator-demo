@@ -27,7 +27,7 @@ class EnergyPlanList extends React.Component {
         {
           !!plans && processedRecords >= totalRecords &&
           plans.map((plan, index) => (
-            <Plan key={index} plan={plan} />
+            <Plan key={index} plan={plan} dataSourceIndex={dataSourceIndex} />
           ))
         }
       </div>

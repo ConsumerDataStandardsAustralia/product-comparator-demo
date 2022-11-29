@@ -6,7 +6,7 @@ export default function energySelection(state = [], action) {
             return [...state, action.payload]
         case DESELECT_ENERGY_PLAN:
             const { payload } = action
-            return state.filter(selection => (selection.dataSourceIdx !== payload.dataSourceIdx || selection.planId !== payload.planId))
+            return state.filter(selection => (selection.dataSourceIdx !== payload.dataSourceIdx || selection.plan.planId !== payload.plan.planId))
         case CLEAR_ENERGY_SELECTION:
             return state.filter(selection => (selection.dataSourceIdx !== action.payload))
         default:

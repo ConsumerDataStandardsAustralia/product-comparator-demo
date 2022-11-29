@@ -19,6 +19,7 @@ import FormLabel from '@material-ui/core/FormLabel'
 import EnergyPlanList from './EnergyPlanList'
 import {startRetrievePlanList, retrievePlanList, clearData} from '../../../store/energy/data'
 import {normalise} from '../../../utils/url'
+import {comparePlans} from '../../../store/energy/comparison'
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -54,12 +55,22 @@ const EnergyPanel = (props) => {
   const [expanded, setExpanded] = React.useState(true)
   const [effective, setEffective] = React.useState('ALL')
   const [fuelType, setFuelType] = React.useState('ALL')
+  const compare = () => {
+    if( /Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+      alert('The screen size is too small! Please use a bigger screen to compare.')
+      return
+    }
+    props.comparePlans(props.selectedPlans)
+    setExpanded(false)
+  }
 
   React.useEffect(() => {
     dataSources.forEach((dataSource, dataSourceIndex) => {
       if (isEnergyDataSource(dataSource)) {
         props.startRetrievePlanList(dataSourceIndex)
-        props.retrievePlanList(dataSourceIndex, normalise(dataSource.url), versionInfo.xV, versionInfo.xMinV, effective, fuelType)
+        const normalisedUrl = normalise(dataSource.url)
+        const planListUrl = normalisedUrl + '/energy/plans?effective=' + effective + '&fuelType=' + fuelType
+        props.retrievePlanList(dataSourceIndex, normalisedUrl, planListUrl, versionInfo.xV, versionInfo.xMinV, effective, fuelType)
       }
     })
     return function() {
@@ -68,7 +79,7 @@ const EnergyPanel = (props) => {
         .forEach((dataSource, dataSourceIndex) => props.clearData(dataSourceIndex))
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [effective, fuelType, savedDataSourcesCount])
+  }, [effective, fuelType, versionInfo.xV, versionInfo.xMinV, savedDataSourcesCount])
 
   const getWidth = (dataSourceCount, min) => {
     return Math.max(12 / dataSourceCount, min)
@@ -126,7 +137,7 @@ const EnergyPanel = (props) => {
       <AccordionActions>
         <Fab variant='extended' size='medium' color='primary'
              disabled={props.selectedPlans.length < 2 || props.selectedPlans.length > 4}
-             className={classes.button}>
+             className={classes.button} onClick={compare}>
           <CompareIcon className={classes.leftIcon}/>
           Compare
         </Fab>
@@ -146,6 +157,6 @@ const mapStateToProps = state=>({
   versionInfo: state.versionInfo.vHeaders
 })
 
-const mapDispatchToProps = {startRetrievePlanList, retrievePlanList, clearData}
+const mapDispatchToProps = {startRetrievePlanList, retrievePlanList, clearData, comparePlans}
 
 export default connect(mapStateToProps, mapDispatchToProps)(EnergyPanel)

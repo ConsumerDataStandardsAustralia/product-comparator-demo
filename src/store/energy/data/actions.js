@@ -15,9 +15,8 @@ const headers = {
   'Accept': 'application/json'
 }
 
-export const retrievePlanList = (dataSourceIdx, baseUrl, xV, xMinV, effective, fuelType) =>
+export const retrievePlanList = (dataSourceIdx, baseUrl, planListUrl, xV, xMinV, effective, fuelType) =>
   (dispatch) => {
-    const planListUrl = baseUrl + '/energy/plans?effective=' + effective + '&fuelType=' + fuelType
     const request = new Request(planListUrl, {headers: new Headers({...headers, 'x-v': xV, 'x-min-v': xMinV})})
     dispatch(conoutInfo(`Requesting retrievePlanList() for ${planListUrl}`))
     const response = dispatch({
@@ -48,10 +47,12 @@ export const retrievePlanList = (dataSourceIdx, baseUrl, xV, xMinV, effective, f
       const actions = plans.map(plan => retrievePlanDetail(dataSourceIdx, baseUrl, plan.planId, xV, xMinV))
       const {next} = value.response.links
       if (!!next) {
-        if (next === planListUrl) {
+        const proxyRegExp = RegExp('^(https?://.*)(https?://.*)', 'gi') // RegExp objects are not thread safe
+        const proxyInfo = proxyRegExp.exec(planListUrl)
+        if ((proxyInfo && (next === proxyInfo[2])) || (!proxyInfo && (next === planListUrl))) {
           dispatch(conoutError(`The link next should not be the same as the current page URL (${planListUrl}):`, value.response.links))
         } else {
-          actions.push(retrievePlanList(dataSourceIdx, next, xV, xMinV, effective, fuelType))
+          actions.push(retrievePlanList(dataSourceIdx, baseUrl, proxyInfo ? proxyInfo[1] + next : next, xV, xMinV, effective, fuelType))
         }
       }
       dispatch(retrieveAllPlanDetails(actions))

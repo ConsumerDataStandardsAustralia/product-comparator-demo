@@ -20,6 +20,7 @@ export default function banking(state = [], action) {
           progress: action.type,
           detailRecords: 0,
           failedDetailRecords: 0,
+          products: [],
           productDetails: []
         }
       }
@@ -31,11 +32,7 @@ export default function banking(state = [], action) {
       const item = s[idx]
       item.progress = action.type
       item.totalRecords = response.meta.totalRecords
-      if (item.products) {
-        item.products.push.apply(response.data.products)
-      } else {
-        item.products = response.data.products
-      }
+      item.products = [...item.products, ...response.data.products]
       return s
     }
     case fulfilled(RETRIEVE_PRODUCT_DETAIL): {
