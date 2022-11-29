@@ -9,7 +9,7 @@ class EnergyPlanList extends React.Component {
     const { dataSourceIndex } = this.props
     let planList = this.props.planList[dataSourceIndex];
     planList = !!planList ? planList : {}
-    const { progress, totalRecords, detailRecords, failedDetailRecords, plans, planDetails } = planList
+    const { progress, totalRecords, detailRecords, failedDetailRecords, plans } = planList
     const processedRecords = detailRecords + failedDetailRecords
 
     return (
@@ -25,8 +25,7 @@ class EnergyPlanList extends React.Component {
           processedRecords < totalRecords && <p>Getting plan details...</p>
         }
         {
-          !!plans && processedRecords >= totalRecords &&
-          plans.map((plan, index) => (
+          !!plans && processedRecords >= totalRecords && Object.values(plans).map((plan, index) => (
             <Plan key={index} plan={plan} dataSourceIndex={dataSourceIndex} />
           ))
         }

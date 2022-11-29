@@ -19,8 +19,7 @@ export default function energy(state = [], action) {
           progress: action.type,
           detailRecords: 0,
           failedDetailRecords: 0,
-          plans: [],
-          planDetails: []
+          plans: {}
         }
       }
       return s
@@ -31,7 +30,7 @@ export default function energy(state = [], action) {
       const item = s[idx]
       item.progress = action.type
       item.totalRecords = response.meta.totalRecords
-      item.plans = [...item.plans, ...response.data.plans]
+      response.data.plans.forEach(plan => item.plans[plan.planId] = plan)
       return s
     }
     case fulfilled(RETRIEVE_PLAN_DETAIL): {
@@ -39,7 +38,7 @@ export default function energy(state = [], action) {
       const {idx, response} = action.payload
       const item = s[idx]
       if (response) {
-        item.planDetails.push(response.data)
+        item.plans[response.data.planId] = response.data
         item.detailRecords++
       } else {
         item.failedDetailRecords++

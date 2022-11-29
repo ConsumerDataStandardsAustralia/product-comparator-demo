@@ -74,9 +74,11 @@ const EnergyPanel = (props) => {
       }
     })
     return function() {
-      dataSources
-        .filter(dataSource => isEnergyDataSource(dataSource))
-        .forEach((dataSource, dataSourceIndex) => props.clearData(dataSourceIndex))
+      dataSources.forEach((dataSource, dataSourceIndex) => {
+        if (isEnergyDataSource(dataSource)) {
+          props.clearData(dataSourceIndex)
+        }
+      })
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [effective, fuelType, versionInfo.xV, versionInfo.xMinV, savedDataSourcesCount])
