@@ -15,8 +15,8 @@ import {
   modifyDataSourceIcon,
   modifyDataSourceUrl
 } from '../../store/data-source'
-import { clearSelection} from '../../store/selection'
-import { deleteData, clearData } from '../../store/data'
+import { clearSelection} from '../../store/banking/selection'
+import { deleteData, clearData } from '../../store/banking/data'
 import {connect} from 'react-redux'
 import isUrl from '../../utils/url'
 import Snackbar from '@material-ui/core/Snackbar'

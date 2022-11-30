@@ -10,13 +10,7 @@ export const ENABLE_DATA_SOURCE = 'ENABLE_DATA_SOURCE'
 
 function fetchDatasources() {
   return fetch(process.env.PUBLIC_URL + '/datasources.json')
-    .then(response => response.json().then(datasources => {
-      const filtered = [];
-      datasources.forEach(ds => {
-        if (!ds.sectors || ds.sectors.includes("banking")) filtered.push(ds);
-      })
-      return filtered;
-    }))
+    .then(response => response.json())
 }
 
 function loadLocalDatasources() {
@@ -68,9 +62,8 @@ export function syncDataSources() {
           const lds = localDatasources.find(lds => lds.name === ds.name)
           if (lds) {
             lds.url = ds.url
-            if (ds.icon) {
-              lds.icon = ds.icon
-            }
+            lds.sectors = ds.sectors
+            lds.icon = ds.icon
           } else {
             localDatasources.push(ds)
           }

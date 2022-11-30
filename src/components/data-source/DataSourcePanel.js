@@ -20,9 +20,8 @@ import Autocomplete from '@material-ui/lab/Autocomplete'
 import { fade } from '@material-ui/core/styles/colorManipulator'
 import { loadDataSource, addDataSource, syncDataSources } from '../../store/data-source'
 import { loadVersionInfo, saveVersionInfo, setVersionsEditable, setVersionsReadOnly } from '../../store/version-info'
-import { startRetrieveProductList, retrieveProductList } from '../../store/data'
-import { clearSelection} from '../../store/selection'
-import { clearData } from '../../store/data'
+import { startRetrieveProductList, retrieveProductList, clearData } from '../../store/banking/data'
+import { clearSelection} from '../../store/banking/selection'
 import { normalise } from '../../utils/url'
 import Fab from '@material-ui/core/Fab'
 import Tooltip from '@material-ui/core/Tooltip'
@@ -91,7 +90,7 @@ class DataSourcePanel extends React.Component {
           aria-controls='panel1c-content'
         >
           <div className={classes.heading}>
-            <AccountBalanceIcon/><Typography  style={{paddingLeft: 8}}>Banks</Typography>
+            <AccountBalanceIcon/><Typography style={{paddingLeft: 8}}>Data sources</Typography>
           </div>
         </AccordionSummary>
         <div style={{maxHeight: 300, overflow: 'auto'}}>
@@ -100,7 +99,7 @@ class DataSourcePanel extends React.Component {
             <Grid container spacing={1} style={{fontSize: 'smaller', fontStyle: 'italic'}}>
               <Grid item xs={1}><span>Enabled</span></Grid>
               <Grid item xs={3}><span>Name</span></Grid>
-              <Grid item xs={4}><span>Banking product API base url</span></Grid>
+              <Grid item xs={4}><span>API base url</span></Grid>
               <Grid item xs={3}><span>Icon url</span></Grid>
             </Grid>
             {dataSources.map((dataSource, index) =>
