@@ -17,6 +17,8 @@ import AdditionalInfo from '../data/energy/AdditionalInfo'
 import Type from '../data/energy/Type'
 import FuelType from '../data/energy/FuelType'
 import ExternalLink from '../data/energy/ExternalLink'
+import Geography from '../data/energy/Geography'
+import CustomerType from '../data/energy/CustomerType'
 
 const useStyles = makeStyles(theme => ({
   panel: {
@@ -50,32 +52,12 @@ const useStyles = makeStyles(theme => ({
   },
   dataCell: {
     verticalAlign: 'top'
+  },
+  ul: {
+    margin: 0,
+    padding:0
   }
 }))
-
-const render = (plan, key) => {
-  switch (key) {
-    case 'displayName':
-    case 'description':
-    case 'brand':
-    case 'brandName':
-      return plan[key]
-    case 'lastUpdated':
-    case 'effectiveFrom':
-    case 'effectiveTo':
-      return !!plan[key] ? format(plan[key]) : ''
-    case 'type':
-      return <Type type={plan[key]} />
-    case 'fuelType':
-      return <FuelType fuelType={plan[key]} />
-    case 'applicationUri':
-      return !!plan[key] && <ExternalLink link={plan[key]}>Apply here</ExternalLink>
-    case 'additionalInformation':
-      return !!plan[key] && <AdditionalInfo additionalInfo={plan[key]} tableCell/>
-    default:
-      return ''
-  }
-}
 
 const EnergyComparisonPanel = (props) => {
   const {dataSources, planSelections} = props
@@ -92,8 +74,38 @@ const EnergyComparisonPanel = (props) => {
     {key: 'effectiveTo', label: 'Effective To'},
     {key: 'applicationUri', label: 'Application Link'},
     {key: 'additionalInformation', label: 'Additional Information'},
+    {key: 'customerType', label: 'Customer Type'},
+    {key: 'geography', label: 'Geography'},
   ]
-  
+
+  const render = (plan, key) => {
+    switch (key) {
+      case 'displayName':
+      case 'description':
+      case 'brand':
+      case 'brandName':
+        return plan[key]
+      case 'lastUpdated':
+      case 'effectiveFrom':
+      case 'effectiveTo':
+        return !!plan[key] ? format(plan[key]) : ''
+      case 'type':
+        return <Type type={plan[key]} />
+      case 'fuelType':
+        return <FuelType fuelType={plan[key]} />
+      case 'applicationUri':
+        return !!plan[key] && <ExternalLink link={plan[key]}>Apply here</ExternalLink>
+      case 'additionalInformation':
+        return !!plan[key] && <AdditionalInfo additionalInfo={plan[key]} tableCell/>
+      case 'customerType':
+        return !!plan[key] && <CustomerType customerType={plan[key]} />
+      case 'geography':
+        return !!plan[key] && <ul className={classes.ul}><Geography geography={plan[key]} /></ul>
+      default:
+        return ''
+    }
+  }
+    
   return (
     !!planSelections && planSelections.length > 0 &&
     <Accordion defaultExpanded className={classes.panel}>

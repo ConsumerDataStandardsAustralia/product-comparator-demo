@@ -13,11 +13,20 @@ import Type from './Type'
 import FuelType from './FuelType'
 import CustomerType from './CustomerType'
 import ExternalLink from './ExternalLink'
+import Geography from './Geography'
 
 const useStyles = makeStyles(() => ({
   root: {
     display: 'flex',
     alignItems: 'flex-start'
+  },
+  sectionTitle: {
+    fontStyle: 'italic'
+  },
+  sectionContent: {
+    marginTop: 0,
+    marginBottom: 0,
+    paddingLeft: 20
   }
 }))
 
@@ -105,7 +114,16 @@ const Plan = (props) => {
             <AdditionalInfo additionalInfo={plan.additionalInformation} />
           </div>
         }
-        <div>Customer Type: <CustomerType customerType={plan.customerType} /></div>
+        {!!plan.customerType && <div>Customer Type: <CustomerType customerType={plan.customerType} /></div>}
+        {
+          !!plan.geography &&
+          <div>
+            <div className={classes.sectionTitle}>Geography:</div>
+            <ul className={classes.sectionContent}>
+              <Geography geography={plan.geography} />
+            </ul>
+          </div>
+        }
       </div>
     </Accordion>
     </div>

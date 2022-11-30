@@ -97,7 +97,7 @@ const EnergyPanel = (props) => {
           <SubjectIcon/><Typography style={{paddingLeft: 8}}>Plans</Typography>
         </div>
       </AccordionSummary>
-      <Grid container justifyContent="center" alignItems="center" spacing={2} className={classes.container}>
+      <Grid container alignItems="center" spacing={2} className={classes.container}>
         <Grid item>
           <FormLabel>Effective</FormLabel>
           <RadioGroup row aria-label="effective" name="effective" value={effective} onChange={e => setEffective(e.target.value)}>
