@@ -16,6 +16,11 @@ const headers = {
   'Accept': 'application/json'
 }
 
+function createConoutError(error, url) {
+  return conoutError('Caught ' + error + ' while requesting ' + url + (error.name === 'TypeError' ?
+    ' Possibly caused by the endpoint not supporting Cross-Origin Requests (CORS)' : ''))
+}
+
 export const retrieveProductList = (dataSourceIdx, baseUrl, productListUrl, xV, xMinV) =>
   (dispatch) => {
     const request = new Request(productListUrl, {headers: new Headers({...headers, 'x-v': xV, 'x-min-v': xMinV})})
@@ -34,7 +39,7 @@ export const retrieveProductList = (dataSourceIdx, baseUrl, productListUrl, xV, 
           return obj
         })
         .catch(error => {
-          dispatch(conoutError('Caught ' + error + ' while requesting ' + productListUrl))
+          dispatch(createConoutError(error, productListUrl))
           return {
             meta: {totalRecords: 0},
             data: {products: []},
@@ -88,7 +93,7 @@ export const retrieveProductDetail = (dataSourceIdx, url, productId, xV, xMinV) 
         return {idx: dataSourceIdx, response: json}
       })
       .catch(error => {
-        dispatch(conoutError('Caught ' + error + ' while requesting ' + fullUrl))
+        dispatch(createConoutError(error, fullUrl))
         return {idx: dataSourceIdx, response: null}
       })
   })
