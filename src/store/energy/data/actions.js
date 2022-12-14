@@ -15,6 +15,11 @@ const headers = {
   'Accept': 'application/json'
 }
 
+function createConoutError(error, url) {
+  return conoutError('Caught ' + error + ' while requesting ' + url + (error.name === 'TypeError' ?
+    ' Possibly caused by the endpoint not supporting Cross-Origin Requests (CORS)' : ''))
+}
+
 export const retrievePlanList = (dataSourceIdx, baseUrl, planListUrl, xV, xMinV, effective, fuelType) =>
   (dispatch) => {
     const request = new Request(planListUrl, {headers: new Headers({...headers, 'x-v': xV, 'x-min-v': xMinV})})
@@ -33,7 +38,7 @@ export const retrievePlanList = (dataSourceIdx, baseUrl, planListUrl, xV, xMinV,
           return obj
         })
         .catch(error => {
-          dispatch(conoutError('Caught ' + error + ' while requesting ' + planListUrl))
+          dispatch(createConoutError(error, planListUrl))
           return {
             meta: {totalRecords: 0},
             data: {plans: []},
@@ -79,7 +84,7 @@ export const retrievePlanDetail = (dataSourceIdx, url, planId, xV, xMinV) => (di
         return {idx: dataSourceIdx, response: obj}
       })
       .catch(error => {
-        dispatch(conoutError('Caught ' + error + ' while requesting ' + fullUrl))
+        dispatch(createConoutError(error, fullUrl))
         return {idx: dataSourceIdx, response: null}
       })
   })
