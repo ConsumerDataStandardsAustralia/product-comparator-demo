@@ -117,7 +117,6 @@
     {"name":"Aurora Energy", "sectors":["energy"], "icon":"https://www.cdr.gov.au/sites/default/files/2022-08/No-logo-available-2.png", "url":"https://cdr.energymadeeasy.gov.au/aurora"},
     {"name":"Besy", "sectors":["energy"], "icon":"https://www.cdr.gov.au/sites/default/files/2022-08/No-logo-available-2.png", "url":"https://cdr.energymadeeasy.gov.au/besy"},
     {"name":"Blue NRG", "sectors":["energy"], "icon":"https://www.cdr.gov.au/sites/default/files/2022-08/No-logo-available-2.png", "url":"https://cdr.energymadeeasy.gov.au/blue-nrg"},
-    {"name":"Bright Spark Power", "sectors":["energy"], "icon":"https://www.cdr.gov.au/sites/default/files/2022-08/No-logo-available-2.png", "url":"https://cdr.energymadeeasy.gov.au/bright-spark"},
     {"name":"Brighte Energy", "sectors":["energy"], "icon":"https://www.cdr.gov.au/sites/default/files/2022-08/No-logo-available-2.png", "url":"https://cdr.energymadeeasy.gov.au/brighte"},
     {"name":"Circular Energy", "sectors":["energy"], "icon":"https://www.cdr.gov.au/sites/default/files/2022-08/No-logo-available-2.png", "url":"https://cdr.energymadeeasy.gov.au/circular"},
     {"name":"CleanCo Queensland", "sectors":["energy"], "icon":"https://www.cdr.gov.au/sites/default/files/2022-08/No-logo-available-2.png", "url":"https://cdr.energymadeeasy.gov.au/cleanco"},
