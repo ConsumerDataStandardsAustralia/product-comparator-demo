@@ -86,7 +86,7 @@ const BankingPanel = (props) => {
                   lg={getWidth(savedDataSourcesCount, 4)}
                   xl={getWidth(savedDataSourcesCount, 3)}
             >
-              <div className="title">{!!dataSource.icon && <span><img src={dataSource.icon} alt=""/></span>}<h2>{dataSource.name}</h2></div>
+              <div className="title">{!!dataSource.logoUri && <span><img src={dataSource.logoUri} alt=""/></span>}<h2>{dataSource.brandName}</h2></div>
               <BankingProductList dataSource={dataSource} dataSourceIndex={index}/>
             </Grid>
           ))}
@@ -107,7 +107,7 @@ const BankingPanel = (props) => {
 }
 
 function isBankingDataSource(dataSource) {
-  return !dataSource.unsaved && !dataSource.deleted && dataSource.enabled && (!dataSource.sectors || dataSource.sectors.includes("banking"))
+  return !dataSource.unsaved && !dataSource.deleted && dataSource.enabled && (!dataSource.industries || dataSource.industries.includes("banking"))
 }
 
 const mapStateToProps = state=>({

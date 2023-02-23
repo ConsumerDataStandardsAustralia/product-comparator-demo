@@ -10,13 +10,14 @@ import {
   MODIFY_DATA_SOURCE_URL
 } from './actions'
 import {fulfilled} from '../../utils/async-actions'
+import {sortWithMajors} from '../../utils/ds-utils'
 
 export default function dataSources(state=[], action) {
   switch (action.type) {
     case fulfilled(LOAD_DATA_SOURCE):
       return action.payload
     case ADD_DATA_SOURCE:
-      return [...state, {name: '', url: ''}]
+      return [...state, {brandName: '', publicBaseUri: ''}]
     case fulfilled(SYNC_DATA_SOURCES):
       persistSavedDataSources(action.payload)
       return action.payload
@@ -46,5 +47,6 @@ export default function dataSources(state=[], action) {
 
 function persistSavedDataSources(dataSources) {
   window.localStorage.setItem("cds-banking-prd-ds",
-    JSON.stringify(dataSources.filter(dataSource => !dataSource.unsaved && !dataSource.deleted)))
+    JSON.stringify(sortWithMajors(
+      dataSources.filter(dataSource => !dataSource.unsaved && !dataSource.deleted))))
 }

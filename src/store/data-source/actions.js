@@ -1,4 +1,5 @@
 import {conoutError} from '../conout/actions'
+import {MAJOR_NAMES, sortWithMajors} from '../../utils/ds-utils'
 
 export const LOAD_DATA_SOURCE = 'LOAD_DATA_SOURCE'
 export const ADD_DATA_SOURCE = 'ADD_DATA_SOURCE'
@@ -11,30 +12,46 @@ export const MODIFY_DATA_SOURCE_ICON = 'MODIFY_DATA_SOURCE_ICON'
 export const ENABLE_DATA_SOURCE = 'ENABLE_DATA_SOURCE'
 
 function fetchDatasources(dispatch) {
-  return fetch('https://api.cdr.gov.au/cdr-register/v1/banking/data-holders/brands/summary')
-    .then(response => response.json()).then(obj => obj.data)
+  const request = new Request('https://api.cdr.gov.au/cdr-register/v1/banking/data-holders/brands/summary', {
+    headers: new Headers({'x-v': 1})
+  })
+  return fetch(request)
+    .then(response => response.json())
+    .then(obj => {
+      if (obj.error) {
+        dispatch(conoutError('Received error: ' + obj.error))
+        return []
+      }
+      return sortWithMajors(obj.data)
+    })
     .catch(error => {
       dispatch(conoutError('Caught ' + error + ' while requesting Brands Summary'))
       return []
     })
-  }
+}
 
 function loadLocalDatasources() {
-  const ds = window.localStorage.getItem("cds-banking-prd-ds")
-  return ds ? JSON.parse(ds) : false
+  let ds = window.localStorage.getItem("cds-banking-prd-ds")
+  if (ds) {
+    if (ds[0].name) { // Old format. Remap to the Register field names
+      ds = ds.map(({name, url, icon, sectors}) => ({brandName: name, publicBaseUri: url, logoUri: icon, industries: sectors}));
+    }
+    return JSON.parse(ds)
+  }
+  return false
 }
 
 export const loadDataSource = () => dispatch => {
-  const ds = false
+  const ds = loadLocalDatasources()
   dispatch({
     type: LOAD_DATA_SOURCE,
     payload: ds ? Promise.resolve(ds) : fetchDatasources(dispatch)
-      // .then(datasources => {
-      //   for (let i = 0; i < 4 && i < datasources.length; i++) {
-      //     datasources[i].enabled = true
-      //   }
-      //   return datasources
-      // })
+      .then(datasources => {
+        for (let i = 0; i < 4 && i < datasources.length; i++) {
+          datasources[i].enabled = true
+        }
+        return datasources
+      })
   })
 }
 
@@ -44,44 +61,27 @@ export function addDataSource() {
   }
 }
 
-const MAJORS = ['ANZ', 'CBA', 'NAB', 'Westpac']
-
-export function syncDataSources() {
-  function saparateMajors(localDatasources, majorDatasources, minorDatasources) {
-    localDatasources.forEach(ds => {
-      if (majorDatasources.length < MAJORS.length && MAJORS.includes(ds.name)) {
-        majorDatasources.push(ds)
-      } else {
-        minorDatasources.push(ds)
-      }
-    })
-  }
-
-  const nameSort = (a, b) => a.name < b.name ? -1 : 1
-
-  return {
-    type: SYNC_DATA_SOURCES,
-    payload: fetchDatasources().then(datasources => {
-      const localDatasources = loadLocalDatasources()
-      if (localDatasources) {
-        datasources.forEach(ds => {
-          const lds = localDatasources.find(lds => lds.name === ds.name)
-          if (lds) {
-            lds.url = ds.url
-            lds.sectors = ds.sectors
-            lds.icon = ds.icon
-          } else {
-            localDatasources.push(ds)
-          }
-        })
-        const majorDatasources = [], minorDatasources = []
-        saparateMajors(localDatasources, majorDatasources, minorDatasources)
-        return [...majorDatasources.sort(nameSort), ...minorDatasources.sort(nameSort)]
-      }
-      return datasources
-    })
-  }
-}
+export const syncDataSources = () => dispatch => dispatch({
+  type: SYNC_DATA_SOURCES,
+  payload: fetchDatasources(dispatch).then(datasources => {
+    const localDatasources = loadLocalDatasources()
+    if (localDatasources) {
+      datasources.forEach(ds => {
+        const lds = localDatasources.find(lds => ((lds.brandName === ds.brandName) || (MAJOR_NAMES[ds.brandName] && MAJOR_NAMES[ds.brandName].includes(lds.brandName))))
+        if (lds) {
+          lds.brandName = ds.brandName
+          lds.publicBaseUri = ds.publicBaseUri
+          lds.industries = ds.industries
+          lds.logoUri = ds.logoUri
+        } else {
+          localDatasources.push(ds)
+        }
+      })
+      return localDatasources
+    }
+    return datasources
+  })
+})
 
 export function saveDataSource(index, payload) {
   return {

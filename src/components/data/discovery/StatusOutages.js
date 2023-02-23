@@ -10,7 +10,7 @@ class StatusOutages extends React.Component {
 
   componentDidMount() {    
     const { dataSourceIndex, dataSource, versionInfo } = this.props
-    const url = normalise(dataSource.url)
+    const url = normalise(dataSource.publicBaseUri)
     this.props.retrieveStatus(dataSourceIndex, url, versionInfo.xV, versionInfo.xMinV)
     this.props.retrieveOutages(dataSourceIndex, url, versionInfo.xV, versionInfo.xMinV)
   }

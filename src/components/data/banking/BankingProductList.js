@@ -9,8 +9,8 @@ class BankingProductList extends React.Component {
 
   componentDidMount() {
     const { dataSourceIndex, dataSource, versionInfo } = this.props
-    const { url } = dataSource
-    const normalisedUrl = normalise(url)
+    const { publicBaseUri } = dataSource
+    const normalisedUrl = normalise(publicBaseUri)
     const productListUrl = normalisedUrl + '/banking/products'
     this.props.startRetrieveProductList(dataSourceIndex)
     this.props.retrieveProductList(dataSourceIndex, normalisedUrl, productListUrl, versionInfo.xV, versionInfo.xMinV)

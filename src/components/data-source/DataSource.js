@@ -52,17 +52,17 @@ const DataSource = (props) => {
 
   const handleChange = name => event => {
     if (name === 'name') {
-      props.modifyDataSourceName(index, {...dataSource, [name]: event.target.value})
+      props.modifyDataSourceName(index, {...dataSource, brandName: event.target.value})
     } else if (name === 'url') {
-      props.modifyDataSourceUrl(index, {...dataSource, [name]: event.target.value})
+      props.modifyDataSourceUrl(index, {...dataSource, publicBaseUri: event.target.value})
       if (!dataSource.unsaved) {
         props.clearSelection(index)
         props.clearData(index)
       }
     } else if (name === 'icon') {
-      props.modifyDataSourceIcon(index, {...dataSource, [name]: event.target.value})
+      props.modifyDataSourceIcon(index, {...dataSource, logoUri: event.target.value})
     } else if (name === 'enabled') {
-      props.enableDataSource(index, {...dataSource, [name]: event.target.checked})
+      props.enableDataSource(index, {...dataSource, enabled: event.target.checked})
       if (dataSource.enabled) {
         props.clearSelection(index)
         props.clearData(index)
@@ -73,10 +73,10 @@ const DataSource = (props) => {
   const save = () => {
     if (!isDataSourceValid()) {
       let message = ''
-      if (dataSource.name.trim().length === 0) {
+      if (dataSource.brandName.trim().length === 0) {
         message = 'Bank name is required. '
       }
-      if (!isUrl(dataSource.url)) {
+      if (!isUrl(dataSource.publicBaseUri)) {
         message += 'URL is invalid.'
       }
       setErrorState({
@@ -99,7 +99,7 @@ const DataSource = (props) => {
   }
 
   const isDataSourceValid = () => {
-    return dataSource.name.trim().length > 0 && isUrl(dataSource.url)
+    return dataSource.brandName.trim().length > 0 && isUrl(dataSource.publicBaseUri)
   }
 
   return (
@@ -112,12 +112,12 @@ const DataSource = (props) => {
       </Grid>
       <Grid item xs={3}>
         <TextField
-          error={!dataSource.name.trim().length}
+          error={!dataSource.brandName.trim().length}
           required={true}
           onChange={handleChange('name')}
           margin='normal'
           placeholder='e.g. Acme Bank'
-          value={dataSource.name}
+          value={dataSource.brandName}
           fullWidth
         />
       </Grid>

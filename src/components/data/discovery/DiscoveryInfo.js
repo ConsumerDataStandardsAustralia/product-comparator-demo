@@ -87,7 +87,7 @@ const DiscoveryInfo = (props) => {
                   lg={getWidth(savedDataSourcesCount, 4)}
                   xl={getWidth(savedDataSourcesCount, 3)}
             >
-              <div className="title">{!!dataSource.icon && <span><img src={dataSource.icon} alt=""/></span>}<h2>{dataSource.name}</h2></div>
+              <div className="title">{!!dataSource.logoUri && <span><img src={dataSource.logoUri} alt=""/></span>}<h2>{dataSource.brandName}</h2></div>
               <StatusOutages dataSource={dataSource} dataSourceIndex={index}/>
             </Grid>
           ))}
