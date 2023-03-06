@@ -52,7 +52,7 @@
     {"name": "Hume Bank", "url": "https://ibankob.humebank.com.au/openbanking", "sectors":["banking"]},
     {"name": "Illawarra Credit Union", "url": "https://onlineteller.cu.com.au/OpenBanking", "icon": "https://www.illawarracu.com.au/content/themes/nucleo-icu/assets/images/logo.png", "sectors":["banking"]},
     {"name": "IMB Bank", "url": "https://openbank.openbanking.imb.com.au", "sectors":["banking"]},
-    {"name": "ING", "url": "https://apic.ing.com.au", "icon": "https://www.ing.com.au/img/logos/Logo-sm@2x.png", "sectors":["banking"]},
+    {"name": "ING", "url": "https://id.ob.ing.com.au", "icon": "https://www.ing.com.au/img/logos/Logo-sm@2x.png", "sectors":["banking"]},
     {"name": "G&C Mutual Bank", "url": "https://ibank.gcmutualbank.com.au/openbanking", "icon": "https://www.gcmutual.bank/media/3018/gc-mutual-bank-logo.png", "sectors":["banking"]},
     {"name": "Judo Bank", "url": "https://public.open.judo.bank", "icon": "https://judocdn.azurewebsites.net/sig/logo.png", "sectors":["banking"]},
     {"name": "Laboratories Credit Union", "url": "https://internetbanking.lcu.com.au/openbanking", "icon": "https://asset.lcu.com.au/images/StandardLCULogo-nobackground.png", "sectors":["banking"]},
