@@ -10,12 +10,14 @@ const Geography = ({geography}) => {
       {includedPostcodes && includedPostcodes.length > 0 && (
         <li><div>Included Postcodes:</div> <span>{includedPostcodes.join(', ')}</span></li>
       )}
+      {distributors && (
       <li>
         <div>Distributors:</div>
         <ul>
           {distributors.map((distributor, idx) => <li key={idx}>{distributor}</li>)}
         </ul>
       </li>
+      )}
     </>
   )
 }
