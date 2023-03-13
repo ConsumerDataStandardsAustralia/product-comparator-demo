@@ -22,6 +22,4 @@ or
 * Run `npm run start` to run locally at http://localhost:3000
 * Run `npm run build` to build production release
 
-See the CDR support portal article [Add your organisation to the Banking Product Comparator](https://cdr-support.zendesk.com/hc/en-us/articles/900002933263-Add-your-organisation-to-the-Banking-Product-Comparator) for details of adding a CDR participant organisation’s Product Reference Data to the comparator.
-
 Here is a link to the currently running [CDS instance of the application](https://consumerdatastandardsaustralia.github.io/product-comparator-demo/).
