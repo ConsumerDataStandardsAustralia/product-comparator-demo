@@ -22,4 +22,6 @@ or
 * Run `npm run start` to run locally at http://localhost:3000
 * Run `npm run build` to build production release
 
+Learn more about how the data holder details are managed within the application in this [Zendesk article](https://cdr-support.zendesk.com/hc/en-us/articles/900002933263).
+
 Here is a link to the currently running [CDS instance of the application](https://consumerdatastandardsaustralia.github.io/product-comparator-demo/).
