@@ -5,12 +5,38 @@ export const SAVE_DATA_SOURCE = 'SAVE_DATA_SOURCE'
 export const DELETE_DATA_SOURCE = 'DELETE_DATA_SOURCE'
 export const MODIFY_DATA_SOURCE_NAME = 'MODIFY_DATA_SOURCE_NAME'
 export const MODIFY_DATA_SOURCE_URL = 'MODIFY_DATA_SOURCE_URL'
+export const MODIFY_DATA_SOURCE_ENERGY_PRD_URL = 'MODIFY_DATA_SOURCE_ENERGY_PRD_URL'
 export const MODIFY_DATA_SOURCE_ICON = 'MODIFY_DATA_SOURCE_ICON'
 export const ENABLE_DATA_SOURCE = 'ENABLE_DATA_SOURCE'
 
+const MAJOR_NAMES = {'ANZ': [], 'CommBank': ['CBA', 'Commonwealth Bank'], 'NATIONAL AUSTRALIA BANK': ['NAB', 'National'], 'Westpac': []}
+const MAJORS = Object.keys(MAJOR_NAMES)
+
+function mergeDatasources(into, from) {
+  const result = {};
+  into.forEach(ds => result[ds.name] = ds)
+  from.forEach(ds => {
+    const name = ds.name
+    if (MAJORS.includes(name)) {
+      // Consolidate the aliases of the Big Four
+      MAJOR_NAMES[name].forEach(alias => {
+        result[name] = {...result[alias], ...result[name]}
+        delete result[alias]
+      })
+    }
+    result[name] = {...result[name], ...ds}
+  })
+  return Object.values(result)
+}
+
 function fetchDatasources() {
-  return fetch(process.env.PUBLIC_URL + '/datasources.json')
+  const dssPromise = fetch(process.env.PUBLIC_URL + '/datasources.json')
     .then(response => response.json())
+  const ovsPromise = fetch(process.env.PUBLIC_URL + '/override.json')
+    .then(response => response.json())
+  return Promise.all([dssPromise, ovsPromise]).then(([datasources, overrides]) =>
+    mergeDatasources(datasources, overrides)
+  )
 }
 
 function loadLocalDatasources() {
@@ -38,8 +64,6 @@ export function addDataSource() {
   }
 }
 
-const MAJORS = ['ANZ', 'CBA', 'NAB', 'Westpac']
-
 export function syncDataSources() {
   function saparateMajors(localDatasources, majorDatasources, minorDatasources) {
     localDatasources.forEach(ds => {
@@ -58,18 +82,9 @@ export function syncDataSources() {
     payload: fetchDatasources().then(datasources => {
       const localDatasources = loadLocalDatasources()
       if (localDatasources) {
-        datasources.forEach(ds => {
-          const lds = localDatasources.find(lds => lds.name === ds.name)
-          if (lds) {
-            lds.url = ds.url
-            lds.sectors = ds.sectors
-            lds.icon = ds.icon
-          } else {
-            localDatasources.push(ds)
-          }
-        })
+        const merged = mergeDatasources(localDatasources, datasources)
         const majorDatasources = [], minorDatasources = []
-        saparateMajors(localDatasources, majorDatasources, minorDatasources)
+        saparateMajors(merged, majorDatasources, minorDatasources)
         return [...majorDatasources.sort(nameSort), ...minorDatasources.sort(nameSort)]
       }
       return datasources
@@ -103,6 +118,14 @@ export function modifyDataSourceName(index, payload) {
 export function modifyDataSourceUrl(index, payload) {
   return {
     type: MODIFY_DATA_SOURCE_URL,
+    index: index,
+    payload: payload
+  }
+}
+
+export function modifyDataSourceEnergyPrdUrl(index, payload) {
+  return {
+    type: MODIFY_DATA_SOURCE_ENERGY_PRD_URL,
     index: index,
     payload: payload
   }

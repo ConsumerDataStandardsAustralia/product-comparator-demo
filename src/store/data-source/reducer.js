@@ -7,6 +7,7 @@ import {
   DELETE_DATA_SOURCE,
   MODIFY_DATA_SOURCE_NAME,
   MODIFY_DATA_SOURCE_ICON,
+  MODIFY_DATA_SOURCE_ENERGY_PRD_URL,
   MODIFY_DATA_SOURCE_URL
 } from './actions'
 import {fulfilled} from '../../utils/async-actions'
@@ -36,6 +37,7 @@ export default function dataSources(state=[], action) {
       persistSavedDataSources(dataSources)
       return dataSources
     case MODIFY_DATA_SOURCE_URL:
+    case MODIFY_DATA_SOURCE_ENERGY_PRD_URL:
       dataSources = state.map((dataSource, index) => (index === action.index ? {...action.payload, unsaved: true} : dataSource))
       persistSavedDataSources(dataSources)
       return dataSources

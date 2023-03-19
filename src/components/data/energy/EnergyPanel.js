@@ -68,7 +68,7 @@ const EnergyPanel = (props) => {
     dataSources.forEach((dataSource, dataSourceIndex) => {
       if (isEnergyDataSource(dataSource)) {
         props.startRetrievePlanList(dataSourceIndex)
-        const normalisedUrl = normalise(dataSource.url)
+        const normalisedUrl = normalise(dataSource.energyPrd ? dataSource.energyPrd : dataSource.url)
         const planListUrl = normalisedUrl + '/energy/plans?effective=' + effective + '&fuelType=' + fuelType
         props.retrievePlanList(dataSourceIndex, normalisedUrl, planListUrl, versionInfo.xV, versionInfo.xMinV, effective, fuelType)
       }

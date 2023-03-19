@@ -96,7 +96,7 @@ class DataSourcePanel extends React.Component {
         <div style={{maxHeight: 300, overflow: 'auto'}}>
           { dataSources.length > 0 &&
           <div className={classes.details}>
-            <Grid container spacing={1} style={{fontSize: 'smaller', fontStyle: 'italic'}}>
+            <Grid container spacing={1} style={{fontSize: 'smaller', fontStyle: 'italic', paddingRight: 60}}>
               <Grid item xs={1}><span>Enabled</span></Grid>
               <Grid item xs={3}><span>Name</span></Grid>
               <Grid item xs={4}><span>API base url</span></Grid>
