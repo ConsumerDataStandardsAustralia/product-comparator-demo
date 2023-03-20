@@ -81,7 +81,6 @@ const DataSource = (props) => {
   const { dataSource, index } = props
 
   const [errorState, setErrorState] = React.useState({open: false, errorMessage: ''})
-  const [energyPrd, setEnergyPrd] = React.useState(dataSource.energyPrd)
 
   const handleChange = name => event => {
     if (name === 'name') {
@@ -93,7 +92,6 @@ const DataSource = (props) => {
         props.clearData(index)
       }
     } else if (name === 'energyPrd') {
-      setEnergyPrd(event.target.value)
       props.modifyDataSourceEnergyPrdUrl(index, {...dataSource, [name]: event.target.value})
       if (!dataSource.unsaved) {
         props.clearSelection(index)
@@ -269,7 +267,7 @@ const DataSource = (props) => {
         required={false}
         onChange={handleChange('energyPrd')}
         placeholder='e.g. https://data.holder'
-        value={energyPrd}
+        value={dataSource.energyPrd}
         margin='normal'
         fullWidth
         label='AER PRD URL (if needed)'
