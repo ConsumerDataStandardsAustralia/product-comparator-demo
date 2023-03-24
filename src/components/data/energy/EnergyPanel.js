@@ -53,8 +53,8 @@ const EnergyPanel = (props) => {
   const {dataSources, savedDataSourcesCount, versionInfo} = props
   const classes = useStyles()
   const [expanded, setExpanded] = React.useState(true)
-  const [effective, setEffective] = React.useState('ALL')
-  const [fuelType, setFuelType] = React.useState('ALL')
+  const [effective, setEffective] = React.useState('CURRENT')
+  const [fuelType, setFuelType] = React.useState('GAS')
   const compare = () => {
     if( /Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
       alert('The screen size is too small! Please use a bigger screen to compare.')

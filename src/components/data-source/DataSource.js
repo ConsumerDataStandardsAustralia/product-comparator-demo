@@ -261,17 +261,16 @@ const DataSource = (props) => {
     <AccordionDetails>
       <Grid item xs={1}>
       </Grid>
-      <Grid item xs={11}>
+      <Grid item xs={4}>
       <TextField
         error={!isUrl(dataSource.energyPrd)}
         required={false}
         onChange={handleChange('energyPrd')}
         placeholder='e.g. https://data.holder'
-        value={dataSource.energyPrd}
+        value={dataSource.energyPrd || ''}
         margin='normal'
         fullWidth
         label='AER PRD URL (if needed)'
-        style={{width: '40%'}}
       />
       </Grid>
     </AccordionDetails>
