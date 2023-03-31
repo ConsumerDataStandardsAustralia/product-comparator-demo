@@ -7,5 +7,10 @@
 		"name": "Origin Energy",
 		"energyPrd": "https://cdr.energymadeeasy.gov.au/origin",
 		"url": "https://public.mydata.cdr.originenergy.com.au"
+	},
+	{
+		"name": "EnergyAustralia",
+		"energyPrd": "https://cdr.energymadeeasy.gov.au/energyaustralia",
+		"url": "https://authncdr.energyaustralia.com.au/"
 	}
 ]
