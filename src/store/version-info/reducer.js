@@ -5,7 +5,7 @@ import {
   SET_VERSIONS_READ_ONLY
 } from './actions'
 
-export default function versionInfo(state={vHeaders: {xV: '3', xMinV: '1'}}, action) {
+export default function versionInfo(state={vHeaders: {xV: '4', xMinV: '1'}}, action) {
   const vHeaders = {
     xV: loadVersionField("x-v") || state.vHeaders.xV,
     xMinV: loadVersionField("x-min-v") || state.vHeaders.xMinV
