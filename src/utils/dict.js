@@ -67,16 +67,21 @@ export const eligibilityTypeDict = {
 
 export const featureTypeDict = {
   CARD_ACCESS: 'Card Access',
+  CASHBACK_OFFER: 'Cashback Offer',
   ADDITIONAL_CARDS: 'Additional Cards',
   UNLIMITED_TXNS: 'Unlimited Transactions',
+  EXTRA_REPAYMENTS: 'Extra Repayments',
+  FRAUD_PROTECTION: 'Fraud Protection',
   FREE_TXNS: 'Free Transactions',
   FREE_TXNS_ALLOWANCE: 'Free Transaction Allowance',
+  GUARANTOR: 'Guarantor',
   LOYALTY_PROGRAM: 'Loyalty Program',
   OFFSET: 'Offset',
   OVERDRAFT: 'Overdraft',
   REDRAW: 'Redraw',
   INSURANCE: 'Insurance',
   BALANCE_TRANSFERS: 'Balance Transfer',
+  INSTALMENT_PLAN: 'Instalment Plan',
   INTEREST_FREE: 'Interest Free',
   INTEREST_FREE_TRANSFERS: 'Interest Free Transfers',
   DIGITAL_WALLET: 'Digital Wallet',
@@ -88,6 +93,7 @@ export const featureTypeDict = {
   COMPLEMENTARY_PRODUCT_DISCOUNTS: 'Complementary Product Discounts',
   BONUS_REWARDS: 'Bonus Rewards',
   NOTIFICATIONS: 'Notifications',
+  RELATIONSHIP_MANAGEMENT: 'Relationship Management',
   OTHER: 'Other'
 }
 
