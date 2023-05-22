@@ -52,7 +52,11 @@ const Feature = (props) => {
           (featureType === 'INTEREST_FREE' || featureType === 'INTEREST_FREE_TRANSFERS') &&
           <span> - <Duration prefix="every" value={additionalValue}/></span>
         }
-        {featureType === 'FREE_TXNS_ALLOWANCE' && <span> - ${additionalValue}</span>}
+        {
+          ( featureType === 'CASHBACK_OFFER' ||
+            featureType === 'FREE_TXNS_ALLOWANCE') &&
+          <span> - ${additionalValue}</span>
+        }
       </div>
       {!!additionalInfoUri && <div><a href={additionalInfoUri} target='_blank' rel='noopener noreferrer'>More info</a></div>}
     </li>
