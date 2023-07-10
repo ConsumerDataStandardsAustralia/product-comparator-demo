@@ -1,4 +1,5 @@
 import {conoutInfo, conoutError, conoutWarn} from '../../conout/actions'
+import {encodeRFC3986URIComponent} from '../../../utils/url'
 
 export const START_RETRIEVE_PRODUCT_LIST = 'START_RETRIEVE_PRODUCT_LIST'
 export const RETRIEVE_PRODUCT_LIST = 'RETRIEVE_PRODUCT_LIST'
@@ -64,7 +65,7 @@ export const retrieveProductList = (dataSourceIdx, baseUrl, productListUrl, xV, 
   }
 
 export const retrieveProductDetail = (dataSourceIdx, url, productId, xV, xMinV) => (dispatch, getState) => {
-  const fullUrl = url + '/banking/products/' + productId
+  const fullUrl = url + '/banking/products/' + encodeRFC3986URIComponent(productId)
   const request = new Request(fullUrl, {
     headers: new Headers({...headers, 'x-v': xV, 'x-min-v': xMinV})
   })

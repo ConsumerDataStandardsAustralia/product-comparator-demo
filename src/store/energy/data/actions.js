@@ -1,4 +1,5 @@
 import {conoutInfo, conoutError} from '../../conout/actions'
+import {encodeRFC3986URIComponent} from '../../../utils/url'
 
 export const START_RETRIEVE_PLAN_LIST = 'START_RETRIEVE_PLAN_LIST'
 export const RETRIEVE_PLAN_LIST = 'RETRIEVE_PLAN_LIST'
@@ -65,7 +66,7 @@ export const retrievePlanList = (dataSourceIdx, baseUrl, planListUrl, xV, xMinV,
   }
 
 export const retrievePlanDetail = (dataSourceIdx, url, planId, xV, xMinV) => (dispatch, getState) => {
-  const fullUrl = url + '/energy/plans/' + planId
+  const fullUrl = url + '/energy/plans/' + encodeRFC3986URIComponent(planId)
   const request = new Request(fullUrl, {
     headers: new Headers({...headers, 'x-v': xV, 'x-min-v': xMinV})
   })
