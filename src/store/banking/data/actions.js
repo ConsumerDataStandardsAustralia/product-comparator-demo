@@ -1,4 +1,4 @@
-import {conoutInfo, conoutError, conoutWarn} from '../../conout/actions'
+import {conoutInfo, conoutError, conoutHtmlError, conoutWarn} from '../../conout/actions'
 import {encodeRFC3986URIComponent} from '../../../utils/url'
 
 export const START_RETRIEVE_PRODUCT_LIST = 'START_RETRIEVE_PRODUCT_LIST'
@@ -31,6 +31,14 @@ export const retrieveProductList = (dataSourceIdx, baseUrl, productListUrl, xV, 
       payload: fetch(request)
         .then(response => {
           if (response.ok) {
+            if (!response.headers['x-v']) {
+              const msg = `Response for ${productListUrl}: doesn't expose header x-v: possibly caused by incomplete `
+              const corsSupport = 'CORS support'
+              dispatch(conoutHtmlError(
+                msg + corsSupport,
+                `${msg}<a href="https://cdr-support.zendesk.com/hc/en-us/articles/900003054706-CORS-support" target="_blank">${corsSupport}</a>`
+              ))
+            }
             return response.json()
           }
           throw new Error(`Response not OK. Status: ${response.status} (${response.statusText})`)

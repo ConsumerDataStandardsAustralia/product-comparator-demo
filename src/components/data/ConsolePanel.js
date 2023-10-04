@@ -68,7 +68,10 @@ const ConsolePanel = (props) => {
         {props.conout.actions.map((msg, i) =>
           <div key={i}>
             <span className={classes.timestamp}>{moment(msg.timestamp).format('L HH:mm:ss.SSS')}</span>
-            <span style={{color: msg.payload.lvl === 'error' ? 'red' : 'black'}}>{msg.payload.txt}</span>
+            {msg.payload.html
+              ? <span style={{color: msg.payload.lvl === 'error' ? 'red' : 'black'}} dangerouslySetInnerHTML={{__html: msg.payload.html}}></span>
+              : <span style={{color: msg.payload.lvl === 'error' ? 'red' : 'black'}}>{msg.payload.txt}</span>
+            }
             {msg.payload.obj && <TreeView data={msg.payload.obj}/>}
           </div>
         )}
