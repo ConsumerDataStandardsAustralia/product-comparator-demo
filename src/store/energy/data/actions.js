@@ -1,4 +1,4 @@
-import {conoutInfo, conoutError} from '../../conout/actions'
+import {conoutInfo, conoutHtmlError, conoutError} from '../../conout/actions'
 import {encodeRFC3986URIComponent} from '../../../utils/url'
 
 export const START_RETRIEVE_PLAN_LIST = 'START_RETRIEVE_PLAN_LIST'
@@ -30,6 +30,14 @@ export const retrievePlanList = (dataSourceIdx, baseUrl, planListUrl, xV, xMinV,
       payload: fetch(request)
         .then(response => {
           if (response.ok) {
+            if (!response.headers['x-v']) {
+              const msg = `Response for ${planListUrl}: doesn't expose header x-v: possibly caused by incomplete `
+              const corsSupport = 'CORS support'
+              dispatch(conoutHtmlError(
+                msg + corsSupport,
+                `${msg}<a href="https://cdr-support.zendesk.com/hc/en-us/articles/900003054706-CORS-support" target="_blank">${corsSupport}</a>`
+              ))
+            }
             return response.json()
           }
           throw new Error(`Response not OK. Status: ${response.status} (${response.statusText})`)

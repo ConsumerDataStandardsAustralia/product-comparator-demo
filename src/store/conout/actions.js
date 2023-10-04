@@ -18,6 +18,10 @@ export const conoutError = (txt, obj) => {
   return createLogEntry({lvl: 'error', txt, obj})
 }
 
+export const conoutHtmlError = (txt, html, obj) => {
+  return createLogEntry({lvl: 'error', txt, html, obj})
+}
+
 function createLogEntry(payload) {
   return {
     type: CONSOLE_OUT,

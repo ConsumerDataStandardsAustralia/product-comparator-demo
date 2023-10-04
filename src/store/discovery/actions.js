@@ -1,4 +1,4 @@
-import {conoutInfo, conoutError} from '../conout/actions'
+import {conoutInfo, conoutHtmlError, conoutError} from '../conout/actions'
 
 export const RETRIEVE_STATUS = 'RETRIEVE_STATUS'
 export const RETRIEVE_OUTAGES = 'RETRIEVE_OUTAGES'
@@ -48,6 +48,14 @@ export const retrieveOutages = (dataSourceIdx, url, xV, xMinV) => dispatch => {
     payload: fetch(request)
       .then(response => {
         if (response.ok) {
+          if (!response.headers['x-v']) {
+            const msg = `Response for ${fullUrl}: doesn't expose header x-v: possibly caused by incomplete `
+            const corsSupport = 'CORS support'
+            dispatch(conoutHtmlError(
+              msg + corsSupport,
+              `${msg}<a href="https://cdr-support.zendesk.com/hc/en-us/articles/900003054706-CORS-support" target="_blank">${corsSupport}</a>`
+            ))
+          }
           return response.json()
         }
         throw new Error(`Response not OK. Status: ${response.status} (${response.statusText})`)
