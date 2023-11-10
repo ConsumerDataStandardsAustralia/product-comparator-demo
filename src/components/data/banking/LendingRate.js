@@ -1,7 +1,7 @@
 import React from 'react'
 import RateTier from './RateTier'
 import Duration from '../Duration'
-import {translateInterestPaymentDue, translateLendingRateType, translateRepaymentType} from '../../../utils/dict'
+import {translateInterestPaymentDue, translateLendingRateType, translateRepaymentType, translateloanPurpose} from '../../../utils/dict'
 import ecomp from '../../../utils/enum-comp'
 import {makeStyles} from '@material-ui/core'
 
@@ -61,7 +61,7 @@ const LendingRate = (props) => {
       {!!applicationFrequency && <div>Applied <Duration prefix="every" value={applicationFrequency}/></div>}
       {!!interestPaymentDue && <div>Interest Payment {translateInterestPaymentDue(interestPaymentDue)}</div>}
       {!!repaymentType && <div>Repayment Type {translateRepaymentType(repaymentType)}</div>}
-      {!!loanPurpose && <div>Loan Purpose {loanPurpose}</div>}
+      {!!loanPurpose && <div>Loan Purpose {translateloanPurpose (loanPurpose)}</div>}
       {
         !!tiers && tiers.length > 0 &&
         <div>

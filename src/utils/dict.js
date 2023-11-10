@@ -135,6 +135,11 @@ export const repaymentTypeDict = {
   PRINCIPAL_AND_INTEREST: 'Principal and Interest'
 }
 
+export const loanPurposeDict = {
+  INVESTMENT: 'Investment',
+  OWNER_OCCUPIED: 'Owner Occupied'
+}
+
 export const discoveryStatusDict = {
   OK: 'OK',
   PARTIAL_FAILURE: 'Partial failure',
@@ -172,6 +177,8 @@ export const translateLendingRateType = (lendingRateType) => lendingRateTypeDict
 export const translateInterestPaymentDue = (interestPaymentDue) => interestPaymentDueDict[interestPaymentDue]
 
 export const translateRepaymentType = (repaymentType) => repaymentTypeDict[repaymentType]
+
+export const translateloanPurpose = (loanPurpose) => loanPurposeDict [loanPurpose]
 
 export const translateEligibilityType = (eligibilityType) => eligibilityTypeDict[eligibilityType]
 
