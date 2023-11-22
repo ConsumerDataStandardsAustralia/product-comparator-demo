@@ -61,7 +61,7 @@ const LendingRate = (props) => {
       {!!applicationFrequency && <div>Applied <Duration prefix="every" value={applicationFrequency}/></div>}
       {!!interestPaymentDue && <div>Interest Payment {translateInterestPaymentDue(interestPaymentDue)}</div>}
       {!!repaymentType && <div>Repayment Type {translateRepaymentType(repaymentType)}</div>}
-      {!!loanPurpose && <div>Loan Purpose {translateloanPurpose (loanPurpose)}</div>}
+      {!!loanPurpose && <div>Loan Purpose {translateloanPurpose(loanPurpose)}</div>}
       {
         !!tiers && tiers.length > 0 &&
         <div>

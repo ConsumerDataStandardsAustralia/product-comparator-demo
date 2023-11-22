@@ -178,7 +178,7 @@ export const translateInterestPaymentDue = (interestPaymentDue) => interestPayme
 
 export const translateRepaymentType = (repaymentType) => repaymentTypeDict[repaymentType]
 
-export const translateloanPurpose = (loanPurpose) => loanPurposeDict [loanPurpose]
+export const translateloanPurpose = (loanPurpose) => loanPurposeDict[loanPurpose]
 
 export const translateEligibilityType = (eligibilityType) => eligibilityTypeDict[eligibilityType]
 
