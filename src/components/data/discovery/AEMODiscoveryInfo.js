@@ -5,17 +5,15 @@ import AccordionActions from '@material-ui/core/AccordionActions'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import SubjectIcon from '@material-ui/icons/Subject'
 import Typography from '@material-ui/core/Typography'
-import Grid from '@material-ui/core/Grid'
 import Divider from '@material-ui/core/Divider'
 import RefreshIcon from '@material-ui/icons/Refresh'
 import Fab from '@material-ui/core/Fab'
 import Tooltip from '@material-ui/core/Tooltip'
-import StatusOutages from './StatusOutages'
 import { makeStyles } from '@material-ui/core/styles'
 import { fade } from '@material-ui/core/styles/colorManipulator'
+import StatusOutages from './StatusOutages'
 import { connect } from 'react-redux'
-import { normalise } from '../../../utils/url'
-import { retrieveStatus, retrieveOutages } from '../../../store/discovery'
+import { retrieveStatus, retrieveOutages } from '../../../store/aemo_discovery'
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -39,35 +37,25 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-const DiscoveryInfo = (props) => {
+const AEMODiscoveryInfo = (props) => {
 
-  const {dataSources, savedDataSourcesCount} = props
   const classes = useStyles()
   const [expanded, setExpanded] = React.useState(true)
+  const {statusDetails, outagesDetails} = props.data
 
   const toggleExpansion = (event, newExpanded) => {
     setExpanded(newExpanded)
   }
 
+  const refreshStatusOutages = () => {
+    props.retrieveStatus()
+    props.retrieveOutages()
+  }
+
   React.useEffect(() => {
     refreshStatusOutages()
     // eslint-disable-next-line
-  }, [props.dataSources])
-
-  const getWidth = (dataSourceCount, min) => {
-    return Math.max(12 / dataSourceCount, min)
-  }
-
-  const refreshStatusOutages = () => {
-    const { versionInfo } = props
-    props.dataSources.forEach((dataSource, index) => {
-      const url = normalise(dataSource.url)
-      if (!dataSource.unsaved && dataSource.enabled && !dataSource.deleted) {
-        props.retrieveStatus(index, url, versionInfo.xV, versionInfo.xMinV)
-        props.retrieveOutages(index, url, versionInfo.xV, versionInfo.xMinV)
-      }
-    })
-  }
+  }, [])
     
   return (
     <Accordion defaultExpanded className={classes.panel} expanded={expanded} onChange={toggleExpansion}>
@@ -80,30 +68,11 @@ const DiscoveryInfo = (props) => {
         </div>
       </AccordionSummary>
       <div className={classes.details}>
-      {
-        savedDataSourcesCount > 0 &&
-        <Grid container alignItems='flex-start' spacing={2} className={classes.container}>
-          {dataSources.map((dataSource, index) => {
-            const data = props.data[index]
-            if (!data) {
-              return false
-            }
-            const {statusDetails, outagesDetails} = data
-            return (!dataSource.unsaved && dataSource.enabled && !dataSource.deleted &&
-            <Grid item key={index}
-                  xs={getWidth(savedDataSourcesCount, 12)}
-                  sm={getWidth(savedDataSourcesCount, 12)}
-                  md={getWidth(savedDataSourcesCount, 6)}
-                  lg={getWidth(savedDataSourcesCount, 4)}
-                  xl={getWidth(savedDataSourcesCount, 3)}
-            >
-              <div className="title">{!!dataSource.icon && <span><img src={dataSource.icon} alt=""/></span>}<h2>{dataSource.name}</h2></div>
-              <StatusOutages statusDetails={statusDetails} outagesDetails={outagesDetails} />
-            </Grid>
-            )
-          })}
-        </Grid>
-      }
+        <p>Secondary Data Holders provide data to Data Holders via CDR requests, who in turn provide the data to ADRs. Such data is called Shared Responsibility Data (SR data).</p>
+        <p>Currently, only the energy sector has a designated secondary data holder: AEMO. This page lists the status and outages for AEMO.</p>
+
+        <div className="title"><span><img src="https://www.aemo.com.au/-/media/project/aemo/global/logos/aemo-logo.svg" alt="AEMO"/></span></div>
+        <StatusOutages statusDetails={statusDetails} outagesDetails={outagesDetails} />
       </div>
 
       <Divider/>
@@ -120,10 +89,7 @@ const DiscoveryInfo = (props) => {
 }
 
 const mapStateToProps = state => ({
-  dataSources : state.dataSources,
-  savedDataSourcesCount: state.dataSources.filter(dataSource => !dataSource.unsaved && !dataSource.deleted && dataSource.enabled).length,
-  versionInfo: state.versionInfo.vHeaders,
-  data: state.discovery
+  data: state.aemoDiscovery
 })
 
 const mapDispatchToProps = {
@@ -131,4 +97,4 @@ const mapDispatchToProps = {
   retrieveOutages
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(DiscoveryInfo)
+export default connect(mapStateToProps, mapDispatchToProps)(AEMODiscoveryInfo)

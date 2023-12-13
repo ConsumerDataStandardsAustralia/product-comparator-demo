@@ -12,6 +12,7 @@ import AppBar from '@material-ui/core/AppBar'
 import Tabs from '@material-ui/core/Tabs'
 import Tab from '@material-ui/core/Tab'
 import DiscoveryInfo from './data/discovery/DiscoveryInfo'
+import AEMODiscoveryInfo from './data/discovery/AEMODiscoveryInfo'
 
 const useStyles = makeStyles(theme => ({
   hidden: {
@@ -37,6 +38,7 @@ function Page() {
           <Tab label="Banking" />
           <Tab label="Energy" />
           <Tab label="Status and Outages" />
+          <Tab label="AEMO - Status and Outages" />
         </Tabs>
       </AppBar>
       <div className={value === 0 ? '' : classes.hidden}>
@@ -49,6 +51,9 @@ function Page() {
       </div>
       <div className={value === 2 ? '' : classes.hidden}>
         <DiscoveryInfo/>
+      </div>
+      <div className={value === 3 ? '' : classes.hidden}>
+        <AEMODiscoveryInfo/>
       </div>
     </Container>
   );

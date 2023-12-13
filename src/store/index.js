@@ -9,6 +9,7 @@ import banking from './banking/data/reducer'
 import energy from './energy/data/reducer'
 import energySelection from './energy/selection/reducer'
 import discovery from './discovery/reducer'
+import aemoDiscovery from './aemo_discovery/reducer'
 import bankingSelection from './banking/selection/reducer'
 import bankingComparison from './banking/comparison/reducer'
 import energyComparison from './energy/comparison/reducer'
@@ -20,6 +21,7 @@ const rootReducer = combineReducers({
   banking,
   energy,
   discovery,
+  aemoDiscovery,
   bankingSelection,
   energySelection,
   bankingComparison,
