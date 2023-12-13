@@ -2,25 +2,12 @@ import React from 'react'
 import DateTime from '../DateTime'
 import Duration from '../Duration'
 import { connect } from 'react-redux'
-import { normalise } from '../../../utils/url'
-import { retrieveStatus, retrieveOutages } from '../../../store/discovery'
 import { translateDiscoveryStatus } from '../../../utils/dict'
 
 class StatusOutages extends React.Component {
 
-  componentDidMount() {    
-    const { dataSourceIndex, dataSource, versionInfo } = this.props
-    const url = normalise(dataSource.url)
-    this.props.retrieveStatus(dataSourceIndex, url, versionInfo.xV, versionInfo.xMinV)
-    this.props.retrieveOutages(dataSourceIndex, url, versionInfo.xV, versionInfo.xMinV)
-  }
-
   render() {
-    let data = this.props.data[this.props.dataSourceIndex]
-    if (!data) {
-      return false
-    }
-    const {statusDetails, outagesDetails} = data
+    const { statusDetails, outagesDetails } = this.props
     return (
     <>
       {!!statusDetails &&
@@ -63,13 +50,9 @@ const Outage = props => {
 }
 
 const mapStateToProps = state => ({
-  versionInfo: state.versionInfo.vHeaders,
-  data: state.discovery
 })
 
 const mapDispatchToProps = {
-  retrieveStatus,
-  retrieveOutages
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(StatusOutages)

@@ -1,15 +1,11 @@
-import {conoutInfo, conoutHtmlError, conoutError} from '../conout/actions'
+import {conoutInfo} from '../conout/actions'
+import {createConoutError, checkExposedHeaders} from '../../utils/cors'
 
 export const RETRIEVE_STATUS = 'RETRIEVE_STATUS'
 export const RETRIEVE_OUTAGES = 'RETRIEVE_OUTAGES'
 
 const headers = {
   'Accept': 'application/json'
-}
-
-function createConoutError(error, url) {
-  return conoutError('Caught ' + error + ' while requesting ' + url + (error.name === 'TypeError' ?
-    ' Possibly caused by the endpoint not supporting Cross-Origin Requests (CORS)' : ''))
 }
 
 export const retrieveStatus = (dataSourceIdx, url, xV, xMinV) => dispatch => {
@@ -23,6 +19,7 @@ export const retrieveStatus = (dataSourceIdx, url, xV, xMinV) => dispatch => {
     payload: fetch(request)
       .then(response => {
         if (response.ok) {
+          checkExposedHeaders(response, fullUrl, dispatch)
           return response.json()
         }
         throw new Error(`Response not OK. Status: ${response.status} (${response.statusText})`)
@@ -48,14 +45,7 @@ export const retrieveOutages = (dataSourceIdx, url, xV, xMinV) => dispatch => {
     payload: fetch(request)
       .then(response => {
         if (response.ok) {
-          if (!response.headers['x-v']) {
-            const msg = `Response for ${fullUrl}: doesn't expose header x-v: possibly caused by incomplete `
-            const corsSupport = 'CORS support'
-            dispatch(conoutHtmlError(
-              msg + corsSupport,
-              `${msg}<a href="https://cdr-support.zendesk.com/hc/en-us/articles/900003054706-CORS-support" target="_blank">${corsSupport}</a>`
-            ))
-          }
+          checkExposedHeaders(response, fullUrl, dispatch)
           return response.json()
         }
         throw new Error(`Response not OK. Status: ${response.status} (${response.statusText})`)

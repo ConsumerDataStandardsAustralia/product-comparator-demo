@@ -49,6 +49,11 @@ const DiscoveryInfo = (props) => {
     setExpanded(newExpanded)
   }
 
+  React.useEffect(() => {
+    refreshStatusOutages()
+    // eslint-disable-next-line
+  }, [props.dataSources])
+
   const getWidth = (dataSourceCount, min) => {
     return Math.max(12 / dataSourceCount, min)
   }
@@ -78,8 +83,13 @@ const DiscoveryInfo = (props) => {
       {
         savedDataSourcesCount > 0 &&
         <Grid container alignItems='flex-start' spacing={2} className={classes.container}>
-          {dataSources.map((dataSource, index) => (
-            !dataSource.unsaved && dataSource.enabled && !dataSource.deleted &&
+          {dataSources.map((dataSource, index) => {
+            const data = props.data[index]
+            if (!data) {
+              return false
+            }
+            const {statusDetails, outagesDetails} = data
+            return (!dataSource.unsaved && dataSource.enabled && !dataSource.deleted &&
             <Grid item key={index}
                   xs={getWidth(savedDataSourcesCount, 12)}
                   sm={getWidth(savedDataSourcesCount, 12)}
@@ -88,9 +98,10 @@ const DiscoveryInfo = (props) => {
                   xl={getWidth(savedDataSourcesCount, 3)}
             >
               <div className="title">{!!dataSource.icon && <span><img src={dataSource.icon} alt=""/></span>}<h2>{dataSource.name}</h2></div>
-              <StatusOutages dataSource={dataSource} dataSourceIndex={index}/>
+              <StatusOutages statusDetails={statusDetails} outagesDetails={outagesDetails} />
             </Grid>
-          ))}
+            )
+          })}
         </Grid>
       }
       </div>
@@ -108,10 +119,11 @@ const DiscoveryInfo = (props) => {
   )
 }
 
-const mapStateToProps = state=>({
+const mapStateToProps = state => ({
   dataSources : state.dataSources,
   savedDataSourcesCount: state.dataSources.filter(dataSource => !dataSource.unsaved && !dataSource.deleted && dataSource.enabled).length,
-  versionInfo: state.versionInfo.vHeaders
+  versionInfo: state.versionInfo.vHeaders,
+  data: state.discovery
 })
 
 const mapDispatchToProps = {

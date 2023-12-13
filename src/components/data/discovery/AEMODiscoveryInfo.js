@@ -11,11 +11,9 @@ import Fab from '@material-ui/core/Fab'
 import Tooltip from '@material-ui/core/Tooltip'
 import { makeStyles } from '@material-ui/core/styles'
 import { fade } from '@material-ui/core/styles/colorManipulator'
-import Duration from '../Duration'
-import DateTime from '../DateTime'
+import StatusOutages from './StatusOutages'
 import { connect } from 'react-redux'
 import { retrieveStatus, retrieveOutages } from '../../../store/aemo_discovery'
-import { translateDiscoveryStatus } from '../../../utils/dict'
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -74,33 +72,7 @@ const AEMODiscoveryInfo = (props) => {
         <p>Currently, only the energy sector has a designated secondary data holder: AEMO. This page lists the status and outages for AEMO.</p>
 
         <div className="title"><span><img src="https://www.aemo.com.au/-/media/project/aemo/global/logos/aemo-logo.svg" alt="AEMO"/></span></div>
-        {!!statusDetails &&
-        <>
-          <h4>Status</h4>
-          <div style={{fontSize: '0.8rem'}}>
-            <div>Status: {translateDiscoveryStatus(statusDetails.status)}{!!statusDetails.explanation && <span> - {statusDetails.explanation}</span>}</div>
-            {!!statusDetails.detectionTime && <div>Detection Time: <DateTime rfc3339={statusDetails.detectionTime}/></div>}
-            {!!statusDetails.expectedResolutionTime && <div>Expected Resolution Time: <DateTime rfc3339={statusDetails.expectedResolutionTime}/></div>}
-            {!!statusDetails.updateTime && <div>Update Time: <DateTime rfc3339={statusDetails.updateTime}/></div>}
-          </div>
-        </>
-        }
-
-        {!!outagesDetails && !!outagesDetails.outages && !!outagesDetails.outages.length &&
-        <>
-          <h4>Scheduled Outages</h4>
-          <ul style={{fontSize: '0.8rem'}}>
-          {outagesDetails.outages.map((outage, index) =>
-            <li key={index}>
-              <div>Outage Time: <DateTime rfc3339={outage.outageTime}/></div>
-              {!!outage.duration && <div>Planned Duration: <Duration value={outage.duration}/></div>}
-              {!!outage.isPartial && <div>Partial: {outage.isPartial}</div>}
-              <div>&laquo;{outage.explanation}&raquo;</div>
-            </li>
-          )}
-          </ul>
-        </>
-        }
+        <StatusOutages statusDetails={statusDetails} outagesDetails={outagesDetails} />
       </div>
 
       <Divider/>
