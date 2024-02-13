@@ -6,7 +6,7 @@ export function createConoutError(error, url) {
 }
 
 export function checkExposedHeaders(response, fullUrl, dispatch) {
-  if (!response.headers['x-v']) {
+  if (!response.headers.get('x-v')) {
     const msg = `Response for ${fullUrl}: doesn't expose header x-v: possibly caused by incomplete `
     const corsSupport = 'CORS support'
     dispatch(conoutHtmlError(
