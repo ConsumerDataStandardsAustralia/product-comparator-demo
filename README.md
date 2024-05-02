@@ -101,11 +101,7 @@ We welcome contributions from the community! If you'd like to contribute to this
 
 ### Note:
 
-1. Please ensure your contributions align with our project's objectives and [guidelines](https://www.notion.so/Contribution-Guidelines-8b99d030fea946668fbc75444197e68b?pvs=21).
-
-## Detailed Documentation and Guides
-
-For comprehensive guides, installation instructions, usage tutorials, and more, please visit our [Developer Information Hub](https://www.notion.so/dev-cds-gov-au-5211fb564b3e4e7f9792d1b6f88fe5df?pvs=21).
+Please ensure your contributions align with our project's objectives and [guidelines](https://www.notion.so/Contribution-Guidelines-8b99d030fea946668fbc75444197e68b?pvs=21).
 
 ## Reporting Issues
 
