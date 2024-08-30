@@ -7,12 +7,17 @@
     "lodash.template": "^4.5.0",
     "path-parse": "^1.0.7",
     "ssri": "^8.0.1",
+    "caniuse-lite": "1.0.30001632",
     "immer": "^8.0.1"
+  },
+  "overrides": {
+    "caniuse-lite": "1.0.30001632"
   },
   "dependencies": {
     "@material-ui/core": "^4.9.10",
     "@material-ui/icons": "^4.2.1",
     "@material-ui/lab": "^4.0.0-alpha.56",
+    "caniuse-lite": "^1.0.30001632",
     "clsx": "^1.0.4",
     "gh-pages": "^2.0.1",
     "iso8601-duration": "^1.2.0",
