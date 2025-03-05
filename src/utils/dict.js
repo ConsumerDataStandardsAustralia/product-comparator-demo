@@ -17,6 +17,8 @@ export const constraintTypeDict = {
   MIN_BALANCE: 'Minimum Balance',
   MAX_BALANCE: 'Maximum Balance',
   OPENING_BALANCE: 'Opening Balance',
+  MIN_LVR: 'Minimum Loan to Value Ratio',
+  MAX_LVR: 'Maximum Loan to Value Ratio',
   MAX_LIMIT: 'Maximum Credit Limit',
   MIN_LIMIT: 'Minimum Credit Limit'
 }
