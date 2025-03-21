@@ -30,8 +30,9 @@ function mergeDatasources(into, from) {
 }
 
 function fetchDatasources() {
-  const dssPromise = fetch(process.env.PUBLIC_URL + '/datasources.json')
+  const dssPromise = fetch('https://api.cdr.gov.au/cdr-register/v1/all/data-holders/brands/summary', {headers: {"x-v": 1}})
     .then(response => response.json())
+    .then(dss => dss.data.map(({brandName: name, publicBaseUri: url, logoUri: icon, industries: sectors}) => ({name, url, icon, sectors})))
   const ovsPromise = fetch(process.env.PUBLIC_URL + '/override.json')
     .then(response => response.json())
   return Promise.all([dssPromise, ovsPromise]).then(([datasources, overrides]) =>
