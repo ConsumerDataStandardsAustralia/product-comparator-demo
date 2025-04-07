@@ -14,6 +14,8 @@ import FuelType from './FuelType'
 import CustomerType from './CustomerType'
 import ExternalLink from './ExternalLink'
 import Geography from './Geography'
+import PlanContract from './PlanContract'
+import MeteringCharge from './MeteringCharge'
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -103,6 +105,7 @@ const Plan = (props) => {
         <div>Brand: {plan.brand} {!!plan.brandName && <span>({plan.brandName})</span>}</div>
         <div>Type: <Type type={plan.type} /></div>
         <div>Fuel Type: <FuelType fuelType={plan.fuelType} /></div>
+        <div>Plan ID: {plan.planId}</div>
         <div>Last updated at <DateTime rfc3339={plan.lastUpdated} /> <ExternalLink link={URL.createObjectURL(blob)}>JSON</ExternalLink></div>
         {!!plan.effectiveFrom && <div>Effective from <DateTime rfc3339={plan.effectiveFrom} /></div>}
         {!!plan.effectiveTo && <div>Effective to <DateTime rfc3339={plan.effectiveTo} /></div>}
@@ -119,9 +122,36 @@ const Plan = (props) => {
           !!plan.geography &&
           <div>
             <div className={classes.sectionTitle}>Geography:</div>
-            <ul className={classes.sectionContent}>
+            <div className={classes.sectionContent}>
               <Geography geography={plan.geography} />
+            </div>
+          </div>
+        }
+        {
+          !!plan.meteringCharges &&
+          <div>
+            <div className={classes.sectionTitle}>Metering Charges:</div>
+            <ul className={classes.sectionContent}>
+              {plan.meteringCharges.map((meteringCharge, index) => <MeteringCharge meteringCharge={meteringCharge} key={index} />)}
             </ul>
+          </div>
+        }
+        {
+          !!plan.gasContract &&
+          <div>
+            <div className={classes.sectionTitle}>Gas Contract:</div>
+            <div className={classes.sectionContent}>
+              <PlanContract contract={plan.gasContract} />
+            </div>
+          </div>
+        }
+        {
+          !!plan.electricityContract &&
+          <div>
+            <div className={classes.sectionTitle}>Electricity Contract:</div>
+            <div className={classes.sectionContent}>
+              <PlanContract contract={plan.electricityContract} />
+            </div>
           </div>
         }
       </div>

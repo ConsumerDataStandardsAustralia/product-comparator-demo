@@ -63,7 +63,7 @@ class DataSourcePanel extends React.Component {
 
   render() {
     const {classes, dataSources, addDataSource, syncDataSources, vHeaders} = this.props
-    const versions = ['1', '2', '3', '4']
+    const versions = ['1', '2', '3', '4', '5']
     let {xV, xMinV} = vHeaders
 
     const updateVersions = () => {
