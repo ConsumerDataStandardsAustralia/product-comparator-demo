@@ -19,6 +19,8 @@ import FuelType from '../data/energy/FuelType'
 import ExternalLink from '../data/energy/ExternalLink'
 import Geography from '../data/energy/Geography'
 import CustomerType from '../data/energy/CustomerType'
+import MeteringCharge from '../data/energy/MeteringCharge'
+import PlanContract from '../data/energy/PlanContract'
 
 const useStyles = makeStyles(theme => ({
   panel: {
@@ -76,6 +78,9 @@ const EnergyComparisonPanel = (props) => {
     {key: 'additionalInformation', label: 'Additional Information'},
     {key: 'customerType', label: 'Customer Type'},
     {key: 'geography', label: 'Geography'},
+    {key: 'meteringCharges', label: 'Metering Charges'},
+    {key: 'gasContract', label: 'Gas Contract'},
+    {key: 'electricityContract', label: 'Electricity Contract'},
   ]
 
   const render = (plan, key) => {
@@ -100,7 +105,15 @@ const EnergyComparisonPanel = (props) => {
       case 'customerType':
         return !!plan[key] && <CustomerType customerType={plan[key]} />
       case 'geography':
-        return !!plan[key] && <ul className={classes.ul}><Geography geography={plan[key]} /></ul>
+        return !!plan[key] && <Geography geography={plan[key]} />
+      case 'meteringCharges':
+        return !!plan[key] &&
+          <ul className={classes.ul}>
+            {plan[key].map((meteringCharge, index) => <MeteringCharge meteringCharge={meteringCharge} key={index} />)}
+          </ul>
+      case 'gasContract':
+      case 'electricityContract':
+        return !!plan[key] && <PlanContract contract={plan[key]} />
       default:
         return ''
     }

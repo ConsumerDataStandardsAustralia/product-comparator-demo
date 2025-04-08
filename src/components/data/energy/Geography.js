@@ -1,22 +1,32 @@
 import React from 'react'
+import {makeStyles} from '@material-ui/core'
+
+const useStyles = makeStyles(() => ({
+  sectionContent: {
+    marginTop: 0,
+    marginBottom: 0,
+    paddingLeft: 20
+  }
+}))
 
 const Geography = ({geography}) => {
+  const classes = useStyles()
   const {excludedPostcodes, includedPostcodes, distributors} = geography
   return (
     <>
       {excludedPostcodes && excludedPostcodes.length > 0 && (
-        <li><div>Excluded Postcodes:</div> <span>{excludedPostcodes.join(', ')}</span></li>
+        <div>Excluded Postcodes: <span>{excludedPostcodes.join(', ')}</span></div>
       )}
       {includedPostcodes && includedPostcodes.length > 0 && (
-        <li><div>Included Postcodes:</div> <span>{includedPostcodes.join(', ')}</span></li>
+        <div>Included Postcodes: <span>{includedPostcodes.join(', ')}</span></div>
       )}
       {distributors && (
-      <li>
+      <>
         <div>Distributors:</div>
-        <ul>
+        <ul className={classes.sectionContent}>
           {distributors.map((distributor, idx) => <li key={idx}>{distributor}</li>)}
         </ul>
-      </li>
+      </>
       )}
     </>
   )
