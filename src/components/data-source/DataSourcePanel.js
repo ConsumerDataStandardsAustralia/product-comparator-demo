@@ -63,7 +63,8 @@ class DataSourcePanel extends React.Component {
 
   render() {
     const {classes, dataSources, addDataSource, syncDataSources, vHeaders} = this.props
-    const versions = ['1', '2', '3', '4', '5']
+    const xMinVVersions = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']
+    const xVVersions = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '999']
     let {xV, xMinV} = vHeaders
 
     const updateVersions = () => {
@@ -120,10 +121,10 @@ class DataSourcePanel extends React.Component {
             <Grid item xs={10}>
               {this.props.readOnly ?
               <div className={classes.version}>
-                <TextField value={xV} label="x-v" helperText="Preferred version"  inputProps={{readOnly: true}} />
                 <TextField value={xMinV} label="x-min-v" helperText="Minimal acceptable version"  inputProps={{readOnly: true}} />
+                <TextField value={xV} label="x-v" helperText="Preferred version"  inputProps={{readOnly: true}} />
                 <IconButton color="primary" style={{marginTop: 20}} onClick={this.props.setVersionsEditable}>
-                  <Tooltip title="Change x-v, x-min-v">
+                  <Tooltip title="Change x-min-v, x-v">
                     <EditIcon />
                   </Tooltip>
                 </IconButton>
@@ -131,20 +132,9 @@ class DataSourcePanel extends React.Component {
               :
               <div className={classes.version}>
                 <Autocomplete
-                  id="xV"
-                  freeSolo
-                  options={versions}
-                  value={xV}
-                  renderInput={params => (
-                    <TextField {...params} label="x-v" helperText="Preferred version"/>
-                  )}
-                  onInputChange={(ev, value) => xV = value}
-                  style={{display: 'inline'}}
-                />
-                <Autocomplete
                   id="xMinV"
                   freeSolo
-                  options={versions}
+                  options={xMinVVersions}
                   value={xMinV}
                   renderInput={params => (
                     <TextField {...params} label="x-min-v" helperText="Minimal acceptable version"/>
@@ -152,8 +142,19 @@ class DataSourcePanel extends React.Component {
                   onInputChange={(ev, value) => xMinV = value}
                   style={{display: 'inline'}}
                 />
+                <Autocomplete
+                  id="xV"
+                  freeSolo
+                  options={xVVersions}
+                  value={xV}
+                  renderInput={params => (
+                    <TextField {...params} label="x-v" helperText="Preferred version"/>
+                  )}
+                  onInputChange={(ev, value) => xV = value}
+                  style={{display: 'inline'}}
+                />
                 <IconButton color="primary" style={{marginTop: 20}} onClick={updateVersions}>
-                  <Tooltip title="Apply x-v, x-min-v">
+                  <Tooltip title="Apply x-min-v, x-v">
                     <DoneOutlineIcon />
                   </Tooltip>
                 </IconButton>
