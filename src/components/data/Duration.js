@@ -3,7 +3,7 @@ import { pattern, parse } from 'iso8601-duration'
 import pluralize from 'pluralize'
 
 const Duration = props => {
-  const { prefix, value } = props
+  const { prefix, value, alwaysShowNumber } = props
   let showNum
   if (!value || value.length === 0) {
     return false
@@ -17,6 +17,9 @@ const Duration = props => {
     const num = duration[unit + 's']
     if (!num) {
       return false
+    }
+    if (alwaysShowNumber) {
+      return <span key={idx}> {num} {pluralize(unit, num)}</span>
     }
     showNum ||= num > 1 || units.filter(u => u !== unit && duration[u + 's']).length > 0
     return <span key={idx}>{showNum ? ' ' + num : ''} {pluralize(unit, num)}</span>
