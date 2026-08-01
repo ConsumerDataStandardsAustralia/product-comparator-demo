@@ -1,3 +1,5 @@
+import { merge } from 'lodash'
+
 export const LOAD_DATA_SOURCE = 'LOAD_DATA_SOURCE'
 export const ADD_DATA_SOURCE = 'ADD_DATA_SOURCE'
 export const SYNC_DATA_SOURCES = 'SYNC_DATA_SOURCES'
@@ -9,30 +11,34 @@ export const MODIFY_DATA_SOURCE_ENERGY_PRD_URL = 'MODIFY_DATA_SOURCE_ENERGY_PRD_
 export const MODIFY_DATA_SOURCE_ICON = 'MODIFY_DATA_SOURCE_ICON'
 export const ENABLE_DATA_SOURCE = 'ENABLE_DATA_SOURCE'
 
-const MAJOR_NAMES = {'ANZ': [], 'CommBank': ['CBA', 'Commonwealth Bank'], 'NATIONAL AUSTRALIA BANK': ['NAB', 'National'], 'Westpac': []}
+const MAJOR_NAMES = { 'ANZ': [], 'CommBank': ['CBA', 'Commonwealth Bank'], 'NATIONAL AUSTRALIA BANK': ['NAB', 'National'], 'Westpac': [] }
 const MAJORS = Object.keys(MAJOR_NAMES)
+
+function mergeDatasourceItem(into = {}, from = {}) {
+  return merge({}, into, from)
+}
 
 function mergeDatasources(into, from) {
   const result = {};
   into.forEach(ds => result[ds.name] = ds)
   from.forEach(ds => {
-    const {name} = ds
+    const { name } = ds
     if (MAJORS.includes(name)) {
       // Consolidate the aliases of the Big Four
       MAJOR_NAMES[name].forEach(alias => {
-        result[name] = {...result[alias], ...result[name]}
+        result[name] = mergeDatasourceItem(result[alias], result[name])
         delete result[alias]
       })
     }
-    result[name] = {...result[name], ...ds}
+    result[name] = mergeDatasourceItem(result[name], ds)
   })
   return Object.values(result)
 }
 
 function fetchDatasources() {
-  const dssPromise = fetch('https://api.cdr.gov.au/cdr-register/v1/all/data-holders/brands/summary', {headers: {"x-v": 1}})
+  const dssPromise = fetch('https://api.cdr.gov.au/cdr-register/v1/all/data-holders/brands/summary', { headers: { "x-v": 2 } })
     .then(response => response.json())
-    .then(({data}) => data.map(({brandName: name, publicBaseUri: url, logoUri: icon, industries: sectors}) => ({name, url, icon, sectors})))
+    .then(({ data }) => data.map(({ brandName: name, publicBaseUri: url, logoUri: icon, industries: sectors }) => ({ name, url, icon, sectors })))
   const ovsPromise = fetch(process.env.PUBLIC_URL + '/override.json')
     .then(response => response.json())
   return Promise.all([dssPromise, ovsPromise]).then(([datasources, overrides]) =>

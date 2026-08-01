@@ -5,23 +5,23 @@ import {
   SET_VERSIONS_READ_ONLY
 } from './actions'
 
-export default function versionInfo(state={vHeaders: {xV: '4', xMinV: '1'}}, action) {
+export default function versionInfo(state = { vHeaders: { xV: '7', xMinV: '1' } }, action) {
   const vHeaders = {
     xV: loadVersionField("x-v") || state.vHeaders.xV,
     xMinV: loadVersionField("x-min-v") || state.vHeaders.xMinV
   }
   switch (action.type) {
     case LOAD_VERSION_INFO:
-      return {vHeaders}
+      return { vHeaders }
     case SAVE_VERSION_INFO:
       const vi = action.versionInfo
       saveVersionField("x-v", vi.xV)
       saveVersionField("x-min-v", vi.xMinV)
-      return {vHeaders: vi}
+      return { vHeaders: vi }
     case SET_VERSIONS_EDITABLE:
-      return {editable: true, vHeaders}
+      return { editable: true, vHeaders }
     case SET_VERSIONS_READ_ONLY:
-      return {vHeaders}
+      return { vHeaders }
     default:
       return state
   }

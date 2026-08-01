@@ -17,7 +17,6 @@
     "@material-ui/core": "^4.9.10",
     "@material-ui/icons": "^4.2.1",
     "@material-ui/lab": "^4.0.0-alpha.56",
-    "caniuse-lite": "^1.0.30001632",
     "clsx": "^1.0.4",
     "gh-pages": "^2.0.1",
     "iso8601-duration": "^1.2.0",
@@ -38,9 +37,9 @@
   },
   "scripts": {
     "preinstall": "npx npm-force-resolutions",
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
+    "start": "NODE_OPTIONS=--openssl-legacy-provider BROWSER=none react-scripts start",
+    "build": "NODE_OPTIONS=--openssl-legacy-provider react-scripts build",
+    "test": "NODE_OPTIONS=--openssl-legacy-provider react-scripts test",
     "eject": "react-scripts eject",
     "deploy": "gh-pages -d build"
   },

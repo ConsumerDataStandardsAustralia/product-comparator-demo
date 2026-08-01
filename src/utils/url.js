@@ -19,9 +19,14 @@ function getLocation(url) {
 }
 
 export function normalise(url) {
-  if (url.endsWith('/')) url = url.substr(0, url.length - 1)
-  if (!url.endsWith('/cds-au/v1') && getLocation(url).hostname !== 'localhost') {
-    url += '/cds-au/v1'
+  try {
+    if (url.endsWith('/')) url = url.substr(0, url.length - 1)
+    if (!url.endsWith('/cds-au/v1') && getLocation(url).hostname !== 'localhost') {
+      url += '/cds-au/v1'
+    }
+  } catch (e) {
+    console.error("Error occurred while normalising URL for: " + url)
+    console.error(e)
   }
   return url
 }
